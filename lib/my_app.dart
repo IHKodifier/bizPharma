@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/landing/landing_page.dart';
+import 'widgets/auth_wrapper.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'providers/theme_provider.dart';
@@ -26,7 +26,7 @@ class MyApp extends ConsumerWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const LandingPage(),
+      home: const AuthWrapper(),
     );
   }
 }

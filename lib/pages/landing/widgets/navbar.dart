@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../providers/theme_provider.dart';
+import '../../../providers/auth_provider.dart';
 
 class LandingNavbar extends ConsumerWidget {
   const LandingNavbar({super.key});
@@ -9,6 +10,7 @@ class LandingNavbar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
+    final authState = ref.watch(authStateProvider);
     final isDark = themeMode == ThemeMode.dark;
     final theme = Theme.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
@@ -82,20 +84,57 @@ class LandingNavbar extends ConsumerWidget {
           if (showFullNav) ...[
             const SizedBox(width: 8),
             // Login Button
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Login',
-                style: GoogleFonts.inter(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+            // Auth State
+            authState.when(
+              data: (user) {
+                if (user != null) {
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (user.photoURL != null)
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(user.photoURL!),
+                          radius: 16,
+                        ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        onPressed: () =>
+                            ref.read(authServiceProvider).signOut(),
+                        child: Text(
+                          'Logout',
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return TextButton(
+                  onPressed: () =>
+                      ref.read(authServiceProvider).signInWithGoogle(),
+                  child: Text(
+                    'Login',
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                );
+              },
+              loading: () => const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2),
               ),
+              error: (_, __) => const Icon(Icons.error, size: 20),
             ),
             const SizedBox(width: 8),
             // CTA Button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  ref.read(authServiceProvider).signInAnonymously(),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
@@ -115,7 +154,8 @@ class LandingNavbar extends ConsumerWidget {
             const SizedBox(width: 8),
             // Compact CTA Button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  ref.read(authServiceProvider).signInAnonymously(),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,

@@ -1,35 +1,41 @@
-part of 'default.dart';
+part of 'ik_pharma.dart';
 
-class ListAllProductsVariablesBuilder {
+class VerifyProductVariablesBuilder {
   
   final FirebaseDataConnect _dataConnect;
-  ListAllProductsVariablesBuilder(this._dataConnect, );
-  Deserializer<ListAllProductsData> dataDeserializer = (dynamic json)  => ListAllProductsData.fromJson(jsonDecode(json));
+  VerifyProductVariablesBuilder(this._dataConnect, );
+  Deserializer<VerifyProductData> dataDeserializer = (dynamic json)  => VerifyProductData.fromJson(jsonDecode(json));
   
-  Future<QueryResult<ListAllProductsData, void>> execute() {
+  Future<QueryResult<VerifyProductData, void>> execute() {
     return ref().execute();
   }
 
-  QueryRef<ListAllProductsData, void> ref() {
+  QueryRef<VerifyProductData, void> ref() {
     
-    return _dataConnect.query("listAllProducts", dataDeserializer, emptySerializer, null);
+    return _dataConnect.query("VerifyProduct", dataDeserializer, emptySerializer, null);
   }
 }
 
 @immutable
-class ListAllProductsProducts {
+class VerifyProductProducts {
   final String id;
   final String genericName;
+  final String? brandName;
   final String internalSKU;
-  final ListAllProductsProductsManufacturer manufacturer;
-  final ListAllProductsProductsBusiness business;
-  ListAllProductsProducts.fromJson(dynamic json):
+  final VerifyProductProductsManufacturer manufacturer;
+  final VerifyProductProductsBusiness business;
+  final EnumValue<ProductCategory> category;
+  final bool isActive;
+  VerifyProductProducts.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
   genericName = nativeFromJson<String>(json['genericName']),
+  brandName = json['brandName'] == null ? null : nativeFromJson<String>(json['brandName']),
   internalSKU = nativeFromJson<String>(json['internalSKU']),
-  manufacturer = ListAllProductsProductsManufacturer.fromJson(json['manufacturer']),
-  business = ListAllProductsProductsBusiness.fromJson(json['business']);
+  manufacturer = VerifyProductProductsManufacturer.fromJson(json['manufacturer']),
+  business = VerifyProductProductsBusiness.fromJson(json['business']),
+  category = productCategoryDeserializer(json['category']),
+  isActive = nativeFromJson<bool>(json['isActive']);
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -39,41 +45,54 @@ class ListAllProductsProducts {
       return false;
     }
 
-    final ListAllProductsProducts otherTyped = other as ListAllProductsProducts;
+    final VerifyProductProducts otherTyped = other as VerifyProductProducts;
     return id == otherTyped.id && 
     genericName == otherTyped.genericName && 
+    brandName == otherTyped.brandName && 
     internalSKU == otherTyped.internalSKU && 
     manufacturer == otherTyped.manufacturer && 
-    business == otherTyped.business;
+    business == otherTyped.business && 
+    category == otherTyped.category && 
+    isActive == otherTyped.isActive;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, genericName.hashCode, internalSKU.hashCode, manufacturer.hashCode, business.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, genericName.hashCode, brandName.hashCode, internalSKU.hashCode, manufacturer.hashCode, business.hashCode, category.hashCode, isActive.hashCode]);
   
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
     json['id'] = nativeToJson<String>(id);
     json['genericName'] = nativeToJson<String>(genericName);
+    if (brandName != null) {
+      json['brandName'] = nativeToJson<String?>(brandName);
+    }
     json['internalSKU'] = nativeToJson<String>(internalSKU);
     json['manufacturer'] = manufacturer.toJson();
     json['business'] = business.toJson();
+    json['category'] = 
+    productCategorySerializer(category)
+    ;
+    json['isActive'] = nativeToJson<bool>(isActive);
     return json;
   }
 
-  ListAllProductsProducts({
+  VerifyProductProducts({
     required this.id,
     required this.genericName,
+    this.brandName,
     required this.internalSKU,
     required this.manufacturer,
     required this.business,
+    required this.category,
+    required this.isActive,
   });
 }
 
 @immutable
-class ListAllProductsProductsManufacturer {
+class VerifyProductProductsManufacturer {
   final String name;
-  ListAllProductsProductsManufacturer.fromJson(dynamic json):
+  VerifyProductProductsManufacturer.fromJson(dynamic json):
   
   name = nativeFromJson<String>(json['name']);
   @override
@@ -85,7 +104,7 @@ class ListAllProductsProductsManufacturer {
       return false;
     }
 
-    final ListAllProductsProductsManufacturer otherTyped = other as ListAllProductsProductsManufacturer;
+    final VerifyProductProductsManufacturer otherTyped = other as VerifyProductProductsManufacturer;
     return name == otherTyped.name;
     
   }
@@ -99,15 +118,15 @@ class ListAllProductsProductsManufacturer {
     return json;
   }
 
-  ListAllProductsProductsManufacturer({
+  VerifyProductProductsManufacturer({
     required this.name,
   });
 }
 
 @immutable
-class ListAllProductsProductsBusiness {
+class VerifyProductProductsBusiness {
   final String name;
-  ListAllProductsProductsBusiness.fromJson(dynamic json):
+  VerifyProductProductsBusiness.fromJson(dynamic json):
   
   name = nativeFromJson<String>(json['name']);
   @override
@@ -119,7 +138,7 @@ class ListAllProductsProductsBusiness {
       return false;
     }
 
-    final ListAllProductsProductsBusiness otherTyped = other as ListAllProductsProductsBusiness;
+    final VerifyProductProductsBusiness otherTyped = other as VerifyProductProductsBusiness;
     return name == otherTyped.name;
     
   }
@@ -133,18 +152,18 @@ class ListAllProductsProductsBusiness {
     return json;
   }
 
-  ListAllProductsProductsBusiness({
+  VerifyProductProductsBusiness({
     required this.name,
   });
 }
 
 @immutable
-class ListAllProductsData {
-  final List<ListAllProductsProducts> products;
-  ListAllProductsData.fromJson(dynamic json):
+class VerifyProductData {
+  final List<VerifyProductProducts> products;
+  VerifyProductData.fromJson(dynamic json):
   
   products = (json['products'] as List<dynamic>)
-        .map((e) => ListAllProductsProducts.fromJson(e))
+        .map((e) => VerifyProductProducts.fromJson(e))
         .toList();
   @override
   bool operator ==(Object other) {
@@ -155,7 +174,7 @@ class ListAllProductsData {
       return false;
     }
 
-    final ListAllProductsData otherTyped = other as ListAllProductsData;
+    final VerifyProductData otherTyped = other as VerifyProductData;
     return products == otherTyped.products;
     
   }
@@ -169,7 +188,7 @@ class ListAllProductsData {
     return json;
   }
 
-  ListAllProductsData({
+  VerifyProductData({
     required this.products,
   });
 }

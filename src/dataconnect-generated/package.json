@@ -2,7 +2,7 @@
   "name": "@firebasegen/ik-pharma-connector/generated",
   "version": "1.0.0",
   "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
-  "description": "Generated SDK For ik-pharma-connector",
+  "description": "Generated SDK For ik_pharma",
   "license": "Apache-2.0",
   "engines": {
     "node": " >=18.0"

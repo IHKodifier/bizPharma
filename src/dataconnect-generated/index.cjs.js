@@ -168,154 +168,34 @@ const UserRole = {
 exports.UserRole = UserRole;
 
 const connectorConfig = {
-  connector: 'ik-pharma-connector',
+  connector: 'ik_pharma',
   service: 'ikpharma-dev-database',
   location: 'asia-south1'
 };
 exports.connectorConfig = connectorConfig;
 
-const listProductsByBusinessRef = (dcOrVars, vars) => {
+const createSupplierRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListProductsByBusiness', inputVars);
+  return mutationRef(dcInstance, 'CreateSupplier', inputVars);
 }
-listProductsByBusinessRef.operationName = 'ListProductsByBusiness';
-exports.listProductsByBusinessRef = listProductsByBusinessRef;
+createSupplierRef.operationName = 'CreateSupplier';
+exports.createSupplierRef = createSupplierRef;
 
-exports.listProductsByBusiness = function listProductsByBusiness(dcOrVars, vars) {
-  return executeQuery(listProductsByBusinessRef(dcOrVars, vars));
+exports.createSupplier = function createSupplier(dcOrVars, vars) {
+  return executeMutation(createSupplierRef(dcOrVars, vars));
 };
 
-const listAllSuppliersRef = (dc) => {
+const getParacetamolProductsRef = (dc) => {
   const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
   dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListAllSuppliers');
+  return queryRef(dcInstance, 'GetParacetamolProducts');
 }
-listAllSuppliersRef.operationName = 'ListAllSuppliers';
-exports.listAllSuppliersRef = listAllSuppliersRef;
+getParacetamolProductsRef.operationName = 'GetParacetamolProducts';
+exports.getParacetamolProductsRef = getParacetamolProductsRef;
 
-exports.listAllSuppliers = function listAllSuppliers(dc) {
-  return executeQuery(listAllSuppliersRef(dc));
-};
-
-const createProductBatchRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateProductBatch', inputVars);
-}
-createProductBatchRef.operationName = 'CreateProductBatch';
-exports.createProductBatchRef = createProductBatchRef;
-
-exports.createProductBatch = function createProductBatch(dcOrVars, vars) {
-  return executeMutation(createProductBatchRef(dcOrVars, vars));
-};
-
-const listAllProductsRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'listAllProducts');
-}
-listAllProductsRef.operationName = 'listAllProducts';
-exports.listAllProductsRef = listAllProductsRef;
-
-exports.listAllProducts = function listAllProducts(dc) {
-  return executeQuery(listAllProductsRef(dc));
-};
-
-const listInventoryByLocationRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListInventoryByLocation', inputVars);
-}
-listInventoryByLocationRef.operationName = 'ListInventoryByLocation';
-exports.listInventoryByLocationRef = listInventoryByLocationRef;
-
-exports.listInventoryByLocation = function listInventoryByLocation(dcOrVars, vars) {
-  return executeQuery(listInventoryByLocationRef(dcOrVars, vars));
-};
-
-const createDummyProductRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'createDummyProduct');
-}
-createDummyProductRef.operationName = 'createDummyProduct';
-exports.createDummyProductRef = createDummyProductRef;
-
-exports.createDummyProduct = function createDummyProduct(dc) {
-  return executeMutation(createDummyProductRef(dc));
-};
-
-const createInventoryLevelRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateInventoryLevel', inputVars);
-}
-createInventoryLevelRef.operationName = 'CreateInventoryLevel';
-exports.createInventoryLevelRef = createInventoryLevelRef;
-
-exports.createInventoryLevel = function createInventoryLevel(dcOrVars, vars) {
-  return executeMutation(createInventoryLevelRef(dcOrVars, vars));
-};
-
-const createBusinessRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateBusiness', inputVars);
-}
-createBusinessRef.operationName = 'CreateBusiness';
-exports.createBusinessRef = createBusinessRef;
-
-exports.createBusiness = function createBusiness(dcOrVars, vars) {
-  return executeMutation(createBusinessRef(dcOrVars, vars));
-};
-
-const createUserRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateUser', inputVars);
-}
-createUserRef.operationName = 'CreateUser';
-exports.createUserRef = createUserRef;
-
-exports.createUser = function createUser(dcOrVars, vars) {
-  return executeMutation(createUserRef(dcOrVars, vars));
-};
-
-const createCustomerRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateCustomer', inputVars);
-}
-createCustomerRef.operationName = 'CreateCustomer';
-exports.createCustomerRef = createCustomerRef;
-
-exports.createCustomer = function createCustomer(dcOrVars, vars) {
-  return executeMutation(createCustomerRef(dcOrVars, vars));
-};
-
-const createProductPricingRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateProductPricing', inputVars);
-}
-createProductPricingRef.operationName = 'CreateProductPricing';
-exports.createProductPricingRef = createProductPricingRef;
-
-exports.createProductPricing = function createProductPricing(dcOrVars, vars) {
-  return executeMutation(createProductPricingRef(dcOrVars, vars));
-};
-
-const createGoodsReceiptRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateGoodsReceipt', inputVars);
-}
-createGoodsReceiptRef.operationName = 'CreateGoodsReceipt';
-exports.createGoodsReceiptRef = createGoodsReceiptRef;
-
-exports.createGoodsReceipt = function createGoodsReceipt(dcOrVars, vars) {
-  return executeMutation(createGoodsReceiptRef(dcOrVars, vars));
+exports.getParacetamolProducts = function getParacetamolProducts(dc) {
+  return executeQuery(getParacetamolProductsRef(dc));
 };
 
 const createPurchaseOrderRef = (dcOrVars, vars) => {
@@ -330,64 +210,28 @@ exports.createPurchaseOrder = function createPurchaseOrder(dcOrVars, vars) {
   return executeMutation(createPurchaseOrderRef(dcOrVars, vars));
 };
 
-const seedDataRef = (dc) => {
+const createDummyProductRef = (dc) => {
   const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
   dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'SeedData');
+  return mutationRef(dcInstance, 'createDummyProduct');
 }
-seedDataRef.operationName = 'SeedData';
-exports.seedDataRef = seedDataRef;
+createDummyProductRef.operationName = 'createDummyProduct';
+exports.createDummyProductRef = createDummyProductRef;
 
-exports.seedData = function seedData(dc) {
-  return executeMutation(seedDataRef(dc));
+exports.createDummyProduct = function createDummyProduct(dc) {
+  return executeMutation(createDummyProductRef(dc));
 };
 
-const createAddressRef = (dcOrVars, vars) => {
+const createProductBatchRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateAddress', inputVars);
+  return mutationRef(dcInstance, 'CreateProductBatch', inputVars);
 }
-createAddressRef.operationName = 'CreateAddress';
-exports.createAddressRef = createAddressRef;
+createProductBatchRef.operationName = 'CreateProductBatch';
+exports.createProductBatchRef = createProductBatchRef;
 
-exports.createAddress = function createAddress(dcOrVars, vars) {
-  return executeMutation(createAddressRef(dcOrVars, vars));
-};
-
-const createTherapeuticClassRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateTherapeuticClass', inputVars);
-}
-createTherapeuticClassRef.operationName = 'CreateTherapeuticClass';
-exports.createTherapeuticClassRef = createTherapeuticClassRef;
-
-exports.createTherapeuticClass = function createTherapeuticClass(dcOrVars, vars) {
-  return executeMutation(createTherapeuticClassRef(dcOrVars, vars));
-};
-
-const verifyProductRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'VerifyProduct');
-}
-verifyProductRef.operationName = 'VerifyProduct';
-exports.verifyProductRef = verifyProductRef;
-
-exports.verifyProduct = function verifyProduct(dc) {
-  return executeQuery(verifyProductRef(dc));
-};
-
-const getBusinessByIdRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetBusinessById', inputVars);
-}
-getBusinessByIdRef.operationName = 'GetBusinessById';
-exports.getBusinessByIdRef = getBusinessByIdRef;
-
-exports.getBusinessById = function getBusinessById(dcOrVars, vars) {
-  return executeQuery(getBusinessByIdRef(dcOrVars, vars));
+exports.createProductBatch = function createProductBatch(dcOrVars, vars) {
+  return executeMutation(createProductBatchRef(dcOrVars, vars));
 };
 
 const listAllBusinessesRef = (dc) => {
@@ -426,16 +270,184 @@ exports.listAllLocations = function listAllLocations(dc) {
   return executeQuery(listAllLocationsRef(dc));
 };
 
-const createProductRef = (dcOrVars, vars) => {
+const listAllProductsRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'listAllProducts');
+}
+listAllProductsRef.operationName = 'listAllProducts';
+exports.listAllProductsRef = listAllProductsRef;
+
+exports.listAllProducts = function listAllProducts(dc) {
+  return executeQuery(listAllProductsRef(dc));
+};
+
+const listInventoryByLocationRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateProduct', inputVars);
+  return queryRef(dcInstance, 'ListInventoryByLocation', inputVars);
 }
-createProductRef.operationName = 'CreateProduct';
-exports.createProductRef = createProductRef;
+listInventoryByLocationRef.operationName = 'ListInventoryByLocation';
+exports.listInventoryByLocationRef = listInventoryByLocationRef;
 
-exports.createProduct = function createProduct(dcOrVars, vars) {
-  return executeMutation(createProductRef(dcOrVars, vars));
+exports.listInventoryByLocation = function listInventoryByLocation(dcOrVars, vars) {
+  return executeQuery(listInventoryByLocationRef(dcOrVars, vars));
+};
+
+const createProductPricingRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateProductPricing', inputVars);
+}
+createProductPricingRef.operationName = 'CreateProductPricing';
+exports.createProductPricingRef = createProductPricingRef;
+
+exports.createProductPricing = function createProductPricing(dcOrVars, vars) {
+  return executeMutation(createProductPricingRef(dcOrVars, vars));
+};
+
+const verifyProductRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'VerifyProduct');
+}
+verifyProductRef.operationName = 'VerifyProduct';
+exports.verifyProductRef = verifyProductRef;
+
+exports.verifyProduct = function verifyProduct(dc) {
+  return executeQuery(verifyProductRef(dc));
+};
+
+const getBusinessByIdRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetBusinessById', inputVars);
+}
+getBusinessByIdRef.operationName = 'GetBusinessById';
+exports.getBusinessByIdRef = getBusinessByIdRef;
+
+exports.getBusinessById = function getBusinessById(dcOrVars, vars) {
+  return executeQuery(getBusinessByIdRef(dcOrVars, vars));
+};
+
+const listLocationsByBusinessRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListLocationsByBusiness', inputVars);
+}
+listLocationsByBusinessRef.operationName = 'ListLocationsByBusiness';
+exports.listLocationsByBusinessRef = listLocationsByBusinessRef;
+
+exports.listLocationsByBusiness = function listLocationsByBusiness(dcOrVars, vars) {
+  return executeQuery(listLocationsByBusinessRef(dcOrVars, vars));
+};
+
+const listProductsByBusinessRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListProductsByBusiness', inputVars);
+}
+listProductsByBusinessRef.operationName = 'ListProductsByBusiness';
+exports.listProductsByBusinessRef = listProductsByBusinessRef;
+
+exports.listProductsByBusiness = function listProductsByBusiness(dcOrVars, vars) {
+  return executeQuery(listProductsByBusinessRef(dcOrVars, vars));
+};
+
+const listAllSuppliersRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListAllSuppliers');
+}
+listAllSuppliersRef.operationName = 'ListAllSuppliers';
+exports.listAllSuppliersRef = listAllSuppliersRef;
+
+exports.listAllSuppliers = function listAllSuppliers(dc) {
+  return executeQuery(listAllSuppliersRef(dc));
+};
+
+const seedDataRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'SeedData');
+}
+seedDataRef.operationName = 'SeedData';
+exports.seedDataRef = seedDataRef;
+
+exports.seedData = function seedData(dc) {
+  return executeMutation(seedDataRef(dc));
+};
+
+const createAddressRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateAddress', inputVars);
+}
+createAddressRef.operationName = 'CreateAddress';
+exports.createAddressRef = createAddressRef;
+
+exports.createAddress = function createAddress(dcOrVars, vars) {
+  return executeMutation(createAddressRef(dcOrVars, vars));
+};
+
+const createUserRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateUser', inputVars);
+}
+createUserRef.operationName = 'CreateUser';
+exports.createUserRef = createUserRef;
+
+exports.createUser = function createUser(dcOrVars, vars) {
+  return executeMutation(createUserRef(dcOrVars, vars));
+};
+
+const createCustomerRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateCustomer', inputVars);
+}
+createCustomerRef.operationName = 'CreateCustomer';
+exports.createCustomerRef = createCustomerRef;
+
+exports.createCustomer = function createCustomer(dcOrVars, vars) {
+  return executeMutation(createCustomerRef(dcOrVars, vars));
+};
+
+const createTherapeuticClassRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateTherapeuticClass', inputVars);
+}
+createTherapeuticClassRef.operationName = 'CreateTherapeuticClass';
+exports.createTherapeuticClassRef = createTherapeuticClassRef;
+
+exports.createTherapeuticClass = function createTherapeuticClass(dcOrVars, vars) {
+  return executeMutation(createTherapeuticClassRef(dcOrVars, vars));
+};
+
+const listPricingByLocationRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListPricingByLocation', inputVars);
+}
+listPricingByLocationRef.operationName = 'ListPricingByLocation';
+exports.listPricingByLocationRef = listPricingByLocationRef;
+
+exports.listPricingByLocation = function listPricingByLocation(dcOrVars, vars) {
+  return executeQuery(listPricingByLocationRef(dcOrVars, vars));
+};
+
+const createBusinessRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateBusiness', inputVars);
+}
+createBusinessRef.operationName = 'CreateBusiness';
+exports.createBusinessRef = createBusinessRef;
+
+exports.createBusiness = function createBusiness(dcOrVars, vars) {
+  return executeMutation(createBusinessRef(dcOrVars, vars));
 };
 
 const createManufacturerRef = (dcOrVars, vars) => {
@@ -462,38 +474,38 @@ exports.createLocation = function createLocation(dcOrVars, vars) {
   return executeMutation(createLocationRef(dcOrVars, vars));
 };
 
-const createSupplierRef = (dcOrVars, vars) => {
+const createGoodsReceiptRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateSupplier', inputVars);
+  return mutationRef(dcInstance, 'CreateGoodsReceipt', inputVars);
 }
-createSupplierRef.operationName = 'CreateSupplier';
-exports.createSupplierRef = createSupplierRef;
+createGoodsReceiptRef.operationName = 'CreateGoodsReceipt';
+exports.createGoodsReceiptRef = createGoodsReceiptRef;
 
-exports.createSupplier = function createSupplier(dcOrVars, vars) {
-  return executeMutation(createSupplierRef(dcOrVars, vars));
+exports.createGoodsReceipt = function createGoodsReceipt(dcOrVars, vars) {
+  return executeMutation(createGoodsReceiptRef(dcOrVars, vars));
 };
 
-const listLocationsByBusinessRef = (dcOrVars, vars) => {
+const createInventoryLevelRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListLocationsByBusiness', inputVars);
+  return mutationRef(dcInstance, 'CreateInventoryLevel', inputVars);
 }
-listLocationsByBusinessRef.operationName = 'ListLocationsByBusiness';
-exports.listLocationsByBusinessRef = listLocationsByBusinessRef;
+createInventoryLevelRef.operationName = 'CreateInventoryLevel';
+exports.createInventoryLevelRef = createInventoryLevelRef;
 
-exports.listLocationsByBusiness = function listLocationsByBusiness(dcOrVars, vars) {
-  return executeQuery(listLocationsByBusinessRef(dcOrVars, vars));
+exports.createInventoryLevel = function createInventoryLevel(dcOrVars, vars) {
+  return executeMutation(createInventoryLevelRef(dcOrVars, vars));
 };
 
-const listPricingByLocationRef = (dcOrVars, vars) => {
+const createProductRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListPricingByLocation', inputVars);
+  return mutationRef(dcInstance, 'CreateProduct', inputVars);
 }
-listPricingByLocationRef.operationName = 'ListPricingByLocation';
-exports.listPricingByLocationRef = listPricingByLocationRef;
+createProductRef.operationName = 'CreateProduct';
+exports.createProductRef = createProductRef;
 
-exports.listPricingByLocation = function listPricingByLocation(dcOrVars, vars) {
-  return executeQuery(listPricingByLocationRef(dcOrVars, vars));
+exports.createProduct = function createProduct(dcOrVars, vars) {
+  return executeMutation(createProductRef(dcOrVars, vars));
 };

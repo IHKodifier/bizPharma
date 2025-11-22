@@ -1,0 +1,8 @@
+[2025-11-22T06:39:43.363Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"flutter"}
+[2025-11-22T06:39:43.425Z] defaultcredentials: writing to file C:\Users\Ihtiram\AppData\Roaming\firebase\enigmatek_inc_gmail.com_application_default_credentials.json
+I1122 11:39:43.722092    3236 codegen.go:79] [connector "ik_pharma" javascriptSdk] Generating sources into "E:\\Non_Office\\Dev_Space\\vibe_skool\\ik_pharma\\src\\dataconnect-generated"
+I1122 11:39:43.754071    3236 collector.go:107] connector "ik_pharma" javascriptSdk wrote into "E:\\Non_Office\\Dev_Space\\vibe_skool\\ik_pharma\\src\\dataconnect-generated"
+Generated sources: index.d.ts [38442B] esm\index.esm.js [15023B] package.json [659B] README.md [140782B] .guides/usage.md [1925B] .guides/setup.md [604B] esm\package.json [17B] index.cjs.js [17423B] .guides/config.json [236B] 
+I1122 11:39:43.770681    3236 installsdk.go:86] Running command: C:\Program Files\nodejs\npm.cmd install file:src\dataconnect-generated
+E1122 11:39:45.288718    3236 installsdk.go:88] Failed to install package: exit status 1
++  dataconnect: Successfully Generated SDKs for services: ikpharma-dev-database 

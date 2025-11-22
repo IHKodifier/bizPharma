@@ -1,4 +1,4 @@
-part of 'generated.dart';
+part of 'ik_pharma.dart';
 
 class CreateUserVariablesBuilder {
   String id;

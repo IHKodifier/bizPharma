@@ -52,3 +52,14 @@ node_modules/
 firebase-debug.log
 dataconnect-debug.log
 pglite-debug.log
+dataconnect/.dataconnect/
+
+# Secrets and credentials (DO NOT COMMIT)
+*.key
+*.key.json
+*service-account*.json
+.env
+.env.*
+!.env.example
+secrets/
+credentials/

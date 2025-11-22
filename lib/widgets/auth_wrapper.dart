@@ -4,6 +4,7 @@ import '../providers/auth_provider.dart';
 import '../pages/landing/landing_page.dart';
 import '../app_home_page.dart';
 
+//Just one trivial comment to fix the GitHub actions.
 class AuthWrapper extends ConsumerWidget {
   const AuthWrapper({super.key});
 

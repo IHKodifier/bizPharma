@@ -14,38 +14,38 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { listProductsByBusiness, listAllSuppliers, createProductBatch, listAllProducts, listInventoryByLocation, createDummyProduct, createInventoryLevel, createBusiness, createUser, createCustomer } from '@firebasegen/ik-pharma-connector/generated';
+import { createSupplier, getParacetamolProducts, createPurchaseOrder, createDummyProduct, createProductBatch, listAllBusinesses, listAllCustomers, listAllLocations, listAllProducts, listInventoryByLocation } from '@firebasegen/ik-pharma-connector/generated';
 
 
-// Operation ListProductsByBusiness:  For variables, look at type ListProductsByBusinessVars in ../index.d.ts
-const { data } = await ListProductsByBusiness(dataConnect, listProductsByBusinessVars);
+// Operation CreateSupplier:  For variables, look at type CreateSupplierVars in ../index.d.ts
+const { data } = await CreateSupplier(dataConnect, createSupplierVars);
 
-// Operation ListAllSuppliers: 
-const { data } = await ListAllSuppliers(dataConnect);
+// Operation GetParacetamolProducts: 
+const { data } = await GetParacetamolProducts(dataConnect);
+
+// Operation CreatePurchaseOrder:  For variables, look at type CreatePurchaseOrderVars in ../index.d.ts
+const { data } = await CreatePurchaseOrder(dataConnect, createPurchaseOrderVars);
+
+// Operation createDummyProduct: 
+const { data } = await CreateDummyProduct(dataConnect);
 
 // Operation CreateProductBatch:  For variables, look at type CreateProductBatchVars in ../index.d.ts
 const { data } = await CreateProductBatch(dataConnect, createProductBatchVars);
+
+// Operation ListAllBusinesses: 
+const { data } = await ListAllBusinesses(dataConnect);
+
+// Operation ListAllCustomers: 
+const { data } = await ListAllCustomers(dataConnect);
+
+// Operation ListAllLocations: 
+const { data } = await ListAllLocations(dataConnect);
 
 // Operation listAllProducts: 
 const { data } = await ListAllProducts(dataConnect);
 
 // Operation ListInventoryByLocation:  For variables, look at type ListInventoryByLocationVars in ../index.d.ts
 const { data } = await ListInventoryByLocation(dataConnect, listInventoryByLocationVars);
-
-// Operation createDummyProduct: 
-const { data } = await CreateDummyProduct(dataConnect);
-
-// Operation CreateInventoryLevel:  For variables, look at type CreateInventoryLevelVars in ../index.d.ts
-const { data } = await CreateInventoryLevel(dataConnect, createInventoryLevelVars);
-
-// Operation CreateBusiness:  For variables, look at type CreateBusinessVars in ../index.d.ts
-const { data } = await CreateBusiness(dataConnect, createBusinessVars);
-
-// Operation CreateUser:  For variables, look at type CreateUserVars in ../index.d.ts
-const { data } = await CreateUser(dataConnect, createUserVars);
-
-// Operation CreateCustomer:  For variables, look at type CreateCustomerVars in ../index.d.ts
-const { data } = await CreateCustomer(dataConnect, createCustomerVars);
 
 
 ```

@@ -52,3 +52,4 @@ node_modules/
 firebase-debug.log
 dataconnect-debug.log
 pglite-debug.log
+dataconnect/.dataconnect/

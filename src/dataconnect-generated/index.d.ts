@@ -486,6 +486,23 @@ export interface GetBusinessByIdVariables {
   id: UUIDString;
 }
 
+export interface GetParacetamolProductsData {
+  products: ({
+    id: UUIDString;
+    genericName: string;
+    brandName?: string | null;
+    internalSKU: string;
+    manufacturer: {
+      name: string;
+    };
+      business: {
+        name: string;
+      };
+        category: ProductCategory;
+        isActive: boolean;
+  } & Product_Key)[];
+}
+
 export interface GoodsReceipt_Key {
   id: UUIDString;
   __typename?: 'GoodsReceipt_Key';
@@ -859,149 +876,29 @@ export interface VolumeDiscount_Key {
   __typename?: 'VolumeDiscount_Key';
 }
 
-interface ListProductsByBusinessRef {
+interface CreateSupplierRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: ListProductsByBusinessVariables): QueryRef<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+  (vars: CreateSupplierVariables): MutationRef<CreateSupplierData, CreateSupplierVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: ListProductsByBusinessVariables): QueryRef<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+  (dc: DataConnect, vars: CreateSupplierVariables): MutationRef<CreateSupplierData, CreateSupplierVariables>;
   operationName: string;
 }
-export const listProductsByBusinessRef: ListProductsByBusinessRef;
+export const createSupplierRef: CreateSupplierRef;
 
-export function listProductsByBusiness(vars: ListProductsByBusinessVariables): QueryPromise<ListProductsByBusinessData, ListProductsByBusinessVariables>;
-export function listProductsByBusiness(dc: DataConnect, vars: ListProductsByBusinessVariables): QueryPromise<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+export function createSupplier(vars: CreateSupplierVariables): MutationPromise<CreateSupplierData, CreateSupplierVariables>;
+export function createSupplier(dc: DataConnect, vars: CreateSupplierVariables): MutationPromise<CreateSupplierData, CreateSupplierVariables>;
 
-interface ListAllSuppliersRef {
+interface GetParacetamolProductsRef {
   /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<ListAllSuppliersData, undefined>;
+  (): QueryRef<GetParacetamolProductsData, undefined>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<ListAllSuppliersData, undefined>;
+  (dc: DataConnect): QueryRef<GetParacetamolProductsData, undefined>;
   operationName: string;
 }
-export const listAllSuppliersRef: ListAllSuppliersRef;
+export const getParacetamolProductsRef: GetParacetamolProductsRef;
 
-export function listAllSuppliers(): QueryPromise<ListAllSuppliersData, undefined>;
-export function listAllSuppliers(dc: DataConnect): QueryPromise<ListAllSuppliersData, undefined>;
-
-interface CreateProductBatchRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateProductBatchVariables): MutationRef<CreateProductBatchData, CreateProductBatchVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateProductBatchVariables): MutationRef<CreateProductBatchData, CreateProductBatchVariables>;
-  operationName: string;
-}
-export const createProductBatchRef: CreateProductBatchRef;
-
-export function createProductBatch(vars: CreateProductBatchVariables): MutationPromise<CreateProductBatchData, CreateProductBatchVariables>;
-export function createProductBatch(dc: DataConnect, vars: CreateProductBatchVariables): MutationPromise<CreateProductBatchData, CreateProductBatchVariables>;
-
-interface ListAllProductsRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<ListAllProductsData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<ListAllProductsData, undefined>;
-  operationName: string;
-}
-export const listAllProductsRef: ListAllProductsRef;
-
-export function listAllProducts(): QueryPromise<ListAllProductsData, undefined>;
-export function listAllProducts(dc: DataConnect): QueryPromise<ListAllProductsData, undefined>;
-
-interface ListInventoryByLocationRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: ListInventoryByLocationVariables): QueryRef<ListInventoryByLocationData, ListInventoryByLocationVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: ListInventoryByLocationVariables): QueryRef<ListInventoryByLocationData, ListInventoryByLocationVariables>;
-  operationName: string;
-}
-export const listInventoryByLocationRef: ListInventoryByLocationRef;
-
-export function listInventoryByLocation(vars: ListInventoryByLocationVariables): QueryPromise<ListInventoryByLocationData, ListInventoryByLocationVariables>;
-export function listInventoryByLocation(dc: DataConnect, vars: ListInventoryByLocationVariables): QueryPromise<ListInventoryByLocationData, ListInventoryByLocationVariables>;
-
-interface CreateDummyProductRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): MutationRef<CreateDummyProductData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): MutationRef<CreateDummyProductData, undefined>;
-  operationName: string;
-}
-export const createDummyProductRef: CreateDummyProductRef;
-
-export function createDummyProduct(): MutationPromise<CreateDummyProductData, undefined>;
-export function createDummyProduct(dc: DataConnect): MutationPromise<CreateDummyProductData, undefined>;
-
-interface CreateInventoryLevelRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateInventoryLevelVariables): MutationRef<CreateInventoryLevelData, CreateInventoryLevelVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateInventoryLevelVariables): MutationRef<CreateInventoryLevelData, CreateInventoryLevelVariables>;
-  operationName: string;
-}
-export const createInventoryLevelRef: CreateInventoryLevelRef;
-
-export function createInventoryLevel(vars: CreateInventoryLevelVariables): MutationPromise<CreateInventoryLevelData, CreateInventoryLevelVariables>;
-export function createInventoryLevel(dc: DataConnect, vars: CreateInventoryLevelVariables): MutationPromise<CreateInventoryLevelData, CreateInventoryLevelVariables>;
-
-interface CreateBusinessRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateBusinessVariables): MutationRef<CreateBusinessData, CreateBusinessVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateBusinessVariables): MutationRef<CreateBusinessData, CreateBusinessVariables>;
-  operationName: string;
-}
-export const createBusinessRef: CreateBusinessRef;
-
-export function createBusiness(vars: CreateBusinessVariables): MutationPromise<CreateBusinessData, CreateBusinessVariables>;
-export function createBusiness(dc: DataConnect, vars: CreateBusinessVariables): MutationPromise<CreateBusinessData, CreateBusinessVariables>;
-
-interface CreateUserRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateUserVariables): MutationRef<CreateUserData, CreateUserVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateUserVariables): MutationRef<CreateUserData, CreateUserVariables>;
-  operationName: string;
-}
-export const createUserRef: CreateUserRef;
-
-export function createUser(vars: CreateUserVariables): MutationPromise<CreateUserData, CreateUserVariables>;
-export function createUser(dc: DataConnect, vars: CreateUserVariables): MutationPromise<CreateUserData, CreateUserVariables>;
-
-interface CreateCustomerRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateCustomerVariables): MutationRef<CreateCustomerData, CreateCustomerVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateCustomerVariables): MutationRef<CreateCustomerData, CreateCustomerVariables>;
-  operationName: string;
-}
-export const createCustomerRef: CreateCustomerRef;
-
-export function createCustomer(vars: CreateCustomerVariables): MutationPromise<CreateCustomerData, CreateCustomerVariables>;
-export function createCustomer(dc: DataConnect, vars: CreateCustomerVariables): MutationPromise<CreateCustomerData, CreateCustomerVariables>;
-
-interface CreateProductPricingRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateProductPricingVariables): MutationRef<CreateProductPricingData, CreateProductPricingVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateProductPricingVariables): MutationRef<CreateProductPricingData, CreateProductPricingVariables>;
-  operationName: string;
-}
-export const createProductPricingRef: CreateProductPricingRef;
-
-export function createProductPricing(vars: CreateProductPricingVariables): MutationPromise<CreateProductPricingData, CreateProductPricingVariables>;
-export function createProductPricing(dc: DataConnect, vars: CreateProductPricingVariables): MutationPromise<CreateProductPricingData, CreateProductPricingVariables>;
-
-interface CreateGoodsReceiptRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateGoodsReceiptVariables): MutationRef<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateGoodsReceiptVariables): MutationRef<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
-  operationName: string;
-}
-export const createGoodsReceiptRef: CreateGoodsReceiptRef;
-
-export function createGoodsReceipt(vars: CreateGoodsReceiptVariables): MutationPromise<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
-export function createGoodsReceipt(dc: DataConnect, vars: CreateGoodsReceiptVariables): MutationPromise<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
+export function getParacetamolProducts(): QueryPromise<GetParacetamolProductsData, undefined>;
+export function getParacetamolProducts(dc: DataConnect): QueryPromise<GetParacetamolProductsData, undefined>;
 
 interface CreatePurchaseOrderRef {
   /* Allow users to create refs without passing in DataConnect */
@@ -1015,65 +912,29 @@ export const createPurchaseOrderRef: CreatePurchaseOrderRef;
 export function createPurchaseOrder(vars: CreatePurchaseOrderVariables): MutationPromise<CreatePurchaseOrderData, CreatePurchaseOrderVariables>;
 export function createPurchaseOrder(dc: DataConnect, vars: CreatePurchaseOrderVariables): MutationPromise<CreatePurchaseOrderData, CreatePurchaseOrderVariables>;
 
-interface SeedDataRef {
+interface CreateDummyProductRef {
   /* Allow users to create refs without passing in DataConnect */
-  (): MutationRef<SeedDataData, undefined>;
+  (): MutationRef<CreateDummyProductData, undefined>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): MutationRef<SeedDataData, undefined>;
+  (dc: DataConnect): MutationRef<CreateDummyProductData, undefined>;
   operationName: string;
 }
-export const seedDataRef: SeedDataRef;
+export const createDummyProductRef: CreateDummyProductRef;
 
-export function seedData(): MutationPromise<SeedDataData, undefined>;
-export function seedData(dc: DataConnect): MutationPromise<SeedDataData, undefined>;
+export function createDummyProduct(): MutationPromise<CreateDummyProductData, undefined>;
+export function createDummyProduct(dc: DataConnect): MutationPromise<CreateDummyProductData, undefined>;
 
-interface CreateAddressRef {
+interface CreateProductBatchRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateAddressVariables): MutationRef<CreateAddressData, CreateAddressVariables>;
+  (vars: CreateProductBatchVariables): MutationRef<CreateProductBatchData, CreateProductBatchVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateAddressVariables): MutationRef<CreateAddressData, CreateAddressVariables>;
+  (dc: DataConnect, vars: CreateProductBatchVariables): MutationRef<CreateProductBatchData, CreateProductBatchVariables>;
   operationName: string;
 }
-export const createAddressRef: CreateAddressRef;
+export const createProductBatchRef: CreateProductBatchRef;
 
-export function createAddress(vars: CreateAddressVariables): MutationPromise<CreateAddressData, CreateAddressVariables>;
-export function createAddress(dc: DataConnect, vars: CreateAddressVariables): MutationPromise<CreateAddressData, CreateAddressVariables>;
-
-interface CreateTherapeuticClassRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateTherapeuticClassVariables): MutationRef<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateTherapeuticClassVariables): MutationRef<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
-  operationName: string;
-}
-export const createTherapeuticClassRef: CreateTherapeuticClassRef;
-
-export function createTherapeuticClass(vars: CreateTherapeuticClassVariables): MutationPromise<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
-export function createTherapeuticClass(dc: DataConnect, vars: CreateTherapeuticClassVariables): MutationPromise<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
-
-interface VerifyProductRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<VerifyProductData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<VerifyProductData, undefined>;
-  operationName: string;
-}
-export const verifyProductRef: VerifyProductRef;
-
-export function verifyProduct(): QueryPromise<VerifyProductData, undefined>;
-export function verifyProduct(dc: DataConnect): QueryPromise<VerifyProductData, undefined>;
-
-interface GetBusinessByIdRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetBusinessByIdVariables): QueryRef<GetBusinessByIdData, GetBusinessByIdVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetBusinessByIdVariables): QueryRef<GetBusinessByIdData, GetBusinessByIdVariables>;
-  operationName: string;
-}
-export const getBusinessByIdRef: GetBusinessByIdRef;
-
-export function getBusinessById(vars: GetBusinessByIdVariables): QueryPromise<GetBusinessByIdData, GetBusinessByIdVariables>;
-export function getBusinessById(dc: DataConnect, vars: GetBusinessByIdVariables): QueryPromise<GetBusinessByIdData, GetBusinessByIdVariables>;
+export function createProductBatch(vars: CreateProductBatchVariables): MutationPromise<CreateProductBatchData, CreateProductBatchVariables>;
+export function createProductBatch(dc: DataConnect, vars: CreateProductBatchVariables): MutationPromise<CreateProductBatchData, CreateProductBatchVariables>;
 
 interface ListAllBusinessesRef {
   /* Allow users to create refs without passing in DataConnect */
@@ -1111,17 +972,185 @@ export const listAllLocationsRef: ListAllLocationsRef;
 export function listAllLocations(): QueryPromise<ListAllLocationsData, undefined>;
 export function listAllLocations(dc: DataConnect): QueryPromise<ListAllLocationsData, undefined>;
 
-interface CreateProductRef {
+interface ListAllProductsRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateProductVariables): MutationRef<CreateProductData, CreateProductVariables>;
+  (): QueryRef<ListAllProductsData, undefined>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateProductVariables): MutationRef<CreateProductData, CreateProductVariables>;
+  (dc: DataConnect): QueryRef<ListAllProductsData, undefined>;
   operationName: string;
 }
-export const createProductRef: CreateProductRef;
+export const listAllProductsRef: ListAllProductsRef;
 
-export function createProduct(vars: CreateProductVariables): MutationPromise<CreateProductData, CreateProductVariables>;
-export function createProduct(dc: DataConnect, vars: CreateProductVariables): MutationPromise<CreateProductData, CreateProductVariables>;
+export function listAllProducts(): QueryPromise<ListAllProductsData, undefined>;
+export function listAllProducts(dc: DataConnect): QueryPromise<ListAllProductsData, undefined>;
+
+interface ListInventoryByLocationRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: ListInventoryByLocationVariables): QueryRef<ListInventoryByLocationData, ListInventoryByLocationVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: ListInventoryByLocationVariables): QueryRef<ListInventoryByLocationData, ListInventoryByLocationVariables>;
+  operationName: string;
+}
+export const listInventoryByLocationRef: ListInventoryByLocationRef;
+
+export function listInventoryByLocation(vars: ListInventoryByLocationVariables): QueryPromise<ListInventoryByLocationData, ListInventoryByLocationVariables>;
+export function listInventoryByLocation(dc: DataConnect, vars: ListInventoryByLocationVariables): QueryPromise<ListInventoryByLocationData, ListInventoryByLocationVariables>;
+
+interface CreateProductPricingRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateProductPricingVariables): MutationRef<CreateProductPricingData, CreateProductPricingVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateProductPricingVariables): MutationRef<CreateProductPricingData, CreateProductPricingVariables>;
+  operationName: string;
+}
+export const createProductPricingRef: CreateProductPricingRef;
+
+export function createProductPricing(vars: CreateProductPricingVariables): MutationPromise<CreateProductPricingData, CreateProductPricingVariables>;
+export function createProductPricing(dc: DataConnect, vars: CreateProductPricingVariables): MutationPromise<CreateProductPricingData, CreateProductPricingVariables>;
+
+interface VerifyProductRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<VerifyProductData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<VerifyProductData, undefined>;
+  operationName: string;
+}
+export const verifyProductRef: VerifyProductRef;
+
+export function verifyProduct(): QueryPromise<VerifyProductData, undefined>;
+export function verifyProduct(dc: DataConnect): QueryPromise<VerifyProductData, undefined>;
+
+interface GetBusinessByIdRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetBusinessByIdVariables): QueryRef<GetBusinessByIdData, GetBusinessByIdVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetBusinessByIdVariables): QueryRef<GetBusinessByIdData, GetBusinessByIdVariables>;
+  operationName: string;
+}
+export const getBusinessByIdRef: GetBusinessByIdRef;
+
+export function getBusinessById(vars: GetBusinessByIdVariables): QueryPromise<GetBusinessByIdData, GetBusinessByIdVariables>;
+export function getBusinessById(dc: DataConnect, vars: GetBusinessByIdVariables): QueryPromise<GetBusinessByIdData, GetBusinessByIdVariables>;
+
+interface ListLocationsByBusinessRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: ListLocationsByBusinessVariables): QueryRef<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: ListLocationsByBusinessVariables): QueryRef<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+  operationName: string;
+}
+export const listLocationsByBusinessRef: ListLocationsByBusinessRef;
+
+export function listLocationsByBusiness(vars: ListLocationsByBusinessVariables): QueryPromise<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+export function listLocationsByBusiness(dc: DataConnect, vars: ListLocationsByBusinessVariables): QueryPromise<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+
+interface ListProductsByBusinessRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: ListProductsByBusinessVariables): QueryRef<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: ListProductsByBusinessVariables): QueryRef<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+  operationName: string;
+}
+export const listProductsByBusinessRef: ListProductsByBusinessRef;
+
+export function listProductsByBusiness(vars: ListProductsByBusinessVariables): QueryPromise<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+export function listProductsByBusiness(dc: DataConnect, vars: ListProductsByBusinessVariables): QueryPromise<ListProductsByBusinessData, ListProductsByBusinessVariables>;
+
+interface ListAllSuppliersRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<ListAllSuppliersData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<ListAllSuppliersData, undefined>;
+  operationName: string;
+}
+export const listAllSuppliersRef: ListAllSuppliersRef;
+
+export function listAllSuppliers(): QueryPromise<ListAllSuppliersData, undefined>;
+export function listAllSuppliers(dc: DataConnect): QueryPromise<ListAllSuppliersData, undefined>;
+
+interface SeedDataRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): MutationRef<SeedDataData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): MutationRef<SeedDataData, undefined>;
+  operationName: string;
+}
+export const seedDataRef: SeedDataRef;
+
+export function seedData(): MutationPromise<SeedDataData, undefined>;
+export function seedData(dc: DataConnect): MutationPromise<SeedDataData, undefined>;
+
+interface CreateAddressRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateAddressVariables): MutationRef<CreateAddressData, CreateAddressVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateAddressVariables): MutationRef<CreateAddressData, CreateAddressVariables>;
+  operationName: string;
+}
+export const createAddressRef: CreateAddressRef;
+
+export function createAddress(vars: CreateAddressVariables): MutationPromise<CreateAddressData, CreateAddressVariables>;
+export function createAddress(dc: DataConnect, vars: CreateAddressVariables): MutationPromise<CreateAddressData, CreateAddressVariables>;
+
+interface CreateUserRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateUserVariables): MutationRef<CreateUserData, CreateUserVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateUserVariables): MutationRef<CreateUserData, CreateUserVariables>;
+  operationName: string;
+}
+export const createUserRef: CreateUserRef;
+
+export function createUser(vars: CreateUserVariables): MutationPromise<CreateUserData, CreateUserVariables>;
+export function createUser(dc: DataConnect, vars: CreateUserVariables): MutationPromise<CreateUserData, CreateUserVariables>;
+
+interface CreateCustomerRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateCustomerVariables): MutationRef<CreateCustomerData, CreateCustomerVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateCustomerVariables): MutationRef<CreateCustomerData, CreateCustomerVariables>;
+  operationName: string;
+}
+export const createCustomerRef: CreateCustomerRef;
+
+export function createCustomer(vars: CreateCustomerVariables): MutationPromise<CreateCustomerData, CreateCustomerVariables>;
+export function createCustomer(dc: DataConnect, vars: CreateCustomerVariables): MutationPromise<CreateCustomerData, CreateCustomerVariables>;
+
+interface CreateTherapeuticClassRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateTherapeuticClassVariables): MutationRef<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateTherapeuticClassVariables): MutationRef<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
+  operationName: string;
+}
+export const createTherapeuticClassRef: CreateTherapeuticClassRef;
+
+export function createTherapeuticClass(vars: CreateTherapeuticClassVariables): MutationPromise<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
+export function createTherapeuticClass(dc: DataConnect, vars: CreateTherapeuticClassVariables): MutationPromise<CreateTherapeuticClassData, CreateTherapeuticClassVariables>;
+
+interface ListPricingByLocationRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: ListPricingByLocationVariables): QueryRef<ListPricingByLocationData, ListPricingByLocationVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: ListPricingByLocationVariables): QueryRef<ListPricingByLocationData, ListPricingByLocationVariables>;
+  operationName: string;
+}
+export const listPricingByLocationRef: ListPricingByLocationRef;
+
+export function listPricingByLocation(vars: ListPricingByLocationVariables): QueryPromise<ListPricingByLocationData, ListPricingByLocationVariables>;
+export function listPricingByLocation(dc: DataConnect, vars: ListPricingByLocationVariables): QueryPromise<ListPricingByLocationData, ListPricingByLocationVariables>;
+
+interface CreateBusinessRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateBusinessVariables): MutationRef<CreateBusinessData, CreateBusinessVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateBusinessVariables): MutationRef<CreateBusinessData, CreateBusinessVariables>;
+  operationName: string;
+}
+export const createBusinessRef: CreateBusinessRef;
+
+export function createBusiness(vars: CreateBusinessVariables): MutationPromise<CreateBusinessData, CreateBusinessVariables>;
+export function createBusiness(dc: DataConnect, vars: CreateBusinessVariables): MutationPromise<CreateBusinessData, CreateBusinessVariables>;
 
 interface CreateManufacturerRef {
   /* Allow users to create refs without passing in DataConnect */
@@ -1147,39 +1176,39 @@ export const createLocationRef: CreateLocationRef;
 export function createLocation(vars: CreateLocationVariables): MutationPromise<CreateLocationData, CreateLocationVariables>;
 export function createLocation(dc: DataConnect, vars: CreateLocationVariables): MutationPromise<CreateLocationData, CreateLocationVariables>;
 
-interface CreateSupplierRef {
+interface CreateGoodsReceiptRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateSupplierVariables): MutationRef<CreateSupplierData, CreateSupplierVariables>;
+  (vars: CreateGoodsReceiptVariables): MutationRef<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateSupplierVariables): MutationRef<CreateSupplierData, CreateSupplierVariables>;
+  (dc: DataConnect, vars: CreateGoodsReceiptVariables): MutationRef<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
   operationName: string;
 }
-export const createSupplierRef: CreateSupplierRef;
+export const createGoodsReceiptRef: CreateGoodsReceiptRef;
 
-export function createSupplier(vars: CreateSupplierVariables): MutationPromise<CreateSupplierData, CreateSupplierVariables>;
-export function createSupplier(dc: DataConnect, vars: CreateSupplierVariables): MutationPromise<CreateSupplierData, CreateSupplierVariables>;
+export function createGoodsReceipt(vars: CreateGoodsReceiptVariables): MutationPromise<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
+export function createGoodsReceipt(dc: DataConnect, vars: CreateGoodsReceiptVariables): MutationPromise<CreateGoodsReceiptData, CreateGoodsReceiptVariables>;
 
-interface ListLocationsByBusinessRef {
+interface CreateInventoryLevelRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: ListLocationsByBusinessVariables): QueryRef<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+  (vars: CreateInventoryLevelVariables): MutationRef<CreateInventoryLevelData, CreateInventoryLevelVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: ListLocationsByBusinessVariables): QueryRef<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+  (dc: DataConnect, vars: CreateInventoryLevelVariables): MutationRef<CreateInventoryLevelData, CreateInventoryLevelVariables>;
   operationName: string;
 }
-export const listLocationsByBusinessRef: ListLocationsByBusinessRef;
+export const createInventoryLevelRef: CreateInventoryLevelRef;
 
-export function listLocationsByBusiness(vars: ListLocationsByBusinessVariables): QueryPromise<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
-export function listLocationsByBusiness(dc: DataConnect, vars: ListLocationsByBusinessVariables): QueryPromise<ListLocationsByBusinessData, ListLocationsByBusinessVariables>;
+export function createInventoryLevel(vars: CreateInventoryLevelVariables): MutationPromise<CreateInventoryLevelData, CreateInventoryLevelVariables>;
+export function createInventoryLevel(dc: DataConnect, vars: CreateInventoryLevelVariables): MutationPromise<CreateInventoryLevelData, CreateInventoryLevelVariables>;
 
-interface ListPricingByLocationRef {
+interface CreateProductRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: ListPricingByLocationVariables): QueryRef<ListPricingByLocationData, ListPricingByLocationVariables>;
+  (vars: CreateProductVariables): MutationRef<CreateProductData, CreateProductVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: ListPricingByLocationVariables): QueryRef<ListPricingByLocationData, ListPricingByLocationVariables>;
+  (dc: DataConnect, vars: CreateProductVariables): MutationRef<CreateProductData, CreateProductVariables>;
   operationName: string;
 }
-export const listPricingByLocationRef: ListPricingByLocationRef;
+export const createProductRef: CreateProductRef;
 
-export function listPricingByLocation(vars: ListPricingByLocationVariables): QueryPromise<ListPricingByLocationData, ListPricingByLocationVariables>;
-export function listPricingByLocation(dc: DataConnect, vars: ListPricingByLocationVariables): QueryPromise<ListPricingByLocationData, ListPricingByLocationVariables>;
+export function createProduct(vars: CreateProductVariables): MutationPromise<CreateProductData, CreateProductVariables>;
+export function createProduct(dc: DataConnect, vars: CreateProductVariables): MutationPromise<CreateProductData, CreateProductVariables>;
 

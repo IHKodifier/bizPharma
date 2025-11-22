@@ -1,35 +1,41 @@
 part of 'ik_pharma.dart';
 
-class ListAllProductsVariablesBuilder {
+class GetParacetamolProductsVariablesBuilder {
   
   final FirebaseDataConnect _dataConnect;
-  ListAllProductsVariablesBuilder(this._dataConnect, );
-  Deserializer<ListAllProductsData> dataDeserializer = (dynamic json)  => ListAllProductsData.fromJson(jsonDecode(json));
+  GetParacetamolProductsVariablesBuilder(this._dataConnect, );
+  Deserializer<GetParacetamolProductsData> dataDeserializer = (dynamic json)  => GetParacetamolProductsData.fromJson(jsonDecode(json));
   
-  Future<QueryResult<ListAllProductsData, void>> execute() {
+  Future<QueryResult<GetParacetamolProductsData, void>> execute() {
     return ref().execute();
   }
 
-  QueryRef<ListAllProductsData, void> ref() {
+  QueryRef<GetParacetamolProductsData, void> ref() {
     
-    return _dataConnect.query("listAllProducts", dataDeserializer, emptySerializer, null);
+    return _dataConnect.query("GetParacetamolProducts", dataDeserializer, emptySerializer, null);
   }
 }
 
 @immutable
-class ListAllProductsProducts {
+class GetParacetamolProductsProducts {
   final String id;
   final String genericName;
+  final String? brandName;
   final String internalSKU;
-  final ListAllProductsProductsManufacturer manufacturer;
-  final ListAllProductsProductsBusiness business;
-  ListAllProductsProducts.fromJson(dynamic json):
+  final GetParacetamolProductsProductsManufacturer manufacturer;
+  final GetParacetamolProductsProductsBusiness business;
+  final EnumValue<ProductCategory> category;
+  final bool isActive;
+  GetParacetamolProductsProducts.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
   genericName = nativeFromJson<String>(json['genericName']),
+  brandName = json['brandName'] == null ? null : nativeFromJson<String>(json['brandName']),
   internalSKU = nativeFromJson<String>(json['internalSKU']),
-  manufacturer = ListAllProductsProductsManufacturer.fromJson(json['manufacturer']),
-  business = ListAllProductsProductsBusiness.fromJson(json['business']);
+  manufacturer = GetParacetamolProductsProductsManufacturer.fromJson(json['manufacturer']),
+  business = GetParacetamolProductsProductsBusiness.fromJson(json['business']),
+  category = productCategoryDeserializer(json['category']),
+  isActive = nativeFromJson<bool>(json['isActive']);
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -39,41 +45,54 @@ class ListAllProductsProducts {
       return false;
     }
 
-    final ListAllProductsProducts otherTyped = other as ListAllProductsProducts;
+    final GetParacetamolProductsProducts otherTyped = other as GetParacetamolProductsProducts;
     return id == otherTyped.id && 
     genericName == otherTyped.genericName && 
+    brandName == otherTyped.brandName && 
     internalSKU == otherTyped.internalSKU && 
     manufacturer == otherTyped.manufacturer && 
-    business == otherTyped.business;
+    business == otherTyped.business && 
+    category == otherTyped.category && 
+    isActive == otherTyped.isActive;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, genericName.hashCode, internalSKU.hashCode, manufacturer.hashCode, business.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, genericName.hashCode, brandName.hashCode, internalSKU.hashCode, manufacturer.hashCode, business.hashCode, category.hashCode, isActive.hashCode]);
   
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
     json['id'] = nativeToJson<String>(id);
     json['genericName'] = nativeToJson<String>(genericName);
+    if (brandName != null) {
+      json['brandName'] = nativeToJson<String?>(brandName);
+    }
     json['internalSKU'] = nativeToJson<String>(internalSKU);
     json['manufacturer'] = manufacturer.toJson();
     json['business'] = business.toJson();
+    json['category'] = 
+    productCategorySerializer(category)
+    ;
+    json['isActive'] = nativeToJson<bool>(isActive);
     return json;
   }
 
-  ListAllProductsProducts({
+  GetParacetamolProductsProducts({
     required this.id,
     required this.genericName,
+    this.brandName,
     required this.internalSKU,
     required this.manufacturer,
     required this.business,
+    required this.category,
+    required this.isActive,
   });
 }
 
 @immutable
-class ListAllProductsProductsManufacturer {
+class GetParacetamolProductsProductsManufacturer {
   final String name;
-  ListAllProductsProductsManufacturer.fromJson(dynamic json):
+  GetParacetamolProductsProductsManufacturer.fromJson(dynamic json):
   
   name = nativeFromJson<String>(json['name']);
   @override
@@ -85,7 +104,7 @@ class ListAllProductsProductsManufacturer {
       return false;
     }
 
-    final ListAllProductsProductsManufacturer otherTyped = other as ListAllProductsProductsManufacturer;
+    final GetParacetamolProductsProductsManufacturer otherTyped = other as GetParacetamolProductsProductsManufacturer;
     return name == otherTyped.name;
     
   }
@@ -99,15 +118,15 @@ class ListAllProductsProductsManufacturer {
     return json;
   }
 
-  ListAllProductsProductsManufacturer({
+  GetParacetamolProductsProductsManufacturer({
     required this.name,
   });
 }
 
 @immutable
-class ListAllProductsProductsBusiness {
+class GetParacetamolProductsProductsBusiness {
   final String name;
-  ListAllProductsProductsBusiness.fromJson(dynamic json):
+  GetParacetamolProductsProductsBusiness.fromJson(dynamic json):
   
   name = nativeFromJson<String>(json['name']);
   @override
@@ -119,7 +138,7 @@ class ListAllProductsProductsBusiness {
       return false;
     }
 
-    final ListAllProductsProductsBusiness otherTyped = other as ListAllProductsProductsBusiness;
+    final GetParacetamolProductsProductsBusiness otherTyped = other as GetParacetamolProductsProductsBusiness;
     return name == otherTyped.name;
     
   }
@@ -133,18 +152,18 @@ class ListAllProductsProductsBusiness {
     return json;
   }
 
-  ListAllProductsProductsBusiness({
+  GetParacetamolProductsProductsBusiness({
     required this.name,
   });
 }
 
 @immutable
-class ListAllProductsData {
-  final List<ListAllProductsProducts> products;
-  ListAllProductsData.fromJson(dynamic json):
+class GetParacetamolProductsData {
+  final List<GetParacetamolProductsProducts> products;
+  GetParacetamolProductsData.fromJson(dynamic json):
   
   products = (json['products'] as List<dynamic>)
-        .map((e) => ListAllProductsProducts.fromJson(e))
+        .map((e) => GetParacetamolProductsProducts.fromJson(e))
         .toList();
   @override
   bool operator ==(Object other) {
@@ -155,7 +174,7 @@ class ListAllProductsData {
       return false;
     }
 
-    final ListAllProductsData otherTyped = other as ListAllProductsData;
+    final GetParacetamolProductsData otherTyped = other as GetParacetamolProductsData;
     return products == otherTyped.products;
     
   }
@@ -169,7 +188,7 @@ class ListAllProductsData {
     return json;
   }
 
-  ListAllProductsData({
+  GetParacetamolProductsData({
     required this.products,
   });
 }

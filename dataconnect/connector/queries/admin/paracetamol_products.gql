@@ -1,0 +1,16 @@
+query GetParacetamolProducts @auth(level: PUBLIC) {
+  products(where: { genericName: { eq: "Paracetamol" } }) {
+    id
+    genericName
+    brandName
+    internalSKU
+    manufacturer {
+      name
+    }
+    business {
+      name
+    }
+    category
+    isActive
+  }
+}

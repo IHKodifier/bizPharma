@@ -1,0 +1,47 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "ikpharma-dev",
+          "appId": "1:795893319163:android:cddc38fe3982c75655775e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "ikpharma-dev",
+          "configurations": {
+            "android": "1:795893319163:android:cddc38fe3982c75655775e",
+            "ios": "1:795893319163:ios:545db9f3274f3f8f55775e",
+            "macos": "1:795893319163:ios:545db9f3274f3f8f55775e",
+            "web": "1:795893319163:web:fb9c46771fbef2ab55775e",
+            "windows": "1:795893319163:web:944a50818aefe7cf55775e"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "dataconnect": {
+      "dataDir": "dataconnect/.dataconnect/pgliteData"
+    }
+  },
+  "dataconnect": {
+    "source": "dataconnect"
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

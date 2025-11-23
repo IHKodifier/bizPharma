@@ -1,0 +1,39 @@
+# ============================================================================
+# FORMULARY & SUBSTITUTION RULES
+# ============================================================================
+
+"""
+Formulary status for insurance coverage.
+"""
+type FormularyStatus @table {
+  id: UUID! @default(expr: "uuidV4()")
+  product: Product!
+  productId: UUID!
+  business: Business!
+  businessId: UUID!
+  insurancePayer: String! @col(dataType: "varchar(255)")
+  tier: FormularyTier! @col(dataType: "formulary_tier")
+  isPreferred: Boolean! @default(value: false)
+  isCovered: Boolean! @default(value: true)
+  requiresPriorAuthorization: Boolean! @default(value: false)
+  requiresStepTherapy: Boolean! @default(value: false)
+  quantityLimit: Int
+  quantityLimitPeriod: String @col(dataType: "varchar(50)")
+  preferredAlternatives: String @col(dataType: "jsonb")
+  effectiveDate: Date!
+  lastUpdated: Timestamp! @default(expr: "request.time")
+}
+
+"""
+Substitution rules for generic/brand interchange.
+"""
+type SubstitutionRules @table {
+  id: UUID! @default(expr: "uuidV4()")
+  allowGenericSubstitution: Boolean!
+  allowTherapeuticSubstitution: Boolean!
+  substitutableProducts: String @col(dataType: "jsonb")
+  restrictions: String @col(dataType: "text")
+}
+
+
+

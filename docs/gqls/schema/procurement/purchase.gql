@@ -1,0 +1,126 @@
+# ============================================================================
+# PURCHASE ORDERS & PROCUREMENTS
+# ============================================================================
+
+"""
+Purchase order for procuring inventory.
+"""
+type PurchaseOrder @table {
+  id: UUID! @default(expr: "uuidV4()")
+  business: Business!
+  businessId: UUID!
+  supplier: Supplier!
+  supplierId: UUID!
+
+  # Order Details
+  orderNumber: String! @col(dataType: "varchar(50)")
+  orderDate: Timestamp! @default(expr: "request.time")
+  expectedDeliveryDate: Date
+
+  # Status
+  status: PurchaseOrderStatus! @col(dataType: "purchase_order_status")
+
+  # Financial
+  subtotal: Float!
+  taxAmount: Float!
+  shippingAmount: Float! @default(value: 0)
+  totalAmount: Float!
+
+  # Terms
+  paymentTerms: String @col(dataType: "varchar(100)")
+  shippingTerms: String @col(dataType: "varchar(100)")
+
+  # Approval
+  approvedBy: User
+  approvedById: String
+  approvalDate: Timestamp
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+  createdBy: User!
+  createdById: String!
+}
+
+"""
+Line item in a purchase order.
+"""
+type PurchaseOrderLineItem @table {
+  id: UUID! @default(expr: "uuidV4()")
+  purchaseOrder: PurchaseOrder!
+  purchaseOrderId: UUID!
+  product: Product!
+  productId: UUID!
+
+  # Order Details
+  quantity: Int!
+  unitCost: Float!
+  lineTotal: Float!
+
+  # Received
+  receivedQuantity: Int! @default(value: 0)
+  receivedDate: Timestamp
+  receivedBy: User
+  receivedById: String
+}
+
+"""
+Goods receipt for received purchase orders.
+"""
+type GoodsReceipt @table {
+  id: UUID! @default(expr: "uuidV4()")
+  purchaseOrder: PurchaseOrder!
+  purchaseOrderId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Receipt Details
+  receiptNumber: String! @col(dataType: "varchar(50)")
+  receiptDate: Timestamp! @default(expr: "request.time")
+
+  # Quality Control
+  inspectedBy: User!
+  inspectedById: String!
+  qualityCheckPassed: Boolean! @default(value: true)
+  qualityNotes: String @col(dataType: "text")
+
+  # Status
+  status: GoodsReceiptStatus! @col(dataType: "goods_receipt_status")
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+"""
+Purchase requisition for internal ordering.
+"""
+type PurchaseRequisition @table {
+  id: UUID! @default(expr: "uuidV4()")
+  business: Business!
+  businessId: UUID!
+  location: Location!
+  locationId: UUID!
+
+  # Requisition Details
+  requisitionNumber: String! @col(dataType: "varchar(50)")
+  requestedDate: Timestamp! @default(expr: "request.time")
+  requiredDate: Date
+
+  # Status
+  status: RequisitionStatus! @col(dataType: "requisition_status")
+
+  # Approval
+  approvedBy: User
+  approvedById: String
+  approvalDate: Timestamp
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+  createdBy: User!
+  createdById: String!
+}
+
+
+

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "795893319163",
+    "project_id": "ikpharma-dev",
+    "storage_bucket": "ikpharma-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795893319163:android:cddc38fe3982c75655775e",
+        "android_client_info": {
+          "package_name": "com.example.ik_pharma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwA_aT2E0fnpeePvbgocN6DOFBQ69WMcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

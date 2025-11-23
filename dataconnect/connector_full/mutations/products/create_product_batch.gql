@@ -1,0 +1,48 @@
+# ============================================================================
+# CREATE PRODUCT BATCH
+# ============================================================================
+
+mutation CreateProductBatch(
+  $productId: UUID!
+  $businessId: UUID!
+  $batchNumber: String!
+  $lotNumber: String!
+  $manufacturingDate: Date!
+  $expiryDate: Date!
+  $supplierId: UUID!
+  $goodsReceiptId: UUID!
+  $receivedDate: Date!
+  $unitCost: Float!
+  $totalCost: Float!
+  $totalQuantity: Int!
+  $quantityRemaining: Int!
+  $locationId: UUID!
+  $createdById: String!
+  $updatedById: String!
+) {
+  productBatch_insert(data: {
+    productId: $productId
+    businessId: $businessId
+    batchNumber: $batchNumber
+    lotNumber: $lotNumber
+    manufacturingDate: $manufacturingDate
+    expiryDate: $expiryDate
+    supplierId: $supplierId
+    goodsReceiptId: $goodsReceiptId
+    receivedDate: $receivedDate
+    unitCost: $unitCost
+    totalCost: $totalCost
+    totalQuantity: $totalQuantity
+    quantityRemaining: $quantityRemaining
+    quantityDispensed: 0
+    quantityReturned: 0
+    quantityWasted: 0
+    quantityExpired: 0
+    locationId: $locationId
+    qualityCheckPassed: true
+    isRecalled: false
+    createdById: $createdById
+    updatedById: $updatedById
+  })
+}
+

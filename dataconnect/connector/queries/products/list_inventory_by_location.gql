@@ -1,0 +1,23 @@
+# ============================================================================
+# LIST INVENTORY BY LOCATION
+# ============================================================================
+
+query ListInventoryByLocation($locationId: UUID!) {
+  inventoryLevels(where: { locationId: { eq: $locationId } }) {
+    id
+    productId
+    locationId
+    batchId
+    businessId
+    quantityOnHand
+    quantityReserved
+    quantityAvailable
+    quantityInTransit
+    averageCost
+    totalValue
+    lastCountDate
+    lastDispenseDate
+    lastRestockDate
+    updatedAt
+  }
+}

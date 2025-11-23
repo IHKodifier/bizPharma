@@ -1,0 +1,88 @@
+# ============================================================================
+# PRICING & FINANCIAL
+# ============================================================================
+
+"""
+Multi-tier pricing for different customer categories.
+Supports insurance reimbursement and discount programs.
+"""
+type ProductPricing @table {
+  id: UUID! @default(expr: "uuidV4()")
+  product: Product!
+  productId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Base Pricing
+  wholesaleCost: Float!
+  retailPrice: Float!
+
+  # Tier Pricing (for customer categories)
+  walkInPrice: Float!
+  bronzePrice: Float
+  silverPrice: Float
+  goldPrice: Float
+  diamondPrice: Float
+  platinumPrice: Float
+
+  # Margins
+  grossMarginPercent: Float!
+  markupPercent: Float!
+
+  # Insurance
+  insuranceReimbursementRates: String @col(dataType: "jsonb")
+
+  # Discounts
+  volumeDiscounts: String @col(dataType: "jsonb")
+  promotionalDiscounts: String @col(dataType: "jsonb")
+
+  # Tax
+  taxRate: Float!
+  isTaxExempt: Boolean! @default(value: false)
+
+  # Metadata
+  effectiveDate: Date!
+  expiryDate: Date
+  updatedAt: Timestamp! @default(expr: "request.time")
+  updatedBy: User!
+  updatedById: String!
+}
+
+"""
+Insurance reimbursement rate by payer.
+"""
+type InsuranceReimbursement @table {
+  id: UUID! @default(expr: "uuidV4()")
+  insurancePayer: String!
+  reimbursementRate: Float!
+  copayAmount: Float
+  requiresPriorAuthorization: Boolean!
+  effectiveDate: Date!
+  expiryDate: Date
+}
+
+"""
+Volume-based discount tiers.
+"""
+type VolumeDiscount @table {
+  id: UUID! @default(expr: "uuidV4()")
+  minimumQuantity: Int!
+  discountPercent: Float!
+  discountAmount: Float
+}
+
+"""
+Promotional discount programs.
+"""
+type PromotionalDiscount @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  description: String
+  discountPercent: Float!
+  discountAmount: Float
+  startDate: Date!
+  endDate: Date!
+  requiresCouponCode: Boolean!
+  couponCode: String
+}
+

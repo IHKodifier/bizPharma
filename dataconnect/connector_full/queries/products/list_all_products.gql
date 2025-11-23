@@ -1,0 +1,13 @@
+query listAllProducts @auth(level: PUBLIC) {
+  products {
+    id
+    genericName
+    internalSKU
+    manufacturer {
+      name
+    }
+    business {
+      name
+    }
+  }
+}

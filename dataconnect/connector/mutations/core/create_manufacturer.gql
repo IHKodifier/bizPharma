@@ -1,0 +1,14 @@
+# ============================================================================
+# CREATE MANUFACTURER
+# ============================================================================
+
+mutation CreateManufacturer(
+  $name: String!
+  $country: String!
+) {
+  manufacturer_insert(data: {
+    name: $name
+    country: $country
+  })
+}
+

@@ -1,0 +1,17 @@
+# ============================================================================
+# LIST ALL LOCATIONS
+# ============================================================================
+
+query ListAllLocations {
+  locations {
+    id
+    businessId
+    name
+    code
+    type
+    phone
+    email
+    isActive
+    createdAt
+  }
+}

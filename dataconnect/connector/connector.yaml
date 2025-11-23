@@ -1,0 +1,12 @@
+connectorId: "ik_pharma"
+authMode: PUBLIC
+generate:
+  dartSdk:
+    outputDir: "../../lib/dataconnect_generated"
+    package: "ik_pharma"
+#   javascriptSdk:
+#     outputDir: "../../src/dataconnect-generated"
+#     package: "@firebasegen/ik-pharma-connector/generated"
+#     packageJsonDir: ..\..
+#     react: false
+#     angular: false

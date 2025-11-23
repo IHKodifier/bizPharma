@@ -1,0 +1,28 @@
+# ============================================================================
+# CREATE INVENTORY LEVEL
+# ============================================================================
+
+mutation CreateInventoryLevel(
+  $productId: UUID!
+  $locationId: UUID!
+  $businessId: UUID!
+  $batchId: UUID
+  $quantityOnHand: Int!
+  $quantityAvailable: Int!
+  $averageCost: Float!
+  $totalValue: Float!
+) {
+  inventoryLevel_insert(data: {
+    productId: $productId
+    locationId: $locationId
+    businessId: $businessId
+    batchId: $batchId
+    quantityOnHand: $quantityOnHand
+    quantityReserved: 0
+    quantityAvailable: $quantityAvailable
+    quantityInTransit: 0
+    averageCost: $averageCost
+    totalValue: $totalValue
+  })
+}
+

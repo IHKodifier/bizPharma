@@ -1,0 +1,170 @@
+mutation createDummyProduct @auth(level:PUBLIC) {
+  business_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000001"
+      name: "Dummy Business"
+      tier: TRIAL
+      subscriptionStartDate: "2025-01-01"
+      isActive: true
+    }
+  )
+
+  user_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000002"
+      business: {
+        id: "10000000-0000-0000-0000-000000000001"
+      }
+      email: "dummy@example.com"
+      firstName: "Dummy"
+      lastName: "User"
+      role: SUPER_ADMIN
+    }
+  )
+
+  manufacturer_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000003"
+      name: "Dummy Manufacturer"
+      country: "USA"
+    }
+  )
+
+  therapeuticClass_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000004"
+      name: "Dummy Therapeutic Class"
+      code: "DUMMY"
+    }
+  )
+
+  address_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000005"
+      line1: "123 Dummy Street"
+      city: "Dummyville"
+      state: "DS"
+      postalCode: "12345"
+      country: "USA"
+    }
+  )
+
+  dateRange_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000006"
+      startDate: "2025-01-01"
+      endDate: "2025-12-31"
+    }
+  )
+
+  supplier_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000007"
+      business: {
+        id: "10000000-0000-0000-0000-000000000001"
+      }
+      name: "Dummy Supplier"
+      type: DISTRIBUTOR
+      address: {
+        id: "10000000-0000-0000-0000-000000000005"
+      }
+      paymentTerms: "Net 30"
+      tier: PREFERRED
+    }
+  )
+
+  supplierPerformanceScore_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000008"
+      business: {
+        id: "10000000-0000-0000-0000-000000000001"
+      }
+      supplier: {
+        id: "10000000-0000-0000-0000-000000000007"
+      }
+      defectRate: 0
+      returnRate: 0
+      qualityScore: 0
+      onTimeDeliveryPercent: 0
+      partialDeliveryFrequency: 0
+      averageLeadTimeDays: 0
+      deliveryScore: 0
+      averagePriceCompetitiveness: 0
+      priceTrendPercent: 0
+      pricingScore: 0
+      overallScore: 0
+      rank: 0
+      calculatedFor: {
+        id: "10000000-0000-0000-0000-000000000006"
+      }
+    }
+  )
+
+  product_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000009"
+      business: {
+        id: "10000000-0000-0000-0000-000000000001"
+      }
+      genericName: "Dummy Product"
+      manufacturer: {
+        id: "10000000-0000-0000-0000-000000000003"
+      }
+      internalSKU: "DUMMY001"
+      dosageForm: TABLET
+      strength: "10mg"
+      unit: "mg"
+      routeOfAdministration: ORAL
+      drugSchedule: PRESCRIPTION_ONLY
+      therapeuticClass: {
+        id: "10000000-0000-0000-0000-000000000004"
+      }
+      packageSize: 100
+      packageUnit: BOTTLE
+      reorderPoint: 10
+      reorderQuantity: 50
+      minimumStockLevel: 10
+      primarySupplier: {
+        id: "10000000-0000-0000-0000-000000000007"
+      }
+      leadTimeDays: 7
+      category: PHARMACEUTICAL
+      createdBy: {
+        id: "10000000-0000-0000-0000-000000000002"
+      }
+      updatedBy: {
+        id: "10000000-0000-0000-0000-000000000002"
+      }
+    }
+  )
+
+  productPricing_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000010"
+      productId: "10000000-0000-0000-0000-000000000009"
+      business: {
+        id: "10000000-0000-0000-0000-000000000001"
+      }
+      wholesaleCost: 10.0
+      retailPrice: 20.0
+      walkInPrice: 20.0
+      grossMarginPercent: 50.0
+      markupPercent: 100.0
+      taxRate: 0.0
+      effectiveDate: "2025-01-01"
+      updatedBy: {
+        id: "10000000-0000-0000-0000-000000000002"
+      }
+    }
+  )
+
+  expiryWarningThresholds_insert(
+    data: {
+      id: "10000000-0000-0000-0000-000000000011"
+      productId: "10000000-0000-0000-0000-000000000009"
+      criticalWarningDays: 30
+      highWarningDays: 60
+      mediumWarningDays: 90
+    }
+  )
+}

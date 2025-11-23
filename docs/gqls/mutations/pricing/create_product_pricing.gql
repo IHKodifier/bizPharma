@@ -1,0 +1,30 @@
+# ============================================================================
+# CREATE PRODUCT PRICING
+# ============================================================================
+
+mutation CreateProductPricing(
+  $productId: UUID!
+  $businessId: UUID!
+  $wholesaleCost: Float!
+  $retailPrice: Float!
+  $walkInPrice: Float!
+  $grossMarginPercent: Float!
+  $markupPercent: Float!
+  $taxRate: Float!
+  $effectiveDate: Date!
+  $updatedById: String!
+) {
+  productPricing_insert(data: {
+    productId: $productId
+    businessId: $businessId
+    wholesaleCost: $wholesaleCost
+    retailPrice: $retailPrice
+    walkInPrice: $walkInPrice
+    grossMarginPercent: $grossMarginPercent
+    markupPercent: $markupPercent
+    taxRate: $taxRate
+    isTaxExempt: false
+    effectiveDate: $effectiveDate
+    updatedById: $updatedById
+  })
+}

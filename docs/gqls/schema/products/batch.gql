@@ -1,0 +1,99 @@
+# ============================================================================
+# PRODUCT BATCH & TRACKING
+# ============================================================================
+
+"""
+Product batch/lot tracking for expiry and recall management.
+Critical for pharmacy operations and regulatory compliance.
+"""
+type ProductBatch @table {
+  id: UUID! @default(expr: "uuidV4()")
+  product: Product!
+  productId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Batch Identity
+  batchNumber: String! @col(dataType: "varchar(100)")
+  lotNumber: String! @col(dataType: "varchar(100)")
+
+  # Dates
+  manufacturingDate: Date!
+  expiryDate: Date!
+
+  # Acquisition
+  supplier: Supplier!
+  supplierId: UUID!
+  purchaseOrder: PurchaseOrder
+  purchaseOrderId: UUID
+  goodsReceipt: GoodsReceipt!
+  goodsReceiptId: UUID!
+  receivedDate: Date!
+
+  # Cost & Pricing
+  unitCost: Float!
+  totalCost: Float!
+  totalQuantity: Int!
+
+  # Current Status
+  quantityRemaining: Int!
+  quantityDispensed: Int!
+  quantityReturned: Int!
+  quantityWasted: Int!
+  quantityExpired: Int!
+
+  # Storage Location
+  location: Location!
+  locationId: UUID!
+  binLocation: String @col(dataType: "varchar(255)")
+
+  # Quality & Safety
+  qualityCheckPassed: Boolean! @default(value: true)
+  qualityCheckDate: Date
+  qualityCheckBy: User
+  qualityCheckById: String
+  isRecalled: Boolean! @default(value: false)
+  recallDetails: String @col(dataType: "jsonb")
+
+  # Temperature Monitoring (if required)
+  temperatureLog: String @col(dataType: "jsonb")
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+  createdBy: User!
+  updatedBy: User!
+}
+
+"""
+Temperature reading for temperature-sensitive products.
+"""
+type TemperatureReading @table {
+  id: UUID! @default(expr: "uuidV4()")
+  batch: ProductBatch!
+  batchId: UUID!
+  timestamp: Timestamp!
+  temperature: Float!
+  unit: TemperatureUnit! @col(dataType: "temperature_unit")
+  recordedBy: User!
+  recordedById: String!
+  deviceId: String @col(dataType: "varchar(100)")
+}
+
+"""
+Recall information for a batch.
+"""
+type RecallDetails @table {
+  id: UUID! @default(expr: "uuidV4()")
+  recallDate: Date!
+  recallReason: String!
+  recallLevel: RecallLevel! @col(dataType: "recall_level")
+  recallSource: String!
+  actionTaken: String!
+  affectedQuantity: Int!
+  notificationSent: Boolean!
+  notificationDate: Timestamp
+}
+
+
+

@@ -1,0 +1,66 @@
+# ============================================================================
+# CREATE PRODUCT
+# ============================================================================
+
+mutation CreateProduct(
+  $businessId: UUID!
+  $genericName: String!
+  $brandName: String
+  $manufacturerId: UUID!
+  $nationalDrugCode: String
+  $barcode: String
+  $internalSKU: String!
+  $dosageForm: DosageForm!
+  $strength: String!
+  $unit: String!
+  $routeOfAdministration: RouteOfAdministration!
+  $drugSchedule: DrugSchedule!
+  $requiresPrescription: Boolean!
+  $therapeuticClassId: UUID!
+  $packageSize: Int!
+  $packageUnit: PackageUnit!
+  $primarySupplierId: UUID!
+  $leadTimeDays: Int!
+  $reorderPoint: Int!
+  $reorderQuantity: Int!
+  $minimumStockLevel: Int!
+  $category: ProductCategory!
+  $createdById: String!
+  $updatedById: String!
+) {
+  product_insert(data: {
+    businessId: $businessId
+    genericName: $genericName
+    brandName: $brandName
+    manufacturerId: $manufacturerId
+    nationalDrugCode: $nationalDrugCode
+    barcode: $barcode
+    internalSKU: $internalSKU
+    dosageForm: $dosageForm
+    strength: $strength
+    unit: $unit
+    routeOfAdministration: $routeOfAdministration
+    drugSchedule: $drugSchedule
+    requiresPrescription: $requiresPrescription
+    therapeuticClassId: $therapeuticClassId
+    packageSize: $packageSize
+    packageUnit: $packageUnit
+    primarySupplierId: $primarySupplierId
+    leadTimeDays: $leadTimeDays
+    reorderPoint: $reorderPoint
+    reorderQuantity: $reorderQuantity
+    minimumStockLevel: $minimumStockLevel
+    category: $category
+    isActive: true
+    isDiscontinued: false
+    requiresRefrigeration: false
+    requiresControlledSubstanceVault: false
+    isLightSensitive: false
+    isHazardousDrug: false
+    requiresReconstitution: false
+    isFastMover: false
+    createdById: $createdById
+    updatedById: $updatedById
+  })
+}
+

@@ -1,0 +1,11 @@
+{
+  "name": "firebase",
+  "version": "0.0.1",
+  "mcpServers": {
+    "firebase": {
+      "command": "npx",
+      "args": ["-y", "firebase-tools", "mcp", "--dir", "e:\Non_Office\Dev_Space\vibe_skool\ik_pharma"]
+    }
+  },
+  "contextFileName": "FIREBASE.md"
+}

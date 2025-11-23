@@ -1,0 +1,127 @@
+# ============================================================================
+# SUPPLIER MANAGEMENT
+# ============================================================================
+
+"""
+Supplier/Manufacturer entity.
+"""
+type Supplier @table {
+  id: UUID! @default(expr: "uuidV4()")
+  business: Business!
+  businessId: UUID!
+  name: String! @col(dataType: "varchar(255)")
+  type: SupplierType! @col(dataType: "supplier_type")
+
+  # Contact Information
+  contactPerson: String @col(dataType: "varchar(100)")
+  email: String @col(dataType: "varchar(255)")
+  phone: String @col(dataType: "varchar(20)")
+  alternatePhone: String @col(dataType: "varchar(20)")
+  website: String @col(dataType: "varchar(500)")
+
+  # Address
+  address: Address
+
+  # Business Details
+  taxId: String @col(dataType: "varchar(50)")
+  licenseNumber: String @col(dataType: "varchar(100)")
+  deaNumber: String @col(dataType: "varchar(50)")
+
+  # Payment Terms
+  paymentTerms: String! @col(dataType: "varchar(100)")
+  creditLimit: Float
+  outstandingBalance: Float! @default(value: 0)
+
+  # Classification
+  tier: SupplierTier! @col(dataType: "supplier_tier")
+
+  # Performance Metrics
+  performanceScore: SupplierPerformanceScore
+  performanceScoreId: UUID
+
+  # Documents
+  contracts: [String!] @col(dataType: "jsonb")
+  licenses: [String!] @col(dataType: "jsonb")
+  certifications: [String!] @col(dataType: "jsonb")
+
+  # Status
+  isActive: Boolean! @default(value: true)
+  isPreferred: Boolean! @default(value: false)
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+"""
+Supplier performance scoring.
+"""
+type SupplierPerformanceScore @table {
+  id: UUID! @default(expr: "uuidV4()")
+  supplier: Supplier!
+  supplierId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Quality Metrics
+  defectRate: Float!
+  returnRate: Float!
+  qualityScore: Float!
+
+  # Delivery Metrics
+  onTimeDeliveryPercent: Float!
+  partialDeliveryFrequency: Float!
+  averageLeadTimeDays: Float!
+  deliveryScore: Float!
+
+  # Pricing Metrics
+  averagePriceCompetitiveness: Float!
+  priceTrendPercent: Float!
+  pricingScore: Float!
+
+  # Composite Score
+  overallScore: Float!
+  rank: Int!
+
+  # Period
+  calculatedFor: DateRange!
+  lastUpdated: Timestamp! @default(expr: "request.time")
+}
+
+"""
+Product-supplier relationship with pricing and lead time.
+"""
+type ProductSupplier @table(key: ["product", "supplier"]) {
+  product: Product!
+  productId: UUID!
+  supplier: Supplier!
+  supplierId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Supplier-specific details
+  supplierProductCode: String @col(dataType: "varchar(100)")
+  supplierProductName: String @col(dataType: "varchar(255)")
+
+  # Pricing
+  unitCost: Float!
+  minimumOrderQuantity: Int
+
+  # Lead Time
+  leadTimeDays: Int!
+
+  # Preferences
+  isPrimary: Boolean! @default(value: false)
+  isActive: Boolean! @default(value: true)
+
+  # Last Purchase
+  lastPurchaseDate: Date
+  lastPurchasePrice: Float
+
+  # Metadata
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+
+

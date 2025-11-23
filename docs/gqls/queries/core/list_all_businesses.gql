@@ -1,0 +1,18 @@
+# ============================================================================
+# LIST ALL BUSINESSES
+# ============================================================================
+
+query ListAllBusinesses {
+  businesses {
+    id
+    name
+    tier
+    subscriptionStartDate
+    subscriptionEndDate
+    isActive
+    maxUsers
+    maxLocations
+    createdAt
+    updatedAt
+  }
+}

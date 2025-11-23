@@ -1,0 +1,55 @@
+# ============================================================================
+# PACKAGING & STORAGE SUPPORTING TYPES
+# ============================================================================
+
+"""
+Expiry warning thresholds.
+"""
+type ExpiryWarningThresholds @table {
+  id: UUID! @default(expr: "uuidV4()")
+  productId: UUID!
+  criticalWarningDays: Int!
+  highWarningDays: Int!
+  mediumWarningDays: Int!
+  lowWarningDays: Int
+  notifyCritical: String @col(dataType: "jsonb")
+  notifyHigh: String @col(dataType: "jsonb")
+  notifyMedium: String @col(dataType: "jsonb")
+  notifyLow: String @col(dataType: "jsonb")
+}
+
+"""
+Bulk packaging information.
+"""
+type BulkPackaging @table {
+  id: UUID! @default(expr: "uuidV4()")
+  unitsPerCase: Int!
+  casesPerPallet: Int
+  caseWeight: Float!
+  caseWeightUnit: WeightUnit! @col(dataType: "weight_unit")
+  caseDimensions: String @col(dataType: "jsonb")
+}
+
+"""
+Temperature range for storage.
+"""
+type TemperatureRange @table {
+  id: UUID! @default(expr: "uuidV4()")
+  minimum: Float!
+  maximum: Float!
+  unit: TemperatureUnit! @col(dataType: "temperature_unit")
+}
+
+"""
+Physical dimensions.
+"""
+type Dimensions @table {
+  id: UUID! @default(expr: "uuidV4()")
+  length: Float!
+  width: Float!
+  height: Float!
+  unit: DimensionUnit! @col(dataType: "dimension_unit")
+}
+
+
+

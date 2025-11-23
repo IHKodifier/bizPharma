@@ -1,0 +1,30 @@
+# ============================================================================
+# CREATE PURCHASE ORDER
+# ============================================================================
+
+mutation CreatePurchaseOrder(
+  $businessId: UUID!
+  $supplierId: UUID!
+  $orderNumber: String!
+  $orderDate: Timestamp
+  $expectedDeliveryDate: Date
+  $totalAmount: Float!
+  $subtotal: Float!
+  $taxAmount: Float!
+  $status: PurchaseOrderStatus!
+  $createdById: String!
+) {
+  purchaseOrder_insert(data: {
+    businessId: $businessId
+    supplierId: $supplierId
+    orderNumber: $orderNumber
+    orderDate: $orderDate
+    expectedDeliveryDate: $expectedDeliveryDate
+    totalAmount: $totalAmount
+    subtotal: $subtotal
+    taxAmount: $taxAmount
+    shippingAmount: 0
+    status: $status
+    createdById: $createdById
+  })
+}

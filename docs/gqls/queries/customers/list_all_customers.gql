@@ -1,0 +1,18 @@
+# ============================================================================
+# LIST ALL CUSTOMERS
+# ============================================================================
+
+query ListAllCustomers {
+  customers {
+    id
+    businessId
+    firstName
+    lastName
+    email
+    phone
+    dateOfBirth
+    tier
+    isActive
+    createdAt
+  }
+}

@@ -1,0 +1,18 @@
+# ============================================================================
+# GET BUSINESS BY ID
+# ============================================================================
+
+query GetBusinessById($id: UUID!) {
+  business(id: $id) {
+    id
+    name
+    tier
+    subscriptionStartDate
+    subscriptionEndDate
+    isActive
+    maxUsers
+    maxLocations
+    createdAt
+    updatedAt
+  }
+}

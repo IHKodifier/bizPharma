@@ -1,0 +1,24 @@
+# ============================================================================
+# LIST PRICING BY LOCATION
+# ============================================================================
+
+query ListPricingByLocation($businessId: UUID!) {
+  productPricings(where: { businessId: { eq: $businessId } }) {
+    id
+    productId
+    businessId
+    wholesaleCost
+    retailPrice
+    walkInPrice
+    bronzePrice
+    silverPrice
+    goldPrice
+    diamondPrice
+    platinumPrice
+    grossMarginPercent
+    markupPercent
+    taxRate
+    effectiveDate
+    updatedAt
+  }
+}

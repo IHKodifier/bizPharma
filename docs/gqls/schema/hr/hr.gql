@@ -1,0 +1,155 @@
+# ============================================================================
+# EMPLOYEES & HR
+# ============================================================================
+
+"""
+Employee entity for HR management.
+"""
+type Employee @table {
+  id: UUID! @default(expr: "uuidV4()")
+  business: Business!
+  businessId: UUID!
+  user: User!
+  userId: String!
+
+  # Personal Information
+  employeeId: String! @col(dataType: "varchar(50)")
+  firstName: String! @col(dataType: "varchar(100)")
+  lastName: String! @col(dataType: "varchar(100)")
+  email: String! @col(dataType: "varchar(255)")
+  phone: String @col(dataType: "varchar(20)")
+  dateOfBirth: Date
+
+  # Employment Details
+  hireDate: Date!
+  terminationDate: Date
+  employmentStatus: EmploymentStatus! @col(dataType: "employment_status")
+  jobTitle: String! @col(dataType: "varchar(100)")
+  department: String @col(dataType: "varchar(100)")
+
+  # Compensation
+  salary: Float
+  hourlyRate: Float
+  commissionRate: Float
+
+  # Address
+  address: Address
+
+  # Emergency Contact
+  emergencyContactName: String @col(dataType: "varchar(100)")
+  emergencyContactPhone: String @col(dataType: "varchar(20)")
+
+  # Benefits
+  healthInsurance: Boolean! @default(value: false)
+  dentalInsurance: Boolean! @default(value: false)
+  paidTimeOff: Int! @default(value: 0)
+
+  # Audit
+  createdAt: Date! @default(expr: "request.time")
+  updatedAt: Date! @default(expr: "request.time")
+}
+
+"""
+Attendance record for employees.
+"""
+type Attendance @table {
+  id: UUID! @default(expr: "uuidV4()")
+  employee: Employee!
+  employeeId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Date & Time
+  date: Date!
+  clockInTime: Timestamp
+  clockOutTime: Timestamp
+
+  # Hours
+  scheduledHours: Float!
+  actualHours: Float!
+  overtimeHours: Float! @default(value: 0)
+
+  # Status
+  status: AttendanceStatus! @col(dataType: "attendance_status")
+
+  # Notes
+  notes: String @col(dataType: "text")
+
+  # Audit
+  createdAt: Date! @default(expr: "request.time")
+  updatedAt: Date! @default(expr: "request.time")
+}
+
+"""
+Employee shift schedule.
+"""
+type Shift @table {
+  id: UUID! @default(expr: "uuidV4()")
+  employee: Employee!
+  employeeId: UUID!
+  location: Location!
+  locationId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Shift Details
+  shiftDate: Date!
+  startTime: Timestamp!
+  endTime: Timestamp!
+  breakDuration: Int! @default(value: 0)  # minutes
+
+  # Role
+  role: String! @col(dataType: "varchar(100)")
+
+  # Status
+  status: ShiftStatus! @col(dataType: "shift_status")
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+"""
+Payroll record for employee compensation.
+"""
+type Payroll @table {
+  id: UUID! @default(expr: "uuidV4()")
+  employee: Employee!
+  employeeId: UUID!
+  business: Business!
+  businessId: UUID!
+
+  # Pay Period
+  payPeriodStart: Date!
+  payPeriodEnd: Date!
+  payDate: Date!
+
+  # Earnings
+  regularHours: Float!
+  overtimeHours: Float!
+  grossPay: Float!
+
+  # Deductions
+  taxDeductions: Float!
+  insuranceDeductions: Float!
+  otherDeductions: Float!
+  totalDeductions: Float!
+
+  # Net Pay
+  netPay: Float!
+
+  # Commissions (for sales staff)
+  commissions: Float! @default(value: 0)
+
+  # Status
+  status: PayrollStatus! @col(dataType: "payroll_status")
+
+  # Audit
+  createdAt: Timestamp! @default(expr: "request.time")
+  processedAt: Timestamp
+  processedBy: User
+  processedById: String
+}
+
+
+

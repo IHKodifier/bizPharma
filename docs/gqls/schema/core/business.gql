@@ -1,0 +1,43 @@
+# ============================================================================
+# MULTI-TENANCY & AUTHENTICATION
+# ============================================================================
+
+"""
+Business entity representing a multi-tenant root.
+Supports TRIAL/PAID/ENTERPRISE tiers.
+"""
+type Business @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  tier: BusinessTier! @col(dataType: "business_tier")
+  subscriptionStartDate: Date!
+  subscriptionEndDate: Date
+  isActive: Boolean! @default(value: true)
+  maxUsers: Int
+  maxLocations: Int
+  createdAt: Date! @default(expr: "request.time")
+  updatedAt: Date! @default(expr: "request.time")
+}
+
+"""
+User entity with RBAC support.
+Key is Firebase Auth UID.
+"""
+type User @table {
+  id: String! @default(expr: "auth.uid")
+  business: Business!
+  businessId: UUID!
+  email: String! @col(dataType: "varchar(255)")
+  firstName: String! @col(dataType: "varchar(100)")
+  lastName: String! @col(dataType: "varchar(100)")
+  phone: String @col(dataType: "varchar(20)")
+  role: UserRole! @col(dataType: "user_role")
+  permissions: [String!] @col(dataType: "jsonb")
+  isActive: Boolean! @default(value: true)
+  lastLoginAt: Timestamp
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+
+

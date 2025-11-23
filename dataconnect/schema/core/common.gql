@@ -1,0 +1,37 @@
+# ============================================================================
+# COMMON SHARED TYPES
+# ============================================================================
+
+"""
+Manufacturer entity.
+"""
+type Manufacturer @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String! @col(dataType: "varchar(255)")
+  country: String! @col(dataType: "varchar(100)")
+  website: String @col(dataType: "varchar(500)")
+  isActive: Boolean! @default(value: true)
+}
+
+"""
+Address type.
+"""
+type Address @table {
+  id: UUID! @default(expr: "uuidV4()")
+  line1: String! @col(dataType: "varchar(255)")
+  line2: String @col(dataType: "varchar(255)")
+  city: String! @col(dataType: "varchar(100)")
+  state: String! @col(dataType: "varchar(100)")
+  postalCode: String! @col(dataType: "varchar(20)")
+  country: String! @col(dataType: "varchar(100)")
+}
+
+"""
+Date range for reporting periods.
+"""
+type DateRange @table {
+  id: UUID! @default(expr: "uuidV4()")
+  startDate: Date!
+  endDate: Date!
+}
+

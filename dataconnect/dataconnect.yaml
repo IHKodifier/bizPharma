@@ -1,0 +1,11 @@
+specVersion: 'v1alpha'
+serviceId: ikpharma-dev-database
+location: asia-south1
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "ikpharma-dev-database"
+      cloudSql:
+        instanceId: "ikpharma-dev-instance"
+connectorDirs: ["./connector"]

@@ -1,0 +1,27 @@
+# ============================================================================
+# CREATE USER
+# ============================================================================
+
+mutation CreateUser(
+  $id: String!
+  $businessId: UUID!
+  $email: String!
+  $firstName: String!
+  $lastName: String!
+  $phone: String
+  $role: UserRole!
+  $permissions: [String!]
+) {
+  user_insert(data: {
+    id: $id
+    businessId: $businessId
+    email: $email
+    firstName: $firstName
+    lastName: $lastName
+    phone: $phone
+    role: $role
+    permissions: $permissions
+    isActive: true
+  })
+}
+

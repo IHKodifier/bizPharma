@@ -1,0 +1,56 @@
+# ============================================================================
+# INVENTORY MANAGEMENT
+# ============================================================================
+
+"""
+Inventory levels across locations and batches.
+Supports multi-location tracking with batch-level granularity.
+"""
+type InventoryLevel @table {
+  id: UUID! @default(expr: "uuidV4()")
+  product: Product!
+  productId: UUID!
+  location: Location!
+  locationId: UUID!
+  batch: ProductBatch
+  batchId: UUID
+  business: Business!
+  businessId: UUID!
+
+  # Quantities
+  quantityOnHand: Int!
+  quantityReserved: Int! @default(value: 0)
+  quantityAvailable: Int!
+  quantityInTransit: Int! @default(value: 0)
+
+  # Valuation
+  averageCost: Float!
+  totalValue: Float!
+
+  # Last Activity
+  lastCountDate: Date
+  lastDispenseDate: Date
+  lastRestockDate: Date
+
+  # Metadata
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+"""
+Storage location within a warehouse/store.
+Hierarchical structure for efficient picking.
+"""
+type StorageLocation @table {
+  id: UUID! @default(expr: "uuidV4()")
+  location: Location!
+  locationId: UUID!
+  business: Business!
+  businessId: UUID!
+  zone: String! @col(dataType: "varchar(50)")
+  aisle: String @col(dataType: "varchar(50)")
+  rack: String @col(dataType: "varchar(50)")
+  bin: String @col(dataType: "varchar(50)")
+  description: String @col(dataType: "varchar(255)")
+  isActive: Boolean! @default(value: true)
+}
+

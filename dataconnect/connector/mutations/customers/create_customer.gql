@@ -1,0 +1,28 @@
+# ============================================================================
+# CREATE CUSTOMER
+# ============================================================================
+
+mutation CreateCustomer(
+  $businessId: UUID!
+  $firstName: String!
+  $lastName: String!
+  $email: String
+  $phone: String
+  $dateOfBirth: Date
+  $createdById: String!
+) {
+  customer_insert(data: {
+    businessId: $businessId
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    phone: $phone
+    dateOfBirth: $dateOfBirth
+    tier: WALK_IN
+    loyaltyPoints: 0
+    totalSpent: 0
+    isActive: true
+    createdById: $createdById
+  })
+}
+

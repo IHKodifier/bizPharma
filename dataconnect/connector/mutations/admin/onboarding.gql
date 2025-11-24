@@ -1,0 +1,38 @@
+mutation CreateBusinessAndAdmin(
+  $businessName: String!
+  $userEmail: String!
+  $userFirstName: String!
+  $userLastName: String!
+  $userPhone: String
+  $authUid: String!
+) @transaction {
+  # 1. Create Business
+  business: business_insert(data: {
+    name: $businessName
+    tier: TRIAL
+    subscriptionStartDate: { today: true }
+    isActive: true
+  })
+
+  # 2. Create Admin User linked to the Business
+  user: user_insert(data: {
+    id: $authUid
+    businessId: { from: "business", path: "id" } # Link to the business created above
+    email: $userEmail
+    firstName: $userFirstName
+    lastName: $userLastName
+    phone: $userPhone
+    role: BUSINESS_ADMIN
+    isActive: true
+  })
+}
+
+query GetUserByAuthId($id: String!) {
+  user(id: $id) {
+    id
+    businessId
+    role
+    firstName
+    lastName
+  }
+}

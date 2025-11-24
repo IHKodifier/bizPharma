@@ -15,7 +15,7 @@ mutation SeedData {
     email: "admin@pharmacare.com"
     firstName: "John"
     lastName: "Doe"
-    role: ADMIN
+    role: BUSINESS_ADMIN
     isActive: true
   })
 

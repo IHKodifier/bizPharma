@@ -1,0 +1,18 @@
+{
+    "graphql-config.load.baseDir": ".",
+    "graphql-config.load.filePath": ".graphqlrc.yml",
+    // Disable GraphQL validation for Firebase Data Connect files
+    "graphql.validate": false,
+    // Configure file associations
+    "files.associations": {
+        "*.gql": "graphql"
+    },
+    // Exclude patterns from file watcher
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.hg/store/**": true,
+        "**/dataconnect/.dataconnect/**": true
+    }
+}

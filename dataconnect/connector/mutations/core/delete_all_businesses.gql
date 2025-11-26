@@ -1,0 +1,11 @@
+# ============================================================================
+# DELETE ALL BUSINESSES - Purge all business records from database
+# ============================================================================
+# WARNING: This will delete ALL businesses from the database.
+# This may fail if there are foreign key constraints from other tables.
+# Consider deleting dependent records first or use DeleteAllData mutation.
+# ============================================================================
+
+mutation DeleteAllBusinesses  @auth(level: USER) {
+  deleteBusinesses: business_deleteMany(all: true)
+}

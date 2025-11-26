@@ -2,7 +2,7 @@
 # LIST INVENTORY BY LOCATION
 # ============================================================================
 
-query ListInventoryByLocation($locationId: UUID!) {
+query ListInventoryByLocation($locationId: UUID!) @auth(level: USER) {
   inventoryLevels(where: { locationId: { eq: $locationId } }) {
     id
     productId

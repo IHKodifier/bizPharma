@@ -5,7 +5,7 @@
 mutation CreateManufacturer(
   $name: String!
   $country: String!
-) {
+) @auth(level: USER) {
   manufacturer_insert(data: {
     name: $name
     country: $country

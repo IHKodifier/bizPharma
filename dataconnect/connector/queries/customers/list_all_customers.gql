@@ -2,7 +2,7 @@
 # LIST ALL CUSTOMERS
 # ============================================================================
 
-query ListAllCustomers {
+query ListAllCustomers @auth(level: USER) {
   customers {
     id
     businessId

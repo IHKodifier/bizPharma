@@ -1,17 +1,19 @@
 # ============================================================================
-# LIST ALL LOCATIONS
+# LIST ALL USERS
 # ============================================================================
 
-query ListAllLocations {
-  locations {
+query ListAllUsers @auth(level: USER) {
+  users {
     id
     businessId
-    name
-    code
-    type
-    phone
     email
+    firstName
+    lastName
+    phone
+    role
     isActive
+    lastLoginAt
     createdAt
+    updatedAt
   }
 }

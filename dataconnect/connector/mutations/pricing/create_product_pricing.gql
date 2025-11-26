@@ -13,7 +13,7 @@ mutation CreateProductPricing(
   $taxRate: Float!
   $effectiveDate: Date!
   $updatedById: String!
-) {
+) @auth(level: USER) {
   productPricing_insert(data: {
     productId: $productId
     businessId: $businessId

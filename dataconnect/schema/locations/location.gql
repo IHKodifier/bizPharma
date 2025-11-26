@@ -22,6 +22,7 @@ type Location @table {
 
   # Address
   address: Address
+  addressId: UUID
 
   # Contact
   phone: String @col(dataType: "varchar(20)")

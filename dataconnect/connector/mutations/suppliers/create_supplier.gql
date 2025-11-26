@@ -11,7 +11,7 @@ mutation CreateSupplier(
   $phone: String
   $paymentTerms: String!
   $tier: SupplierTier!
-) {
+) @auth(level: USER) {
   supplier_insert(data: {
     businessId: $businessId
     name: $name

@@ -11,7 +11,7 @@ mutation CreateUser(
   $phone: String
   $role: UserRole!
   $permissions: [String!]
-) {
+) @auth(level: USER) {
   user_insert(data: {
     id: $id
     businessId: $businessId

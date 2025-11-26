@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import '../dataconnect_generated/ik_pharma.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -70,6 +72,51 @@ class AuthService {
       await _auth.signOut();
     } catch (e) {
       log('Error signing out: $e');
+      rethrow;
+    }
+  }
+
+  // Check if user exists in Data Connect and return the user object
+  Future<GetUserByAuthIdUser?> getUser(String uid) async {
+    try {
+      final result = await IkPharmaConnector.instance
+          .getUserByAuthId(id: uid)
+          .execute();
+      return result.data.user;
+    } catch (e) {
+      log('Error checking user existence: $e');
+      rethrow;
+    }
+  }
+
+  // Create Business and Admin User atomically
+  Future<void> createBusinessAndUser({
+    required String businessName,
+    required String email,
+    required String firstName,
+    required String lastName,
+    String? phone,
+    required String uid,
+  }) async {
+    try {
+      const uuid = Uuid();
+      final businessId = uuid.v4();
+
+      await IkPharmaConnector.instance
+          .createBusinessAndAdmin(
+            businessId: businessId,
+            businessName: businessName,
+            userEmail: email,
+            userFirstName: firstName,
+            userLastName: lastName,
+            authUid: uid,
+            today: DateTime.now(),
+          )
+          // .userPhone(phone)
+          .execute();
+      log('Business and User created successfully');
+    } catch (e) {
+      log('Error creating business and user: $e');
       rethrow;
     }
   }

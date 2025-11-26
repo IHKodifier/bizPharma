@@ -11,7 +11,7 @@ mutation CreateInventoryLevel(
   $quantityAvailable: Int!
   $averageCost: Float!
   $totalValue: Float!
-) {
+) @auth(level: USER) {
   inventoryLevel_insert(data: {
     productId: $productId
     locationId: $locationId

@@ -27,7 +27,7 @@ mutation CreateProduct(
   $category: ProductCategory!
   $createdById: String!
   $updatedById: String!
-) {
+) @auth(level: USER) {
   product_insert(data: {
     businessId: $businessId
     genericName: $genericName

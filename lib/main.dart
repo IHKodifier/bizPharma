@@ -5,8 +5,21 @@ import 'my_app.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:flutter/foundation.dart';
+import 'dataconnect_generated/ik_pharma.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  if (kDebugMode) {
+    // Connect to Data Connect Emulator
+    IkPharmaConnector.instance.dataConnect.useDataConnectEmulator(
+      '127.0.0.1',
+      9399,
+    );
+    print('🔌 Connected to Data Connect Emulator on 127.0.0.1:9399');
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }

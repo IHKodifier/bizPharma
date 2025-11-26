@@ -13,7 +13,7 @@ mutation CreatePurchaseOrder(
   $taxAmount: Float!
   $status: PurchaseOrderStatus!
   $createdById: String!
-) {
+) @auth(level: USER) {
   purchaseOrder_insert(data: {
     businessId: $businessId
     supplierId: $supplierId

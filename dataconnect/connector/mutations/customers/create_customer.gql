@@ -10,7 +10,7 @@ mutation CreateCustomer(
   $phone: String
   $dateOfBirth: Date
   $createdById: String!
-) {
+) @auth(level: USER) {
   customer_insert(data: {
     businessId: $businessId
     firstName: $firstName

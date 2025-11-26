@@ -1,0 +1,7 @@
+# ============================================================================
+# DELETE ALL DATA - Execute in reverse dependency order
+# ============================================================================
+
+# mutation DeleteAllData {
+#   ... content commented out ...
+# }

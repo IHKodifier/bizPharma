@@ -1,5 +1,4 @@
-connectorId: "ik_pharma"
-authMode: PUBLIC
+connectorId: "ik-pharma"
 generate:
   dartSdk:
     outputDir: "../../lib/dataconnect_generated"

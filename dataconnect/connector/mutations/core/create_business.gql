@@ -9,7 +9,7 @@ mutation CreateBusiness(
   $subscriptionEndDate: Date
   $maxUsers: Int
   $maxLocations: Int
-) {
+) @auth(level: USER) {
   business_insert(data: {
     name: $name
     tier: $tier

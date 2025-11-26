@@ -19,7 +19,7 @@ mutation CreateProductBatch(
   $locationId: UUID!
   $createdById: String!
   $updatedById: String!
-) {
+) @auth(level: USER) {
   productBatch_insert(data: {
     productId: $productId
     businessId: $businessId

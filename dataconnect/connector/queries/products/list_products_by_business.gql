@@ -2,7 +2,7 @@
 # LIST PRODUCTS BY BUSINESS
 # ============================================================================
 
-query ListProductsByBusiness($businessId: UUID!) {
+query ListProductsByBusiness($businessId: UUID!) @auth(level: USER) {
   products(where: { businessId: { eq: $businessId } }) {
     id
     businessId

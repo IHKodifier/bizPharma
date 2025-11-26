@@ -1,0 +1,10 @@
+# ============================================================================
+# DELETE ALL USERS - Purge all user records from database
+# ============================================================================
+# WARNING: This will delete ALL users from the database.
+# Use this mutation carefully, especially in production environments.
+# ============================================================================
+
+mutation DeleteAllUsers @auth(level: USER) {
+  deleteUsers: user_deleteMany(all: true)
+}

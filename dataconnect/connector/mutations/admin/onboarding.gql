@@ -1,0 +1,24 @@
+mutation CreateBusinessAndAdmin(
+  $businessId: UUID!
+  $businessName: String!
+  $userEmail: String!
+  $userFirstName: String!
+  $userLastName: String!
+  $authUid: String!
+  $today: Date!
+) @auth(level: USER) @transaction {
+  business_insert(data: {
+    id: $businessId
+    name: $businessName
+    tier: TRIAL
+    subscriptionStartDate: $today
+  })
+  user_insert(data: {
+    id: $authUid
+    businessId: $businessId
+    email: $userEmail
+    firstName: $userFirstName
+    lastName: $userLastName
+    role: BUSINESS_ADMIN
+  })
+}

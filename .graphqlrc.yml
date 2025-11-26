@@ -1,0 +1,23 @@
+schema: 
+  - "dataconnect/schema/**/*.gql"
+  - "dataconnect/connector/**/*.gql"
+
+documents: "dataconnect/connector/**/*.gql"
+
+extensions:
+  customValidationRules:
+    # Disable unknown directive warnings for Firebase Data Connect directives
+    - KnownDirectivesRule: off
+    - ProvidedRequiredArgumentsRule: off
+  
+  # Configure schema-aware features
+  schemaPath: "dataconnect/schema"
+  
+  # Include configuration for Firebase Data Connect
+  include:
+    - "dataconnect/**/*.gql"
+  
+  exclude:
+    - "**/node_modules"
+    - "**/.git"
+    - "**/build"

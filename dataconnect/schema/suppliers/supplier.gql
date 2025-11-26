@@ -21,6 +21,7 @@ type Supplier @table {
 
   # Address
   address: Address
+  addressId: UUID
 
   # Business Details
   taxId: String @col(dataType: "varchar(50)")

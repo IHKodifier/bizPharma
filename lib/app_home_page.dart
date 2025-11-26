@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'providers/theme_provider.dart';
 import 'providers/auth_provider.dart';
+import 'dataconnect_generated/ik_pharma.dart';
 
 class AppHomePage extends ConsumerStatefulWidget {
   const AppHomePage({super.key, required this.title});
@@ -192,7 +193,92 @@ class _AppHomePageState extends ConsumerState<AppHomePage> {
             error: (_, __) => const SizedBox.shrink(),
           ),
           // Main content
-          Expanded(child: const Center(child: Text('Welcome to ik-Pharma!'))),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Welcome to ik-Pharma!',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  const Divider(),
+                  const Text(
+                    'DEBUG: All Businesses',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  FutureBuilder(
+                    future: IkPharmaConnector.instance
+                        .listAllBusinesses()
+                        .execute(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+                      final businesses = snapshot.data?.data.businesses ?? [];
+                      if (businesses.isEmpty) {
+                        return const Text('No businesses found.');
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: businesses.length,
+                        itemBuilder: (context, index) {
+                          final business = businesses[index];
+                          return ListTile(
+                            title: Text(business.name),
+                            subtitle: Text(
+                              'ID: ${business.id}\nTier: ${business.tier}',
+                            ),
+                            isThreeLine: true,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  const Divider(),
+                  const Text(
+                    'DEBUG: All Users',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  FutureBuilder(
+                    future: IkPharmaConnector.instance.listAllUsers().execute(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+                      final users = snapshot.data?.data.users ?? [];
+                      if (users.isEmpty) {
+                        return const Text('No users found.');
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          final user = users[index];
+                          return ListTile(
+                            title: Text(user.email),
+                            subtitle: Text(
+                              'ID: ${user.id}\nRole: ${user.role}',
+                            ),
+                            isThreeLine: true,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -9,7 +9,7 @@ mutation CreateGoodsReceipt(
   $receiptDate: Timestamp
   $status: GoodsReceiptStatus!
   $inspectedById: String!
-) {
+) @auth(level: USER) {
   goodsReceipt_insert(data: {
     purchaseOrderId: $purchaseOrderId
     businessId: $businessId

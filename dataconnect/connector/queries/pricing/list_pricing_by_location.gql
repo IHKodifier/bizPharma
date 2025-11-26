@@ -2,7 +2,7 @@
 # LIST PRICING BY LOCATION
 # ============================================================================
 
-query ListPricingByLocation($businessId: UUID!) {
+query ListPricingByLocation($businessId: UUID!) @auth(level: USER) {
   productPricings(where: { businessId: { eq: $businessId } }) {
     id
     productId

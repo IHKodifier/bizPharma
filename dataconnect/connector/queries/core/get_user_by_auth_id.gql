@@ -1,17 +1,16 @@
 # ============================================================================
-# LIST LOCATIONS BY BUSINESS
+# GET USER BY AUTH ID
 # ============================================================================
 
-query ListLocationsByBusiness($businessId: UUID!) {
-  locations(where: { businessId: { eq: $businessId } }) {
+query GetUserByAuthId($id: String!) @auth(level: USER) {
+  user(id: $id) {
     id
     businessId
-    name
-    code
-    type
-    phone
+    role
+    firstName
+    lastName
     email
+    phone
     isActive
-    createdAt
   }
 }

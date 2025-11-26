@@ -2,7 +2,7 @@
 # GET BUSINESS BY ID
 # ============================================================================
 
-query GetBusinessById($id: UUID!) {
+query GetBusinessById($id: UUID!) @auth(level: USER) {
   business(id: $id) {
     id
     name

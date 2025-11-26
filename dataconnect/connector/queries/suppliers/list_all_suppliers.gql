@@ -2,7 +2,7 @@
 # LIST ALL SUPPLIERS
 # ============================================================================
 
-query ListAllSuppliers {
+query ListAllSuppliers @auth(level: USER) {
   suppliers {
     id
     businessId

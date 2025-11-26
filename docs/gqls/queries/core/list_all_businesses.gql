@@ -2,7 +2,7 @@
 # LIST ALL BUSINESSES
 # ============================================================================
 
-query ListAllBusinesses {
+query ListAllBusinesses @auth(level: USER) {
   businesses {
     id
     name

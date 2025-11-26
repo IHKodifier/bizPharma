@@ -6,7 +6,7 @@ mutation CreateTherapeuticClass(
   $code: String!
   $name: String!
   $description: String
-) {
+) @auth(level: USER) {
   therapeuticClass_insert(data: {
     code: $code
     name: $name

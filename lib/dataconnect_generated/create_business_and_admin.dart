@@ -6,10 +6,15 @@ class CreateBusinessAndAdminVariablesBuilder {
   String userEmail;
   String userFirstName;
   String userLastName;
+  Optional<String> _userPhone = Optional.optional(nativeFromJson, nativeToJson);
   String authUid;
   DateTime today;
 
-  final FirebaseDataConnect _dataConnect;
+  final FirebaseDataConnect _dataConnect;  CreateBusinessAndAdminVariablesBuilder userPhone(String? t) {
+   _userPhone.value = t;
+   return this;
+  }
+
   CreateBusinessAndAdminVariablesBuilder(this._dataConnect, {required  this.businessId,required  this.businessName,required  this.userEmail,required  this.userFirstName,required  this.userLastName,required  this.authUid,required  this.today,});
   Deserializer<CreateBusinessAndAdminData> dataDeserializer = (dynamic json)  => CreateBusinessAndAdminData.fromJson(jsonDecode(json));
   Serializer<CreateBusinessAndAdminVariables> varsSerializer = (CreateBusinessAndAdminVariables vars) => jsonEncode(vars.toJson());
@@ -18,7 +23,7 @@ class CreateBusinessAndAdminVariablesBuilder {
   }
 
   MutationRef<CreateBusinessAndAdminData, CreateBusinessAndAdminVariables> ref() {
-    CreateBusinessAndAdminVariables vars= CreateBusinessAndAdminVariables(businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,authUid: authUid,today: today,);
+    CreateBusinessAndAdminVariables vars= CreateBusinessAndAdminVariables(businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userPhone: _userPhone,authUid: authUid,today: today,);
     return _dataConnect.mutation("CreateBusinessAndAdmin", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -137,6 +142,7 @@ class CreateBusinessAndAdminVariables {
   final String userEmail;
   final String userFirstName;
   final String userLastName;
+  late final Optional<String>userPhone;
   final String authUid;
   final DateTime today;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
@@ -148,7 +154,20 @@ class CreateBusinessAndAdminVariables {
   userFirstName = nativeFromJson<String>(json['userFirstName']),
   userLastName = nativeFromJson<String>(json['userLastName']),
   authUid = nativeFromJson<String>(json['authUid']),
-  today = nativeFromJson<DateTime>(json['today']);
+  today = nativeFromJson<DateTime>(json['today']) {
+  
+  
+  
+  
+  
+  
+  
+    userPhone = Optional.optional(nativeFromJson, nativeToJson);
+    userPhone.value = json['userPhone'] == null ? null : nativeFromJson<String>(json['userPhone']);
+  
+  
+  
+  }
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -164,12 +183,13 @@ class CreateBusinessAndAdminVariables {
     userEmail == otherTyped.userEmail && 
     userFirstName == otherTyped.userFirstName && 
     userLastName == otherTyped.userLastName && 
+    userPhone == otherTyped.userPhone && 
     authUid == otherTyped.authUid && 
     today == otherTyped.today;
     
   }
   @override
-  int get hashCode => Object.hashAll([businessId.hashCode, businessName.hashCode, userEmail.hashCode, userFirstName.hashCode, userLastName.hashCode, authUid.hashCode, today.hashCode]);
+  int get hashCode => Object.hashAll([businessId.hashCode, businessName.hashCode, userEmail.hashCode, userFirstName.hashCode, userLastName.hashCode, userPhone.hashCode, authUid.hashCode, today.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -179,6 +199,9 @@ class CreateBusinessAndAdminVariables {
     json['userEmail'] = nativeToJson<String>(userEmail);
     json['userFirstName'] = nativeToJson<String>(userFirstName);
     json['userLastName'] = nativeToJson<String>(userLastName);
+    if(userPhone.state == OptionalState.set) {
+      json['userPhone'] = userPhone.toJson();
+    }
     json['authUid'] = nativeToJson<String>(authUid);
     json['today'] = nativeToJson<DateTime>(today);
     return json;
@@ -190,6 +213,7 @@ class CreateBusinessAndAdminVariables {
     required this.userEmail,
     required this.userFirstName,
     required this.userLastName,
+    required this.userPhone,
     required this.authUid,
     required this.today,
   });

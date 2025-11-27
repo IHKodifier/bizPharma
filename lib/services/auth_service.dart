@@ -112,7 +112,7 @@ class AuthService {
             authUid: uid,
             today: DateTime.now(),
           )
-          // .userPhone(phone)
+          .userPhone(phone)
           .execute();
       log('Business and User created successfully');
     } catch (e) {

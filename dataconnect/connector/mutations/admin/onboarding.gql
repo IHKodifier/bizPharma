@@ -4,6 +4,7 @@ mutation CreateBusinessAndAdmin(
   $userEmail: String!
   $userFirstName: String!
   $userLastName: String!
+  $userPhone: String
   $authUid: String!
   $today: Date!
 ) @auth(level: USER) @transaction {
@@ -19,6 +20,7 @@ mutation CreateBusinessAndAdmin(
     email: $userEmail
     firstName: $userFirstName
     lastName: $userLastName
+    phone: $userPhone
     role: BUSINESS_ADMIN
   })
 }

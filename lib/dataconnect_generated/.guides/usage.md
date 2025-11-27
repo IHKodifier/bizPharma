@@ -1,16 +1,16 @@
 # Basic Usage
 
 ```dart
-IkPharmaConnector.instance.ListProductsByBusiness(listProductsByBusinessVariables).execute();
-IkPharmaConnector.instance.ListAllSuppliers().execute();
-IkPharmaConnector.instance.DeleteAllBusinesses().execute();
-IkPharmaConnector.instance.ListLocationsByBusiness(listLocationsByBusinessVariables).execute();
-IkPharmaConnector.instance.listAllProducts().execute();
+IkPharmaConnector.instance.CreateProductPricing(createProductPricingVariables).execute();
+IkPharmaConnector.instance.CreateBusinessAndAdmin(createBusinessAndAdminVariables).execute();
+IkPharmaConnector.instance.CreateAddress(createAddressVariables).execute();
+IkPharmaConnector.instance.CreatePurchaseOrder(createPurchaseOrderVariables).execute();
+IkPharmaConnector.instance.DeleteAllUsers().execute();
+IkPharmaConnector.instance.CreateCustomer(createCustomerVariables).execute();
 IkPharmaConnector.instance.CreateInventoryLevel(createInventoryLevelVariables).execute();
-IkPharmaConnector.instance.ListAllBusinesses().execute();
-IkPharmaConnector.instance.ListAllUsers().execute();
-IkPharmaConnector.instance.CreateSupplier(createSupplierVariables).execute();
-IkPharmaConnector.instance.CreateLocation(createLocationVariables).execute();
+IkPharmaConnector.instance.CreateGoodsReceipt(createGoodsReceiptVariables).execute();
+IkPharmaConnector.instance.CreateUser(createUserVariables).execute();
+IkPharmaConnector.instance.CreateBusiness(createBusinessVariables).execute();
 
 ```
 

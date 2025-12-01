@@ -8,7 +8,11 @@ mutation CreateBusiness(
   $subscriptionStartDate: Date!
   $subscriptionEndDate: Date
   $maxUsers: Int
+
   $maxLocations: Int
+  $logo: String
+  $banner: String
+  $phone: String
 ) @auth(level: USER) {
   business_insert(data: {
     name: $name
@@ -17,6 +21,9 @@ mutation CreateBusiness(
     subscriptionEndDate: $subscriptionEndDate
     maxUsers: $maxUsers
     maxLocations: $maxLocations
+    logo: $logo
+    banner: $banner
+    phone: $phone
     isActive: true
   })
 }

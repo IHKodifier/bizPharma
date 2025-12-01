@@ -12,6 +12,9 @@ query ListAllBusinesses @auth(level: USER) {
     isActive
     maxUsers
     maxLocations
+    logo
+    banner
+    phone
     createdAt
     updatedAt
   }

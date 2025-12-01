@@ -9,6 +9,7 @@ mutation CreateAddress(
   $state: String!
   $postalCode: String!
   $country: String!
+  $phone: String
 ) @auth(level: USER) {
   address_insert(data: {
     line1: $line1
@@ -17,6 +18,7 @@ mutation CreateAddress(
     state: $state
     postalCode: $postalCode
     country: $country
+    phone: $phone
   })
 }
 

@@ -23,7 +23,7 @@ class ListAllUsersUsers {
   final String email;
   final String firstName;
   final String lastName;
-  final String? phone;
+  final String mobile;
   final EnumValue<UserRole> role;
   final bool isActive;
   final Timestamp? lastLoginAt;
@@ -36,7 +36,7 @@ class ListAllUsersUsers {
   email = nativeFromJson<String>(json['email']),
   firstName = nativeFromJson<String>(json['firstName']),
   lastName = nativeFromJson<String>(json['lastName']),
-  phone = json['phone'] == null ? null : nativeFromJson<String>(json['phone']),
+  mobile = nativeFromJson<String>(json['mobile']),
   role = userRoleDeserializer(json['role']),
   isActive = nativeFromJson<bool>(json['isActive']),
   lastLoginAt = json['lastLoginAt'] == null ? null : Timestamp.fromJson(json['lastLoginAt']),
@@ -57,7 +57,7 @@ class ListAllUsersUsers {
     email == otherTyped.email && 
     firstName == otherTyped.firstName && 
     lastName == otherTyped.lastName && 
-    phone == otherTyped.phone && 
+    mobile == otherTyped.mobile && 
     role == otherTyped.role && 
     isActive == otherTyped.isActive && 
     lastLoginAt == otherTyped.lastLoginAt && 
@@ -66,7 +66,7 @@ class ListAllUsersUsers {
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, email.hashCode, firstName.hashCode, lastName.hashCode, phone.hashCode, role.hashCode, isActive.hashCode, lastLoginAt.hashCode, createdAt.hashCode, updatedAt.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, email.hashCode, firstName.hashCode, lastName.hashCode, mobile.hashCode, role.hashCode, isActive.hashCode, lastLoginAt.hashCode, createdAt.hashCode, updatedAt.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -76,9 +76,7 @@ class ListAllUsersUsers {
     json['email'] = nativeToJson<String>(email);
     json['firstName'] = nativeToJson<String>(firstName);
     json['lastName'] = nativeToJson<String>(lastName);
-    if (phone != null) {
-      json['phone'] = nativeToJson<String?>(phone);
-    }
+    json['mobile'] = nativeToJson<String>(mobile);
     json['role'] = 
     userRoleSerializer(role)
     ;
@@ -97,7 +95,7 @@ class ListAllUsersUsers {
     required this.email,
     required this.firstName,
     required this.lastName,
-    this.phone,
+    required this.mobile,
     required this.role,
     required this.isActive,
     this.lastLoginAt,

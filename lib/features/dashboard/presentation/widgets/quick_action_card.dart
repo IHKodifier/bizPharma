@@ -23,34 +23,36 @@ class QuickActionCard extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(30),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         decoration: BoxDecoration(
           color: isPrimary ? primaryColor : colorScheme.surface,
-          borderRadius: BorderRadius.circular(12),
-          border: isPrimary ? null : Border.all(color: theme.dividerColor),
+          borderRadius: BorderRadius.circular(30),
+          border: isPrimary
+              ? null
+              : Border.all(color: theme.dividerColor.withOpacity(0.5)),
           boxShadow: isPrimary
               ? [
                   BoxShadow(
                     color: primaryColor.withOpacity(0.3),
-                    blurRadius: 8,
+                    blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
                 ]
               : null,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
               color: isPrimary
                   ? colorScheme.onPrimary
                   : colorScheme.onSurfaceVariant,
-              size: 20,
+              size: 18,
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 8),
             Text(
               title,
               style: GoogleFonts.inter(

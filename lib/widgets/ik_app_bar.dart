@@ -70,38 +70,40 @@ class IkAppBar extends ConsumerWidget implements PreferredSizeWidget {
           // Spacer to push Search Bar to the middle of available space
           const Spacer(),
 
-          // Search Bar (Fixed Width & Height)
-          Container(
-            width: 400,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            child: TextField(
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                isDense: true,
-                hintText: 'Search...',
-                hintStyle: GoogleFonts.inter(
-                  color: colorScheme.onSurfaceVariant,
-                  fontSize: 13,
-                  height: 1.0, // Ensure consistent line height
-                ),
-                border: InputBorder.none,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: colorScheme.onSurfaceVariant,
-                  size: 20,
-                ),
-                // Zero padding ensures the text centers vertically within the 40px height
-                contentPadding: EdgeInsets.zero,
+          // Search Bar (Flexible Width)
+          Flexible(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 400),
+              height: 40,
+              decoration: BoxDecoration(
+                color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: theme.dividerColor),
               ),
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                height: 1.0,
-                color: colorScheme.onSurface,
+              child: TextField(
+                textAlignVertical: TextAlignVertical.center,
+                decoration: InputDecoration(
+                  isDense: true,
+                  hintText: 'Search...',
+                  hintStyle: GoogleFonts.inter(
+                    color: colorScheme.onSurfaceVariant,
+                    fontSize: 13,
+                    height: 1.0, // Ensure consistent line height
+                  ),
+                  border: InputBorder.none,
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: colorScheme.onSurfaceVariant,
+                    size: 20,
+                  ),
+                  // Zero padding ensures the text centers vertically within the 40px height
+                  contentPadding: EdgeInsets.zero,
+                ),
+                style: GoogleFonts.inter(
+                  fontSize: 13,
+                  height: 1.0,
+                  color: colorScheme.onSurface,
+                ),
               ),
             ),
           ),

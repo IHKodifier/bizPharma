@@ -24,6 +24,7 @@ type Address @table {
   state: String! @col(dataType: "varchar(100)")
   postalCode: String! @col(dataType: "varchar(20)")
   country: String! @col(dataType: "varchar(100)")
+  phone: String
 }
 
 """

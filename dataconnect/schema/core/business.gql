@@ -15,6 +15,9 @@ type Business @table {
   isActive: Boolean! @default(value: true)
   maxUsers: Int
   maxLocations: Int
+  logo: String
+  banner: String
+  phone: String
   createdAt: Date! @default(expr: "request.time")
   updatedAt: Date! @default(expr: "request.time")
 }
@@ -30,7 +33,7 @@ type User @table {
   email: String! @col(dataType: "varchar(255)")
   firstName: String! @col(dataType: "varchar(100)")
   lastName: String! @col(dataType: "varchar(100)")
-  phone: String @col(dataType: "varchar(20)")
+  mobile: String! @col(dataType: "varchar(20)")
   role: UserRole! @col(dataType: "user_role")
   permissions: [String!] @col(dataType: "jsonb")
   isActive: Boolean! @default(value: true)

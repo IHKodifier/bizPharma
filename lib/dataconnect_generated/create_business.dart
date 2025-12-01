@@ -7,6 +7,9 @@ class CreateBusinessVariablesBuilder {
   Optional<DateTime> _subscriptionEndDate = Optional.optional(nativeFromJson, nativeToJson);
   Optional<int> _maxUsers = Optional.optional(nativeFromJson, nativeToJson);
   Optional<int> _maxLocations = Optional.optional(nativeFromJson, nativeToJson);
+  Optional<String> _logo = Optional.optional(nativeFromJson, nativeToJson);
+  Optional<String> _banner = Optional.optional(nativeFromJson, nativeToJson);
+  Optional<String> _phone = Optional.optional(nativeFromJson, nativeToJson);
 
   final FirebaseDataConnect _dataConnect;  CreateBusinessVariablesBuilder subscriptionEndDate(DateTime? t) {
    _subscriptionEndDate.value = t;
@@ -20,6 +23,18 @@ class CreateBusinessVariablesBuilder {
    _maxLocations.value = t;
    return this;
   }
+  CreateBusinessVariablesBuilder logo(String? t) {
+   _logo.value = t;
+   return this;
+  }
+  CreateBusinessVariablesBuilder banner(String? t) {
+   _banner.value = t;
+   return this;
+  }
+  CreateBusinessVariablesBuilder phone(String? t) {
+   _phone.value = t;
+   return this;
+  }
 
   CreateBusinessVariablesBuilder(this._dataConnect, {required  this.name,required  this.tier,required  this.subscriptionStartDate,});
   Deserializer<CreateBusinessData> dataDeserializer = (dynamic json)  => CreateBusinessData.fromJson(jsonDecode(json));
@@ -29,7 +44,7 @@ class CreateBusinessVariablesBuilder {
   }
 
   MutationRef<CreateBusinessData, CreateBusinessVariables> ref() {
-    CreateBusinessVariables vars= CreateBusinessVariables(name: name,tier: tier,subscriptionStartDate: subscriptionStartDate,subscriptionEndDate: _subscriptionEndDate,maxUsers: _maxUsers,maxLocations: _maxLocations,);
+    CreateBusinessVariables vars= CreateBusinessVariables(name: name,tier: tier,subscriptionStartDate: subscriptionStartDate,subscriptionEndDate: _subscriptionEndDate,maxUsers: _maxUsers,maxLocations: _maxLocations,logo: _logo,banner: _banner,phone: _phone,);
     return _dataConnect.mutation("CreateBusiness", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -110,6 +125,9 @@ class CreateBusinessVariables {
   late final Optional<DateTime>subscriptionEndDate;
   late final Optional<int>maxUsers;
   late final Optional<int>maxLocations;
+  late final Optional<String>logo;
+  late final Optional<String>banner;
+  late final Optional<String>phone;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
   CreateBusinessVariables.fromJson(Map<String, dynamic> json):
   
@@ -132,6 +150,18 @@ class CreateBusinessVariables {
     maxLocations = Optional.optional(nativeFromJson, nativeToJson);
     maxLocations.value = json['maxLocations'] == null ? null : nativeFromJson<int>(json['maxLocations']);
   
+  
+    logo = Optional.optional(nativeFromJson, nativeToJson);
+    logo.value = json['logo'] == null ? null : nativeFromJson<String>(json['logo']);
+  
+  
+    banner = Optional.optional(nativeFromJson, nativeToJson);
+    banner.value = json['banner'] == null ? null : nativeFromJson<String>(json['banner']);
+  
+  
+    phone = Optional.optional(nativeFromJson, nativeToJson);
+    phone.value = json['phone'] == null ? null : nativeFromJson<String>(json['phone']);
+  
   }
   @override
   bool operator ==(Object other) {
@@ -148,11 +178,14 @@ class CreateBusinessVariables {
     subscriptionStartDate == otherTyped.subscriptionStartDate && 
     subscriptionEndDate == otherTyped.subscriptionEndDate && 
     maxUsers == otherTyped.maxUsers && 
-    maxLocations == otherTyped.maxLocations;
+    maxLocations == otherTyped.maxLocations && 
+    logo == otherTyped.logo && 
+    banner == otherTyped.banner && 
+    phone == otherTyped.phone;
     
   }
   @override
-  int get hashCode => Object.hashAll([name.hashCode, tier.hashCode, subscriptionStartDate.hashCode, subscriptionEndDate.hashCode, maxUsers.hashCode, maxLocations.hashCode]);
+  int get hashCode => Object.hashAll([name.hashCode, tier.hashCode, subscriptionStartDate.hashCode, subscriptionEndDate.hashCode, maxUsers.hashCode, maxLocations.hashCode, logo.hashCode, banner.hashCode, phone.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -171,6 +204,15 @@ class CreateBusinessVariables {
     if(maxLocations.state == OptionalState.set) {
       json['maxLocations'] = maxLocations.toJson();
     }
+    if(logo.state == OptionalState.set) {
+      json['logo'] = logo.toJson();
+    }
+    if(banner.state == OptionalState.set) {
+      json['banner'] = banner.toJson();
+    }
+    if(phone.state == OptionalState.set) {
+      json['phone'] = phone.toJson();
+    }
     return json;
   }
 
@@ -181,6 +223,9 @@ class CreateBusinessVariables {
     required this.subscriptionEndDate,
     required this.maxUsers,
     required this.maxLocations,
+    required this.logo,
+    required this.banner,
+    required this.phone,
   });
 }
 

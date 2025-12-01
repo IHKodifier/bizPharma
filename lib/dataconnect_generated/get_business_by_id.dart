@@ -27,6 +27,9 @@ class GetBusinessByIdBusiness {
   final bool isActive;
   final int? maxUsers;
   final int? maxLocations;
+  final String? logo;
+  final String? banner;
+  final String? phone;
   final DateTime createdAt;
   final DateTime updatedAt;
   GetBusinessByIdBusiness.fromJson(dynamic json):
@@ -39,6 +42,9 @@ class GetBusinessByIdBusiness {
   isActive = nativeFromJson<bool>(json['isActive']),
   maxUsers = json['maxUsers'] == null ? null : nativeFromJson<int>(json['maxUsers']),
   maxLocations = json['maxLocations'] == null ? null : nativeFromJson<int>(json['maxLocations']),
+  logo = json['logo'] == null ? null : nativeFromJson<String>(json['logo']),
+  banner = json['banner'] == null ? null : nativeFromJson<String>(json['banner']),
+  phone = json['phone'] == null ? null : nativeFromJson<String>(json['phone']),
   createdAt = nativeFromJson<DateTime>(json['createdAt']),
   updatedAt = nativeFromJson<DateTime>(json['updatedAt']);
   @override
@@ -59,12 +65,15 @@ class GetBusinessByIdBusiness {
     isActive == otherTyped.isActive && 
     maxUsers == otherTyped.maxUsers && 
     maxLocations == otherTyped.maxLocations && 
+    logo == otherTyped.logo && 
+    banner == otherTyped.banner && 
+    phone == otherTyped.phone && 
     createdAt == otherTyped.createdAt && 
     updatedAt == otherTyped.updatedAt;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, name.hashCode, tier.hashCode, subscriptionStartDate.hashCode, subscriptionEndDate.hashCode, isActive.hashCode, maxUsers.hashCode, maxLocations.hashCode, createdAt.hashCode, updatedAt.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, name.hashCode, tier.hashCode, subscriptionStartDate.hashCode, subscriptionEndDate.hashCode, isActive.hashCode, maxUsers.hashCode, maxLocations.hashCode, logo.hashCode, banner.hashCode, phone.hashCode, createdAt.hashCode, updatedAt.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -85,6 +94,15 @@ class GetBusinessByIdBusiness {
     if (maxLocations != null) {
       json['maxLocations'] = nativeToJson<int?>(maxLocations);
     }
+    if (logo != null) {
+      json['logo'] = nativeToJson<String?>(logo);
+    }
+    if (banner != null) {
+      json['banner'] = nativeToJson<String?>(banner);
+    }
+    if (phone != null) {
+      json['phone'] = nativeToJson<String?>(phone);
+    }
     json['createdAt'] = nativeToJson<DateTime>(createdAt);
     json['updatedAt'] = nativeToJson<DateTime>(updatedAt);
     return json;
@@ -99,6 +117,9 @@ class GetBusinessByIdBusiness {
     required this.isActive,
     this.maxUsers,
     this.maxLocations,
+    this.logo,
+    this.banner,
+    this.phone,
     required this.createdAt,
     required this.updatedAt,
   });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/auth_wrapper.dart';
+
+import 'features/dashboard/presentation/pages/dashboard_page.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +30,7 @@ class MyApp extends ConsumerWidget {
         ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
       ),
-      home: const AuthWrapper(),
+      home: const DashboardPage(),
     );
   }
 }

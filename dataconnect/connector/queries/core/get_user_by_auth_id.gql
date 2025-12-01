@@ -10,7 +10,7 @@ query GetUserByAuthId($id: String!) @auth(level: USER) {
     firstName
     lastName
     email
-    phone
+    mobile
     isActive
   }
 }

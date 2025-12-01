@@ -7,9 +7,14 @@ class CreateAddressVariablesBuilder {
   String state;
   String postalCode;
   String country;
+  Optional<String> _phone = Optional.optional(nativeFromJson, nativeToJson);
 
   final FirebaseDataConnect _dataConnect;  CreateAddressVariablesBuilder line2(String? t) {
    _line2.value = t;
+   return this;
+  }
+  CreateAddressVariablesBuilder phone(String? t) {
+   _phone.value = t;
    return this;
   }
 
@@ -21,7 +26,7 @@ class CreateAddressVariablesBuilder {
   }
 
   MutationRef<CreateAddressData, CreateAddressVariables> ref() {
-    CreateAddressVariables vars= CreateAddressVariables(line1: line1,line2: _line2,city: city,state: state,postalCode: postalCode,country: country,);
+    CreateAddressVariables vars= CreateAddressVariables(line1: line1,line2: _line2,city: city,state: state,postalCode: postalCode,country: country,phone: _phone,);
     return _dataConnect.mutation("CreateAddress", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -102,6 +107,7 @@ class CreateAddressVariables {
   final String state;
   final String postalCode;
   final String country;
+  late final Optional<String>phone;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
   CreateAddressVariables.fromJson(Map<String, dynamic> json):
   
@@ -120,6 +126,10 @@ class CreateAddressVariables {
   
   
   
+  
+    phone = Optional.optional(nativeFromJson, nativeToJson);
+    phone.value = json['phone'] == null ? null : nativeFromJson<String>(json['phone']);
+  
   }
   @override
   bool operator ==(Object other) {
@@ -136,11 +146,12 @@ class CreateAddressVariables {
     city == otherTyped.city && 
     state == otherTyped.state && 
     postalCode == otherTyped.postalCode && 
-    country == otherTyped.country;
+    country == otherTyped.country && 
+    phone == otherTyped.phone;
     
   }
   @override
-  int get hashCode => Object.hashAll([line1.hashCode, line2.hashCode, city.hashCode, state.hashCode, postalCode.hashCode, country.hashCode]);
+  int get hashCode => Object.hashAll([line1.hashCode, line2.hashCode, city.hashCode, state.hashCode, postalCode.hashCode, country.hashCode, phone.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -153,6 +164,9 @@ class CreateAddressVariables {
     json['state'] = nativeToJson<String>(state);
     json['postalCode'] = nativeToJson<String>(postalCode);
     json['country'] = nativeToJson<String>(country);
+    if(phone.state == OptionalState.set) {
+      json['phone'] = phone.toJson();
+    }
     return json;
   }
 
@@ -163,6 +177,7 @@ class CreateAddressVariables {
     required this.state,
     required this.postalCode,
     required this.country,
+    required this.phone,
   });
 }
 

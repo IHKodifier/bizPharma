@@ -9,7 +9,7 @@ query ListAllUsers @auth(level: USER) {
     email
     firstName
     lastName
-    phone
+    mobile
     role
     isActive
     lastLoginAt

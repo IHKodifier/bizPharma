@@ -6,20 +6,16 @@ class CreateUserVariablesBuilder {
   String email;
   String firstName;
   String lastName;
-  Optional<String> _phone = Optional.optional(nativeFromJson, nativeToJson);
+  String mobile;
   UserRole role;
   Optional<List<String>> _permissions = Optional.optional(listDeserializer(nativeFromJson), listSerializer(nativeToJson));
 
-  final FirebaseDataConnect _dataConnect;  CreateUserVariablesBuilder phone(String? t) {
-   _phone.value = t;
-   return this;
-  }
-  CreateUserVariablesBuilder permissions(List<String>? t) {
+  final FirebaseDataConnect _dataConnect;  CreateUserVariablesBuilder permissions(List<String>? t) {
    _permissions.value = t;
    return this;
   }
 
-  CreateUserVariablesBuilder(this._dataConnect, {required  this.id,required  this.businessId,required  this.email,required  this.firstName,required  this.lastName,required  this.role,});
+  CreateUserVariablesBuilder(this._dataConnect, {required  this.id,required  this.businessId,required  this.email,required  this.firstName,required  this.lastName,required  this.mobile,required  this.role,});
   Deserializer<CreateUserData> dataDeserializer = (dynamic json)  => CreateUserData.fromJson(jsonDecode(json));
   Serializer<CreateUserVariables> varsSerializer = (CreateUserVariables vars) => jsonEncode(vars.toJson());
   Future<OperationResult<CreateUserData, CreateUserVariables>> execute() {
@@ -27,7 +23,7 @@ class CreateUserVariablesBuilder {
   }
 
   MutationRef<CreateUserData, CreateUserVariables> ref() {
-    CreateUserVariables vars= CreateUserVariables(id: id,businessId: businessId,email: email,firstName: firstName,lastName: lastName,phone: _phone,role: role,permissions: _permissions,);
+    CreateUserVariables vars= CreateUserVariables(id: id,businessId: businessId,email: email,firstName: firstName,lastName: lastName,mobile: mobile,role: role,permissions: _permissions,);
     return _dataConnect.mutation("CreateUser", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -107,7 +103,7 @@ class CreateUserVariables {
   final String email;
   final String firstName;
   final String lastName;
-  late final Optional<String>phone;
+  final String mobile;
   final UserRole role;
   late final Optional<List<String>>permissions;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
@@ -118,6 +114,7 @@ class CreateUserVariables {
   email = nativeFromJson<String>(json['email']),
   firstName = nativeFromJson<String>(json['firstName']),
   lastName = nativeFromJson<String>(json['lastName']),
+  mobile = nativeFromJson<String>(json['mobile']),
   role = UserRole.values.byName(json['role']) {
   
   
@@ -125,9 +122,6 @@ class CreateUserVariables {
   
   
   
-  
-    phone = Optional.optional(nativeFromJson, nativeToJson);
-    phone.value = json['phone'] == null ? null : nativeFromJson<String>(json['phone']);
   
   
   
@@ -152,13 +146,13 @@ class CreateUserVariables {
     email == otherTyped.email && 
     firstName == otherTyped.firstName && 
     lastName == otherTyped.lastName && 
-    phone == otherTyped.phone && 
+    mobile == otherTyped.mobile && 
     role == otherTyped.role && 
     permissions == otherTyped.permissions;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, email.hashCode, firstName.hashCode, lastName.hashCode, phone.hashCode, role.hashCode, permissions.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, email.hashCode, firstName.hashCode, lastName.hashCode, mobile.hashCode, role.hashCode, permissions.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -168,9 +162,7 @@ class CreateUserVariables {
     json['email'] = nativeToJson<String>(email);
     json['firstName'] = nativeToJson<String>(firstName);
     json['lastName'] = nativeToJson<String>(lastName);
-    if(phone.state == OptionalState.set) {
-      json['phone'] = phone.toJson();
-    }
+    json['mobile'] = nativeToJson<String>(mobile);
     json['role'] = 
     role.name
     ;
@@ -186,7 +178,7 @@ class CreateUserVariables {
     required this.email,
     required this.firstName,
     required this.lastName,
-    required this.phone,
+    required this.mobile,
     required this.role,
     required this.permissions,
   });

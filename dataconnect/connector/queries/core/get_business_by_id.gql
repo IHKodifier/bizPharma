@@ -12,6 +12,9 @@ query GetBusinessById($id: UUID!) @auth(level: USER) {
     isActive
     maxUsers
     maxLocations
+    logo
+    banner
+    phone
     createdAt
     updatedAt
   }

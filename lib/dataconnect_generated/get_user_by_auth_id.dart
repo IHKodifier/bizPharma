@@ -25,7 +25,7 @@ class GetUserByAuthIdUser {
   final String firstName;
   final String lastName;
   final String email;
-  final String? phone;
+  final String mobile;
   final bool isActive;
   GetUserByAuthIdUser.fromJson(dynamic json):
   
@@ -35,7 +35,7 @@ class GetUserByAuthIdUser {
   firstName = nativeFromJson<String>(json['firstName']),
   lastName = nativeFromJson<String>(json['lastName']),
   email = nativeFromJson<String>(json['email']),
-  phone = json['phone'] == null ? null : nativeFromJson<String>(json['phone']),
+  mobile = nativeFromJson<String>(json['mobile']),
   isActive = nativeFromJson<bool>(json['isActive']);
   @override
   bool operator ==(Object other) {
@@ -53,12 +53,12 @@ class GetUserByAuthIdUser {
     firstName == otherTyped.firstName && 
     lastName == otherTyped.lastName && 
     email == otherTyped.email && 
-    phone == otherTyped.phone && 
+    mobile == otherTyped.mobile && 
     isActive == otherTyped.isActive;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, role.hashCode, firstName.hashCode, lastName.hashCode, email.hashCode, phone.hashCode, isActive.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, role.hashCode, firstName.hashCode, lastName.hashCode, email.hashCode, mobile.hashCode, isActive.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -71,9 +71,7 @@ class GetUserByAuthIdUser {
     json['firstName'] = nativeToJson<String>(firstName);
     json['lastName'] = nativeToJson<String>(lastName);
     json['email'] = nativeToJson<String>(email);
-    if (phone != null) {
-      json['phone'] = nativeToJson<String?>(phone);
-    }
+    json['mobile'] = nativeToJson<String>(mobile);
     json['isActive'] = nativeToJson<bool>(isActive);
     return json;
   }
@@ -85,7 +83,7 @@ class GetUserByAuthIdUser {
     required this.firstName,
     required this.lastName,
     required this.email,
-    this.phone,
+    required this.mobile,
     required this.isActive,
   });
 }

@@ -26,82 +26,124 @@ class KpiCard extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: theme.dividerColor),
+    return Container(
+      padding: const EdgeInsets.all(24.0),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      color: colorScheme.surface,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
                   title,
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     color: colorScheme.onSurfaceVariant,
                     fontWeight: FontWeight.w500,
                   ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                if (icon != null)
-                  Icon(
+              ),
+              if (icon != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Icon(
                     icon,
                     size: 20,
                     color:
                         iconColor ??
                         colorScheme.onSurfaceVariant.withOpacity(0.5),
                   ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
+                ),
+            ],
+          ),
+          const Spacer(),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
               value,
               style: GoogleFonts.inter(
-                fontSize: 28,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
+                letterSpacing: -0.5,
               ),
             ),
-            if (trend != null) ...[
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(
-                    isTrendPositive ? Icons.trending_up : Icons.trending_down,
-                    size: 16,
-                    color: isTrendPositive ? Colors.green : Colors.red,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    trend!,
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: isTrendPositive ? Colors.green : Colors.red,
+          ),
+          if (trend != null) ...[
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: (isTrendPositive ? Colors.green : Colors.red)
+                          .withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          isTrendPositive
+                              ? Icons.arrow_upward
+                              : Icons.arrow_downward,
+                          size: 12,
+                          color: isTrendPositive ? Colors.green : Colors.red,
+                        ),
+                        const SizedBox(width: 4),
+                        Flexible(
+                          child: Text(
+                            trend!,
+                            style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: isTrendPositive
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  if (trendText != null) ...[
-                    const SizedBox(width: 4),
-                    Text(
+                ),
+                if (trendText != null) ...[
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
                       trendText!,
                       style: GoogleFonts.inter(
                         fontSize: 12,
                         color: colorScheme.onSurfaceVariant,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ],
+                  ),
                 ],
-              ),
-            ],
+              ],
+            ),
           ],
-        ),
+        ],
       ),
     );
   }

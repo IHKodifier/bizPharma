@@ -8,7 +8,7 @@ mutation CreateUser(
   $email: String!
   $firstName: String!
   $lastName: String!
-  $phone: String
+  $mobile: String!
   $role: UserRole!
   $permissions: [String!]
 ) @auth(level: USER) {
@@ -18,7 +18,7 @@ mutation CreateUser(
     email: $email
     firstName: $firstName
     lastName: $lastName
-    phone: $phone
+    mobile: $mobile
     role: $role
     permissions: $permissions
     isActive: true

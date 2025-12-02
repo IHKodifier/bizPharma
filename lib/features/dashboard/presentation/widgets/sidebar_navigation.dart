@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../providers/auth_provider.dart';
 
-class SidebarNavigation extends StatefulWidget {
+class SidebarNavigation extends ConsumerStatefulWidget {
   final bool isCollapsed;
   final VoidCallback onToggleCollapse;
 
@@ -12,10 +14,10 @@ class SidebarNavigation extends StatefulWidget {
   });
 
   @override
-  State<SidebarNavigation> createState() => _SidebarNavigationState();
+  ConsumerState<SidebarNavigation> createState() => _SidebarNavigationState();
 }
 
-class _SidebarNavigationState extends State<SidebarNavigation> {
+class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
   String? _expandedModule;
 
   @override
@@ -59,7 +61,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'ikPharma',
+                          'bizPharma',
                           style: GoogleFonts.inter(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -195,7 +197,16 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
                   'Help Center',
                   isCompact: true,
                 ),
-                _buildNavItem(context, Icons.logout, 'Logout', isCompact: true),
+                _buildNavItem(
+                  context,
+                  Icons.logout,
+                  'Logout',
+                  isCompact: true,
+                  onTap: () async {
+                    await ref.read(authServiceProvider).signOut();
+                    print('user sign out completed');
+                  },
+                ),
               ],
             ),
           ),
@@ -211,6 +222,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
     bool isSelected = false,
     String? badge,
     bool isCompact = false,
+    VoidCallback? onTap,
   }) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -236,7 +248,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
           ),
           child: IconButton(
             icon: iconWidget,
-            onPressed: () {},
+            onPressed: onTap ?? () {},
             padding: const EdgeInsets.all(12),
           ),
         ),
@@ -276,7 +288,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
                 ),
               )
             : null,
-        onTap: () {},
+        onTap: onTap ?? () {},
         contentPadding: EdgeInsets.symmetric(
           horizontal: 12,
           vertical: isCompact ? 0 : 4,

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
-import '../dataconnect_generated/ik_pharma.dart';
+import '../dataconnect_generated/biz_pharma.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -79,7 +79,7 @@ class AuthService {
   // Check if user exists in Data Connect and return the user object
   Future<GetUserByAuthIdUser?> getUser(String uid) async {
     try {
-      final result = await IkPharmaConnector.instance
+      final result = await BizPharmaConnector.instance
           .getUserByAuthId(id: uid)
           .execute();
       return result.data.user;
@@ -95,24 +95,24 @@ class AuthService {
     required String email,
     required String firstName,
     required String lastName,
-    String? phone,
+    required String phone,
     required String uid,
   }) async {
     try {
       const uuid = Uuid();
       final businessId = uuid.v4();
 
-      await IkPharmaConnector.instance
+      await BizPharmaConnector.instance
           .createBusinessAndAdmin(
             businessId: businessId,
             businessName: businessName,
             userEmail: email,
             userFirstName: firstName,
             userLastName: lastName,
+            userMobile: phone,
             authUid: uid,
             today: DateTime.now(),
           )
-          .userPhone(phone)
           .execute();
       log('Business and User created successfully');
     } catch (e) {

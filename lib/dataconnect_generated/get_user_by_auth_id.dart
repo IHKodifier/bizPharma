@@ -1,4 +1,4 @@
-part of 'ik_pharma.dart';
+part of 'biz_pharma.dart';
 
 class GetUserByAuthIdVariablesBuilder {
   String id;

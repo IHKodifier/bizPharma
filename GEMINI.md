@@ -1,4 +1,4 @@
-# GEMINI Project Analysis: ik_pharma
+# GEMINI Project Analysis: bizPharma
 
 ## Project Overview
 

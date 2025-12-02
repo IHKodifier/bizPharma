@@ -5,7 +5,7 @@ import '../providers/user_provider.dart';
 import '../pages/landing/landing_page.dart';
 import '../app_home_page.dart';
 import '../pages/onboarding/onboarding_stepper.dart';
-import '../dataconnect_generated/ik_pharma.dart';
+import '../dataconnect_generated/biz_pharma.dart';
 
 // Provider to fetch the user from Data Connect
 final currentUserProvider = FutureProvider.family<GetUserByAuthIdUser?, String>(
@@ -21,7 +21,7 @@ final businessByIdProvider =
       ref,
       businessId,
     ) async {
-      final result = await IkPharmaConnector.instance
+      final result = await BizPharmaConnector.instance
           .getBusinessById(id: businessId)
           .execute();
       return result.data.business;

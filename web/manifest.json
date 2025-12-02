@@ -1,6 +1,6 @@
 {
-    "name": "ik_pharma",
-    "short_name": "ik_pharma",
+    "name": "bizPharma",
+    "short_name": "bizPharma",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

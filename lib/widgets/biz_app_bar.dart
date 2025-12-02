@@ -5,12 +5,12 @@ import '../providers/theme_provider.dart';
 import '../providers/user_provider.dart';
 import 'user_avatar.dart';
 
-class IkAppBar extends ConsumerWidget implements PreferredSizeWidget {
+class BizAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String? title;
   final bool isSidebarCollapsed;
   final VoidCallback? onToggleSidebar;
 
-  const IkAppBar({
+  const BizAppBar({
     super.key,
     this.title,
     this.isSidebarCollapsed = false,
@@ -59,7 +59,7 @@ class IkAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            'ikPharma',
+            'bizPharma',
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.bold,

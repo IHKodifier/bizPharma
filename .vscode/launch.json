@@ -5,19 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ik_pharma (Debug mode)",
+            "name": "bizpharma (Debug mode)",
             "request": "launch",
-            "type": "dart", 
+            "type": "dart",
             "flutterMode": "debug"
         },
         {
-            "name": "ik_pharma (profile mode)",
+            "name": "bizpharma (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "ik_pharma (release mode)",
+            "name": "bizpharma (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

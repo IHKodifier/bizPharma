@@ -19,7 +19,7 @@ class ValuePropsSection extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Why ikPharma?',
+            'Why bizPharma?',
             style: GoogleFonts.inter(
               fontSize: isMobile ? 28 : 40,
               fontWeight: FontWeight.bold,
@@ -54,7 +54,7 @@ class ValuePropsSection extends StatelessWidget {
                     icon: Icons.dashboard_outlined,
                     title: 'Unified Operations',
                     description:
-                        'Procurement, Warehouse, Accounting, and HR. Stop juggling multiple systems. ikPharma does it all.',
+                        'Procurement, Warehouse, Accounting, and HR. Stop juggling multiple systems. bizPharma does it all.',
                     width: (constraints.maxWidth / columns) - 24,
                   ),
                   _ValuePropCard(

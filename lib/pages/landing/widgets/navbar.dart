@@ -46,7 +46,7 @@ class LandingNavbar extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'ikPharma',
+                  'bizPharma',
                   style: GoogleFonts.inter(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

@@ -10,7 +10,7 @@ import '../widgets/sales_chart_widget.dart';
 import '../widgets/critical_alerts_widget.dart';
 import '../widgets/activity_feed_widget.dart';
 import '../widgets/dashboard_shimmer.dart';
-import '../../../../widgets/ik_app_bar.dart';
+import '../../../../widgets/biz_app_bar.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
@@ -73,7 +73,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
       backgroundColor: theme.brightness == Brightness.light
           ? const Color(0xFFF9FAFB)
           : colorScheme.surface,
-      appBar: IkAppBar(
+      appBar: BizAppBar(
         isSidebarCollapsed: _isSidebarCollapsed,
         onToggleSidebar: _toggleSidebar,
       ),

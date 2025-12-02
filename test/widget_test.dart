@@ -8,7 +8,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ik_pharma/my_app.dart';
+import 'package:biz_pharma/my_app.dart';
 
 void main() {
   testWidgets('App loads smoke test', (WidgetTester tester) async {

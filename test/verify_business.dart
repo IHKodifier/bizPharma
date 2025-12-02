@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ik_pharma/firebase_options.dart';
-import 'package:ik_pharma/dataconnect_generated/ik_pharma.dart';
+import 'package:biz_pharma/firebase_options.dart';
+import 'package:biz_pharma/dataconnect_generated/biz_pharma.dart';
 
 void main() {
   test('Verify Business Creation', () async {
@@ -18,7 +18,7 @@ void main() {
     // But for Data Connect verification, we need to hit the Data Connect emulator
 
     // Configure Data Connect Emulator
-    IkPharmaConnector.instance.dataConnect.useDataConnectEmulator(
+    BizPharmaConnector.instance.dataConnect.useDataConnectEmulator(
       '127.0.0.1',
       9399,
     );
@@ -35,7 +35,7 @@ void main() {
     print('Signed in as: ${auth.currentUser?.uid}');
 
     // Query Businesses
-    final result = await IkPharmaConnector.instance
+    final result = await BizPharmaConnector.instance
         .listAllBusinesses()
         .execute();
 

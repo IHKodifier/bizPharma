@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../dataconnect_generated/ik_pharma.dart';
+import '../dataconnect_generated/biz_pharma.dart';
 
 // Notifier for the current logged-in user (from Data Connect)
 class UserNotifier extends Notifier<GetUserByAuthIdUser?> {

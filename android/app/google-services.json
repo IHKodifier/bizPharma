@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "795893319163",
-    "project_id": "ikpharma-dev",
-    "storage_bucket": "ikpharma-dev.firebasestorage.app"
+    "project_number": "381385750800",
+    "project_id": "bizpharma-4e73a",
+    "storage_bucket": "bizpharma-4e73a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:795893319163:android:cddc38fe3982c75655775e",
+        "mobilesdk_app_id": "1:381385750800:android:7e989e9d9b77407fe44d95",
         "android_client_info": {
-          "package_name": "com.example.ik_pharma"
+          "package_name": "app.bizpharma"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "381385750800-i3dnf6r6bvl5age1g3hfh8h4at3ma4h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAwA_aT2E0fnpeePvbgocN6DOFBQ69WMcg"
+          "current_key": "AIzaSyD1EIbEbBVBs5PqqgRkuZ185a78NfzWng0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381385750800-i3dnf6r6bvl5age1g3hfh8h4at3ma4h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

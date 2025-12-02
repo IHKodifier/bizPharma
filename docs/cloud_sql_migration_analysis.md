@@ -235,7 +235,7 @@ This is expected for a fresh deployment.
 
 ## Configuration Files
 
-### 1. [dataconnect.yaml](file:///E:/Non_Office/Dev_Space/vibe_skool/ik_pharma/dataconnect/dataconnect.yaml)
+### 1. [dataconnect.yaml](file:///E:/Non_Office/Dev_Space/vibe_skool/bizPharma/dataconnect/dataconnect.yaml)
 
 ```yaml
 specVersion: 'v1alpha'
@@ -251,17 +251,17 @@ schema:
 connectorDirs: ["./connector"]
 ```
 
-### 2. [connector.yaml](file:///E:/Non_Office/Dev_Space/vibe_skool/ik_pharma/dataconnect/connector/connector.yaml)
+### 2. [connector.yaml](file:///E:/Non_Office/Dev_Space/vibe_skool/bizPharma/dataconnect/connector/connector.yaml)
 
 ```yaml
 connectorId: "ik-pharma"
 generate:
   dartSdk:
     outputDir: "../../lib/dataconnect_generated"
-    package: "ik_pharma"
+    package: "biz_pharma"
 ```
 
-### 3. [firebase.json](file:///E:/Non_Office/Dev_Space/vibe_skool/ik_pharma/firebase.json) (Data Connect section)
+### 3. [firebase.json](file:///E:/Non_Office/Dev_Space/vibe_skool/bizPharma/firebase.json) (Data Connect section)
 
 ```json
 {
@@ -458,7 +458,7 @@ mutation {
 
 ### 2. Test Onboarding Flow
 
-- ✅ Mutation exists: [CreateBusinessAndAdmin](file:///E:/Non_Office/Dev_Space/vibe_skool/ik_pharma/dataconnect/connector/mutations/core)
+- ✅ Mutation exists: [CreateBusinessAndAdmin](file:///E:/Non_Office/Dev_Space/vibe_skool/bizPharma/dataconnect/connector/mutations/core)
 - Test sign-up flow end-to-end
 - Verify data persistence
 - Confirm authentication integration
@@ -578,4 +578,4 @@ The Cloud SQL migration for ikPharma has been successfully completed with **zero
 - [Firebase Data Connect Documentation](https://firebase.google.com/docs/data-connect)
 - [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
 - [GraphQL Schema Definition](https://graphql.org/learn/schema/)
-- [Project Repository](file:///E:/Non_Office/Dev_Space/vibe_skool/ik_pharma)
+- [Project Repository](file:///E:/Non_Office/Dev_Space/vibe_skool/bizPharma)

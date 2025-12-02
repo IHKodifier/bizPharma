@@ -86,7 +86,7 @@ class LandingFooter extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '© 2025 ikPharma. All rights reserved.',
+                  '© 2025 bizPharma. All rights reserved.',
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     color: theme.colorScheme.onSurface.withOpacity(0.6),

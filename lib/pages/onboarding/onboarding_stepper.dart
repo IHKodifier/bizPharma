@@ -51,7 +51,7 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
         firstName: _firstNameController.text.trim(),
         lastName: _lastNameController.text.trim(),
         phone: _phoneController.text.trim().isEmpty
-            ? null
+            ? ''
             : _phoneController.text.trim(),
         uid: user.uid,
       );

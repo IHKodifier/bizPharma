@@ -1,8 +1,8 @@
-connectorId: "ik-pharma"
+connectorId: "biz-pharma"
 generate:
   dartSdk:
     outputDir: "../../lib/dataconnect_generated"
-    package: "ik_pharma"
+    package: "biz_pharma"
 #   javascriptSdk:
 #     outputDir: "../../src/dataconnect-generated"
 #     package: "@firebasegen/ik-pharma-connector/generated"

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'features/dashboard/presentation/pages/dashboard_page.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'providers/theme_provider.dart';
+
+import 'app_home_page.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -14,7 +14,7 @@ class MyApp extends ConsumerWidget {
     final themeMode = ref.watch(themeProvider);
 
     return MaterialApp(
-      title: 'ik-Pharma',
+      title: 'bizPharma',
       debugShowCheckedModeBanner: false,
       themeMode: themeMode,
       theme: ThemeData(
@@ -30,7 +30,7 @@ class MyApp extends ConsumerWidget {
         ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
       ),
-      home: const DashboardPage(),
+      home: const AppHomePage(),
     );
   }
 }

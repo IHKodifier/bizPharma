@@ -6,7 +6,7 @@ import 'my_app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter/foundation.dart';
-import 'dataconnect_generated/ik_pharma.dart';
+import 'dataconnect_generated/biz_pharma.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,7 @@ void main() async {
     if (defaultTargetPlatform == TargetPlatform.android) {
       host = '10.0.2.2';
     }
-    IkPharmaConnector.instance.dataConnect.useDataConnectEmulator(host, 9399);
+    BizPharmaConnector.instance.dataConnect.useDataConnectEmulator(host, 9399);
     print('🔌 Connected to Data Connect Emulator on $host:9399');
   }
 

@@ -9,8 +9,7 @@ import 'package:flutter/foundation.dart'
 /// Example:
 /// ```dart
 /// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
+/// // ...\n/// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
@@ -41,46 +40,46 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCrFr8RBMIkvSgVDBuzi8NaAWakx_CxFCg',
-    appId: '1:795893319163:web:fb9c46771fbef2ab55775e',
-    messagingSenderId: '795893319163',
-    projectId: 'ikpharma-dev',
-    authDomain: 'ikpharma-dev.firebaseapp.com',
-    storageBucket: 'ikpharma-dev.firebasestorage.app',
+    apiKey: 'AIzaSyD1EIbEbBVBs5PqqgRkuZ185a78NfzWng0',
+    appId: '1:381385750800:web:YOUR_WEB_APP_ID',
+    messagingSenderId: '381385750800',
+    projectId: 'bizpharma-4e73a',
+    authDomain: 'bizpharma-4e73a.firebaseapp.com',
+    storageBucket: 'bizpharma-4e73a.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAwA_aT2E0fnpeePvbgocN6DOFBQ69WMcg',
-    appId: '1:795893319163:android:cddc38fe3982c75655775e',
-    messagingSenderId: '795893319163',
-    projectId: 'ikpharma-dev',
-    storageBucket: 'ikpharma-dev.firebasestorage.app',
+    apiKey: 'AIzaSyD1EIbEbBVBs5PqqgRkuZ185a78NfzWng0',
+    appId: '1:381385750800:android:7e989e9d9b77407fe44d95',
+    messagingSenderId: '381385750800',
+    projectId: 'bizpharma-4e73a',
+    storageBucket: 'bizpharma-4e73a.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDSGH7E6PHI8Xy3h6mkiEeY12N8u-8BKsI',
-    appId: '1:795893319163:ios:545db9f3274f3f8f55775e',
-    messagingSenderId: '795893319163',
-    projectId: 'ikpharma-dev',
-    storageBucket: 'ikpharma-dev.firebasestorage.app',
-    iosBundleId: 'com.example.ikPharma',
+    apiKey: 'AIzaSyDl3VQJ61yoPQ1faYp95jxvP-CpvV5DwY0',
+    appId: '1:381385750800:ios:f55b0dacd5671359e44d95',
+    messagingSenderId: '381385750800',
+    projectId: 'bizpharma-4e73a',
+    storageBucket: 'bizpharma-4e73a.firebasestorage.app',
+    iosBundleId: 'app.bizpharma',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDSGH7E6PHI8Xy3h6mkiEeY12N8u-8BKsI',
-    appId: '1:795893319163:ios:545db9f3274f3f8f55775e',
-    messagingSenderId: '795893319163',
-    projectId: 'ikpharma-dev',
-    storageBucket: 'ikpharma-dev.firebasestorage.app',
-    iosBundleId: 'com.example.ikPharma',
+    apiKey: 'AIzaSyDl3VQJ61yoPQ1faYp95jxvP-CpvV5DwY0',
+    appId: '1:381385750800:ios:f55b0dacd5671359e44d95',
+    messagingSenderId: '381385750800',
+    projectId: 'bizpharma-4e73a',
+    storageBucket: 'bizpharma-4e73a.firebasestorage.app',
+    iosBundleId: 'app.bizpharma',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCrFr8RBMIkvSgVDBuzi8NaAWakx_CxFCg',
-    appId: '1:795893319163:web:944a50818aefe7cf55775e',
-    messagingSenderId: '795893319163',
-    projectId: 'ikpharma-dev',
-    authDomain: 'ikpharma-dev.firebaseapp.com',
-    storageBucket: 'ikpharma-dev.firebasestorage.app',
+    apiKey: 'AIzaSyD1EIbEbBVBs5PqqgRkuZ185a78NfzWng0',
+    appId: '1:381385750800:web:YOUR_WEB_APP_ID',
+    messagingSenderId: '381385750800',
+    projectId: 'bizpharma-4e73a',
+    authDomain: 'bizpharma-4e73a.firebaseapp.com',
+    storageBucket: 'bizpharma-4e73a.firebasestorage.app',
   );
 }

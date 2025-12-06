@@ -165,14 +165,55 @@ class _TextContent extends ConsumerWidget {
         ),
         const SizedBox(height: 40),
 
-        // CTA Button
-        _PrimaryCTA(isMobile: isMobile, isDark: isDark),
+        // CTA Buttons
+        isMobile
+            ? Column(
+                children: [
+                  _PrimaryCTA(isMobile: isMobile, isDark: isDark),
+                  const SizedBox(height: 16),
+                  _DemoButton(isDark: isDark),
+                ],
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _PrimaryCTA(isMobile: isMobile, isDark: isDark),
+                  const SizedBox(width: 24),
+                  _DemoButton(isDark: isDark),
+                ],
+              ),
 
         const SizedBox(height: 32),
 
         // Trust Badges
         _TrustBadges(isMobile: isMobile, isDark: isDark),
       ],
+    );
+  }
+}
+
+class _DemoButton extends StatelessWidget {
+  final bool isDark;
+
+  const _DemoButton({required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isDark
+        ? const Color(0xFFC5E64D) // Lime
+        : const Color(0xFF0F4C4C); // Deep Teal
+
+    return TextButton.icon(
+      onPressed: () {},
+      icon: Icon(Icons.play_circle_outline, size: 24),
+      label: Text(
+        'Watch Demo',
+        style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+      style: TextButton.styleFrom(
+        foregroundColor: color,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+      ),
     );
   }
 }
@@ -282,7 +323,11 @@ class _TrustBadges extends StatelessWidget {
         ? const Color(0xFF9FC230)
         : const Color(0xFF5A7A6F); // Light Olive / Sage Green
 
-    final badges = ['Free for 4 weeks', 'No credit card', 'Full features'];
+    final badges = [
+      'Free for 4 weeks',
+      'No Credit Card required',
+      'Full features',
+    ];
 
     return Wrap(
       spacing: 16,

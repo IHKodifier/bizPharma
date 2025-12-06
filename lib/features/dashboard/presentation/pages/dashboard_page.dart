@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../providers/theme_provider.dart';
+
 import '../../../../providers/user_provider.dart';
 import '../widgets/sidebar_navigation.dart';
 import '../widgets/kpi_card.dart';
@@ -184,48 +184,6 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                     const SizedBox(height: 16),
                                   if (isLargeScreen) const SizedBox(width: 32),
 
-                                  // Global Search
-                                  Expanded(
-                                    flex: 3,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            'Search products, customers, or transactions...',
-                                        hintStyle: GoogleFonts.inter(
-                                          color: colorScheme.onSurfaceVariant,
-                                          fontSize: 14,
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.search,
-                                          color: colorScheme.onSurfaceVariant,
-                                        ),
-                                        filled: true,
-                                        fillColor: colorScheme.surface,
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                              vertical: 0,
-                                              horizontal: 16,
-                                            ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: theme.dividerColor,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: theme.dividerColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 16),
                                   Container(
                                     decoration: BoxDecoration(
                                       color: colorScheme.surface,
@@ -278,14 +236,14 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                               LayoutBuilder(
                                 builder: (context, constraints) {
                                   int crossAxisCount = 4;
-                                  double childAspectRatio = 1.5;
+                                  double childAspectRatio = 1.8;
 
                                   if (constraints.maxWidth < 600) {
                                     crossAxisCount = 2; // Mobile
-                                    childAspectRatio = 1.3;
+                                    childAspectRatio = 1.5;
                                   } else if (constraints.maxWidth < 1100) {
                                     crossAxisCount = 3; // Tablet
-                                    childAspectRatio = 1.4;
+                                    childAspectRatio = 1.6;
                                   }
 
                                   return GridView.count(
@@ -298,7 +256,8 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                     childAspectRatio: childAspectRatio,
                                     children: [
                                       KpiCard(
-                                        title: "Today's Revenue",
+                                        index: 0,
+                                        title: "Today's Sales",
                                         value: 'PKR 42,480',
                                         trend: '+8.2%',
                                         isTrendPositive: true,
@@ -307,6 +266,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                         iconColor: Colors.green,
                                       ),
                                       KpiCard(
+                                        index: 1,
                                         title: 'Active Transactions',
                                         value: '14',
                                         trend: '2 counters open',
@@ -315,6 +275,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                         iconColor: Colors.blue,
                                       ),
                                       KpiCard(
+                                        index: 2,
                                         title: 'Low Stock Alerts',
                                         value: '8',
                                         trend: 'Needs attention',
@@ -323,6 +284,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                         iconColor: Colors.orange,
                                       ),
                                       KpiCard(
+                                        index: 3,
                                         title: 'Expiring Soon',
                                         value: '12',
                                         trend: 'Next 30 days',

@@ -24,7 +24,7 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final primaryColor = theme.colorScheme.primary;
+
     final isCollapsed = widget.isCollapsed;
 
     return AnimatedContainer(
@@ -34,68 +34,6 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
       color: colorScheme.surface,
       child: Column(
         children: [
-          // Logo Section with Toggle Button
-          Padding(
-            padding: EdgeInsets.all(isCollapsed ? 16.0 : 24.0),
-            child: Row(
-              mainAxisAlignment: isCollapsed
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
-              children: [
-                if (!isCollapsed) ...[
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.local_pharmacy,
-                      color: colorScheme.onPrimary,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'bizPharma',
-                          style: GoogleFonts.inter(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        Text(
-                          'SaaS Management',
-                          style: GoogleFonts.inter(
-                            fontSize: 12,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ] else ...[
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.local_pharmacy,
-                      color: colorScheme.onPrimary,
-                      size: 24,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          const Divider(height: 1),
           const SizedBox(height: 12),
 
           // Navigation Items
@@ -204,7 +142,6 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
                   isCompact: true,
                   onTap: () async {
                     await ref.read(authServiceProvider).signOut();
-                    print('user sign out completed');
                   },
                 ),
               ],
@@ -262,6 +199,8 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: ListTile(
+        hoverColor: colorScheme.onSurface.withOpacity(0.08),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         leading: iconWidget,
         title: Text(
           title,
@@ -334,6 +273,10 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: ListTile(
+            hoverColor: colorScheme.onSurface.withOpacity(0.08),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
             leading: Icon(icon, color: colorScheme.onSurfaceVariant, size: 22),
             title: Text(
               title,
@@ -365,6 +308,10 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
             child: Column(
               children: subItems.map((item) {
                 return ListTile(
+                  hoverColor: colorScheme.onSurface.withOpacity(0.08),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   leading: Icon(
                     item.icon,
                     color: colorScheme.onSurfaceVariant.withOpacity(0.7),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../providers/auth_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/user_provider.dart';
 import 'user_avatar.dart';
@@ -178,10 +179,9 @@ class BizAppBar extends ConsumerWidget implements PreferredSizeWidget {
             lastName: user?.lastName,
             email: user?.email,
             role: user?.role.stringValue,
-            onLogout: () {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text('Logging out...')));
+            onLogout: () async {
+              print('Logging out from Avatar...');
+              await ref.read(authServiceProvider).signOut();
             },
           ),
         ],

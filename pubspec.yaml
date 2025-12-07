@@ -11,6 +11,7 @@ dependencies:
   firebase_auth: ^6.1.2
   firebase_core: ^4.2.1
   firebase_data_connect: ^0.2.1+2
+  dio: ^5.3.3
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.0.0

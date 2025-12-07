@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
+import '../../services/api_client.dart';
 import '../../app_home_page.dart';
 
 class OnboardingStepper extends ConsumerStatefulWidget {
@@ -45,16 +46,24 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
 
       if (user == null) throw Exception('No authenticated user found');
 
-      await authService.createBusinessAndUser(
-        businessName: _businessNameController.text.trim(),
-        email: user.email ?? '',
-        firstName: _firstNameController.text.trim(),
-        lastName: _lastNameController.text.trim(),
-        phone: _phoneController.text.trim().isEmpty
-            ? ''
-            : _phoneController.text.trim(),
-        uid: user.uid,
+      // Call Backend API to initialize business
+      // This sets custom claims (business_id) and creates records
+      final apiClient = ApiClient();
+      await apiClient.post(
+        '/api/v1/setup/initialize',
+        data: {
+          'business_name': _businessNameController.text.trim(),
+          'first_name': _firstNameController.text.trim(),
+          'last_name': _lastNameController.text.trim(),
+          'phone': _phoneController.text.trim().isEmpty
+              ? ''
+              : _phoneController.text.trim(),
+          'email': user.email ?? '',
+        },
       );
+
+      // Force token refresh to get new custom claims (business_id)
+      await user.getIdToken(true);
 
       if (mounted) {
         // Navigate to Dashboard

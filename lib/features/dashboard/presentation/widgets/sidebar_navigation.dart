@@ -141,6 +141,7 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
                   'Logout',
                   isCompact: true,
                   onTap: () async {
+                    print('Logging out from Sidebar...');
                     await ref.read(authServiceProvider).signOut();
                   },
                 ),

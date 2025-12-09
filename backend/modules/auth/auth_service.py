@@ -180,7 +180,7 @@ class AuthService:
             # TODO: Send email via your email service
             return reset_link
         
-    except auth.UserNotFoundError:
+        except auth.UserNotFoundError:
             raise ValueError("Email not found")
     
     async def verify_id_token(self, id_token: str) -> Dict:

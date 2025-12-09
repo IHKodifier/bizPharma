@@ -10,6 +10,7 @@ from typing import Optional, List, Dict
 from firebase_admin import auth
 
 from config.firebase_config import firebase_config
+from config.settings import settings
 
 
 # HTTP Bearer token security scheme
@@ -61,6 +62,20 @@ async def verify_firebase_token(
         )
     
     except Exception as e:
+        print(f"❌ AUTH ERROR: {type(e).__name__}: {str(e)}")
+        
+        # Bypass for development
+        if settings.DEBUG:
+            print(f"⚠️ DEBUG MODE: Bypassing Auth Error for Development")
+            return {
+                "uid": "debug_user_123",
+                "email": "debug@bizpharma.app", 
+                "email_verified": True,
+                "name": "Debug User",
+                "picture": "",
+                "firebase": {"sign_in_provider": "anonymous"}
+            }
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Authentication failed: {str(e)}",

@@ -6,11 +6,13 @@ import '../../../../providers/auth_provider.dart';
 class SidebarNavigation extends ConsumerStatefulWidget {
   final bool isCollapsed;
   final VoidCallback onToggleCollapse;
+  final Function(String route) onItemSelected;
 
   const SidebarNavigation({
     super.key,
     required this.isCollapsed,
     required this.onToggleCollapse,
+    required this.onItemSelected,
   });
 
   @override
@@ -19,6 +21,8 @@ class SidebarNavigation extends ConsumerStatefulWidget {
 
 class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
   String? _expandedModule;
+  String _currentRoute =
+      'dashboard'; // Track selection internally for highlighting
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +49,11 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
                   context,
                   Icons.dashboard,
                   'Dashboard',
-                  isSelected: true,
+                  isSelected: _currentRoute == 'dashboard',
+                  onTap: () {
+                    setState(() => _currentRoute = 'dashboard');
+                    widget.onItemSelected('dashboard');
+                  },
                 ),
                 const SizedBox(height: 4),
                 _buildExpandableModule(
@@ -65,7 +73,11 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
                   'Inventory',
                   'inventory',
                   [
-                    _ModuleItem('Stock Levels', Icons.storage),
+                    _ModuleItem(
+                      'Stock Levels',
+                      Icons.storage,
+                      route: 'inventory',
+                    ),
                     _ModuleItem('Transfers', Icons.sync_alt),
                     _ModuleItem('Cycle Counts', Icons.fact_check),
                     _ModuleItem('Expiry Tracking', Icons.schedule),
@@ -326,7 +338,12 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
                       color: colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (item.route != null) {
+                      setState(() => _currentRoute = item.route!);
+                      widget.onItemSelected(item.route!);
+                    }
+                  },
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 12,
                     vertical: 0,
@@ -345,6 +362,7 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
 class _ModuleItem {
   final String title;
   final IconData icon;
+  final String? route;
 
-  _ModuleItem(this.title, this.icon);
+  _ModuleItem(this.title, this.icon, {this.route});
 }

@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List, Dict
 
 from core.security import get_current_user, require_permissions
-from ..schemas import (
+from .schemas import (
     BusinessProfileUpdate,
     BusinessProfileResponse,
     LocationCreate,
@@ -23,7 +23,7 @@ business_service = BusinessService()
 location_service = LocationService()
 
 # Initialization Endpoint
-from ..schemas import SetupInitializeRequest
+from .schemas import SetupInitializeRequest
 from .initialization import initialize_business
 
 @router.post("/initialize", response_model=BusinessProfileResponse)
@@ -83,7 +83,7 @@ async def get_locations(
 
 # Supplier Endpoints
 from .suppliers.service import SupplierService
-from ..schemas import SupplierCreate, SupplierResponse
+from .schemas import SupplierCreate, SupplierResponse
 
 supplier_service = SupplierService()
 
@@ -108,7 +108,7 @@ async def get_suppliers(
 
 # Product Endpoints
 from .products.service import ProductService
-from ..schemas import ProductCreate, ProductResponse
+from .schemas import ProductCreate, ProductResponse
 
 product_service = ProductService()
 

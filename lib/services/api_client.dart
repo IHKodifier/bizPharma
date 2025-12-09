@@ -21,7 +21,12 @@ class ApiClient {
           final user = _auth.currentUser;
           if (user != null) {
             final token = await user.getIdToken();
-            options.headers['Authorization'] = 'Bearer $token';
+            if (token != null) {
+              print('Injecting Token: ${token.substring(0, 10)}...');
+              options.headers['Authorization'] = 'Bearer $token';
+            }
+          } else {
+            print('ApiClient: User is null! No token injected.');
           }
 
           // Add AppCheck token if available (implementation pending)
@@ -32,6 +37,9 @@ class ApiClient {
         onError: (DioException e, handler) {
           // Global error handling
           print('API Error: ${e.response?.statusCode} - ${e.message}');
+          if (e.response?.data != null) {
+            print('Error Data: ${e.response?.data}');
+          }
           return handler.next(e);
         },
       ),

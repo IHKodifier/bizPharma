@@ -5,9 +5,10 @@ mutation CreateBusinessAndAdmin(
   $userFirstName: String!
   $userLastName: String!
   $userMobile: String!
+  $userProfilePhoto: String
   $authUid: String!
   $today: Date!
-) @auth(level: USER) @transaction {
+) @auth(level: PUBLIC) @transaction {
   business_insert(data: {
     id: $businessId
     name: $businessName
@@ -21,6 +22,7 @@ mutation CreateBusinessAndAdmin(
     firstName: $userFirstName
     lastName: $userLastName
     mobile: $userMobile
+    profilePhoto: $userProfilePhoto
     role: BUSINESS_ADMIN
   })
 }

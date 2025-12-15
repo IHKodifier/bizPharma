@@ -10,6 +10,39 @@ from typing import Optional, Dict
 import uuid
 
 from config.firebase_config import firebase_config
+from datetime import date
+from core.dataconnect_client import data_connect_client
+
+CREATE_BUSINESS_AND_ADMIN_MUTATION = """
+mutation CreateBusinessAndAdmin(
+  $businessId: UUID!
+  $businessName: String!
+  $userEmail: String!
+  $userFirstName: String!
+  $userLastName: String!
+  $userMobile: String!
+  $userProfilePhoto: String
+  $authUid: String!
+  $today: Date!
+) @auth(level: PUBLIC) @transaction {
+  business_insert(data: {
+    id: $businessId
+    name: $businessName
+    tier: TRIAL
+    subscriptionStartDate: $today
+  })
+  user_insert(data: {
+    id: $authUid
+    businessId: $businessId
+    email: $userEmail
+    firstName: $userFirstName
+    lastName: $userLastName
+    mobile: $userMobile
+    profilePhoto: $userProfilePhoto
+    role: BUSINESS_ADMIN
+  })
+}
+"""
 
 
 class AuthService:
@@ -28,7 +61,8 @@ class AuthService:
         first_name: str,
         last_name: str,
         phone: str,
-        business_name: str
+        business_name: str,
+        profile_photo: Optional[str] = None
     ) -> Dict:
         """
         Register new user via backend
@@ -70,17 +104,22 @@ class AuthService:
                 'tier': 'trial'   # Start with trial tier
             })
             
-            # Step 4: TODO - Create user in Data Connect
-            # This will use your existing createBusinessAndAdmin mutation
-            # await create_user_in_database(
-            #     uid=firebase_user.uid,
-            #     email=email,
-            #     first_name=first_name,
-            #     last_name=last_name,
-            #     phone=phone,
-            #     business_id=business_id,
-            #     business_name=business_name
-            # )
+            # Step 4: Create user in Data Connect
+            await data_connect_client.execute_graphql(
+                query=CREATE_BUSINESS_AND_ADMIN_MUTATION,
+                operation_name="CreateBusinessAndAdmin",
+                variables={
+                    "businessId": business_id,
+                    "businessName": business_name,
+                    "userEmail": email,
+                    "userFirstName": first_name,
+                    "userLastName": last_name,
+                    "userMobile": phone,
+                    "userProfilePhoto": profile_photo,
+                    "authUid": firebase_user.uid,
+                    "today": str(date.today())
+                }
+            )
             
             # Step 5: Generate custom token for client
             custom_token = auth.create_custom_token(firebase_user.uid)

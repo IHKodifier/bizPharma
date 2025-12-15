@@ -30,6 +30,7 @@ class SetupInitializeRequest(BaseModel):
     last_name: str
     phone: str
     email: Optional[EmailStr] = None
+    profile_photo: Optional[str] = None
 
 
 class BusinessProfileResponse(BusinessProfileBase):

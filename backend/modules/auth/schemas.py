@@ -17,6 +17,7 @@ class RegisterRequest(BaseModel):
     last_name: str = Field(min_length=1)
     phone: str
     business_name: str
+    profile_photo: Optional[str] = None
     
     class Config:
         json_schema_extra = {

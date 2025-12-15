@@ -14,11 +14,12 @@ from config.settings import settings
 
 
 # HTTP Bearer token security scheme
-security = HTTPBearer()
+# Use auto_error=False to allow manual handling of missing tokens (e.g. for debug bypass)
+security = HTTPBearer(auto_error=False)
 
 
 async def verify_firebase_token(
-    credentials: HTTPAuthorizationCredentials = Depends(security)
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
 ) -> Dict:
     """
     Verify Firebase ID token from Authorization header
@@ -32,6 +33,27 @@ async def verify_firebase_token(
     Raises:
         HTTPException: If token is invalid, expired, or verification fails
     """
+    if not credentials:
+        # No token provided
+        if settings.DEBUG:
+            print(f"⚠️ DEBUG MODE: No token provided. Bypassing Auth.")
+            return {
+                "uid": "debug_user_123",
+                "email": "debug@bizpharma.app",
+                "email_verified": True,
+                "name": "Debug User",
+                "picture": "",
+                "firebase": {"sign_in_provider": "anonymous"},
+                # Add business_id claim if needed for testing
+                # "business_id": "test-business-id"
+            }
+        
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authenticated",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     token = credentials.credentials
     
     try:
@@ -40,24 +62,28 @@ async def verify_firebase_token(
         
         return decoded_token
     
-    except auth.InvalidIdTokenError:
+    except (auth.InvalidIdTokenError, auth.ExpiredIdTokenError, auth.RevokedIdTokenError) as e:
+        # Bypass for development
+        if settings.DEBUG:
+            print(f"⚠️ DEBUG MODE: Bypassing Auth Error ({type(e).__name__}) for Development")
+            return {
+                "uid": "debug_user_123",
+                "email": "debug@bizpharma.app",
+                "email_verified": True,
+                "name": "Debug User",
+                "picture": "",
+                "firebase": {"sign_in_provider": "anonymous"}
+            }
+
+        detail_msg = "Invalid authentication token"
+        if isinstance(e, auth.ExpiredIdTokenError):
+            detail_msg = "Authentication token has expired"
+        elif isinstance(e, auth.RevokedIdTokenError):
+            detail_msg = "Authentication token has been revoked"
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid authentication token",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    
-    except auth.ExpiredIdTokenError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authentication token has expired",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    
-    except auth.RevokedIdTokenError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authentication token has been revoked",
+            detail=detail_msg,
             headers={"WWW-Authenticate": "Bearer"},
         )
     

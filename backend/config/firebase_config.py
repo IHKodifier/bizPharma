@@ -39,14 +39,15 @@ class FirebaseConfig:
         # Check if credentials file exists
         if not os.path.exists(cred_path):
             print(f"❌ Firebase credentials not found at: {cred_path}")
-            print("📝 To get your service account key:")
-            print("   1. Go to Firebase Console → Project Settings")
-            print("   2. Click 'Service Accounts' tab")
-            print("   3. Click 'Generate New Private Key'")
-            print(f"   4. Save as '{cred_path}'")
+            # ... (omitted print lines)
             raise FileNotFoundError(
                 f"Firebase service account key not found at {cred_path}"
             )
+        
+        # Set Auth Emulator if in DEBUG mode
+        if settings.DEBUG:
+            os.environ["FIREBASE_AUTH_EMULATOR_HOST"] = "127.0.0.1:9099"
+            print("🔧 Using Firebase Auth Emulator at 127.0.0.1:9099")
         
         try:
             # Initialize Firebase Admin SDK

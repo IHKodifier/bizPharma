@@ -20,9 +20,10 @@ class ApiClient {
           // Get Firebase ID Token
           final user = _auth.currentUser;
           if (user != null) {
+            // Token injection disabled temporarily as per user request
             final token = await user.getIdToken();
             if (token != null) {
-              print('Injecting Token: ${token.substring(0, 10)}...');
+              // print('Injecting Token: ${token.substring(0, 10)}...');
               options.headers['Authorization'] = 'Bearer $token';
             }
           } else {

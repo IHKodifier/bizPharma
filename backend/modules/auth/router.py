@@ -45,7 +45,8 @@ async def register_user(request: RegisterRequest):
             first_name=request.first_name,
             last_name=request.last_name,
             phone=request.phone,
-            business_name=request.business_name
+            business_name=request.business_name,
+            profile_photo=request.profile_photo
         )
         
         return AuthResponse(

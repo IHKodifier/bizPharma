@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'providers/theme_provider.dart';
 
 import 'app_home_page.dart';
+import 'widgets/auth_wrapper.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -30,7 +31,7 @@ class MyApp extends ConsumerWidget {
         ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
       ),
-      home: const AppHomePage(),
+      home: const AuthWrapper(),
     );
   }
 }

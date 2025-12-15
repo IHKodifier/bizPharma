@@ -7,10 +7,15 @@ class CreateBusinessAndAdminVariablesBuilder {
   String userFirstName;
   String userLastName;
   String userMobile;
+  Optional<String> _userProfilePhoto = Optional.optional(nativeFromJson, nativeToJson);
   String authUid;
   DateTime today;
 
-  final FirebaseDataConnect _dataConnect;
+  final FirebaseDataConnect _dataConnect;  CreateBusinessAndAdminVariablesBuilder userProfilePhoto(String? t) {
+   _userProfilePhoto.value = t;
+   return this;
+  }
+
   CreateBusinessAndAdminVariablesBuilder(this._dataConnect, {required  this.businessId,required  this.businessName,required  this.userEmail,required  this.userFirstName,required  this.userLastName,required  this.userMobile,required  this.authUid,required  this.today,});
   Deserializer<CreateBusinessAndAdminData> dataDeserializer = (dynamic json)  => CreateBusinessAndAdminData.fromJson(jsonDecode(json));
   Serializer<CreateBusinessAndAdminVariables> varsSerializer = (CreateBusinessAndAdminVariables vars) => jsonEncode(vars.toJson());
@@ -19,7 +24,7 @@ class CreateBusinessAndAdminVariablesBuilder {
   }
 
   MutationRef<CreateBusinessAndAdminData, CreateBusinessAndAdminVariables> ref() {
-    CreateBusinessAndAdminVariables vars= CreateBusinessAndAdminVariables(businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userMobile: userMobile,authUid: authUid,today: today,);
+    CreateBusinessAndAdminVariables vars= CreateBusinessAndAdminVariables(businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userMobile: userMobile,userProfilePhoto: _userProfilePhoto,authUid: authUid,today: today,);
     return _dataConnect.mutation("CreateBusinessAndAdmin", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -139,6 +144,7 @@ class CreateBusinessAndAdminVariables {
   final String userFirstName;
   final String userLastName;
   final String userMobile;
+  late final Optional<String>userProfilePhoto;
   final String authUid;
   final DateTime today;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
@@ -151,7 +157,21 @@ class CreateBusinessAndAdminVariables {
   userLastName = nativeFromJson<String>(json['userLastName']),
   userMobile = nativeFromJson<String>(json['userMobile']),
   authUid = nativeFromJson<String>(json['authUid']),
-  today = nativeFromJson<DateTime>(json['today']);
+  today = nativeFromJson<DateTime>(json['today']) {
+  
+  
+  
+  
+  
+  
+  
+  
+    userProfilePhoto = Optional.optional(nativeFromJson, nativeToJson);
+    userProfilePhoto.value = json['userProfilePhoto'] == null ? null : nativeFromJson<String>(json['userProfilePhoto']);
+  
+  
+  
+  }
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -168,12 +188,13 @@ class CreateBusinessAndAdminVariables {
     userFirstName == otherTyped.userFirstName && 
     userLastName == otherTyped.userLastName && 
     userMobile == otherTyped.userMobile && 
+    userProfilePhoto == otherTyped.userProfilePhoto && 
     authUid == otherTyped.authUid && 
     today == otherTyped.today;
     
   }
   @override
-  int get hashCode => Object.hashAll([businessId.hashCode, businessName.hashCode, userEmail.hashCode, userFirstName.hashCode, userLastName.hashCode, userMobile.hashCode, authUid.hashCode, today.hashCode]);
+  int get hashCode => Object.hashAll([businessId.hashCode, businessName.hashCode, userEmail.hashCode, userFirstName.hashCode, userLastName.hashCode, userMobile.hashCode, userProfilePhoto.hashCode, authUid.hashCode, today.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -184,6 +205,9 @@ class CreateBusinessAndAdminVariables {
     json['userFirstName'] = nativeToJson<String>(userFirstName);
     json['userLastName'] = nativeToJson<String>(userLastName);
     json['userMobile'] = nativeToJson<String>(userMobile);
+    if(userProfilePhoto.state == OptionalState.set) {
+      json['userProfilePhoto'] = userProfilePhoto.toJson();
+    }
     json['authUid'] = nativeToJson<String>(authUid);
     json['today'] = nativeToJson<DateTime>(today);
     return json;
@@ -196,6 +220,7 @@ class CreateBusinessAndAdminVariables {
     required this.userFirstName,
     required this.userLastName,
     required this.userMobile,
+    required this.userProfilePhoto,
     required this.authUid,
     required this.today,
   });

@@ -27,7 +27,7 @@ class ListAllCustomersCustomers {
   final DateTime? dateOfBirth;
   final EnumValue<CustomerTier> tier;
   final bool isActive;
-  final DateTime createdAt;
+  final Timestamp createdAt;
   ListAllCustomersCustomers.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
@@ -39,7 +39,7 @@ class ListAllCustomersCustomers {
   dateOfBirth = json['dateOfBirth'] == null ? null : nativeFromJson<DateTime>(json['dateOfBirth']),
   tier = customerTierDeserializer(json['tier']),
   isActive = nativeFromJson<bool>(json['isActive']),
-  createdAt = nativeFromJson<DateTime>(json['createdAt']);
+  createdAt = Timestamp.fromJson(json['createdAt']);
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -85,7 +85,7 @@ class ListAllCustomersCustomers {
     customerTierSerializer(tier)
     ;
     json['isActive'] = nativeToJson<bool>(isActive);
-    json['createdAt'] = nativeToJson<DateTime>(createdAt);
+    json['createdAt'] = createdAt.toJson();
     return json;
   }
 

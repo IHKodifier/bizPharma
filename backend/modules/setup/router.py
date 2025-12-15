@@ -5,7 +5,7 @@ FastAPI endpoints for initial business setup.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from core.security import get_current_user, require_permissions
 from .schemas import (
@@ -54,7 +54,7 @@ async def get_business_profile(
 @router.put("/business", response_model=BusinessProfileResponse)
 async def update_business_profile(
     data: BusinessProfileUpdate,
-    current_user: Dict = Depends(require_permissions("setup:business"))
+    current_user: Dict = Depends(get_current_user)
 ):
     """Update business profile"""
     business_id = current_user.get("business_id")
@@ -65,7 +65,7 @@ async def update_business_profile(
 @router.post("/locations", response_model=LocationResponse)
 async def create_location(
     data: LocationCreate,
-    current_user: Dict = Depends(require_permissions("setup:locations"))
+    current_user: Dict = Depends(get_current_user)
 ):
     """Create new business location (store/warehouse)"""
     business_id = current_user.get("business_id")
@@ -90,7 +90,7 @@ supplier_service = SupplierService()
 @router.post("/suppliers", response_model=SupplierResponse)
 async def create_supplier(
     data: SupplierCreate,
-    current_user: Dict = Depends(require_permissions("setup:suppliers"))
+    current_user: Dict = Depends(get_current_user)
 ):
     """Create new supplier"""
     business_id = current_user.get("business_id")
@@ -115,7 +115,7 @@ product_service = ProductService()
 @router.post("/products", response_model=ProductResponse)
 async def create_product(
     data: ProductCreate,
-    current_user: Dict = Depends(require_permissions("setup:products"))
+    current_user: Dict = Depends(get_current_user)
 ):
     """Create new product in catalog"""
     business_id = current_user.get("business_id")

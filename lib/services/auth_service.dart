@@ -84,8 +84,10 @@ class AuthService {
           .execute();
       return result.data.user;
     } catch (e) {
-      log('Error checking user existence: $e');
-      rethrow;
+      log('User not found in Data Connect (new user): $e');
+      // Return null for new users instead of throwing error
+      // This allows the auth wrapper to route them to onboarding
+      return null;
     }
   }
 

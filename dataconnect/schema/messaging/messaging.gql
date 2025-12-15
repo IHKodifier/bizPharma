@@ -23,7 +23,7 @@ type Message @table {
   senderId: String!
 
   # Timestamps
-  sentAt: Date! @default(expr: "request.time")
+  sentAt: Timestamp! @default(expr: "request.time")
   editedAt: Date
 
   # Attachments
@@ -55,7 +55,7 @@ type Conversation @table {
   lastMessagePreview: String @col(dataType: "varchar(500)")
 
   # Metadata
-  createdAt: Date! @default(expr: "request.time")
+  createdAt: Timestamp! @default(expr: "request.time")
   createdBy: User!
   createdById: String!
 }

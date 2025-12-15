@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
+import '../../services/api_client.dart';
 import '../../app_home_page.dart';
 
 class OnboardingStepper extends ConsumerStatefulWidget {
@@ -21,8 +22,19 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
 
   final _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill email if available
+    final user = ref.read(authServiceProvider).currentUser;
+    if (user?.email != null) {
+      _emailController.text = user!.email!;
+    }
+  }
 
   @override
   void dispose() {
@@ -31,6 +43,7 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
     _firstNameController.dispose();
     _lastNameController.dispose();
     _phoneController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -45,16 +58,25 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
 
       if (user == null) throw Exception('No authenticated user found');
 
-      await authService.createBusinessAndUser(
-        businessName: _businessNameController.text.trim(),
-        email: user.email ?? '',
-        firstName: _firstNameController.text.trim(),
-        lastName: _lastNameController.text.trim(),
-        phone: _phoneController.text.trim().isEmpty
-            ? ''
-            : _phoneController.text.trim(),
-        uid: user.uid,
+      // Call Backend API to initialize business
+      // This sets custom claims (business_id) and creates records
+      final apiClient = ApiClient();
+      await apiClient.post(
+        '/api/v1/setup/initialize',
+        data: {
+          'business_name': _businessNameController.text.trim(),
+          'first_name': _firstNameController.text.trim(),
+          'last_name': _lastNameController.text.trim(),
+          'phone': _phoneController.text.trim().isEmpty
+              ? ''
+              : _phoneController.text.trim(),
+          'email': _emailController.text.trim(),
+          'profile_photo': user.photoURL,
+        },
       );
+
+      // Force token refresh to get new custom claims (business_id)
+      await user.getIdToken(true);
 
       if (mounted) {
         // Navigate to Dashboard
@@ -80,6 +102,15 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
       if (_firstNameController.text.isEmpty ||
           _lastNameController.text.isEmpty) {
         return;
+      }
+      // Validate email
+      final email = _emailController.text.trim();
+      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+      if (email.isEmpty || !emailRegex.hasMatch(email)) {
+        // Rely on form validation to show error
+        // But we need to trigger it or check it here to prevent next page
+        // Since we don't have a separate form key for this step, we can check manually
+        if (email.isEmpty || !emailRegex.hasMatch(email)) return;
       }
     }
 
@@ -282,6 +313,28 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
                                   hint: 'Enter your phone number',
                                 ),
                               ),
+                              const SizedBox(height: 20),
+                              TextFormField(
+                                key: const ValueKey('email_field'),
+                                controller: _emailController,
+                                style: _getInputStyle(),
+                                decoration: _buildInputDecoration(
+                                  'Email Address',
+                                  hint: 'Enter your email address',
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  final emailRegex = RegExp(
+                                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                                  );
+                                  if (!emailRegex.hasMatch(value)) {
+                                    return 'Invalid email address';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ],
                           ),
 
@@ -333,6 +386,12 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
                                         _phoneController.text,
                                         textColor,
                                       ),
+                                    const SizedBox(height: 16),
+                                    _buildReviewRow(
+                                      'Email',
+                                      _emailController.text,
+                                      textColor,
+                                    ),
                                     const SizedBox(height: 24),
                                     Text(
                                       'Click "Complete Setup" to create your organization.',

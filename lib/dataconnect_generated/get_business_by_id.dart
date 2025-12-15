@@ -30,8 +30,8 @@ class GetBusinessByIdBusiness {
   final String? logo;
   final String? banner;
   final String? phone;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final Timestamp createdAt;
+  final Timestamp updatedAt;
   GetBusinessByIdBusiness.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
@@ -45,8 +45,8 @@ class GetBusinessByIdBusiness {
   logo = json['logo'] == null ? null : nativeFromJson<String>(json['logo']),
   banner = json['banner'] == null ? null : nativeFromJson<String>(json['banner']),
   phone = json['phone'] == null ? null : nativeFromJson<String>(json['phone']),
-  createdAt = nativeFromJson<DateTime>(json['createdAt']),
-  updatedAt = nativeFromJson<DateTime>(json['updatedAt']);
+  createdAt = Timestamp.fromJson(json['createdAt']),
+  updatedAt = Timestamp.fromJson(json['updatedAt']);
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -103,8 +103,8 @@ class GetBusinessByIdBusiness {
     if (phone != null) {
       json['phone'] = nativeToJson<String?>(phone);
     }
-    json['createdAt'] = nativeToJson<DateTime>(createdAt);
-    json['updatedAt'] = nativeToJson<DateTime>(updatedAt);
+    json['createdAt'] = createdAt.toJson();
+    json['updatedAt'] = updatedAt.toJson();
     return json;
   }
 

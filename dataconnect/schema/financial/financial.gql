@@ -33,7 +33,7 @@ type FinancialRecord @table {
   relatedPurchaseOrderId: UUID
 
   # Audit
-  createdAt: Date! @default(expr: "request.time")
+  createdAt: Timestamp! @default(expr: "request.time")
   createdBy: User!
   createdById: String!
 }

@@ -31,7 +31,9 @@ class UserAvatar extends StatelessWidget {
 
   String get _gravatarUrl {
     if (email == null) return '';
-    final hash = md5.convert(utf8.encode(email!.trim().toLowerCase())).toString();
+    final hash = md5
+        .convert(utf8.encode(email!.trim().toLowerCase()))
+        .toString();
     return 'https://www.gravatar.com/avatar/$hash?d=404';
   }
 
@@ -125,8 +127,14 @@ class UserAvatar extends StatelessWidget {
         ),
       ],
       onSelected: (value) {
+        print('UserAvatar: Menu selected: $value');
         if (value == 'logout') {
-          onLogout?.call();
+          if (onLogout != null) {
+            print('UserAvatar: Calling onLogout callback');
+            onLogout?.call();
+          } else {
+            print('UserAvatar: onLogout callback is null!');
+          }
         }
       },
       child: avatarContent,

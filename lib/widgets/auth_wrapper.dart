@@ -43,8 +43,14 @@ class AuthWrapper extends ConsumerWidget {
 
           return userAsync.when(
             data: (dcUser) {
-              if (dcUser != null) {
-                // User exists in Data Connect
+              // Check if user exists in Data Connect AND has a business
+              // Safe access with null check because businessId might be null in DB
+              final businessId = dcUser?.businessId;
+
+              if (dcUser != null &&
+                  businessId != null &&
+                  businessId.isNotEmpty) {
+                // User exists in Data Connect AND has a business
                 // Hydrate global user provider
                 Future.microtask(() {
                   ref.read(userProvider.notifier).setUser(dcUser);
@@ -52,7 +58,7 @@ class AuthWrapper extends ConsumerWidget {
 
                 // Fetch and hydrate business
                 final businessAsync = ref.watch(
-                  businessByIdProvider(dcUser.businessId),
+                  businessByIdProvider(businessId),
                 );
 
                 return businessAsync.when(
@@ -77,7 +83,7 @@ class AuthWrapper extends ConsumerWidget {
                   ),
                 );
               } else {
-                // New user, route to onboarding
+                // New user OR user without business, route to onboarding
                 return const OnboardingStepper();
               }
             },

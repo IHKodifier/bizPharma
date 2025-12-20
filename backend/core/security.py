@@ -35,19 +35,6 @@ async def verify_firebase_token(
     """
     if not credentials:
         # No token provided
-        if settings.DEBUG:
-            print(f"⚠️ DEBUG MODE: No token provided. Bypassing Auth.")
-            return {
-                "uid": "debug_user_123",
-                "email": "debug@bizpharma.app",
-                "email_verified": True,
-                "name": "Debug User",
-                "picture": "",
-                "firebase": {"sign_in_provider": "anonymous"},
-                # Add business_id claim if needed for testing
-                # "business_id": "test-business-id"
-            }
-        
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not authenticated",
@@ -58,23 +45,12 @@ async def verify_firebase_token(
     
     try:
         # Verify token with Firebase Admin SDK
+        # When FIREBASE_AUTH_EMULATOR_HOST is set (in DEV), this automatically connects to the emulator.
         decoded_token = auth.verify_id_token(token)
         
         return decoded_token
     
     except (auth.InvalidIdTokenError, auth.ExpiredIdTokenError, auth.RevokedIdTokenError) as e:
-        # Bypass for development
-        if settings.DEBUG:
-            print(f"⚠️ DEBUG MODE: Bypassing Auth Error ({type(e).__name__}) for Development")
-            return {
-                "uid": "debug_user_123",
-                "email": "debug@bizpharma.app",
-                "email_verified": True,
-                "name": "Debug User",
-                "picture": "",
-                "firebase": {"sign_in_provider": "anonymous"}
-            }
-
         detail_msg = "Invalid authentication token"
         if isinstance(e, auth.ExpiredIdTokenError):
             detail_msg = "Authentication token has expired"
@@ -90,18 +66,6 @@ async def verify_firebase_token(
     except Exception as e:
         print(f"❌ AUTH ERROR: {type(e).__name__}: {str(e)}")
         
-        # Bypass for development
-        if settings.DEBUG:
-            print(f"⚠️ DEBUG MODE: Bypassing Auth Error for Development")
-            return {
-                "uid": "debug_user_123",
-                "email": "debug@bizpharma.app", 
-                "email_verified": True,
-                "name": "Debug User",
-                "picture": "",
-                "firebase": {"sign_in_provider": "anonymous"}
-            }
-
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Authentication failed: {str(e)}",

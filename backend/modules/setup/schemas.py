@@ -25,6 +25,7 @@ class BusinessProfileUpdate(BusinessProfileBase):
 
 class SetupInitializeRequest(BaseModel):
     """Initial setup request for new business"""
+    id_token: str
     business_name: str
     first_name: str
     last_name: str

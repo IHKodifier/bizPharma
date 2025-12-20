@@ -23,6 +23,7 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
     # Create business and admin user in Cloud SQL
     try:
         await dataconnect_client.create_business_and_admin(
+            id_token=data.id_token,
             business_id=business_id,
             business_name=data.business_name,
             user_email=data.email or "user@example.com",
@@ -33,6 +34,7 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
             user_profile_photo=data.profile_photo
         )
     except Exception as e:
+        print(f"❌ ONBOARDING ERROR: {str(e)}")
         raise Exception(f"Failed to create business records: {str(e)}")
 
     # Set custom claims so subsequent requests work

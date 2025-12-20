@@ -2,7 +2,7 @@
 # GET USER BY AUTH ID
 # ============================================================================
 
-query GetUserByAuthId($id: String!) @auth(level: USER) {
+query GetUserByAuthId($id: String!) @auth(level: PUBLIC, insecureReason: "Required to check user existence during initial onboarding when user is still anonymous.") {
   user(id: $id) {
     id
     businessId

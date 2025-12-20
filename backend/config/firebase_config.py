@@ -44,21 +44,26 @@ class FirebaseConfig:
                 f"Firebase service account key not found at {cred_path}"
             )
         
-        # Set Auth Emulator if in DEBUG mode
-        if settings.DEBUG:
+        # Set Auth Emulator if in DEV mode
+        if settings.ENV == "DEV":
             os.environ["FIREBASE_AUTH_EMULATOR_HOST"] = "127.0.0.1:9099"
             print("🔧 Using Firebase Auth Emulator at 127.0.0.1:9099")
+        else:
+            # Explicitly remove it if it was set somehow
+            if "FIREBASE_AUTH_EMULATOR_HOST" in os.environ:
+                del os.environ["FIREBASE_AUTH_EMULATOR_HOST"]
         
         try:
             # Initialize Firebase Admin SDK
             cred = credentials.Certificate(cred_path)
             self._app = firebase_admin.initialize_app(cred, {
-                'databaseURL': settings.FIREBASE_DATABASE_URL,
+                'databaseURL': settings.database_url,
                 'projectId': settings.FIREBASE_PROJECT_ID,
             })
             
             print(f"✅ Firebase Admin SDK initialized")
             print(f"   Project: {settings.FIREBASE_PROJECT_ID}")
+            print(f"   Environment: {settings.ENV}")
             
             return self._app
             

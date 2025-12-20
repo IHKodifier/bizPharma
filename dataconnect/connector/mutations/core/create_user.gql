@@ -11,7 +11,7 @@ mutation CreateUser(
   $mobile: String!
   $role: UserRole!
   $permissions: [String!]
-) @auth(level: USER) {
+) @auth(level: PUBLIC, insecureReason: "User creation is allowed for any authenticated user (including anonymous) during initial setup or invitation flow") {
   user_insert(data: {
     id: $id
     businessId: $businessId

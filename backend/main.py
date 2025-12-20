@@ -4,42 +4,72 @@ bizPharma FastAPI Application
 Main entry point for the bizPharma backend API server.
 """
 
-from fastapi import FastAPI, Depends
-from fastapi.middleware.cors import CORSMiddleware
+import logging
+import json
+import time
 from contextlib import asynccontextmanager
+from fastapi import FastAPI, Request, Response, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from config.settings import settings
 from config.firebase_config import firebase_config
 from core.security import get_current_user, get_optional_user
 
+# --- Verbose Logging Configuration ---
+logging.basicConfig(
+    level=settings.LOG_LEVEL,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+logger = logging.getLogger("bizPharma")
+
+class RequestResponseLoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        # Log Request
+        request_body = await request.body()
+        logger.debug(f"Incoming Request: {request.method} {request.url}")
+        if request_body:
+            try:
+                body_json = json.loads(request_body)
+                logger.debug(f"Request Body: {json.dumps(body_json, indent=2)}")
+            except:
+                logger.debug(f"Request Body (raw): {request_body.decode(errors='ignore')}")
+
+        start_time = time.time()
+        response = await call_next(request)
+        process_time = (time.time() - start_time) * 1000
+
+        # Log Response
+        logger.debug(f"Response Status: {response.status_code} (took {process_time:.2f}ms)")
+        return response
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
-    #Startup
-    print("Starting bizPharma API...")
-    print(f"App: {settings.APP_NAME} v{settings.APP_VERSION}")
-    print(f"Debug mode: {settings.DEBUG}")
-    print(f"Firebase Project: {settings.FIREBASE_PROJECT_ID}")
     
+    # --- Service Readiness Report ---
+    print("\n" + "="*50)
+    print("      🚀 BIZPHARMA SERVICE READINESS REPORT      ")
+    print("="*50)
+    print(f" ENVIRONMENT        : {settings.ENV}")
+    print(f" PROJECT ID         : {settings.FIREBASE_PROJECT_ID}")
+    print(f" DC SERVICE         : {settings.DATA_CONNECT_SERVICE}")
+    print(f" DC CONNECTOR       : {settings.DATA_CONNECT_CONNECTOR}")
+    print(f" DC ENDPOINT        : {settings.DATA_CONNECT_ENDPOINT}")
+    print(f" AUTH EMULATOR      : {settings.FIREBASE_AUTH_EMULATOR_HOST or 'OFF'}")
+    print("="*50 + "\n")
+
     # Initialize Firebase Admin SDK
     try:
         firebase_config.initialize()
-        print("Firebase Admin SDK initialized successfully")
-    except FileNotFoundError:
-        print("WARNING: Firebase service account key not found")
-        print("   Server will start but Firebase features won't work")
-        print("   See README.md for setup instructions")
+        print("✅ Firebase Admin SDK initialized successfully")
     except Exception as e:
-        print(f"WARNING: Firebase initialization failed: {e}")
+        print(f"❌ Firebase initialization failed: {e}")
     
-    print("bizPharma API ready!")
+    print("bizPharma API ready!\n")
     
     yield
-    
-    # Shutdown
     print("Shutting down bizPharma API...")
-
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -50,10 +80,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS Configuration
+# Middleware
+app.add_middleware(RequestResponseLoggingMiddleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # IMPORTANT: Configure properly in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

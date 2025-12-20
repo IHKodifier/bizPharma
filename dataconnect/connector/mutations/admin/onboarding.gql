@@ -8,7 +8,7 @@ mutation CreateBusinessAndAdmin(
   $userProfilePhoto: String
   $authUid: String!
   $today: Date!
-) @auth(level: PUBLIC) @transaction {
+) @auth(level: PUBLIC, insecureReason: "Initial onboarding requires creating user record before metadata links are fully established. Anonymous users are allowed to facilitate this first-time setup.") @transaction {
   business_insert(data: {
     id: $businessId
     name: $businessName

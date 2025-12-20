@@ -13,7 +13,7 @@ mutation CreateBusiness(
   $logo: String
   $banner: String
   $phone: String
-) @auth(level: USER) {
+) @auth(level: USER, insecureReason: "Business creation is allowed for authenticated users during initial setup") {
   business_insert(data: {
     name: $name
     tier: $tier

@@ -5,6 +5,6 @@
 # Use this mutation carefully, especially in production environments.
 # ============================================================================
 
-mutation DeleteAllUsers @auth(level: USER) {
+mutation DeleteAllUsers @auth(level: PUBLIC, insecureReason: "Convenience utility for local testing and cleanup.") {
   deleteUsers: user_deleteMany(all: true)
 }

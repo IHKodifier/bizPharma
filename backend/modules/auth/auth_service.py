@@ -11,38 +11,10 @@ import uuid
 
 from config.firebase_config import firebase_config
 from datetime import date
-from core.dataconnect_client import data_connect_client
+from ..shared.dataconnect_client import DataConnectClient
 
-CREATE_BUSINESS_AND_ADMIN_MUTATION = """
-mutation CreateBusinessAndAdmin(
-  $businessId: UUID!
-  $businessName: String!
-  $userEmail: String!
-  $userFirstName: String!
-  $userLastName: String!
-  $userMobile: String!
-  $userProfilePhoto: String
-  $authUid: String!
-  $today: Date!
-) @auth(level: PUBLIC) @transaction {
-  business_insert(data: {
-    id: $businessId
-    name: $businessName
-    tier: TRIAL
-    subscriptionStartDate: $today
-  })
-  user_insert(data: {
-    id: $authUid
-    businessId: $businessId
-    email: $userEmail
-    firstName: $userFirstName
-    lastName: $userLastName
-    mobile: $userMobile
-    profilePhoto: $userProfilePhoto
-    role: BUSINESS_ADMIN
-  })
-}
-"""
+# Global instance of shared client
+data_connect_client = DataConnectClient()
 
 
 class AuthService:
@@ -105,20 +77,18 @@ class AuthService:
             })
             
             # Step 4: Create user in Data Connect
-            await data_connect_client.execute_graphql(
-                query=CREATE_BUSINESS_AND_ADMIN_MUTATION,
-                operation_name="CreateBusinessAndAdmin",
-                variables={
-                    "businessId": business_id,
-                    "businessName": business_name,
-                    "userEmail": email,
-                    "userFirstName": first_name,
-                    "userLastName": last_name,
-                    "userMobile": phone,
-                    "userProfilePhoto": profile_photo,
-                    "authUid": firebase_user.uid,
-                    "today": str(date.today())
-                }
+            await data_connect_client.create_business_and_admin(
+                # Note: We don't have an ID token yet since the user hasn't signed in on the client.
+                # In register_user (admin SDK), we use the service account token implicitly.
+                id_token="", 
+                business_id=business_id,
+                business_name=business_name,
+                user_email=email,
+                user_first_name=first_name,
+                user_last_name=last_name,
+                user_mobile=phone,
+                auth_uid=firebase_user.uid,
+                user_profile_photo=profile_photo
             )
             
             # Step 5: Generate custom token for client

@@ -34,6 +34,17 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
     if (user?.email != null) {
       _emailController.text = user!.email!;
     }
+
+    // Add listeners to controllers to trigger rebuilds for button state
+    _businessNameController.addListener(_updateState);
+    _firstNameController.addListener(_updateState);
+    _lastNameController.addListener(_updateState);
+    _emailController.addListener(_updateState);
+    _phoneController.addListener(_updateState);
+  }
+
+  void _updateState() {
+    if (mounted) setState(() {});
   }
 
   @override
@@ -47,6 +58,21 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
     super.dispose();
   }
 
+  bool _isCurrentStepValid() {
+    switch (_currentStep) {
+      case 0:
+        return _businessNameController.text.trim().isNotEmpty;
+      case 1:
+        return _firstNameController.text.trim().isNotEmpty &&
+            _lastNameController.text.trim().isNotEmpty &&
+            _emailController.text.trim().isNotEmpty;
+      case 2:
+        return true;
+      default:
+        return false;
+    }
+  }
+
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -58,12 +84,15 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
 
       if (user == null) throw Exception('No authenticated user found');
 
+      final idToken = await user.getIdToken();
+
       // Call Backend API to initialize business
       // This sets custom claims (business_id) and creates records
       final apiClient = ApiClient();
       await apiClient.post(
         '/api/v1/setup/initialize',
         data: {
+          'id_token': idToken,
           'business_name': _businessNameController.text.trim(),
           'first_name': _firstNameController.text.trim(),
           'last_name': _lastNameController.text.trim(),
@@ -96,23 +125,9 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
   }
 
   void _nextPage() {
-    if (_currentStep == 0) {
-      if (_businessNameController.text.isEmpty) return; // Basic validation
-    } else if (_currentStep == 1) {
-      if (_firstNameController.text.isEmpty ||
-          _lastNameController.text.isEmpty) {
-        return;
-      }
-      // Validate email
-      final email = _emailController.text.trim();
-      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-      if (email.isEmpty || !emailRegex.hasMatch(email)) {
-        // Rely on form validation to show error
-        // But we need to trigger it or check it here to prevent next page
-        // Since we don't have a separate form key for this step, we can check manually
-        if (email.isEmpty || !emailRegex.hasMatch(email)) return;
-      }
-    }
+    // Trigger validation for the current state of the form
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (!isValid) return;
 
     if (_currentStep < 2) {
       setState(() => _currentStep++);
@@ -436,11 +451,21 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
                             const SizedBox.shrink(),
 
                           ElevatedButton(
-                            onPressed: _isLoading ? null : _nextPage,
+                            onPressed: _isLoading || !_isCurrentStepValid()
+                                ? null
+                                : _nextPage,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              foregroundColor: Colors.white,
-                              elevation: 4,
+                              backgroundColor: _isCurrentStepValid()
+                                  ? Theme.of(context).primaryColor
+                                  : (isDark
+                                        ? Colors.grey.shade800
+                                        : Colors.grey.shade300),
+                              foregroundColor: _isCurrentStepValid()
+                                  ? Colors.white
+                                  : (isDark
+                                        ? Colors.grey.shade500
+                                        : Colors.grey.shade600),
+                              elevation: _isCurrentStepValid() ? 4 : 0,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 32,
                                 vertical: 16,

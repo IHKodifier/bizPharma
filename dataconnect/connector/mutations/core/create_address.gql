@@ -10,7 +10,7 @@ mutation CreateAddress(
   $postalCode: String!
   $country: String!
   $phone: String
-) @auth(level: USER) {
+) @auth(level: USER, insecureReason: "Address creation is allowed for authenticated users as part of entity setup") {
   address_insert(data: {
     line1: $line1
     line2: $line2

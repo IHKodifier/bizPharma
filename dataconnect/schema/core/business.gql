@@ -33,7 +33,7 @@ type User @table {
   email: String! @col(dataType: "varchar(255)")
   firstName: String! @col(dataType: "varchar(100)")
   lastName: String! @col(dataType: "varchar(100)")
-  mobile: String! @col(dataType: "varchar(20)")
+  mobile: String! @col(dataType: "varchar(15)")
   role: UserRole! @col(dataType: "user_role")
   permissions: [String!] @col(dataType: "jsonb")
   profilePhoto: String @col(dataType: "varchar(500)")

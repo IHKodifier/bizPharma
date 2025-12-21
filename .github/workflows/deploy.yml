@@ -27,16 +27,13 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "PROJECT_ID=bizpharma-prod" >> $GITHUB_ENV
-            echo "SA_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIZPHARMA_PROD }}" >> $GITHUB_ENV
             echo "BUILD_ENV=production" >> $GITHUB_ENV
           elif [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
             echo "PROJECT_ID=bizpharma-staging" >> $GITHUB_ENV
-            echo "SA_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIZPHARMA_STAGING }}" >> $GITHUB_ENV
             echo "BUILD_ENV=staging" >> $GITHUB_ENV
           else
             # Default to dev project for other branches/hotfixes
             echo "PROJECT_ID=bizpharma-4e73a" >> $GITHUB_ENV
-            echo "SA_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIZPHARMA_4E73A }}" >> $GITHUB_ENV
             echo "BUILD_ENV=development" >> $GITHUB_ENV
           fi
 
@@ -47,6 +44,10 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ env.SA_KEY }}'
+          firebaseServiceAccount: >-
+            ${{ 
+              github.ref == 'refs/heads/main' && secrets.FIREBASE_SERVICE_ACCOUNT_BIZPHARMA_PROD || 
+              (github.ref == 'refs/heads/dev' && secrets.FIREBASE_SERVICE_ACCOUNT_BIZPHARMA_STAGING || secrets.FIREBASE_SERVICE_ACCOUNT_BIZPHARMA_4E73A)
+            }}
           channelId: live
           projectId: ${{ env.PROJECT_ID }}

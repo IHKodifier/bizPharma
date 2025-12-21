@@ -2,7 +2,7 @@
 Business and Location Schemas
 """
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional, List
 from datetime import datetime, time
 
@@ -32,6 +32,13 @@ class SetupInitializeRequest(BaseModel):
     phone: str
     email: Optional[EmailStr] = None
     profile_photo: Optional[str] = None
+
+    @field_validator('email', mode='before')
+    @classmethod
+    def empty_string_to_none(cls, v):
+        if v == "":
+            return None
+        return v
 
 
 class BusinessProfileResponse(BusinessProfileBase):

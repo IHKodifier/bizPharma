@@ -37,12 +37,19 @@ class FirebaseConfig:
         cred_path = settings.FIREBASE_CREDENTIALS_PATH
         
         # Check if credentials file exists
-        if not os.path.exists(cred_path):
-            print(f"❌ Firebase credentials not found at: {cred_path}")
-            # ... (omitted print lines)
-            raise FileNotFoundError(
-                f"Firebase service account key not found at {cred_path}"
-            )
+        if os.path.exists(cred_path):
+            print(f"🔑 Using local service account key at: {cred_path}")
+            cred = credentials.Certificate(cred_path)
+        else:
+            if settings.ENV != "DEV":
+                print(f"🌐 Service account key not found at {cred_path}. Using Application Default Credentials (ADC).")
+                cred = None # This will cause initialize_app to use ADC
+            else:
+                print(f"❌ Firebase credentials not found at: {cred_path}")
+                print(f"   If you're running locally, make sure serviceAccountKey.json is in the backend/ directory.")
+                raise FileNotFoundError(
+                    f"Firebase service account key not found at {cred_path}"
+                )
         
         # Set Auth Emulator if in DEV mode
         if settings.ENV == "DEV":
@@ -55,7 +62,6 @@ class FirebaseConfig:
         
         try:
             # Initialize Firebase Admin SDK
-            cred = credentials.Certificate(cred_path)
             self._app = firebase_admin.initialize_app(cred, {
                 'databaseURL': settings.database_url,
                 'projectId': settings.FIREBASE_PROJECT_ID,

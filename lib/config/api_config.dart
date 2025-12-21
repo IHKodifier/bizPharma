@@ -8,6 +8,8 @@ class ApiConfig {
     // For android emulator use 10.0.2.2 instead of localhost
     if (environment == 'development') {
       return 'http://127.0.0.1:8000';
+    } else if (environment == 'staging') {
+      return 'https://api-staging.bizpharma.app';
     }
     return 'https://api.bizpharma.app';
   }

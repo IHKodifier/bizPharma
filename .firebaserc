@@ -1,6 +1,8 @@
 {
   "projects": {
-    "default": "bizpharma-4e73a"
+    "default": "bizpharma-4e73a",
+    "staging": "bizpharma-staging",
+    "production": "bizpharma-prod"
   },
   "targets": {},
   "etags": {}

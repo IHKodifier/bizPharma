@@ -44,7 +44,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          IMAGE_URL="${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/cloud-run-source-lib/backend:latest"
+          IMAGE_URL="${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/backend/backend:latest"
           docker build -t $IMAGE_URL ./backend
           docker push $IMAGE_URL
           echo "IMAGE_URL=$IMAGE_URL" >> $GITHUB_ENV

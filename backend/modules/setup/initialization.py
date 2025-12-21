@@ -22,6 +22,12 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
 
     # Create business and admin user in Cloud SQL
     try:
+        # Sanitize data for production safety (safeguard)
+        sanitized_phone = (data.phone or "").strip()
+        if len(sanitized_phone) > 15:
+            sanitized_phone = sanitized_phone[:15]
+            print(f"⚠️ Truncated phone number for schema compatibility: {data.phone} -> {sanitized_phone}")
+
         await dataconnect_client.create_business_and_admin(
             id_token=data.id_token,
             business_id=business_id,
@@ -29,7 +35,7 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
             user_email=data.email or "user@example.com",
             user_first_name=data.first_name,
             user_last_name=data.last_name,
-            user_mobile=data.phone,
+            user_mobile=sanitized_phone,
             auth_uid=user_id,
             user_profile_photo=data.profile_photo
         )

@@ -26,6 +26,7 @@ logger = logging.getLogger("bizPharma")
 class RequestResponseLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         # Log Request
+        # we read the body here to log it
         request_body = await request.body()
         logger.debug(f"Incoming Request: {request.method} {request.url}")
         if request_body:
@@ -34,6 +35,13 @@ class RequestResponseLoggingMiddleware(BaseHTTPMiddleware):
                 logger.debug(f"Request Body: {json.dumps(body_json, indent=2)}")
             except:
                 logger.debug(f"Request Body (raw): {request_body.decode(errors='ignore')}")
+
+        # CRITICAL FIX: The call to request.body() consumes the stream.
+        # We must re-create the receive channel so subsequent handlers (like FastAPI validation)
+        # can read the body again.
+        async def receive():
+            return {"type": "http.request", "body": request_body, "more_body": False}
+        request._receive = receive
 
         start_time = time.time()
         response = await call_next(request)

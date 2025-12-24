@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'config/app_check_config.dart';
 import 'dataconnect_generated/biz_pharma.dart';
 import 'my_app.dart';
 
@@ -36,7 +37,7 @@ void main() async {
   // Activate App Check
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaEnterpriseProvider(
-      '6Le6Xi4sAAAAAHANwno2xugEDeaG5zLPtMcpcMtz',
+      AppCheckConfig.webRecaptchaSiteKey,
     ),
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,

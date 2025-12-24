@@ -14,9 +14,21 @@ import 'package:flutter/foundation.dart'
 /// );
 /// ```
 class DefaultFirebaseOptions {
+  static const String environment = String.fromEnvironment(
+    'ENVIRONMENT',
+    defaultValue: 'development',
+  );
+
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      switch (environment) {
+        case 'production':
+          return webProd;
+        case 'staging':
+          return webStaging;
+        default:
+          return webDev;
+      }
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -39,13 +51,31 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
+  static const FirebaseOptions webDev = FirebaseOptions(
     apiKey: 'AIzaSyD1EIbEbBVBs5PqqgRkuZ185a78NfzWng0',
     appId: '1:381385750800:web:YOUR_WEB_APP_ID',
     messagingSenderId: '381385750800',
     projectId: 'bizpharma-4e73a',
     authDomain: 'bizpharma-4e73a.firebaseapp.com',
     storageBucket: 'bizpharma-4e73a.firebasestorage.app',
+  );
+
+  static const FirebaseOptions webStaging = FirebaseOptions(
+    apiKey: 'AIzaSyArbFbooj4xmHeMhXwtrA3Ch5qTrsivgJM',
+    authDomain: 'bizpharma-staging.firebaseapp.com',
+    projectId: 'bizpharma-staging',
+    storageBucket: 'bizpharma-staging.firebasestorage.app',
+    messagingSenderId: '329922858118',
+    appId: '1:329922858118:web:80322052214a378573d507',
+  );
+
+  static const FirebaseOptions webProd = FirebaseOptions(
+    apiKey: 'AIzaSyARNecjdxHUCvcQOadO6hiAaIGExsrnSbs',
+    authDomain: 'bizpharma-prod.firebaseapp.com',
+    projectId: 'bizpharma-prod',
+    storageBucket: 'bizpharma-prod.firebasestorage.app',
+    messagingSenderId: '359227923382',
+    appId: '1:359227923382:web:6ff76b79629b6f2b3eff17',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

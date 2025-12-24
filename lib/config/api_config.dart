@@ -9,7 +9,7 @@ class ApiConfig {
     if (environment == 'development') {
       return 'http://127.0.0.1:8000';
     } else if (environment == 'staging') {
-      return 'https://api-staging.bizpharma.app';
+      return 'https://bizpharma-api-7rry5wij4a-el.a.run.app';
     }
     return 'https://api.bizpharma.app';
   }

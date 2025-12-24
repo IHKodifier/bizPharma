@@ -27,32 +27,28 @@ class DataConnectClient:
 
     def _get_access_token(self) -> str:
         """
-        Get access token for Data Connect API using Service Account
+        Get access token for Data Connect API using ADC or Service Account
         """
-        if settings.DEBUG:
-            # In debug mode (local), if we have the emulator running, we might still want a token
-            # But the emulator often accepts any token or specific mock formats.
-            # Assuming real auth is preferred to test connectivity unless explicitly disabled.
-            pass
-
         try:
-            from google.oauth2 import service_account
+            import google.auth
             import google.auth.transport.requests
 
-            creds = service_account.Credentials.from_service_account_file(
-                settings.FIREBASE_CREDENTIALS_PATH,
-                scopes=['https://www.googleapis.com/auth/cloud-platform']
-            )
+            # Use Application Default Credentials (works on Cloud Run & Local with gcloud auth application-default login)
+            scopes = ['https://www.googleapis.com/auth/cloud-platform']
+            creds, project = google.auth.default(scopes=scopes)
             
+            # Refresh token
             auth_req = google.auth.transport.requests.Request()
             creds.refresh(auth_req)
             
             return creds.token
 
         except Exception as e:
-            print(f"⚠️ Failed to get real access token: {e}")
-            # Fallback for development if file missing or error
-            return "mock-token-fallback"
+            logger.error(f"⚠️ Failed to get real access token: {e}")
+            # Fallback only for local dev without credentials
+            if settings.ENV == "DEV":
+                return "mock-token-fallback"
+            raise e
 
     def execute_mutation(self, mutation_name: str, variables: Dict[str, Any], id_token: Optional[str] = None) -> Dict[str, Any]:
         """
@@ -63,8 +59,8 @@ class DataConnectClient:
         else:
             access_token = self._get_access_token()
 
-        # Emulator usually requires v1beta, Production uses v1
-        api_version = "v1beta" if settings.ENV == "DEV" else "v1"
+        # Always use v1beta for now as Data Connect is in Preview
+        api_version = "v1beta"
         url = f"{self.endpoint}/{api_version}/projects/{self.project_id}/locations/{self.location}/services/{self.service}/connectors/{self.connector}:executeMutation"
 
         headers = {
@@ -112,7 +108,8 @@ class DataConnectClient:
         else:
             access_token = self._get_access_token()
 
-        api_version = "v1beta" if settings.ENV == "DEV" else "v1"
+        # Always use v1beta for now
+        api_version = "v1beta"
         url = f"{self.endpoint}/{api_version}/projects/{self.project_id}/locations/{self.location}/services/{self.service}/connectors/{self.connector}:executeQuery"
 
         headers = {

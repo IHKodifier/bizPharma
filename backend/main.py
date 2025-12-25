@@ -16,6 +16,13 @@ from config.settings import settings
 from config.firebase_config import firebase_config
 from core.security import get_current_user, get_optional_user
 
+# --- Verbose Logging Configuration ---
+logging.basicConfig(
+    level=settings.LOG_LEVEL,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+logger = logging.getLogger("bizPharma")
+
 class RequestResponseLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         # Log Request

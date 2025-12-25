@@ -1,16 +1,3 @@
-# Agentic Run: Fix Staging Auth Configuration & Infinite Loop Suspicion
-
-**Date**: 2025-12-23
-**Status**: Resolved
-**Environment**: Staging
-**User Request**: Fix "Start Free Trial" button unresponsiveness and missing Anonymous User creation.
-
----
-
-## 1. Investigation & knowledge Base
-
-### 10. `backend/config/settings.py` (Hotfix 3)
-**Change**: Updated Data Connect API Endpoint.
 **Reason**: The backend was using an incorrect base URL `https://dataconnect.googleapis.com`, which returned `404 Not Found` (HTML). The official endpoint is `https://firebasedataconnect.googleapis.com`.
 
 ```python
@@ -166,3 +153,35 @@ After fixing the Auth config, the app failed to connect to the backend because i
     ),
     // ...
 ```
+
+### 6. Cloud IAM Configuration (Infrastructure)
+**Change**: Granted 'roles/firebase.admin' to the **Default Compute Service Account**.
+**Reason**: To fix '404/Permission Denied' when accessing Data Connect.
+
+### 7. 'backend/main.py'
+**Change**: Replaced wildcard ('*') CORS configuration with explicit allowed origins.
+**Reason**: 'allow_origins=['*']' + 'allow_credentials=True' is blocked by browsers.
+
+### 8. 'backend/main.py' (Hotfix)
+**Change**: Restored missing imports ('CORSMiddleware') and fixed middleware ordering.
+**Reason**: Fixed 'NameError' startup crash.
+
+### 9. 'backend/main.py' (Hotfix 2)
+**Change**: Restored logging configuration.
+**Reason**: Fixed 'NameError: name logger is not defined' crash.
+
+### 10. 'backend/config/settings.py' (Hotfix 3)
+**Change**: Updated Data Connect API Endpoint.
+**Reason**: Fixed '404 Not Found' (HTML) by switching to 'https://firebasedataconnect.googleapis.com'.
+
+### 11. 'backend/modules/setup/initialization.py' (Hotfix 4)
+**Change**: Forced valid IAM Authentication for Onboarding.
+**Reason**: Data Connect returned '401 Unauthorized' when using the Anonymous User's ID Token. Removed 'id_token' argument to force fallback to the Backend's Service Account (IAM) credentials.
+
+\\\python
+await dataconnect_client.create_business_and_admin(
+    # ...
+    # id_token=data.id_token,  <-- REMOVED
+)
+\\\
+

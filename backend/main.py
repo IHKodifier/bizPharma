@@ -9,9 +9,12 @@ import json
 import time
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, Response, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
-
-logger = logging.getLogger("bizPharma")
+from config.settings import settings
+from config.firebase_config import firebase_config
+from core.security import get_current_user, get_optional_user
 
 class RequestResponseLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
@@ -99,13 +102,6 @@ app.add_middleware(
 
 # Middleware
 app.add_middleware(RequestResponseLoggingMiddleware)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 @app.get("/")

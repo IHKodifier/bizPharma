@@ -29,7 +29,6 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
             print(f"⚠️ Truncated phone number for schema compatibility: {data.phone} -> {sanitized_phone}")
 
         await dataconnect_client.create_business_and_admin(
-            id_token=data.id_token,
             business_id=business_id,
             business_name=data.business_name,
             user_email=data.email or "user@example.com",
@@ -37,7 +36,8 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
             user_last_name=data.last_name,
             user_mobile=sanitized_phone,
             auth_uid=user_id,
-            user_profile_photo=data.profile_photo
+            user_profile_photo=data.profile_photo,
+            # id_token=data.id_token  <-- REMOVED to force IAM Auth (Service Account)
         )
     except Exception as e:
         print(f"❌ ONBOARDING ERROR: {str(e)}")

@@ -147,7 +147,6 @@ class DataConnectClient:
 
     async def create_business_and_admin(
         self,
-        id_token: str,
         business_id: str,
         business_name: str,
         user_email: str,
@@ -155,6 +154,7 @@ class DataConnectClient:
         user_last_name: str,
         user_mobile: str,
         auth_uid: str,
+        id_token: Optional[str] = None,
         user_profile_photo: Optional[str] = None
     ) -> Dict[str, Any]:
         """

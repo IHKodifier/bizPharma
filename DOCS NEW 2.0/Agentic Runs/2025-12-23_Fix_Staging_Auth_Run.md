@@ -9,6 +9,16 @@
 
 ## 1. Investigation & knowledge Base
 
+### 10. `backend/config/settings.py` (Hotfix 3)
+**Change**: Updated Data Connect API Endpoint.
+**Reason**: The backend was using an incorrect base URL `https://dataconnect.googleapis.com`, which returned `404 Not Found` (HTML). The official endpoint is `https://firebasedataconnect.googleapis.com`.
+
+```python
+     @property
+     def DATA_CONNECT_ENDPOINT(self) -> str:
+-        return "https://dataconnect.googleapis.com"
++        return "https://firebasedataconnect.googleapis.com"
+```
 ### Issue Description
 The Staging environment (`https://bizpharma-staging.web.app`) was failing to function correctly.
 - **Symptom 1**: The "Start Free Trial" button was unresponsive.

@@ -9,25 +9,7 @@ import json
 import time
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, Response, Depends
-# --- CORS Configuration ---
-app.add_middleware(
-    CORSMiddleware,
-    # Allow specific origins for Staging/Prod/Dev
-    allow_origins=[
-        "https://bizpharma-staging.web.app",
-        # TODO: to do for coding Agent. needs to be replaced with actual production url
-        "https://bizpharma-prod.web.app",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        # Add your custom domains here when ready
-        "https://api.bizpharma.app",
-        "https://api-staging.bizpharma.app",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 logger = logging.getLogger("bizPharma")
 
@@ -94,6 +76,25 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
+)
+
+# --- CORS Configuration ---
+app.add_middleware(
+    CORSMiddleware,
+    # Allow specific origins for Staging/Prod/Dev
+    allow_origins=[
+        "https://bizpharma-staging.web.app",
+        "https://bizpharma-prod.web.app",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+        # Add your custom domains here when ready
+        "https://api.bizpharma.app",
+        "https://api-staging.bizpharma.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Middleware

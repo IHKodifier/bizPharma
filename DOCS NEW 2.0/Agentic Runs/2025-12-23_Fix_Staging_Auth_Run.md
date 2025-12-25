@@ -42,19 +42,18 @@ To fix this, we needed to make the `firebase_options.dart` file **environment-aw
 
 ```dart
 class DefaultFirebaseOptions {
-+  static const String environment = String.fromEnvironment('ENVIRONMENT', defaultValue: 'development');
-+
+  static const String environment = String.fromEnvironment('ENVIRONMENT', defaultValue: 'development');
+
    static FirebaseOptions get currentPlatform {
      if (kIsWeb) {
--      return web;
-+      switch (environment) {
-+        case 'production':
-+          return webProd;
-+        case 'staging':
-+          return webStaging;
-+        default:
-+          return webDev;
-+      }
+       switch (environment) {
+         case 'production':
+           return webProd;
+         case 'staging':
+           return webStaging;
+         default:
+           return webDev;
+       }
      }
      // ... (other platforms unchanged)
    }

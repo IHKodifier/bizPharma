@@ -1,15 +1,14 @@
-**Reason**: The backend was using an incorrect base URL `https://dataconnect.googleapis.com`, which returned `404 Not Found` (HTML). The official endpoint is `https://firebasedataconnect.googleapis.com`.
+# Agentic Run: Fix Staging Auth Configuration & Infinite Loop Suspicion
 
-```python
-     @property
-     def DATA_CONNECT_ENDPOINT(self) -> str:
--        return "https://dataconnect.googleapis.com"
-+        return "https://firebasedataconnect.googleapis.com"
-```
-### Issue Description
-The Staging environment (`https://bizpharma-staging.web.app`) was failing to function correctly.
-- **Symptom 1**: The "Start Free Trial" button was unresponsive.
-- **Symptom 2**: Anonymous user creation was failing, despite being enabled in the Staging Firebase Console.
+**Date**: 2025-12-23
+**Status**: Resolved ✅
+**Environment**: Staging
+**User Request**: Fix "Start Free Trial" button unresponsiveness and missing Anonymous User creation.
+**Knowledge Base Entry**: 
+- [Staging Environment Setup & Troubleshooting](../Knowledge%20Base/staging_deployment_guide_2025.md)
+- [Production Rollout Checklist](../Knowledge%20Base/production_rollout_checklist.md)
+
+---
 - **Symptom 3**: The app behaved as if it was disconnected, leading to user suspicions of backend infinite loops or crashes.
 
 ### Investigation Steps

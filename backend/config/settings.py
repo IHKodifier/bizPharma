@@ -47,7 +47,7 @@ class Settings(BaseSettings):
     def DATA_CONNECT_ENDPOINT(self) -> str:
         if self.ENV == "DEV":
             return "http://127.0.0.1:9399"
-        return "https://dataconnect.googleapis.com"
+        return "https://firebasedataconnect.googleapis.com"
     
     @property
     def DATA_CONNECT_PROJECT_ID(self) -> str:

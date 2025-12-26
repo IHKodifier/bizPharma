@@ -7,6 +7,7 @@
 **Knowledge Base Entry**: 
 - [Staging Environment Setup & Troubleshooting](../Knowledge%20Base/staging_deployment_guide_2025.md)
 - [Production Rollout Checklist](../Knowledge%20Base/production_rollout_checklist.md)
+- [Git Workflow Guide](../Knowledge%20Base/git_workflow_guide.md)
 
 ---
 - **Symptom 3**: The app behaved as if it was disconnected, leading to user suspicions of backend infinite loops or crashes.

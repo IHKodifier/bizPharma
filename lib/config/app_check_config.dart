@@ -8,7 +8,7 @@ class AppCheckConfig {
   static const String _stagingSiteKey =
       '6LcqZjUsAAAAAKtTitPrBwz9hJS1DlXqVRa6Yiao';
   // TODO: Create Production reCAPTCHA Enterprise Key and add here
-  static const String _prodSiteKey = 'TODO_PROD_KEY';
+  static const String _prodSiteKey = '6Ld3ezcsAAAAAAxFS83j0ZpNAQ4wzcmhVWEZDuPy';
 
   static String get webRecaptchaSiteKey {
     switch (environment) {

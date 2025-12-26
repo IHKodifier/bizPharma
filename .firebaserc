@@ -4,6 +4,37 @@
     "staging": "bizpharma-staging",
     "production": "bizpharma-prod"
   },
-  "targets": {},
+  "targets": {
+    "bizpharma-4e73a": {
+      "hosting": {
+        "frontend": [
+          "bizpharma-4e73a"
+        ],
+        "api": [
+          "bizpharma-4e73a"
+        ]
+      }
+    },
+    "bizpharma-staging": {
+      "hosting": {
+        "frontend": [
+          "bizpharma-staging"
+        ],
+        "api": [
+          "bizpharma-staging"
+        ]
+      }
+    },
+    "bizpharma-prod": {
+      "hosting": {
+        "frontend": [
+          "bizpharma-prod"
+        ],
+        "api": [
+          "bizpharma-prod-api"
+        ]
+      }
+    }
+  },
   "etags": {}
 }

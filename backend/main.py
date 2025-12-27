@@ -101,6 +101,8 @@ app.add_middleware(
         # Add your custom domains here when ready
         "https://api.bizpharma.app",
         "https://api-staging.bizpharma.app",
+        "https://bizpharma.app",
+        "https://www.bizpharma.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

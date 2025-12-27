@@ -10,7 +10,7 @@ class AppCheckConfig {
   static const String _stagingSiteKey =
       '6LcqZjUsAAAAAKtTitPrBwz9hJS1DlXqVRa6Yiao';
   // TODO: Create Production reCAPTCHA Enterprise Key and add here
-  static const String _prodSiteKey = '6Ld3ezcsAAAAAAxFS83j0ZpNAQ4wzcmhVWEZDuPy';
+  static const String _prodSiteKey = '6LdmAzgsAAAAALi4XGcnxBgs_TJmDOJfnURMsLJH';
 
   static String get webRecaptchaSiteKey {
     // Domain-based detection to ensure Production Key is used on the live site

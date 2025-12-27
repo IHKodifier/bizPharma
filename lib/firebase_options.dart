@@ -21,14 +21,14 @@ class DefaultFirebaseOptions {
 
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      var targetEnv = environment;
-      // If we are in release mode but the environment says 'development' (default),
-      // assume this is a production build.
-      if (kReleaseMode && targetEnv == 'development') {
-        targetEnv = 'production';
+      // Domain-based detection to ensure Production is used on the live site
+      // even if the build flag was missed.
+      final host = Uri.base.host;
+      if (host == 'bizpharma.app' || host == 'www.bizpharma.app') {
+        return webProd;
       }
 
-      switch (targetEnv) {
+      switch (environment) {
         case 'production':
           return webProd;
         case 'staging':

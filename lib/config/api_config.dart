@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class ApiConfig {
   static const String environment = String.fromEnvironment(
     'ENVIRONMENT',
@@ -5,6 +7,12 @@ class ApiConfig {
   );
 
   static String get baseUrl {
+    // If we are in release mode but the environment says 'development' (default),
+    // assume this is a production build.
+    if (kReleaseMode && environment == 'development') {
+      return 'https://api.bizpharma.app';
+    }
+
     // For android emulator use 10.0.2.2 instead of localhost
     if (environment == 'development') {
       return 'http://127.0.0.1:8000';

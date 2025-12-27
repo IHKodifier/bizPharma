@@ -2,7 +2,7 @@
 // ignore_for_file: type=lint
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+    show defaultTargetPlatform, kIsWeb, TargetPlatform, kReleaseMode;
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -21,7 +21,14 @@ class DefaultFirebaseOptions {
 
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      switch (environment) {
+      var targetEnv = environment;
+      // If we are in release mode but the environment says 'development' (default),
+      // assume this is a production build.
+      if (kReleaseMode && targetEnv == 'development') {
+        targetEnv = 'production';
+      }
+
+      switch (targetEnv) {
         case 'production':
           return webProd;
         case 'staging':

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class AppCheckConfig {
   static const String environment = String.fromEnvironment(
     'ENVIRONMENT',
@@ -11,6 +13,14 @@ class AppCheckConfig {
   static const String _prodSiteKey = '6Ld3ezcsAAAAAAxFS83j0ZpNAQ4wzcmhVWEZDuPy';
 
   static String get webRecaptchaSiteKey {
+    // Domain-based detection to ensure Production Key is used on the live site
+    if (kIsWeb) {
+      final host = Uri.base.host;
+      if (host == 'bizpharma.app' || host == 'www.bizpharma.app') {
+        return _prodSiteKey;
+      }
+    }
+
     switch (environment) {
       case 'production':
         return _prodSiteKey;

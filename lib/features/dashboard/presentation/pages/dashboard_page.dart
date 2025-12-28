@@ -6,6 +6,7 @@ import '../../../../widgets/biz_app_bar.dart';
 import '../widgets/sidebar_navigation.dart';
 import '../widgets/dashboard_content.dart';
 import '../../../inventory/presentation/pages/inventory_page.dart';
+import '../../../settings/locations/presentation/pages/locations_page.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
@@ -37,6 +38,8 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
         return const Expanded(
           child: SingleChildScrollView(child: InventoryPage()),
         );
+      case 'locations':
+        return const Expanded(child: LocationsPage());
       case 'dashboard':
       default:
         // DashboardContent already returns an Expanded widget

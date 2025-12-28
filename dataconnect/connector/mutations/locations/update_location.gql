@@ -1,0 +1,29 @@
+# ============================================================================
+# UPDATE LOCATION
+# ============================================================================
+
+mutation UpdateLocation(
+  $id: UUID!
+  $name: String
+  $code: String
+  $type: LocationType
+  $phone: String
+  $email: String
+  $operatingHours: String
+  $licenseNumber: String
+  $isActive: Boolean
+) @auth(level: USER) {
+  location_update(
+    id: $id
+    data: {
+      name: $name
+      code: $code
+      type: $type
+      phone: $phone
+      email: $email
+      operatingHours: $operatingHours
+      licenseNumber: $licenseNumber
+      isActive: $isActive
+    }
+  )
+}

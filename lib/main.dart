@@ -26,12 +26,12 @@ void main() async {
 
   if (kDebugMode) {
     // Connect to local emulators
-    await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
-    BizPharmaConnector.instance.dataConnect.useDataConnectEmulator(
-      '127.0.0.1',
-      9399,
-    );
-    print('🔧 Connected to local Firebase Emulators');
+      await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
+      BizPharmaConnector.instance.dataConnect.useDataConnectEmulator(
+        '127.0.0.1',
+        9399,
+      );
+      print('🔧 Connected to local Firebase Emulators');
   }
 
   // Activate App Check

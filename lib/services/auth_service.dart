@@ -92,7 +92,7 @@ class AuthService {
     }
   }
 
-  // Create Business and Admin User atomically
+  // Create Business and Admin User atomically (includes default Main Store location)
   Future<void> createBusinessAndUser({
     required String businessName,
     required String email,
@@ -104,6 +104,7 @@ class AuthService {
     try {
       const uuid = Uuid();
       final businessId = uuid.v4();
+      final defaultLocationId = uuid.v4();
 
       await BizPharmaConnector.instance
           .createBusinessAndAdmin(
@@ -115,9 +116,10 @@ class AuthService {
             userMobile: phone,
             authUid: uid,
             today: DateTime.now(),
+            defaultLocationId: defaultLocationId,
           )
           .execute();
-      log('Business and User created successfully');
+      log('Business, User, and default Location created successfully');
     } catch (e) {
       log('Error creating business and user: $e');
       rethrow;

@@ -2,7 +2,7 @@
 # LIST LOCATIONS BY BUSINESS
 # ============================================================================
 
-query ListLocationsByBusiness($businessId: UUID!) @auth(level: USER) {
+query ListLocationsByBusiness($businessId: UUID!) @auth(level: PUBLIC) {
   locations(where: { businessId: { eq: $businessId } }) {
     id
     businessId

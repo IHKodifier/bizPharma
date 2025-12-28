@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
 import '../../services/api_client.dart';
 import '../../app_home_page.dart';
+import '../../widgets/auth_wrapper.dart';
 
 class OnboardingStepper extends ConsumerStatefulWidget {
   const OnboardingStepper({super.key});
@@ -106,6 +107,10 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
 
       // Force token refresh to get new custom claims (business_id)
       await user.getIdToken(true);
+
+      // Invalidate the user provider to force AuthWrapper to re-fetch
+      // user data from Data Connect (which now includes the businessId)
+      ref.invalidate(currentUserProvider);
 
       if (mounted) {
         // Navigate to Dashboard

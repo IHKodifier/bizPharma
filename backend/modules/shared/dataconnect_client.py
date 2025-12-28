@@ -5,6 +5,7 @@ Data Connect Client for Cloud SQL operations
 from typing import Dict, Any, Optional
 import requests
 import json
+import uuid
 from datetime import datetime
 from config.settings import settings
 from google.auth import jwt
@@ -169,7 +170,8 @@ class DataConnectClient:
             "userMobile": user_mobile,
             "userProfilePhoto": user_profile_photo,
             "authUid": auth_uid,
-            "today": datetime.utcnow().strftime("%Y-%m-%d")
+            "today": datetime.utcnow().strftime("%Y-%m-%d"),
+            "defaultLocationId": str(uuid.uuid4())
         }
 
         try:

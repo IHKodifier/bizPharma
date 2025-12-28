@@ -71,13 +71,30 @@ bizPharma/
 
 ### C. Data Connect (The "Tricky" Part)
 *   **Schema Source:** You do NOT create tables manually (usually). You edit `.gql` files.
-*   **Deploy:** `firebase deploy --only dataconnect`.
-*   **Common Failure:** "Timeout".
-    *   **Cause:** Local ISP blocks port 5432.
-    *   **Fix:** Use Cloud SQL Studio to manually run DDL if CLI fails.
-*   **Naming:** `type User` in GQL = `"User"` table in Postgres. **Case Sensitive!**
+*   **Network Requirement:** Requires access to Cloud SQL port 5432. Often blocked by local ISPs. **Workaround:** Run SQL DDL manually in Cloud SQL Studio if CLI times out.
 
-## 5. Development Guidelines for Agents
+### 5. Deployment & Release Pipeline
+The "Golden Workflow" for shipping features:
+
+#### A. Staging Release
+1.  Merge feature branch to `dev`.
+2.  Deploy Backend: `gcloud run deploy ...` (or CI/CD).
+3.  **Run Smoke Tests (Mandatory):**
+    ```bash
+    flutter test test/staging_config_test.dart --dart-define=ENVIRONMENT=staging
+    ```
+    *   **Purpose:** Verifies Staging Config is active AND Backend is reachable.
+    *   **Success:** "All tests passed!" 🟢
+
+#### B. Production Release
+1.  If Staging Smoke Test passed: Merge `dev` to `main`.
+2.  Tag release: `git tag v1.x`.
+
+## 6. Critical Files Map
+*   `lib/firebase_options.dart`: **DO NOT OVERWRITE** without checking the custom Environment Detection logic at the top.
+*   `test/staging_config_test.dart`: **The Staging Smoke Test.** Checks ApiConfig and Network Reachability.
+
+## 7. Development Guidelines for Agents
 
 ### When modifying API Logic:
 1.  **Check `api_config.dart`:** Ensure you aren't hardcoding `localhost`.

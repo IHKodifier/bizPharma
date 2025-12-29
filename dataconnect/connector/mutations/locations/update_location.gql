@@ -12,7 +12,7 @@ mutation UpdateLocation(
   $operatingHours: String
   $licenseNumber: String
   $isActive: Boolean
-) @auth(level: USER) {
+) @auth(level: PUBLIC) { # TODO: SECURITY: Revert to @auth(level: USER) before production
   location_update(
     id: $id
     data: {

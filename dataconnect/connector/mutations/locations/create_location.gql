@@ -11,7 +11,7 @@ mutation CreateLocation(
   $email: String
   $operatingHours: String
   $licenseNumber: String
-) @auth(level: USER) {
+) @auth(level: PUBLIC) { # TODO: SECURITY: Revert to @auth(level: USER) before production
   location_insert(data: {
     businessId: $businessId
     name: $name

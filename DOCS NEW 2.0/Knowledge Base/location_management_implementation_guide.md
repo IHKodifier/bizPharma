@@ -352,6 +352,7 @@ final builder = BizPharmaConnector.instance.createLocation(
   name: name,
   code: code,
   type: type,
+  phone: phone, // This line is not needed in the builder, use the method below
 );
 if (phone != null) builder.phone(phone);
 await builder.execute();
@@ -413,13 +414,18 @@ Navigator.of(context).pushReplacement(...);
 
 **Issue**: `GetBusinessById` fails with `401 Unauthorized` even for logged-in users, often accompanied by `App Check: HTTP 400` errors in the console. This happens if the App Check debug token is invalid or if the emulator enforcement is too strict.
 
-**Workaround (Dev Only)**: Relax the query's auth level to `PUBLIC` in the `.gql` file temporarily.
+**Root Cause**: Incorrect App ID in `lib/firebase_options.dart`.
+
+**Fix**:
+1. Run `flutterfire configure --project=YOUR_PROJECT_ID --yes` to regenerate the correct App ID.
+2. (Optional) Hot Restart is usually not enough; full app restart is recommended.
+
+**Workaround (Dev Only)**: Relax the query's auth level to `PUBLIC` in the `.gql` file temporarily if App Check is still blocking, but this is **NOT** recommended for production.
 
 ```graphql
 # dataconnect/connector/queries/core/get_business_by_id.gql
 query GetBusinessById($id: UUID!) @auth(level: PUBLIC) { ... }
 ```
-*Note: Remember to revert to `USER` for production.*
 
 ### 3. Data Connect Emulator Panic (Crash) on Schema Load
 
@@ -437,6 +443,19 @@ query GetBusinessById($id: UUID!) @auth(level: PUBLIC) { ... }
      business_deleteMany(all: true)
    }
    ```
+
+### 4. Security Hardening for Production
+
+**Important**: During development, we often relax auth levels to `@auth(level: PUBLIC)` to avoid emulator friction.
+
+**Before Deployment**: You **MUST** revert these to `@auth(level: USER)` or stricter.
+Check the following files for `TODO: SECURITY` comments:
+- `create_location.gql`
+- `update_location.gql`
+- `delete_location.gql`
+- `list_locations_by_business.gql`
+- `get_business_by_id.gql`
+- `list_all_businesses.gql`
 
 ---
 

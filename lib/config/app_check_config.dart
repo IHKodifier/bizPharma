@@ -19,6 +19,9 @@ class AppCheckConfig {
       if (host == 'bizpharma.app' || host == 'www.bizpharma.app') {
         return _prodSiteKey;
       }
+      if (host == 'bizpharma-staging.web.app') {
+        return _stagingSiteKey;
+      }
     }
 
     switch (environment) {

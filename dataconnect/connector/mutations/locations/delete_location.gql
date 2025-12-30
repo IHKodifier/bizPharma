@@ -2,6 +2,6 @@
 # DELETE LOCATION
 # ============================================================================
 
-mutation DeleteLocation($id: UUID!) @auth(level: PUBLIC) { # TODO: SECURITY: Revert to @auth(level: USER) before production
+mutation DeleteLocation($id: UUID!) @auth(level: USER) {
   location_delete(id: $id)
 }

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../dataconnect_generated/biz_pharma.dart';
 
 /// Service for managing locations in the system.
@@ -9,9 +10,11 @@ class LocationService {
     String businessId,
   ) async {
     try {
+      print('🔍 DEBUG: Fetching locations for business: $businessId');
       final result = await BizPharmaConnector.instance
           .listLocationsByBusiness(businessId: businessId)
           .execute();
+      print('🔍 DEBUG: Fetched ${result.data.locations.length} locations');
       return result.data.locations;
     } catch (e) {
       log('Error fetching locations: $e');
@@ -44,6 +47,15 @@ class LocationService {
     String? licenseNumber,
   }) async {
     try {
+      // DEBUG: Verify Auth State before mutation
+      final user = FirebaseAuth.instance.currentUser;
+      print('🔍 DEBUG: createLocation called.');
+      print('🔍 DEBUG: Current Auth User: ${user?.uid ?? "NULL (Detached?)"}');
+      if (user != null) {
+        final token = await user.getIdToken();
+        print('🔍 DEBUG: Token available (len=${token?.length})');
+      }
+
       // Auto-generate location code based on name
       final code = _generateLocationCode(name);
 

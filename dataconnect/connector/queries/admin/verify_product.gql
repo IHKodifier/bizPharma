@@ -10,7 +10,9 @@ query VerifyProduct @auth(level: PUBLIC) {
     business {
       name
     }
-    category
+    category {
+      name
+    }
     isActive
   }
 }

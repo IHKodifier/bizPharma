@@ -4,7 +4,7 @@ class CreateProductVariablesBuilder {
   String businessId;
   String genericName;
   Optional<String> _brandName = Optional.optional(nativeFromJson, nativeToJson);
-  String manufacturerId;
+  Optional<String> _manufacturerId = Optional.optional(nativeFromJson, nativeToJson);
   Optional<String> _nationalDrugCode = Optional.optional(nativeFromJson, nativeToJson);
   Optional<String> _barcode = Optional.optional(nativeFromJson, nativeToJson);
   String internalSKU;
@@ -14,20 +14,24 @@ class CreateProductVariablesBuilder {
   RouteOfAdministration routeOfAdministration;
   DrugSchedule drugSchedule;
   bool requiresPrescription;
-  String therapeuticClassId;
+  Optional<String> _therapeuticClassId = Optional.optional(nativeFromJson, nativeToJson);
   int packageSize;
   PackageUnit packageUnit;
-  String primarySupplierId;
+  Optional<String> _primarySupplierId = Optional.optional(nativeFromJson, nativeToJson);
   int leadTimeDays;
   int reorderPoint;
   int reorderQuantity;
   int minimumStockLevel;
-  ProductCategory category;
+  Optional<String> _categoryId = Optional.optional(nativeFromJson, nativeToJson);
   String createdById;
   String updatedById;
 
   final FirebaseDataConnect _dataConnect;  CreateProductVariablesBuilder brandName(String? t) {
    _brandName.value = t;
+   return this;
+  }
+  CreateProductVariablesBuilder manufacturerId(String? t) {
+   _manufacturerId.value = t;
    return this;
   }
   CreateProductVariablesBuilder nationalDrugCode(String? t) {
@@ -38,8 +42,20 @@ class CreateProductVariablesBuilder {
    _barcode.value = t;
    return this;
   }
+  CreateProductVariablesBuilder therapeuticClassId(String? t) {
+   _therapeuticClassId.value = t;
+   return this;
+  }
+  CreateProductVariablesBuilder primarySupplierId(String? t) {
+   _primarySupplierId.value = t;
+   return this;
+  }
+  CreateProductVariablesBuilder categoryId(String? t) {
+   _categoryId.value = t;
+   return this;
+  }
 
-  CreateProductVariablesBuilder(this._dataConnect, {required  this.businessId,required  this.genericName,required  this.manufacturerId,required  this.internalSKU,required  this.dosageForm,required  this.strength,required  this.unit,required  this.routeOfAdministration,required  this.drugSchedule,required  this.requiresPrescription,required  this.therapeuticClassId,required  this.packageSize,required  this.packageUnit,required  this.primarySupplierId,required  this.leadTimeDays,required  this.reorderPoint,required  this.reorderQuantity,required  this.minimumStockLevel,required  this.category,required  this.createdById,required  this.updatedById,});
+  CreateProductVariablesBuilder(this._dataConnect, {required  this.businessId,required  this.genericName,required  this.internalSKU,required  this.dosageForm,required  this.strength,required  this.unit,required  this.routeOfAdministration,required  this.drugSchedule,required  this.requiresPrescription,required  this.packageSize,required  this.packageUnit,required  this.leadTimeDays,required  this.reorderPoint,required  this.reorderQuantity,required  this.minimumStockLevel,required  this.createdById,required  this.updatedById,});
   Deserializer<CreateProductData> dataDeserializer = (dynamic json)  => CreateProductData.fromJson(jsonDecode(json));
   Serializer<CreateProductVariables> varsSerializer = (CreateProductVariables vars) => jsonEncode(vars.toJson());
   Future<OperationResult<CreateProductData, CreateProductVariables>> execute() {
@@ -47,7 +63,7 @@ class CreateProductVariablesBuilder {
   }
 
   MutationRef<CreateProductData, CreateProductVariables> ref() {
-    CreateProductVariables vars= CreateProductVariables(businessId: businessId,genericName: genericName,brandName: _brandName,manufacturerId: manufacturerId,nationalDrugCode: _nationalDrugCode,barcode: _barcode,internalSKU: internalSKU,dosageForm: dosageForm,strength: strength,unit: unit,routeOfAdministration: routeOfAdministration,drugSchedule: drugSchedule,requiresPrescription: requiresPrescription,therapeuticClassId: therapeuticClassId,packageSize: packageSize,packageUnit: packageUnit,primarySupplierId: primarySupplierId,leadTimeDays: leadTimeDays,reorderPoint: reorderPoint,reorderQuantity: reorderQuantity,minimumStockLevel: minimumStockLevel,category: category,createdById: createdById,updatedById: updatedById,);
+    CreateProductVariables vars= CreateProductVariables(businessId: businessId,genericName: genericName,brandName: _brandName,manufacturerId: _manufacturerId,nationalDrugCode: _nationalDrugCode,barcode: _barcode,internalSKU: internalSKU,dosageForm: dosageForm,strength: strength,unit: unit,routeOfAdministration: routeOfAdministration,drugSchedule: drugSchedule,requiresPrescription: requiresPrescription,therapeuticClassId: _therapeuticClassId,packageSize: packageSize,packageUnit: packageUnit,primarySupplierId: _primarySupplierId,leadTimeDays: leadTimeDays,reorderPoint: reorderPoint,reorderQuantity: reorderQuantity,minimumStockLevel: minimumStockLevel,categoryId: _categoryId,createdById: createdById,updatedById: updatedById,);
     return _dataConnect.mutation("CreateProduct", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -125,7 +141,7 @@ class CreateProductVariables {
   final String businessId;
   final String genericName;
   late final Optional<String>brandName;
-  final String manufacturerId;
+  late final Optional<String>manufacturerId;
   late final Optional<String>nationalDrugCode;
   late final Optional<String>barcode;
   final String internalSKU;
@@ -135,15 +151,15 @@ class CreateProductVariables {
   final RouteOfAdministration routeOfAdministration;
   final DrugSchedule drugSchedule;
   final bool requiresPrescription;
-  final String therapeuticClassId;
+  late final Optional<String>therapeuticClassId;
   final int packageSize;
   final PackageUnit packageUnit;
-  final String primarySupplierId;
+  late final Optional<String>primarySupplierId;
   final int leadTimeDays;
   final int reorderPoint;
   final int reorderQuantity;
   final int minimumStockLevel;
-  final ProductCategory category;
+  late final Optional<String>categoryId;
   final String createdById;
   final String updatedById;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
@@ -151,7 +167,6 @@ class CreateProductVariables {
   
   businessId = nativeFromJson<String>(json['businessId']),
   genericName = nativeFromJson<String>(json['genericName']),
-  manufacturerId = nativeFromJson<String>(json['manufacturerId']),
   internalSKU = nativeFromJson<String>(json['internalSKU']),
   dosageForm = DosageForm.values.byName(json['dosageForm']),
   strength = nativeFromJson<String>(json['strength']),
@@ -159,15 +174,12 @@ class CreateProductVariables {
   routeOfAdministration = RouteOfAdministration.values.byName(json['routeOfAdministration']),
   drugSchedule = DrugSchedule.values.byName(json['drugSchedule']),
   requiresPrescription = nativeFromJson<bool>(json['requiresPrescription']),
-  therapeuticClassId = nativeFromJson<String>(json['therapeuticClassId']),
   packageSize = nativeFromJson<int>(json['packageSize']),
   packageUnit = PackageUnit.values.byName(json['packageUnit']),
-  primarySupplierId = nativeFromJson<String>(json['primarySupplierId']),
   leadTimeDays = nativeFromJson<int>(json['leadTimeDays']),
   reorderPoint = nativeFromJson<int>(json['reorderPoint']),
   reorderQuantity = nativeFromJson<int>(json['reorderQuantity']),
   minimumStockLevel = nativeFromJson<int>(json['minimumStockLevel']),
-  category = ProductCategory.values.byName(json['category']),
   createdById = nativeFromJson<String>(json['createdById']),
   updatedById = nativeFromJson<String>(json['updatedById']) {
   
@@ -177,6 +189,9 @@ class CreateProductVariables {
     brandName = Optional.optional(nativeFromJson, nativeToJson);
     brandName.value = json['brandName'] == null ? null : nativeFromJson<String>(json['brandName']);
   
+  
+    manufacturerId = Optional.optional(nativeFromJson, nativeToJson);
+    manufacturerId.value = json['manufacturerId'] == null ? null : nativeFromJson<String>(json['manufacturerId']);
   
   
     nationalDrugCode = Optional.optional(nativeFromJson, nativeToJson);
@@ -194,13 +209,22 @@ class CreateProductVariables {
   
   
   
+    therapeuticClassId = Optional.optional(nativeFromJson, nativeToJson);
+    therapeuticClassId.value = json['therapeuticClassId'] == null ? null : nativeFromJson<String>(json['therapeuticClassId']);
+  
+  
+  
+  
+    primarySupplierId = Optional.optional(nativeFromJson, nativeToJson);
+    primarySupplierId.value = json['primarySupplierId'] == null ? null : nativeFromJson<String>(json['primarySupplierId']);
   
   
   
   
   
   
-  
+    categoryId = Optional.optional(nativeFromJson, nativeToJson);
+    categoryId.value = json['categoryId'] == null ? null : nativeFromJson<String>(json['categoryId']);
   
   
   
@@ -236,13 +260,13 @@ class CreateProductVariables {
     reorderPoint == otherTyped.reorderPoint && 
     reorderQuantity == otherTyped.reorderQuantity && 
     minimumStockLevel == otherTyped.minimumStockLevel && 
-    category == otherTyped.category && 
+    categoryId == otherTyped.categoryId && 
     createdById == otherTyped.createdById && 
     updatedById == otherTyped.updatedById;
     
   }
   @override
-  int get hashCode => Object.hashAll([businessId.hashCode, genericName.hashCode, brandName.hashCode, manufacturerId.hashCode, nationalDrugCode.hashCode, barcode.hashCode, internalSKU.hashCode, dosageForm.hashCode, strength.hashCode, unit.hashCode, routeOfAdministration.hashCode, drugSchedule.hashCode, requiresPrescription.hashCode, therapeuticClassId.hashCode, packageSize.hashCode, packageUnit.hashCode, primarySupplierId.hashCode, leadTimeDays.hashCode, reorderPoint.hashCode, reorderQuantity.hashCode, minimumStockLevel.hashCode, category.hashCode, createdById.hashCode, updatedById.hashCode]);
+  int get hashCode => Object.hashAll([businessId.hashCode, genericName.hashCode, brandName.hashCode, manufacturerId.hashCode, nationalDrugCode.hashCode, barcode.hashCode, internalSKU.hashCode, dosageForm.hashCode, strength.hashCode, unit.hashCode, routeOfAdministration.hashCode, drugSchedule.hashCode, requiresPrescription.hashCode, therapeuticClassId.hashCode, packageSize.hashCode, packageUnit.hashCode, primarySupplierId.hashCode, leadTimeDays.hashCode, reorderPoint.hashCode, reorderQuantity.hashCode, minimumStockLevel.hashCode, categoryId.hashCode, createdById.hashCode, updatedById.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -252,7 +276,9 @@ class CreateProductVariables {
     if(brandName.state == OptionalState.set) {
       json['brandName'] = brandName.toJson();
     }
-    json['manufacturerId'] = nativeToJson<String>(manufacturerId);
+    if(manufacturerId.state == OptionalState.set) {
+      json['manufacturerId'] = manufacturerId.toJson();
+    }
     if(nationalDrugCode.state == OptionalState.set) {
       json['nationalDrugCode'] = nationalDrugCode.toJson();
     }
@@ -272,19 +298,23 @@ class CreateProductVariables {
     drugSchedule.name
     ;
     json['requiresPrescription'] = nativeToJson<bool>(requiresPrescription);
-    json['therapeuticClassId'] = nativeToJson<String>(therapeuticClassId);
+    if(therapeuticClassId.state == OptionalState.set) {
+      json['therapeuticClassId'] = therapeuticClassId.toJson();
+    }
     json['packageSize'] = nativeToJson<int>(packageSize);
     json['packageUnit'] = 
     packageUnit.name
     ;
-    json['primarySupplierId'] = nativeToJson<String>(primarySupplierId);
+    if(primarySupplierId.state == OptionalState.set) {
+      json['primarySupplierId'] = primarySupplierId.toJson();
+    }
     json['leadTimeDays'] = nativeToJson<int>(leadTimeDays);
     json['reorderPoint'] = nativeToJson<int>(reorderPoint);
     json['reorderQuantity'] = nativeToJson<int>(reorderQuantity);
     json['minimumStockLevel'] = nativeToJson<int>(minimumStockLevel);
-    json['category'] = 
-    category.name
-    ;
+    if(categoryId.state == OptionalState.set) {
+      json['categoryId'] = categoryId.toJson();
+    }
     json['createdById'] = nativeToJson<String>(createdById);
     json['updatedById'] = nativeToJson<String>(updatedById);
     return json;
@@ -312,7 +342,7 @@ class CreateProductVariables {
     required this.reorderPoint,
     required this.reorderQuantity,
     required this.minimumStockLevel,
-    required this.category,
+    required this.categoryId,
     required this.createdById,
     required this.updatedById,
   });

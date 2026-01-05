@@ -1,0 +1,27 @@
+# ============================================================================
+# CATEGORY MANAGEMENT
+# ============================================================================
+
+"""
+Represents a hierarchical category for products.
+Allows for dynamic creation of categories by users.
+"""
+type Category @table {
+  id: UUID! @default(expr: "uuidV4()")
+  business: Business!
+  businessId: UUID!
+  
+  name: String! @col(dataType: "varchar(100)")
+  description: String @col(dataType: "text")
+  
+  # Hierarchy
+  parent: Category
+  parentId: UUID
+  
+  # Metadata
+  metadata: String @col(dataType: "text")
+  isActive: Boolean! @default(value: true)
+  
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}

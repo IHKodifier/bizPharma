@@ -47,13 +47,20 @@ class LocationService {
     String? licenseNumber,
   }) async {
     try {
+      // Force token refresh to ensure Data Connect gets a valid token
+      await FirebaseAuth.instance.currentUser?.getIdToken(true);
+
       // DEBUG: Verify Auth State before mutation
       final user = FirebaseAuth.instance.currentUser;
       print('🔍 DEBUG: createLocation called.');
       print('🔍 DEBUG: Current Auth User: ${user?.uid ?? "NULL (Detached?)"}');
       if (user != null) {
-        final token = await user.getIdToken();
-        print('🔍 DEBUG: Token available (len=${token?.length})');
+        final tokenResult = await user.getIdTokenResult(true);
+        print('🔍 DEBUG: Token Claims:');
+        print('   - iss: ${tokenResult.claims?['iss']}');
+        print('   - aud: ${tokenResult.claims?['aud']}');
+        print('   - sub: ${tokenResult.claims?['sub']}');
+        print('   - auth_time: ${tokenResult.claims?['auth_time']}');
       }
 
       // Auto-generate location code based on name
@@ -95,6 +102,9 @@ class LocationService {
     bool? isActive,
   }) async {
     try {
+      // Force token refresh
+      await FirebaseAuth.instance.currentUser?.getIdToken(true);
+
       // Use builder pattern for optional parameters
       final builder = BizPharmaConnector.instance.updateLocation(id: id);
 

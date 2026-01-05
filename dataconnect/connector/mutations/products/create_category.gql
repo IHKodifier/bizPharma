@@ -1,0 +1,20 @@
+# ============================================================================
+# CREATE CATEGORY
+# ============================================================================
+
+mutation CreateCategory(
+  $businessId: UUID!
+  $name: String!
+  $description: String
+  $parentId: UUID
+  $metadata: String
+) @auth(level: PUBLIC) @transaction {
+  category_insert(data: {
+    businessId: $businessId
+    name: $name
+    description: $description
+    parentId: $parentId
+    metadata: $metadata
+    isActive: true
+  })
+}

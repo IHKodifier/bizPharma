@@ -1,16 +1,16 @@
 # Basic Usage
 
 ```dart
-BizPharmaConnector.instance.ListAllCustomers().execute();
-BizPharmaConnector.instance.CreateProductBatch(createProductBatchVariables).execute();
-BizPharmaConnector.instance.GetLocationById(getLocationByIdVariables).execute();
-BizPharmaConnector.instance.ListPricingByLocation(listPricingByLocationVariables).execute();
-BizPharmaConnector.instance.ListAllSuppliers().execute();
+BizPharmaConnector.instance.CreateBusiness(createBusinessVariables).execute();
 BizPharmaConnector.instance.CreateManufacturer(createManufacturerVariables).execute();
-BizPharmaConnector.instance.CreateProductPricing(createProductPricingVariables).execute();
-BizPharmaConnector.instance.CreatePurchaseOrder(createPurchaseOrderVariables).execute();
 BizPharmaConnector.instance.CreateUser(createUserVariables).execute();
-BizPharmaConnector.instance.DeleteAllLocations().execute();
+BizPharmaConnector.instance.DeleteAllUsers().execute();
+BizPharmaConnector.instance.ListInventoryByLocation(listInventoryByLocationVariables).execute();
+BizPharmaConnector.instance.CreateProduct(createProductVariables).execute();
+BizPharmaConnector.instance.CreateProductBatch(createProductBatchVariables).execute();
+BizPharmaConnector.instance.GetUserBusinessAndDefaultLocation().execute();
+BizPharmaConnector.instance.GetUserByAuthId(getUserByAuthIdVariables).execute();
+BizPharmaConnector.instance.CreateBusinessAndAdmin(createBusinessAndAdminVariables).execute();
 
 ```
 
@@ -23,8 +23,8 @@ Optional fields can be discovered based on classes that have `Optional` object t
 This is an example of a mutation with an optional field:
 
 ```dart
-await BizPharmaConnector.instance.CreateBusinessAndAdmin({ ... })
-.userProfilePhoto(...)
+await BizPharmaConnector.instance.CreateTherapeuticClass({ ... })
+.description(...)
 .execute();
 ```
 

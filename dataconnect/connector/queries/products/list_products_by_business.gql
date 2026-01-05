@@ -2,7 +2,7 @@
 # LIST PRODUCTS BY BUSINESS
 # ============================================================================
 
-query ListProductsByBusiness($businessId: UUID!) @auth(level: USER) {
+query ListProductsByBusiness($businessId: UUID!) @auth(level: PUBLIC) {
   products(where: { businessId: { eq: $businessId } }) {
     id
     businessId
@@ -18,8 +18,11 @@ query ListProductsByBusiness($businessId: UUID!) @auth(level: USER) {
     routeOfAdministration
     drugSchedule
     requiresPrescription
-    category
-    subcategory
+    category {
+      id
+      name
+    }
+
     isActive
     isDiscontinued
     createdAt

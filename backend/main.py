@@ -123,7 +123,7 @@ async def root():
     return {
         "app": settings.APP_NAME,
         "version": settings.APP_VERSION,
-        "status": "running",
+        "status": "running", 
         "docs": "/docs",
         "firebase_initialized": firebase_config.is_initialized(),
     }

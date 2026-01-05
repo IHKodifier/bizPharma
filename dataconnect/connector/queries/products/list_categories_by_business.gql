@@ -1,0 +1,12 @@
+# ============================================================================
+# LIST CATEGORIES
+# ============================================================================
+
+query ListCategoriesByBusiness($businessId: UUID!) @auth(level: PUBLIC) {
+  categories(where: { businessId: { eq: $businessId }, isActive: { eq: true } }) {
+    id
+    name
+    description
+    parentId
+  }
+}

@@ -3,7 +3,7 @@
 # Returns User details, Business Name, and Default Location Name
 # ============================================================================
 
-query GetUserBusinessAndDefaultLocation @auth(level: PUBLIC) {
+query GetUserBusinessAndDefaultLocation @auth(level: USER) {
   users {
     firstName
     lastName

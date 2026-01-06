@@ -2,7 +2,7 @@
 # LIST CATEGORIES
 # ============================================================================
 
-query ListCategoriesByBusiness($businessId: UUID!) @auth(level: PUBLIC) {
+query ListCategoriesByBusiness($businessId: UUID!) @auth(level: USER) {
   categories(where: { businessId: { eq: $businessId }, isActive: { eq: true } }) {
     id
     name

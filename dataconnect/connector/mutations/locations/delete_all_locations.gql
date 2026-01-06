@@ -5,6 +5,6 @@
 # Use this mutation carefully, especially in production environments.
 # ============================================================================
 
-mutation DeleteAllLocations @auth(level: PUBLIC, insecureReason: "Convenience utility for local testing and cleanup.") {
+mutation DeleteAllLocations @auth(level: USER, insecureReason: "Convenience utility for local testing and cleanup.") {
   deleteLocations: location_deleteMany(all: true)
 }

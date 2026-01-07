@@ -13,6 +13,9 @@ class ApiConfig {
       if (host == 'bizpharma.app' || host == 'www.bizpharma.app') {
         return 'https://api.bizpharma.app';
       }
+      if (host == 'bizpharma-staging.web.app') {
+        return 'https://bizpharma-api-7rry5wij4a-el.a.run.app';
+      }
     }
 
     // For android emulator use 10.0.2.2 instead of localhost

@@ -4,79 +4,79 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
-part 'get_location_by_id.dart';
+part 'list_all_suppliers.dart';
 
-part 'create_location.dart';
+part 'get_business_by_id.dart';
 
-part 'verify_product.dart';
+part 'create_business_and_admin.dart';
 
-part 'get_user_by_auth_id.dart';
-
-part 'list_all_businesses.dart';
-
-part 'create_address.dart';
+part 'list_all_customers.dart';
 
 part 'create_therapeutic_class.dart';
 
-part 'list_all_products.dart';
+part 'get_user_by_auth_id.dart';
 
-part 'create_business_and_admin.dart';
+part 'verify_product.dart';
 
 part 'create_user.dart';
 
 part 'delete_all_businesses.dart';
 
-part 'create_supplier.dart';
-
-part 'get_user_business_and_default_location.dart';
-
-part 'list_all_locations.dart';
-
-part 'create_manufacturer.dart';
-
-part 'create_goods_receipt.dart';
-
-part 'get_business_by_id.dart';
-
-part 'list_categories_by_business.dart';
-
-part 'list_products_by_business.dart';
-
-part 'create_business.dart';
-
-part 'update_location.dart';
-
-part 'list_locations_by_business.dart';
-
-part 'create_purchase_order.dart';
-
-part 'create_category.dart';
-
-part 'create_inventory_level.dart';
-
-part 'delete_all_users.dart';
-
-part 'create_customer.dart';
+part 'create_location.dart';
 
 part 'create_product.dart';
 
+part 'create_address.dart';
+
+part 'create_purchase_order.dart';
+
 part 'create_product_batch.dart';
 
-part 'list_all_users.dart';
+part 'list_all_businesses.dart';
 
 part 'list_pricing_by_location.dart';
 
-part 'list_inventory_by_location.dart';
+part 'list_categories_by_business.dart';
 
-part 'list_all_suppliers.dart';
-
-part 'delete_all_locations.dart';
+part 'create_manufacturer.dart';
 
 part 'delete_location.dart';
 
 part 'create_product_pricing.dart';
 
-part 'list_all_customers.dart';
+part 'create_goods_receipt.dart';
+
+part 'create_inventory_level.dart';
+
+part 'create_supplier.dart';
+
+part 'create_business.dart';
+
+part 'delete_all_locations.dart';
+
+part 'update_location.dart';
+
+part 'create_category.dart';
+
+part 'list_all_users.dart';
+
+part 'list_all_locations.dart';
+
+part 'list_locations_by_business.dart';
+
+part 'create_customer.dart';
+
+part 'delete_all_users.dart';
+
+part 'get_user_business_and_default_location.dart';
+
+part 'get_location_by_id.dart';
+
+part 'list_all_products.dart';
+
+part 'list_inventory_by_location.dart';
+
+part 'list_products_by_business.dart';
 
 
 
@@ -786,33 +786,23 @@ class Unknown extends EnumValue<Never> {
 class BizPharmaConnector {
   
   
-  GetLocationByIdVariablesBuilder getLocationById ({required String id, }) {
-    return GetLocationByIdVariablesBuilder(dataConnect, id: id,);
+  ListAllSuppliersVariablesBuilder listAllSuppliers () {
+    return ListAllSuppliersVariablesBuilder(dataConnect, );
   }
   
   
-  CreateLocationVariablesBuilder createLocation ({required String businessId, required String name, required String code, required LocationType type, }) {
-    return CreateLocationVariablesBuilder(dataConnect, businessId: businessId,name: name,code: code,type: type,);
+  GetBusinessByIdVariablesBuilder getBusinessById ({required String id, }) {
+    return GetBusinessByIdVariablesBuilder(dataConnect, id: id,);
   }
   
   
-  VerifyProductVariablesBuilder verifyProduct () {
-    return VerifyProductVariablesBuilder(dataConnect, );
+  CreateBusinessAndAdminVariablesBuilder createBusinessAndAdmin ({required String businessId, required String businessName, required String userEmail, required String userFirstName, required String userLastName, required String userMobile, required String authUid, required DateTime today, required String defaultLocationId, }) {
+    return CreateBusinessAndAdminVariablesBuilder(dataConnect, businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userMobile: userMobile,authUid: authUid,today: today,defaultLocationId: defaultLocationId,);
   }
   
   
-  GetUserByAuthIdVariablesBuilder getUserByAuthId ({required String id, }) {
-    return GetUserByAuthIdVariablesBuilder(dataConnect, id: id,);
-  }
-  
-  
-  ListAllBusinessesVariablesBuilder listAllBusinesses () {
-    return ListAllBusinessesVariablesBuilder(dataConnect, );
-  }
-  
-  
-  CreateAddressVariablesBuilder createAddress ({required String line1, required String city, required String state, required String postalCode, required String country, }) {
-    return CreateAddressVariablesBuilder(dataConnect, line1: line1,city: city,state: state,postalCode: postalCode,country: country,);
+  ListAllCustomersVariablesBuilder listAllCustomers () {
+    return ListAllCustomersVariablesBuilder(dataConnect, );
   }
   
   
@@ -821,13 +811,13 @@ class BizPharmaConnector {
   }
   
   
-  ListAllProductsVariablesBuilder listAllProducts () {
-    return ListAllProductsVariablesBuilder(dataConnect, );
+  GetUserByAuthIdVariablesBuilder getUserByAuthId ({required String id, }) {
+    return GetUserByAuthIdVariablesBuilder(dataConnect, id: id,);
   }
   
   
-  CreateBusinessAndAdminVariablesBuilder createBusinessAndAdmin ({required String businessId, required String businessName, required String userEmail, required String userFirstName, required String userLastName, required String userMobile, required String authUid, required DateTime today, required String defaultLocationId, }) {
-    return CreateBusinessAndAdminVariablesBuilder(dataConnect, businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userMobile: userMobile,authUid: authUid,today: today,defaultLocationId: defaultLocationId,);
+  VerifyProductVariablesBuilder verifyProduct () {
+    return VerifyProductVariablesBuilder(dataConnect, );
   }
   
   
@@ -841,83 +831,8 @@ class BizPharmaConnector {
   }
   
   
-  CreateSupplierVariablesBuilder createSupplier ({required String businessId, required String name, required SupplierType type, required String paymentTerms, required SupplierTier tier, }) {
-    return CreateSupplierVariablesBuilder(dataConnect, businessId: businessId,name: name,type: type,paymentTerms: paymentTerms,tier: tier,);
-  }
-  
-  
-  GetUserBusinessAndDefaultLocationVariablesBuilder getUserBusinessAndDefaultLocation () {
-    return GetUserBusinessAndDefaultLocationVariablesBuilder(dataConnect, );
-  }
-  
-  
-  ListAllLocationsVariablesBuilder listAllLocations () {
-    return ListAllLocationsVariablesBuilder(dataConnect, );
-  }
-  
-  
-  CreateManufacturerVariablesBuilder createManufacturer ({required String name, required String country, }) {
-    return CreateManufacturerVariablesBuilder(dataConnect, name: name,country: country,);
-  }
-  
-  
-  CreateGoodsReceiptVariablesBuilder createGoodsReceipt ({required String purchaseOrderId, required String businessId, required String receiptNumber, required GoodsReceiptStatus status, required String inspectedById, }) {
-    return CreateGoodsReceiptVariablesBuilder(dataConnect, purchaseOrderId: purchaseOrderId,businessId: businessId,receiptNumber: receiptNumber,status: status,inspectedById: inspectedById,);
-  }
-  
-  
-  GetBusinessByIdVariablesBuilder getBusinessById ({required String id, }) {
-    return GetBusinessByIdVariablesBuilder(dataConnect, id: id,);
-  }
-  
-  
-  ListCategoriesByBusinessVariablesBuilder listCategoriesByBusiness ({required String businessId, }) {
-    return ListCategoriesByBusinessVariablesBuilder(dataConnect, businessId: businessId,);
-  }
-  
-  
-  ListProductsByBusinessVariablesBuilder listProductsByBusiness ({required String businessId, }) {
-    return ListProductsByBusinessVariablesBuilder(dataConnect, businessId: businessId,);
-  }
-  
-  
-  CreateBusinessVariablesBuilder createBusiness ({required String name, required BusinessTier tier, required DateTime subscriptionStartDate, }) {
-    return CreateBusinessVariablesBuilder(dataConnect, name: name,tier: tier,subscriptionStartDate: subscriptionStartDate,);
-  }
-  
-  
-  UpdateLocationVariablesBuilder updateLocation ({required String id, }) {
-    return UpdateLocationVariablesBuilder(dataConnect, id: id,);
-  }
-  
-  
-  ListLocationsByBusinessVariablesBuilder listLocationsByBusiness ({required String businessId, }) {
-    return ListLocationsByBusinessVariablesBuilder(dataConnect, businessId: businessId,);
-  }
-  
-  
-  CreatePurchaseOrderVariablesBuilder createPurchaseOrder ({required String businessId, required String supplierId, required String orderNumber, required double totalAmount, required double subtotal, required double taxAmount, required PurchaseOrderStatus status, required String createdById, }) {
-    return CreatePurchaseOrderVariablesBuilder(dataConnect, businessId: businessId,supplierId: supplierId,orderNumber: orderNumber,totalAmount: totalAmount,subtotal: subtotal,taxAmount: taxAmount,status: status,createdById: createdById,);
-  }
-  
-  
-  CreateCategoryVariablesBuilder createCategory ({required String businessId, required String name, }) {
-    return CreateCategoryVariablesBuilder(dataConnect, businessId: businessId,name: name,);
-  }
-  
-  
-  CreateInventoryLevelVariablesBuilder createInventoryLevel ({required String productId, required String locationId, required String businessId, required int quantityOnHand, required int quantityAvailable, required double averageCost, required double totalValue, }) {
-    return CreateInventoryLevelVariablesBuilder(dataConnect, productId: productId,locationId: locationId,businessId: businessId,quantityOnHand: quantityOnHand,quantityAvailable: quantityAvailable,averageCost: averageCost,totalValue: totalValue,);
-  }
-  
-  
-  DeleteAllUsersVariablesBuilder deleteAllUsers () {
-    return DeleteAllUsersVariablesBuilder(dataConnect, );
-  }
-  
-  
-  CreateCustomerVariablesBuilder createCustomer ({required String businessId, required String firstName, required String lastName, required String createdById, }) {
-    return CreateCustomerVariablesBuilder(dataConnect, businessId: businessId,firstName: firstName,lastName: lastName,createdById: createdById,);
+  CreateLocationVariablesBuilder createLocation ({required String businessId, required String name, required String code, required LocationType type, }) {
+    return CreateLocationVariablesBuilder(dataConnect, businessId: businessId,name: name,code: code,type: type,);
   }
   
   
@@ -926,13 +841,23 @@ class BizPharmaConnector {
   }
   
   
+  CreateAddressVariablesBuilder createAddress ({required String line1, required String city, required String state, required String postalCode, required String country, }) {
+    return CreateAddressVariablesBuilder(dataConnect, line1: line1,city: city,state: state,postalCode: postalCode,country: country,);
+  }
+  
+  
+  CreatePurchaseOrderVariablesBuilder createPurchaseOrder ({required String businessId, required String supplierId, required String orderNumber, required double totalAmount, required double subtotal, required double taxAmount, required PurchaseOrderStatus status, required String createdById, }) {
+    return CreatePurchaseOrderVariablesBuilder(dataConnect, businessId: businessId,supplierId: supplierId,orderNumber: orderNumber,totalAmount: totalAmount,subtotal: subtotal,taxAmount: taxAmount,status: status,createdById: createdById,);
+  }
+  
+  
   CreateProductBatchVariablesBuilder createProductBatch ({required String productId, required String businessId, required String batchNumber, required String lotNumber, required DateTime manufacturingDate, required DateTime expiryDate, required String supplierId, required String goodsReceiptId, required DateTime receivedDate, required double unitCost, required double totalCost, required int totalQuantity, required int quantityRemaining, required String locationId, required String createdById, required String updatedById, }) {
     return CreateProductBatchVariablesBuilder(dataConnect, productId: productId,businessId: businessId,batchNumber: batchNumber,lotNumber: lotNumber,manufacturingDate: manufacturingDate,expiryDate: expiryDate,supplierId: supplierId,goodsReceiptId: goodsReceiptId,receivedDate: receivedDate,unitCost: unitCost,totalCost: totalCost,totalQuantity: totalQuantity,quantityRemaining: quantityRemaining,locationId: locationId,createdById: createdById,updatedById: updatedById,);
   }
   
   
-  ListAllUsersVariablesBuilder listAllUsers () {
-    return ListAllUsersVariablesBuilder(dataConnect, );
+  ListAllBusinessesVariablesBuilder listAllBusinesses () {
+    return ListAllBusinessesVariablesBuilder(dataConnect, );
   }
   
   
@@ -941,18 +866,13 @@ class BizPharmaConnector {
   }
   
   
-  ListInventoryByLocationVariablesBuilder listInventoryByLocation ({required String locationId, }) {
-    return ListInventoryByLocationVariablesBuilder(dataConnect, locationId: locationId,);
+  ListCategoriesByBusinessVariablesBuilder listCategoriesByBusiness ({required String businessId, }) {
+    return ListCategoriesByBusinessVariablesBuilder(dataConnect, businessId: businessId,);
   }
   
   
-  ListAllSuppliersVariablesBuilder listAllSuppliers () {
-    return ListAllSuppliersVariablesBuilder(dataConnect, );
-  }
-  
-  
-  DeleteAllLocationsVariablesBuilder deleteAllLocations () {
-    return DeleteAllLocationsVariablesBuilder(dataConnect, );
+  CreateManufacturerVariablesBuilder createManufacturer ({required String name, required String country, }) {
+    return CreateManufacturerVariablesBuilder(dataConnect, name: name,country: country,);
   }
   
   
@@ -966,8 +886,88 @@ class BizPharmaConnector {
   }
   
   
-  ListAllCustomersVariablesBuilder listAllCustomers () {
-    return ListAllCustomersVariablesBuilder(dataConnect, );
+  CreateGoodsReceiptVariablesBuilder createGoodsReceipt ({required String purchaseOrderId, required String businessId, required String receiptNumber, required GoodsReceiptStatus status, required String inspectedById, }) {
+    return CreateGoodsReceiptVariablesBuilder(dataConnect, purchaseOrderId: purchaseOrderId,businessId: businessId,receiptNumber: receiptNumber,status: status,inspectedById: inspectedById,);
+  }
+  
+  
+  CreateInventoryLevelVariablesBuilder createInventoryLevel ({required String productId, required String locationId, required String businessId, required int quantityOnHand, required int quantityAvailable, required double averageCost, required double totalValue, }) {
+    return CreateInventoryLevelVariablesBuilder(dataConnect, productId: productId,locationId: locationId,businessId: businessId,quantityOnHand: quantityOnHand,quantityAvailable: quantityAvailable,averageCost: averageCost,totalValue: totalValue,);
+  }
+  
+  
+  CreateSupplierVariablesBuilder createSupplier ({required String businessId, required String name, required SupplierType type, required String paymentTerms, required SupplierTier tier, }) {
+    return CreateSupplierVariablesBuilder(dataConnect, businessId: businessId,name: name,type: type,paymentTerms: paymentTerms,tier: tier,);
+  }
+  
+  
+  CreateBusinessVariablesBuilder createBusiness ({required String name, required BusinessTier tier, required DateTime subscriptionStartDate, }) {
+    return CreateBusinessVariablesBuilder(dataConnect, name: name,tier: tier,subscriptionStartDate: subscriptionStartDate,);
+  }
+  
+  
+  DeleteAllLocationsVariablesBuilder deleteAllLocations () {
+    return DeleteAllLocationsVariablesBuilder(dataConnect, );
+  }
+  
+  
+  UpdateLocationVariablesBuilder updateLocation ({required String id, }) {
+    return UpdateLocationVariablesBuilder(dataConnect, id: id,);
+  }
+  
+  
+  CreateCategoryVariablesBuilder createCategory ({required String businessId, required String name, }) {
+    return CreateCategoryVariablesBuilder(dataConnect, businessId: businessId,name: name,);
+  }
+  
+  
+  ListAllUsersVariablesBuilder listAllUsers () {
+    return ListAllUsersVariablesBuilder(dataConnect, );
+  }
+  
+  
+  ListAllLocationsVariablesBuilder listAllLocations () {
+    return ListAllLocationsVariablesBuilder(dataConnect, );
+  }
+  
+  
+  ListLocationsByBusinessVariablesBuilder listLocationsByBusiness ({required String businessId, }) {
+    return ListLocationsByBusinessVariablesBuilder(dataConnect, businessId: businessId,);
+  }
+  
+  
+  CreateCustomerVariablesBuilder createCustomer ({required String businessId, required String firstName, required String lastName, required String createdById, }) {
+    return CreateCustomerVariablesBuilder(dataConnect, businessId: businessId,firstName: firstName,lastName: lastName,createdById: createdById,);
+  }
+  
+  
+  DeleteAllUsersVariablesBuilder deleteAllUsers () {
+    return DeleteAllUsersVariablesBuilder(dataConnect, );
+  }
+  
+  
+  GetUserBusinessAndDefaultLocationVariablesBuilder getUserBusinessAndDefaultLocation () {
+    return GetUserBusinessAndDefaultLocationVariablesBuilder(dataConnect, );
+  }
+  
+  
+  GetLocationByIdVariablesBuilder getLocationById ({required String id, }) {
+    return GetLocationByIdVariablesBuilder(dataConnect, id: id,);
+  }
+  
+  
+  ListAllProductsVariablesBuilder listAllProducts () {
+    return ListAllProductsVariablesBuilder(dataConnect, );
+  }
+  
+  
+  ListInventoryByLocationVariablesBuilder listInventoryByLocation ({required String locationId, }) {
+    return ListInventoryByLocationVariablesBuilder(dataConnect, locationId: locationId,);
+  }
+  
+  
+  ListProductsByBusinessVariablesBuilder listProductsByBusiness ({required String businessId, }) {
+    return ListProductsByBusinessVariablesBuilder(dataConnect, businessId: businessId,);
   }
   
 

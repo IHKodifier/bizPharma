@@ -28,6 +28,9 @@ class DefaultFirebaseOptions {
       if (host == 'bizpharma.app' || host == 'www.bizpharma.app') {
         return webProd;
       }
+      if (host == 'bizpharma-staging.web.app') {
+        return webStaging;
+      }
 
       switch (environment) {
         case 'production':

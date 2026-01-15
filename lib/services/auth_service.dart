@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import '../dataconnect_generated/biz_pharma.dart';
+import 'package:firebase_data_connect/firebase_data_connect.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -85,7 +86,12 @@ class AuthService {
           .execute();
       return result.data.user;
     } catch (e) {
-      log('User not found in Data Connect (new user): $e');
+      log('User not found in Data Connect (new user) or Auth Error: $e');
+      if (e is DataConnectOperationError) {
+        log('DataConnect Error Code: ${e.code}');
+        log('DataConnect Error Message: ${e.message}');
+        // Try to log details if available
+      }
       // Return null for new users instead of throwing error
       // This allows the auth wrapper to route them to onboarding
       return null;

@@ -94,6 +94,7 @@ app.add_middleware(
     # Allow specific origins for Staging/Prod/Dev
     allow_origins=[
         "https://bizpharma-staging.web.app",
+        "https://bizpharma-staging.firebaseapp.com",
         "https://bizpharma-prod.web.app",
         "http://localhost:3000",
         "http://127.0.0.1:3000",

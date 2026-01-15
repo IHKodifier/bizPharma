@@ -37,7 +37,7 @@ async def initialize_business(user_id: str, data: SetupInitializeRequest) -> Bus
             user_mobile=sanitized_phone,
             auth_uid=user_id,
             user_profile_photo=data.profile_photo,
-            id_token=data.id_token
+            # id_token=data.id_token  <-- REMOVED to force IAM Auth (Service Account)
         )
     except Exception as e:
         print(f"❌ ONBOARDING ERROR: {str(e)}")

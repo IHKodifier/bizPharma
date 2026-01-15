@@ -22,7 +22,15 @@ void main() async {
     // ------------------------------------
   }
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (kIsWeb) {
+    print('🔍 DEBUG: Uri.base.host = ${Uri.base.host}');
+  }
+
+  // Determine options
+  final options = DefaultFirebaseOptions.currentPlatform;
+  print('🔍 DEBUG: Selected Firebase Options Project ID: ${options.projectId}');
+
+  await Firebase.initializeApp(options: options);
 
   if (kDebugMode) {
     // Connect to local emulators

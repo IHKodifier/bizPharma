@@ -5,6 +5,9 @@ import 'widgets/hero_section.dart';
 import 'widgets/value_props_section.dart';
 import 'widgets/pricing_section.dart';
 import 'widgets/footer.dart';
+import 'package:flutter/foundation.dart';
+import '../../config/api_config.dart';
+import '../../firebase_options.dart';
 
 class LandingPage extends ConsumerStatefulWidget {
   const LandingPage({super.key});
@@ -65,6 +68,33 @@ class _LandingPageState extends ConsumerState<LandingPage> {
               return LandingNavbar(isScrolled: isScrolled);
             },
           ),
+          if (kIsWeb)
+            Positioned(
+              bottom: 10,
+              left: 10,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.black54,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'ENV: ${ApiConfig.environment}',
+                      style: const TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                    Text(
+                      'API: ${ApiConfig.baseUrl}',
+                      style: const TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                    Text(
+                      'PROJ: ${DefaultFirebaseOptions.currentPlatform.projectId}',
+                      style: const TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );

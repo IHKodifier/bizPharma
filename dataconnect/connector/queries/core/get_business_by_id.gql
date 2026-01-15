@@ -2,7 +2,7 @@
 # GET BUSINESS BY ID
 # ============================================================================
 
-query GetBusinessById($id: UUID!) @auth(level: USER) {
+query GetBusinessById($id: UUID!) @auth(level: PUBLIC, insecureReason: "Required for session restoration. Business ID comes from authenticated user's businessId field which is already validated.") {
   business(id: $id) {
     id
     name

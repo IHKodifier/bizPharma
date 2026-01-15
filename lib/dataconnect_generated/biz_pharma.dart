@@ -971,6 +971,10 @@ class BizPharmaConnector {
   }
   
 
+import 'package:firebase_core/firebase_core.dart';
+
+// ... rest of imports
+
   static ConnectorConfig connectorConfig = ConnectorConfig(
     'asia-south1',
     'biz-pharma',
@@ -979,9 +983,18 @@ class BizPharmaConnector {
 
   BizPharmaConnector({required this.dataConnect});
   static BizPharmaConnector get instance {
+    // DYNAMIC PROJECT ID FIX: Use the current Firebase App's Project ID
+    // This ensures consistency between Auth Token (User) and Data Connect (Resource)
+    // preventing 401 Unauthorized errors due to audience mismatch.
+    final projectId = Firebase.app().options.projectId;
+    
     return BizPharmaConnector(
         dataConnect: FirebaseDataConnect.instanceFor(
-            connectorConfig: connectorConfig,
+            connectorConfig: ConnectorConfig(
+              'asia-south1',
+              projectId,
+              'bizpharma-service',
+            ),
             sdkType: CallerSDKType.generated));
   }
 

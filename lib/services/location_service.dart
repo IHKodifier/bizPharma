@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../dataconnect_generated/biz_pharma.dart';
 
 /// Service for managing locations in the system.
@@ -11,6 +12,25 @@ class LocationService {
   ) async {
     try {
       print('🔍 DEBUG: Fetching locations for business: $businessId');
+
+      // --- DIAGNOSTIC START ---
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          final tokenResult = await user.getIdTokenResult(true);
+          print('🛑 AUTH DIAGNOSTIC:');
+          print('   - App Project ID: ${Firebase.app().options.projectId}');
+          print('   - Token Issuer (iss): ${tokenResult.claims?['iss']}');
+          print('   - Token Audience (aud): ${tokenResult.claims?['aud']}');
+          print('   - User UID: ${user.uid}');
+        } else {
+          print('🛑 AUTH DIAGNOSTIC: User is NULL');
+        }
+      } catch (e) {
+        print('🛑 AUTH DIAGNOSTIC ERROR: $e');
+      }
+      // --- DIAGNOSTIC END ---
+
       final result = await BizPharmaConnector.instance
           .listLocationsByBusiness(businessId: businessId)
           .execute();

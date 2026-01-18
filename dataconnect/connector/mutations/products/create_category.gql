@@ -8,7 +8,7 @@ mutation CreateCategory(
   $description: String
   $parentId: UUID
   $metadata: String
-) @auth(level: PUBLIC) @transaction {
+) @auth(level: USER) @transaction {
   category_insert(data: {
     businessId: $businessId
     name: $name

@@ -81,6 +81,22 @@ class AuthService {
   // Check if user exists in Data Connect and return the user object
   Future<GetUserByAuthIdUser?> getUser(String uid) async {
     try {
+      // --- DIAGNOSTIC START ---
+      try {
+        final user = _auth.currentUser;
+        if (user != null) {
+          final tokenResult = await user.getIdTokenResult(true);
+          print('🛑 AUTH DIAGNOSTIC (getUser):');
+          print('   - App Project ID: ${_auth.app.options.projectId}');
+          print('   - Token Issuer (iss): ${tokenResult.claims?['iss']}');
+          print('   - Token Audience (aud): ${tokenResult.claims?['aud']}');
+          print('   - User UID: ${user.uid}');
+        }
+      } catch (e) {
+        print('🛑 AUTH DIAGNOSTIC ERROR: $e');
+      }
+      // --- DIAGNOSTIC END ---
+
       final result = await BizPharmaConnector.instance
           .getUserByAuthId(id: uid)
           .execute();

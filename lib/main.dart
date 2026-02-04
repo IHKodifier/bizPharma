@@ -53,6 +53,6 @@ void main() async {
   //   appleProvider: AppleProvider.debug,
   // );
   print('⚠️ APP CHECK IS TEMPORARILY DISABLED FOR DIAGNOSIS ⚠️');
-
+// just another trivial commit to trigger a build in github actions
   runApp(const ProviderScope(child: MyApp()));
 }

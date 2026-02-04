@@ -6,6 +6,8 @@ import 'widgets/value_props_section.dart';
 import 'widgets/pricing_section.dart';
 import 'widgets/footer.dart';
 import 'package:flutter/foundation.dart';
+import 'package:firebase_data_connect/firebase_data_connect.dart';
+import '../../dataconnect_generated/biz_pharma.dart';
 import '../../config/api_config.dart';
 import '../../firebase_options.dart';
 
@@ -19,6 +21,17 @@ class LandingPage extends ConsumerStatefulWidget {
 class _LandingPageState extends ConsumerState<LandingPage> {
   late final ScrollController _scrollController;
   final ValueNotifier<bool> _isScrolledNotifier = ValueNotifier(false);
+  final ValueNotifier<String> _probeStatus = ValueNotifier('Idle');
+
+  Future<void> _runProbe() async {
+    _probeStatus.value = 'Probing...';
+    try {
+      final result = await BizPharmaConnector.instance.uptime().execute();
+      _probeStatus.value = 'OK (Found ${result.data.users.length} users)';
+    } catch (e) {
+      _probeStatus.value = 'FAIL: $e';
+    }
+  }
 
   @override
   void initState() {
@@ -99,6 +112,41 @@ class _LandingPageState extends ConsumerState<LandingPage> {
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                    ValueListenableBuilder<String>(
+                      valueListenable: _probeStatus,
+                      builder: (context, status, child) {
+                        Color paramsColor = Colors.white;
+                        if (status.startsWith('OK')) paramsColor = Colors.green;
+                        if (status.startsWith('FAIL')) paramsColor = Colors.red;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ElevatedButton(
+                              onPressed: _runProbe,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                minimumSize: const Size(0, 24),
+                              ),
+                              child: const Text('Run Connectivity Probe'),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              status,
+                              style: TextStyle(
+                                color: paramsColor,
+                                fontSize: 10,
+                              ),
+                              maxLines: 5,
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),

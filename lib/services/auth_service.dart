@@ -83,45 +83,46 @@ class AuthService {
 
   // Check if user exists in Data Connect and return the user object
   Future<GetUserByAuthIdUser?> getUser(String uid) async {
+    // --- DIAGNOSTIC START ---
+    String diagnosticInfo = '';
     try {
-      // --- DIAGNOSTIC START ---
-      try {
-        final user = _auth.currentUser;
-        if (user != null) {
-          final tokenResult = await user.getIdTokenResult(true);
-          final projectId = _auth.app.options.projectId;
-          final iss = tokenResult.claims?['iss'];
-          final aud = tokenResult.claims?['aud'];
+      final user = _auth.currentUser;
+      if (user != null) {
+        final tokenResult = await user.getIdTokenResult(true);
+        final projectId = _auth.app.options.projectId;
+        final iss = tokenResult.claims?['iss'];
+        final aud = tokenResult.claims?['aud'];
 
-          print('🛑 AUTH DIAGNOSTIC (getUser) v2:');
-          print('   - App Project ID: ' + projectId);
-          print('   - Token Issuer (iss): ' + (iss?.toString() ?? 'null'));
-          print('   - Token Audience (aud): ' + (aud?.toString() ?? 'null'));
-          print('   - User UID: ' + user.uid);
-        }
-      } catch (e) {
-        print('🛑 AUTH DIAGNOSTIC ERROR: ' + e.toString());
+        diagnosticInfo =
+            '''
+          DIAGNOSTICS:
+          App Project ID: $projectId
+          Token Issuer (iss): $iss
+          Token Audience (aud): $aud
+          User UID: ${user.uid}
+          ''';
+        print(diagnosticInfo);
+      } else {
+        diagnosticInfo = 'DIAGNOSTICS: User is null (not signed in)';
       }
-      // --- DIAGNOSTIC END ---
+    } catch (e) {
+      diagnosticInfo = 'DIAGNOSTICS FAILED: $e';
+    }
+    // --- DIAGNOSTIC END ---
 
+    try {
       final result = await BizPharmaConnector.instance
           .getUserByAuthId(id: uid)
           .execute();
+
+      if (result.data.user == null) {
+        print('User query returned null (New User Flow)');
+        return null;
+      }
       return result.data.user;
     } catch (e) {
-      print(
-        'User not found in Data Connect (new user) or Auth Error: ' +
-            e.toString(),
-      );
-      log('User not found in Data Connect (new user) or Auth Error: $e');
-      if (e is DataConnectOperationError) {
-        log('DataConnect Error Code: ${e.code}');
-        log('DataConnect Error Message: ${e.message}');
-        // Try to log details if available
-      }
-      // Return null for new users instead of throwing error
-      // This allows the auth wrapper to route them to onboarding
-      return null;
+      // THROW THE DIAGNOSTICS TO THE UI
+      throw Exception('AUTH ERROR: $e\n\n$diagnosticInfo');
     }
   }
 

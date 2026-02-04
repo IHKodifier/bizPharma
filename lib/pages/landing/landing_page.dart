@@ -91,6 +91,15 @@ class _LandingPageState extends ConsumerState<LandingPage> {
                       'PROJ: ${DefaultFirebaseOptions.currentPlatform.projectId}',
                       style: const TextStyle(color: Colors.white, fontSize: 10),
                     ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      'v.DIAGNOSTIC-001 - APP CHECK DISABLED',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -2,7 +2,7 @@
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:developer';
-import 'dart:js' as js; // Add JS interop
+// import 'dart:js' as js; // Add JS interop
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import '../dataconnect_generated/biz_pharma.dart';
@@ -93,25 +93,14 @@ class AuthService {
           final iss = tokenResult.claims?['iss'];
           final aud = tokenResult.claims?['aud'];
 
-          // Use JS console.warn to force visibility in Release builds
-          js.context.callMethod('console.warn', [
-            '🛑 AUTH DIAGNOSTIC (getUser):',
-          ]);
-          js.context.callMethod('console.warn', [
-            '   - App Project ID: ' + projectId,
-          ]);
-          js.context.callMethod('console.warn', [
-            '   - Token Issuer (iss): ' + (iss?.toString() ?? 'null'),
-          ]);
-          js.context.callMethod('console.warn', [
-            '   - Token Audience (aud): ' + (aud?.toString() ?? 'null'),
-          ]);
-          js.context.callMethod('console.warn', ['   - User UID: ' + user.uid]);
+          print('🛑 AUTH DIAGNOSTIC (getUser) v2:');
+          print('   - App Project ID: ' + projectId);
+          print('   - Token Issuer (iss): ' + (iss?.toString() ?? 'null'));
+          print('   - Token Audience (aud): ' + (aud?.toString() ?? 'null'));
+          print('   - User UID: ' + user.uid);
         }
       } catch (e) {
-        js.context.callMethod('console.error', [
-          '🛑 AUTH DIAGNOSTIC ERROR: ' + e.toString(),
-        ]);
+        print('🛑 AUTH DIAGNOSTIC ERROR: ' + e.toString());
       }
       // --- DIAGNOSTIC END ---
 
@@ -120,10 +109,10 @@ class AuthService {
           .execute();
       return result.data.user;
     } catch (e) {
-      js.context.callMethod('console.error', [
+      print(
         'User not found in Data Connect (new user) or Auth Error: ' +
             e.toString(),
-      ]);
+      );
       log('User not found in Data Connect (new user) or Auth Error: $e');
       if (e is DataConnectOperationError) {
         log('DataConnect Error Code: ${e.code}');

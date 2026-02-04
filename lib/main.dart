@@ -43,13 +43,16 @@ void main() async {
   }
 
   // Activate App Check
-  await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaEnterpriseProvider(
-      AppCheckConfig.webRecaptchaSiteKey,
-    ),
-    androidProvider: AndroidProvider.debug,
-    appleProvider: AppleProvider.debug,
-  );
+  // Activate App Check
+  // TODO: REVERT THIS AFTER STAGING DIAGNOSIS. APP CHECK MUST BE ON FOR PRODUCTION.
+  // await FirebaseAppCheck.instance.activate(
+  //   webProvider: ReCaptchaEnterpriseProvider(
+  //     AppCheckConfig.webRecaptchaSiteKey,
+  //   ),
+  //   androidProvider: AndroidProvider.debug,
+  //   appleProvider: AppleProvider.debug,
+  // );
+  print('⚠️ APP CHECK IS TEMPORARILY DISABLED FOR DIAGNOSIS ⚠️');
 
   runApp(const ProviderScope(child: MyApp()));
 }

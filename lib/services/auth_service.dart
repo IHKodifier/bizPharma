@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:developer';
 // import 'dart:js' as js; // Add JS interop
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import '../dataconnect_generated/biz_pharma.dart';
-import 'package:firebase_data_connect/firebase_data_connect.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -124,6 +122,7 @@ class AuthService {
       // THROW THE DIAGNOSTICS TO THE UI
       throw Exception('AUTH ERROR: $e\n\n$diagnosticInfo');
     }
+    return null;
   }
 
   // Create Business and Admin User atomically (includes default Main Store location)

@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:developer';
+import 'dart:js' as js; // Add JS interop
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import '../dataconnect_generated/biz_pharma.dart';
@@ -86,14 +89,29 @@ class AuthService {
         final user = _auth.currentUser;
         if (user != null) {
           final tokenResult = await user.getIdTokenResult(true);
-          print('🛑 AUTH DIAGNOSTIC (getUser):');
-          print('   - App Project ID: ${_auth.app.options.projectId}');
-          print('   - Token Issuer (iss): ${tokenResult.claims?['iss']}');
-          print('   - Token Audience (aud): ${tokenResult.claims?['aud']}');
-          print('   - User UID: ${user.uid}');
+          final projectId = _auth.app.options.projectId;
+          final iss = tokenResult.claims?['iss'];
+          final aud = tokenResult.claims?['aud'];
+
+          // Use JS console.warn to force visibility in Release builds
+          js.context.callMethod('console.warn', [
+            '🛑 AUTH DIAGNOSTIC (getUser):',
+          ]);
+          js.context.callMethod('console.warn', [
+            '   - App Project ID: ' + projectId,
+          ]);
+          js.context.callMethod('console.warn', [
+            '   - Token Issuer (iss): ' + (iss?.toString() ?? 'null'),
+          ]);
+          js.context.callMethod('console.warn', [
+            '   - Token Audience (aud): ' + (aud?.toString() ?? 'null'),
+          ]);
+          js.context.callMethod('console.warn', ['   - User UID: ' + user.uid]);
         }
       } catch (e) {
-        print('🛑 AUTH DIAGNOSTIC ERROR: $e');
+        js.context.callMethod('console.error', [
+          '🛑 AUTH DIAGNOSTIC ERROR: ' + e.toString(),
+        ]);
       }
       // --- DIAGNOSTIC END ---
 
@@ -102,6 +120,10 @@ class AuthService {
           .execute();
       return result.data.user;
     } catch (e) {
+      js.context.callMethod('console.error', [
+        'User not found in Data Connect (new user) or Auth Error: ' +
+            e.toString(),
+      ]);
       log('User not found in Data Connect (new user) or Auth Error: $e');
       if (e is DataConnectOperationError) {
         log('DataConnect Error Code: ${e.code}');

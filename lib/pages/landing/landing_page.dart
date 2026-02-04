@@ -24,12 +24,17 @@ class _LandingPageState extends ConsumerState<LandingPage> {
   final ValueNotifier<String> _probeStatus = ValueNotifier('Idle');
 
   Future<void> _runProbe() async {
+    print('Connectivity Probe: Starting...');
     _probeStatus.value = 'Probing...';
     try {
       final result = await BizPharmaConnector.instance.uptime().execute();
-      _probeStatus.value = 'OK (Found ${result.data.users.length} users)';
+      final msg = 'OK (Found ${result.data.users.length} users)';
+      print('Connectivity Probe: $msg');
+      _probeStatus.value = msg;
     } catch (e) {
-      _probeStatus.value = 'FAIL: $e';
+      final msg = 'FAIL: $e';
+      print('Connectivity Probe: $msg');
+      _probeStatus.value = msg;
     }
   }
 

@@ -1,16 +1,16 @@
 # Basic Usage
 
 ```dart
-BizPharmaConnector.instance.CreateCustomer(createCustomerVariables).execute();
-BizPharmaConnector.instance.CreateProduct(createProductVariables).execute();
-BizPharmaConnector.instance.CreateBusiness(createBusinessVariables).execute();
-BizPharmaConnector.instance.DeleteLocation(deleteLocationVariables).execute();
+BizPharmaConnector.instance.CreateLocation(createLocationVariables).execute();
+BizPharmaConnector.instance.DeleteAllLocations().execute();
 BizPharmaConnector.instance.CreateCategory(createCategoryVariables).execute();
+BizPharmaConnector.instance.CreateInventoryLevel(createInventoryLevelVariables).execute();
 BizPharmaConnector.instance.VerifyProduct().execute();
-BizPharmaConnector.instance.GetBusinessById(getBusinessByIdVariables).execute();
-BizPharmaConnector.instance.GetUserBusinessAndDefaultLocation().execute();
+BizPharmaConnector.instance.GetUserByAuthId(getUserByAuthIdVariables).execute();
+BizPharmaConnector.instance.ListAllCustomers().execute();
+BizPharmaConnector.instance.ListInventoryByLocation(listInventoryByLocationVariables).execute();
 BizPharmaConnector.instance.ListAllBusinesses().execute();
-BizPharmaConnector.instance.CreateManufacturer(createManufacturerVariables).execute();
+BizPharmaConnector.instance.ListProductsByBusiness(listProductsByBusinessVariables).execute();
 
 ```
 

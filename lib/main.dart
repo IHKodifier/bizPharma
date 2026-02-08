@@ -43,16 +43,14 @@ void main() async {
   }
 
   // Activate App Check
-  // Activate App Check
-  // TODO: REVERT THIS AFTER STAGING DIAGNOSIS. APP CHECK MUST BE ON FOR PRODUCTION.
-  // await FirebaseAppCheck.instance.activate(
-  //   webProvider: ReCaptchaEnterpriseProvider(
-  //     AppCheckConfig.webRecaptchaSiteKey,
-  //   ),
-  //   androidProvider: AndroidProvider.debug,
-  //   appleProvider: AppleProvider.debug,
-  // );
-  print('⚠️ APP CHECK IS TEMPORARILY DISABLED FOR DIAGNOSIS ⚠️');
-// just another trivial commit to trigger a build in github actions
+  await FirebaseAppCheck.instance.activate(
+    webProvider: ReCaptchaEnterpriseProvider(
+      AppCheckConfig.webRecaptchaSiteKey,
+    ),
+    androidProvider: AndroidProvider.debug,
+    appleProvider: AppleProvider.debug,
+  );
+  print('✅ App Check activated');
+
   runApp(const ProviderScope(child: MyApp()));
 }

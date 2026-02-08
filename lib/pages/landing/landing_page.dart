@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_data_connect/firebase_data_connect.dart';
 import '../../dataconnect_generated/biz_pharma.dart';
 import '../../config/api_config.dart';
+import '../../config/feature_flags.dart';
 import '../../firebase_options.dart';
 
 class LandingPage extends ConsumerStatefulWidget {
@@ -86,7 +87,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
               return LandingNavbar(isScrolled: isScrolled);
             },
           ),
-          if (kIsWeb)
+          if (FeatureFlags.showConnectivityOverlay)
             Positioned(
               bottom: 10,
               left: 10,
@@ -111,9 +112,9 @@ class _LandingPageState extends ConsumerState<LandingPage> {
                     ),
                     const SizedBox(height: 4),
                     const Text(
-                      'v.DIAGNOSTIC-001 - APP CHECK DISABLED',
+                      'v.DIAGNOSTIC-002 - APP CHECK ENABLED',
                       style: TextStyle(
-                        color: Colors.red,
+                        color: Colors.green,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),

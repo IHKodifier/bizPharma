@@ -110,3 +110,71 @@
 **Status:** ✅ Auth unification complete and verified in staging
 
 ---
+
+### 2026-02-08T23:18:00+05:00 - Session: USER_ANON Trial User Implementation Success
+
+**Goal:** Update 22 Data Connect operations to `USER_ANON` for anonymous trial user support and verify functionality in staging.
+
+**Proceedings:**
+1. Updated 22 operations from `@auth(level: USER)` to `@auth(level: USER_ANON)`
+2. Added `insecureReason` annotations to all operations
+3. Committed changes (hash: c62098c) and pushed to dev branch
+4. User deployed Data Connect schema to staging manually
+5. GitHub Actions build triggered for frontend deployment
+6. User verified 5 critical operations working successfully in staging
+
+**What Worked:**
+- ✅ **Anonymous user sign-up and onboarding** - No 401 errors
+- ✅ **Session persistence on page reload** - User stays logged in
+- ✅ **Adding location** - CreateLocation mutation successful
+- ✅ **Adding product category** - CreateCategory mutation successful
+- ✅ **Adding products** - CreateProduct mutation successful
+- ✅ Systematic category-by-category updates (locations, products, suppliers, customers, pricing, procurement, business)
+- ✅ Standard `insecureReason` annotation for all operations
+- ✅ Firebase INSECURE warnings expected and documented
+
+**What Didn't:**
+- ❌ No issues encountered during implementation or testing
+
+**Gotchas:**
+1. **Firebase INSECURE warnings are expected** - When using `USER_ANON`, Firebase Data Connect compiler shows warnings. These are intentional and documented with `insecureReason`.
+
+2. **App Check was disabled for diagnosis** - Temporarily disabled to isolate auth issues. Analysis shows 15-20% probability of disruption when re-enabled (LOW RISK).
+
+3. **Connectivity overlay needs toggle mechanism** - Diagnostic overlay on landing page should be controllable via feature flag, not hardcoded.
+
+4. **Business-scoped access is critical** - All operations validate `businessId` to prevent cross-business data access. This is the actual security layer, not the auth level.
+
+**Operations Updated (22 Total):**
+- **Locations:** 5 operations (list, get, create, update, delete)
+- **Products:** 8 operations (list, categories, inventory, create, batches, therapeutic classes)
+- **Suppliers:** 2 operations (list, create)
+- **Customers:** 2 operations (list, create)
+- **Pricing:** 2 operations (list, create)
+- **Procurement:** 2 operations (purchase orders, goods receipts)
+- **Business:** 1 operation (get user business details)
+
+**Agent Directives:**
+1. **Use feature flags for debug overlays** - Create `lib/config/feature_flags.dart` with `bool.fromEnvironment()` for toggleable features
+2. **App Check is independent of auth levels** - App Check validates the app instance, Firebase Auth validates the user, Data Connect validates authorization
+3. **Test with App Check disabled first** - When debugging auth issues, disable App Check to isolate variables
+4. **Document security rationale** - Always add `insecureReason` when using `USER_ANON` to explain why it's safe
+5. **Business-scoped access is the real security** - Auth levels control who can call operations, but `businessId` validation prevents cross-business access
+
+**Files Modified:**
+- 22 GQL operation files → Changed to `USER_ANON` with `insecureReason`
+- `lib/config/feature_flags.dart` → Created with `showConnectivityOverlay` flag
+- `lib/pages/landing/landing_page.dart` → Wrapped overlay with `FeatureFlags.showConnectivityOverlay`
+- `DOCS NEW 2.0/project_memory.md` → Updated with USER_ANON successes and App Check status
+- `DOCS NEW 2.0/app_check_analysis.md` → Created comprehensive risk analysis
+
+**Status:** ✅ **VERIFIED IN STAGING - Ready for App Check re-enablement testing**
+
+**Next Steps:**
+1. Re-enable App Check in staging (uncomment in main.dart)
+2. Test all 5 verified operations with App Check enabled
+3. Monitor for 403 errors or reCAPTCHA challenges
+4. If successful, prepare for production deployment
+5. Disable connectivity overlay before production (set `SHOW_CONNECTIVITY_OVERLAY=false`)
+
+---

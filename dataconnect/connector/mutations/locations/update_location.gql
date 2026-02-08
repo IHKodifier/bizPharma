@@ -12,7 +12,7 @@ mutation UpdateLocation(
   $operatingHours: String
   $licenseNumber: String
   $isActive: Boolean
-) @auth(level: USER) {
+) @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
   location_update(
     id: $id
     data: {

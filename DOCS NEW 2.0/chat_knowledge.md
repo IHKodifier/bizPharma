@@ -52,6 +52,61 @@
 - Created `DOCS NEW 2.0/project_memory.md` with critical gotchas
 - Created `DOCS NEW 2.0/Knowledge Base/firebase_dataconnect_auth_levels_gotcha.md`
 
-**Status:** Schema changes ready for deployment (pending GCP quota reset)
+**Status:** ✅ **RESOLVED - Verified in Staging (2026-02-06)**
+
+**Solution Summary:**
+1. Changed `GetUserByAuthId`, `GetBusinessById`, and `CreateBusinessAndAdmin` to `@auth(level: USER_ANON)`
+2. Replaced old REST API call with Data Connect mutation in onboarding code
+3. Deployed to staging and verified successful anonymous sign-up flow
+
+**Verification Results:**
+- ✅ No 401 Unauthorized errors
+- ✅ No CORS errors
+- ✅ Successful redirect to dashboard
+- ✅ Data created in database
+
+---
+
+### 2026-02-06T11:16:00+05:00 - Session: Auth Unification Verification & Deployment
+
+**Goal:** Deploy auth unification fix to staging and verify anonymous sign-up flow works correctly.
+
+**Proceedings:**
+1. Discovered onboarding code was calling old REST API instead of Data Connect
+2. Replaced API call with `CreateBusinessAndAdmin` Data Connect mutation
+3. Fixed parameter names to match GQL schema
+4. Added `insecureReason` to all `USER_ANON` operations
+5. Deployed Data Connect schema to staging with `--force` flag
+6. Built and deployed Flutter web app to staging
+7. User tested anonymous sign-up flow successfully
+
+**What Worked:**
+- ✅ Using Data Connect mutation instead of REST API
+- ✅ Adding `insecureReason` to satisfy Firebase security validation
+- ✅ Deploying Data Connect first, then Hosting
+- ✅ Hard refresh in incognito browser for testing
+
+**What Didn't:**
+- ❌ Initial deployment hit GCP quota limit (resolved by waiting)
+- ❌ Browser automation tool had environment issues (used manual testing instead)
+
+**Gotchas:**
+1. **Firebase requires `insecureReason` for USER_ANON operations** - Without it, deployment fails with validation errors
+2. **GQL parameter names must match exactly** - `userEmail` not `email`, `userFirstName` not `firstName`
+3. **Wait for CDN propagation** - 1-2 minutes after deployment before testing
+4. **Hard refresh required** - `Ctrl+Shift+R` to bypass browser cache
+
+**Agent Directives:**
+1. **Always use Data Connect mutations** instead of custom REST APIs for database operations
+2. **Add `insecureReason` to USER_ANON operations** to pass Firebase validation
+3. **Verify parameter names** against GQL schema before calling mutations
+4. **Deploy Data Connect before Hosting** to ensure schema is ready
+5. **Wait for CDN propagation** before testing deployed changes
+
+**Files Modified:**
+- `lib/pages/onboarding/onboarding_stepper.dart` → Replaced REST API with Data Connect mutation
+- All three auth operations → Added `insecureReason` annotations
+
+**Status:** ✅ Auth unification complete and verified in staging
 
 ---

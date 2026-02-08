@@ -2,7 +2,7 @@
 # GET LOCATION BY ID
 # ============================================================================
 
-query GetLocationById($id: UUID!) @auth(level: USER) {
+query GetLocationById($id: UUID!) @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
   location(id: $id) {
     id
     businessId

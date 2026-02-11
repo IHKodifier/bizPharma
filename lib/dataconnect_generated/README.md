@@ -21,6 +21,96 @@ BizPharmaConnector.instance.dataConnect.useDataConnectEmulator(host, port);
 You can also call queries and mutations by using the connector class.
 ## Queries
 
+### ListInventoryByLocation
+#### Required Arguments
+```dart
+String locationId = ...;
+BizPharmaConnector.instance.listInventoryByLocation(
+  locationId: locationId,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ListInventoryByLocationData, ListInventoryByLocationVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.listInventoryByLocation(
+  locationId: locationId,
+);
+ListInventoryByLocationData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String locationId = ...;
+
+final ref = BizPharmaConnector.instance.listInventoryByLocation(
+  locationId: locationId,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### Uptime
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.uptime().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<UptimeData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.uptime();
+UptimeData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.uptime().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
 ### ListAllUsers
 #### Required Arguments
 ```dart
@@ -56,6 +146,366 @@ Each builder returns an `execute` function, which is a helper function that crea
 An example of how to use the `Ref` object is shown below:
 ```dart
 final ref = BizPharmaConnector.instance.listAllUsers().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ListPricingByLocation
+#### Required Arguments
+```dart
+String businessId = ...;
+BizPharmaConnector.instance.listPricingByLocation(
+  businessId: businessId,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ListPricingByLocationData, ListPricingByLocationVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.listPricingByLocation(
+  businessId: businessId,
+);
+ListPricingByLocationData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String businessId = ...;
+
+final ref = BizPharmaConnector.instance.listPricingByLocation(
+  businessId: businessId,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### GetBusinessById
+#### Required Arguments
+```dart
+String id = ...;
+BizPharmaConnector.instance.getBusinessById(
+  id: id,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<GetBusinessByIdData, GetBusinessByIdVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.getBusinessById(
+  id: id,
+);
+GetBusinessByIdData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String id = ...;
+
+final ref = BizPharmaConnector.instance.getBusinessById(
+  id: id,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### GetUserByAuthId
+#### Required Arguments
+```dart
+String id = ...;
+BizPharmaConnector.instance.getUserByAuthId(
+  id: id,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<GetUserByAuthIdData, GetUserByAuthIdVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.getUserByAuthId(
+  id: id,
+);
+GetUserByAuthIdData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String id = ...;
+
+final ref = BizPharmaConnector.instance.getUserByAuthId(
+  id: id,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ListAllBusinesses
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.listAllBusinesses().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ListAllBusinessesData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.listAllBusinesses();
+ListAllBusinessesData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.listAllBusinesses().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### GetLocationById
+#### Required Arguments
+```dart
+String id = ...;
+BizPharmaConnector.instance.getLocationById(
+  id: id,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<GetLocationByIdData, GetLocationByIdVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.getLocationById(
+  id: id,
+);
+GetLocationByIdData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String id = ...;
+
+final ref = BizPharmaConnector.instance.getLocationById(
+  id: id,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ListAllSuppliers
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.listAllSuppliers().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ListAllSuppliersData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.listAllSuppliers();
+ListAllSuppliersData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.listAllSuppliers().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ListAllCustomers
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.listAllCustomers().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ListAllCustomersData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.listAllCustomers();
+ListAllCustomersData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.listAllCustomers().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ListAllLocations
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.listAllLocations().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ListAllLocationsData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.listAllLocations();
+ListAllLocationsData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.listAllLocations().ref();
 ref.execute();
 
 ref.subscribe(...);
@@ -201,6 +651,47 @@ ref.subscribe(...);
 ```
 
 
+### GetUserBusinessAndDefaultLocation
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.getUserBusinessAndDefaultLocation().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<GetUserBusinessAndDefaultLocationData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await BizPharmaConnector.instance.getUserBusinessAndDefaultLocation();
+GetUserBusinessAndDefaultLocationData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.getUserBusinessAndDefaultLocation().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
 ### listAllProducts
 #### Required Arguments
 ```dart
@@ -236,186 +727,6 @@ Each builder returns an `execute` function, which is a helper function that crea
 An example of how to use the `Ref` object is shown below:
 ```dart
 final ref = BizPharmaConnector.instance.listAllProducts().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### Uptime
-#### Required Arguments
-```dart
-// No required arguments
-BizPharmaConnector.instance.uptime().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<UptimeData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.uptime();
-UptimeData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.uptime().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### GetBusinessById
-#### Required Arguments
-```dart
-String id = ...;
-BizPharmaConnector.instance.getBusinessById(
-  id: id,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<GetBusinessByIdData, GetBusinessByIdVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.getBusinessById(
-  id: id,
-);
-GetBusinessByIdData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String id = ...;
-
-final ref = BizPharmaConnector.instance.getBusinessById(
-  id: id,
-).ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### ListAllLocations
-#### Required Arguments
-```dart
-// No required arguments
-BizPharmaConnector.instance.listAllLocations().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<ListAllLocationsData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.listAllLocations();
-ListAllLocationsData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.listAllLocations().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### GetLocationById
-#### Required Arguments
-```dart
-String id = ...;
-BizPharmaConnector.instance.getLocationById(
-  id: id,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<GetLocationByIdData, GetLocationByIdVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.getLocationById(
-  id: id,
-);
-GetLocationByIdData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String id = ...;
-
-final ref = BizPharmaConnector.instance.getLocationById(
-  id: id,
-).ref();
 ref.execute();
 
 ref.subscribe(...);
@@ -470,499 +781,70 @@ ref.execute();
 ref.subscribe(...);
 ```
 
-
-### ListAllSuppliers
-#### Required Arguments
-```dart
-// No required arguments
-BizPharmaConnector.instance.listAllSuppliers().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<ListAllSuppliersData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.listAllSuppliers();
-ListAllSuppliersData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.listAllSuppliers().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### GetUserByAuthId
-#### Required Arguments
-```dart
-String id = ...;
-BizPharmaConnector.instance.getUserByAuthId(
-  id: id,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<GetUserByAuthIdData, GetUserByAuthIdVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.getUserByAuthId(
-  id: id,
-);
-GetUserByAuthIdData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String id = ...;
-
-final ref = BizPharmaConnector.instance.getUserByAuthId(
-  id: id,
-).ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### ListAllBusinesses
-#### Required Arguments
-```dart
-// No required arguments
-BizPharmaConnector.instance.listAllBusinesses().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<ListAllBusinessesData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.listAllBusinesses();
-ListAllBusinessesData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.listAllBusinesses().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### ListPricingByLocation
-#### Required Arguments
-```dart
-String businessId = ...;
-BizPharmaConnector.instance.listPricingByLocation(
-  businessId: businessId,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<ListPricingByLocationData, ListPricingByLocationVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.listPricingByLocation(
-  businessId: businessId,
-);
-ListPricingByLocationData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String businessId = ...;
-
-final ref = BizPharmaConnector.instance.listPricingByLocation(
-  businessId: businessId,
-).ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### ListInventoryByLocation
-#### Required Arguments
-```dart
-String locationId = ...;
-BizPharmaConnector.instance.listInventoryByLocation(
-  locationId: locationId,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<ListInventoryByLocationData, ListInventoryByLocationVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.listInventoryByLocation(
-  locationId: locationId,
-);
-ListInventoryByLocationData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String locationId = ...;
-
-final ref = BizPharmaConnector.instance.listInventoryByLocation(
-  locationId: locationId,
-).ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### GetUserBusinessAndDefaultLocation
-#### Required Arguments
-```dart
-// No required arguments
-BizPharmaConnector.instance.getUserBusinessAndDefaultLocation().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<GetUserBusinessAndDefaultLocationData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.getUserBusinessAndDefaultLocation();
-GetUserBusinessAndDefaultLocationData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.getUserBusinessAndDefaultLocation().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
-
-### ListAllCustomers
-#### Required Arguments
-```dart
-// No required arguments
-BizPharmaConnector.instance.listAllCustomers().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `QueryResult<ListAllCustomersData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-/// Result of a query request. Created to hold extra variables in the future.
-class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
-  QueryResult(super.dataConnect, super.data, super.ref);
-}
-
-final result = await BizPharmaConnector.instance.listAllCustomers();
-ListAllCustomersData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.listAllCustomers().ref();
-ref.execute();
-
-ref.subscribe(...);
-```
-
 ## Mutations
 
-### DeleteAllBusinesses
+### CreateBusiness
 #### Required Arguments
 ```dart
-// No required arguments
-BizPharmaConnector.instance.deleteAllBusinesses().execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `OperationResult<DeleteAllBusinessesData, void>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.deleteAllBusinesses();
-DeleteAllBusinessesData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-final ref = BizPharmaConnector.instance.deleteAllBusinesses().ref();
-ref.execute();
-```
-
-
-### CreateInventoryLevel
-#### Required Arguments
-```dart
-String productId = ...;
-String locationId = ...;
-String businessId = ...;
-int quantityOnHand = ...;
-int quantityAvailable = ...;
-double averageCost = ...;
-double totalValue = ...;
-BizPharmaConnector.instance.createInventoryLevel(
-  productId: productId,
-  locationId: locationId,
-  businessId: businessId,
-  quantityOnHand: quantityOnHand,
-  quantityAvailable: quantityAvailable,
-  averageCost: averageCost,
-  totalValue: totalValue,
+String name = ...;
+BusinessTier tier = ...;
+DateTime subscriptionStartDate = ...;
+BizPharmaConnector.instance.createBusiness(
+  name: name,
+  tier: tier,
+  subscriptionStartDate: subscriptionStartDate,
 ).execute();
 ```
 
 #### Optional Arguments
-We return a builder for each query. For CreateInventoryLevel, we created `CreateInventoryLevelBuilder`. For queries and mutations with optional parameters, we return a builder class.
+We return a builder for each query. For CreateBusiness, we created `CreateBusinessBuilder`. For queries and mutations with optional parameters, we return a builder class.
 The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
 ```dart
-class CreateInventoryLevelVariablesBuilder {
+class CreateBusinessVariablesBuilder {
   ...
-   CreateInventoryLevelVariablesBuilder batchId(String? t) {
-   _batchId.value = t;
+   CreateBusinessVariablesBuilder subscriptionEndDate(DateTime? t) {
+   _subscriptionEndDate.value = t;
    return this;
   }
-
-  ...
-}
-BizPharmaConnector.instance.createInventoryLevel(
-  productId: productId,
-  locationId: locationId,
-  businessId: businessId,
-  quantityOnHand: quantityOnHand,
-  quantityAvailable: quantityAvailable,
-  averageCost: averageCost,
-  totalValue: totalValue,
-)
-.batchId(batchId)
-.execute();
-```
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateInventoryLevelData, CreateInventoryLevelVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createInventoryLevel(
-  productId: productId,
-  locationId: locationId,
-  businessId: businessId,
-  quantityOnHand: quantityOnHand,
-  quantityAvailable: quantityAvailable,
-  averageCost: averageCost,
-  totalValue: totalValue,
-);
-CreateInventoryLevelData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String productId = ...;
-String locationId = ...;
-String businessId = ...;
-int quantityOnHand = ...;
-int quantityAvailable = ...;
-double averageCost = ...;
-double totalValue = ...;
-
-final ref = BizPharmaConnector.instance.createInventoryLevel(
-  productId: productId,
-  locationId: locationId,
-  businessId: businessId,
-  quantityOnHand: quantityOnHand,
-  quantityAvailable: quantityAvailable,
-  averageCost: averageCost,
-  totalValue: totalValue,
-).ref();
-ref.execute();
-```
-
-
-### CreateCustomer
-#### Required Arguments
-```dart
-String businessId = ...;
-String firstName = ...;
-String lastName = ...;
-String createdById = ...;
-BizPharmaConnector.instance.createCustomer(
-  businessId: businessId,
-  firstName: firstName,
-  lastName: lastName,
-  createdById: createdById,
-).execute();
-```
-
-#### Optional Arguments
-We return a builder for each query. For CreateCustomer, we created `CreateCustomerBuilder`. For queries and mutations with optional parameters, we return a builder class.
-The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
-```dart
-class CreateCustomerVariablesBuilder {
-  ...
-   CreateCustomerVariablesBuilder email(String? t) {
-   _email.value = t;
+  CreateBusinessVariablesBuilder maxUsers(int? t) {
+   _maxUsers.value = t;
    return this;
   }
-  CreateCustomerVariablesBuilder phone(String? t) {
+  CreateBusinessVariablesBuilder maxLocations(int? t) {
+   _maxLocations.value = t;
+   return this;
+  }
+  CreateBusinessVariablesBuilder logo(String? t) {
+   _logo.value = t;
+   return this;
+  }
+  CreateBusinessVariablesBuilder banner(String? t) {
+   _banner.value = t;
+   return this;
+  }
+  CreateBusinessVariablesBuilder phone(String? t) {
    _phone.value = t;
    return this;
   }
-  CreateCustomerVariablesBuilder dateOfBirth(DateTime? t) {
-   _dateOfBirth.value = t;
-   return this;
-  }
 
   ...
 }
-BizPharmaConnector.instance.createCustomer(
-  businessId: businessId,
-  firstName: firstName,
-  lastName: lastName,
-  createdById: createdById,
+BizPharmaConnector.instance.createBusiness(
+  name: name,
+  tier: tier,
+  subscriptionStartDate: subscriptionStartDate,
 )
-.email(email)
+.subscriptionEndDate(subscriptionEndDate)
+.maxUsers(maxUsers)
+.maxLocations(maxLocations)
+.logo(logo)
+.banner(banner)
 .phone(phone)
-.dateOfBirth(dateOfBirth)
 .execute();
 ```
 
 #### Return Type
-`execute()` returns a `OperationResult<CreateCustomerData, CreateCustomerVariables>`
+`execute()` returns a `OperationResult<CreateBusinessData, CreateBusinessVariables>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -972,13 +854,12 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.createCustomer(
-  businessId: businessId,
-  firstName: firstName,
-  lastName: lastName,
-  createdById: createdById,
+final result = await BizPharmaConnector.instance.createBusiness(
+  name: name,
+  tier: tier,
+  subscriptionStartDate: subscriptionStartDate,
 );
-CreateCustomerData data = result.data;
+CreateBusinessData data = result.data;
 final ref = result.ref;
 ```
 
@@ -986,152 +867,74 @@ final ref = result.ref;
 Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
 An example of how to use the `Ref` object is shown below:
 ```dart
-String businessId = ...;
-String firstName = ...;
-String lastName = ...;
-String createdById = ...;
+String name = ...;
+BusinessTier tier = ...;
+DateTime subscriptionStartDate = ...;
 
-final ref = BizPharmaConnector.instance.createCustomer(
-  businessId: businessId,
-  firstName: firstName,
-  lastName: lastName,
-  createdById: createdById,
+final ref = BizPharmaConnector.instance.createBusiness(
+  name: name,
+  tier: tier,
+  subscriptionStartDate: subscriptionStartDate,
 ).ref();
 ref.execute();
 ```
 
 
-### CreateProductPricing
-#### Required Arguments
-```dart
-String productId = ...;
-String businessId = ...;
-double wholesaleCost = ...;
-double retailPrice = ...;
-double walkInPrice = ...;
-double grossMarginPercent = ...;
-double markupPercent = ...;
-double taxRate = ...;
-DateTime effectiveDate = ...;
-String updatedById = ...;
-BizPharmaConnector.instance.createProductPricing(
-  productId: productId,
-  businessId: businessId,
-  wholesaleCost: wholesaleCost,
-  retailPrice: retailPrice,
-  walkInPrice: walkInPrice,
-  grossMarginPercent: grossMarginPercent,
-  markupPercent: markupPercent,
-  taxRate: taxRate,
-  effectiveDate: effectiveDate,
-  updatedById: updatedById,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateProductPricingData, CreateProductPricingVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createProductPricing(
-  productId: productId,
-  businessId: businessId,
-  wholesaleCost: wholesaleCost,
-  retailPrice: retailPrice,
-  walkInPrice: walkInPrice,
-  grossMarginPercent: grossMarginPercent,
-  markupPercent: markupPercent,
-  taxRate: taxRate,
-  effectiveDate: effectiveDate,
-  updatedById: updatedById,
-);
-CreateProductPricingData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String productId = ...;
-String businessId = ...;
-double wholesaleCost = ...;
-double retailPrice = ...;
-double walkInPrice = ...;
-double grossMarginPercent = ...;
-double markupPercent = ...;
-double taxRate = ...;
-DateTime effectiveDate = ...;
-String updatedById = ...;
-
-final ref = BizPharmaConnector.instance.createProductPricing(
-  productId: productId,
-  businessId: businessId,
-  wholesaleCost: wholesaleCost,
-  retailPrice: retailPrice,
-  walkInPrice: walkInPrice,
-  grossMarginPercent: grossMarginPercent,
-  markupPercent: markupPercent,
-  taxRate: taxRate,
-  effectiveDate: effectiveDate,
-  updatedById: updatedById,
-).ref();
-ref.execute();
-```
-
-
-### CreateCategory
+### CreateLocation
 #### Required Arguments
 ```dart
 String businessId = ...;
 String name = ...;
-BizPharmaConnector.instance.createCategory(
+String code = ...;
+LocationType type = ...;
+BizPharmaConnector.instance.createLocation(
   businessId: businessId,
   name: name,
+  code: code,
+  type: type,
 ).execute();
 ```
 
 #### Optional Arguments
-We return a builder for each query. For CreateCategory, we created `CreateCategoryBuilder`. For queries and mutations with optional parameters, we return a builder class.
+We return a builder for each query. For CreateLocation, we created `CreateLocationBuilder`. For queries and mutations with optional parameters, we return a builder class.
 The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
 ```dart
-class CreateCategoryVariablesBuilder {
+class CreateLocationVariablesBuilder {
   ...
-   CreateCategoryVariablesBuilder description(String? t) {
-   _description.value = t;
+   CreateLocationVariablesBuilder phone(String? t) {
+   _phone.value = t;
    return this;
   }
-  CreateCategoryVariablesBuilder parentId(String? t) {
-   _parentId.value = t;
+  CreateLocationVariablesBuilder email(String? t) {
+   _email.value = t;
    return this;
   }
-  CreateCategoryVariablesBuilder metadata(String? t) {
-   _metadata.value = t;
+  CreateLocationVariablesBuilder operatingHours(String? t) {
+   _operatingHours.value = t;
+   return this;
+  }
+  CreateLocationVariablesBuilder licenseNumber(String? t) {
+   _licenseNumber.value = t;
    return this;
   }
 
   ...
 }
-BizPharmaConnector.instance.createCategory(
+BizPharmaConnector.instance.createLocation(
   businessId: businessId,
   name: name,
+  code: code,
+  type: type,
 )
-.description(description)
-.parentId(parentId)
-.metadata(metadata)
+.phone(phone)
+.email(email)
+.operatingHours(operatingHours)
+.licenseNumber(licenseNumber)
 .execute();
 ```
 
 #### Return Type
-`execute()` returns a `OperationResult<CreateCategoryData, CreateCategoryVariables>`
+`execute()` returns a `OperationResult<CreateLocationData, CreateLocationVariables>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -1141,11 +944,13 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.createCategory(
+final result = await BizPharmaConnector.instance.createLocation(
   businessId: businessId,
   name: name,
+  code: code,
+  type: type,
 );
-CreateCategoryData data = result.data;
+CreateLocationData data = result.data;
 final ref = result.ref;
 ```
 
@@ -1155,10 +960,121 @@ An example of how to use the `Ref` object is shown below:
 ```dart
 String businessId = ...;
 String name = ...;
+String code = ...;
+LocationType type = ...;
 
-final ref = BizPharmaConnector.instance.createCategory(
+final ref = BizPharmaConnector.instance.createLocation(
   businessId: businessId,
   name: name,
+  code: code,
+  type: type,
+).ref();
+ref.execute();
+```
+
+
+### CreatePurchaseOrder
+#### Required Arguments
+```dart
+String businessId = ...;
+String supplierId = ...;
+String orderNumber = ...;
+double totalAmount = ...;
+double subtotal = ...;
+double taxAmount = ...;
+PurchaseOrderStatus status = ...;
+String createdById = ...;
+BizPharmaConnector.instance.createPurchaseOrder(
+  businessId: businessId,
+  supplierId: supplierId,
+  orderNumber: orderNumber,
+  totalAmount: totalAmount,
+  subtotal: subtotal,
+  taxAmount: taxAmount,
+  status: status,
+  createdById: createdById,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreatePurchaseOrder, we created `CreatePurchaseOrderBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreatePurchaseOrderVariablesBuilder {
+  ...
+   CreatePurchaseOrderVariablesBuilder orderDate(Timestamp? t) {
+   _orderDate.value = t;
+   return this;
+  }
+  CreatePurchaseOrderVariablesBuilder expectedDeliveryDate(DateTime? t) {
+   _expectedDeliveryDate.value = t;
+   return this;
+  }
+
+  ...
+}
+BizPharmaConnector.instance.createPurchaseOrder(
+  businessId: businessId,
+  supplierId: supplierId,
+  orderNumber: orderNumber,
+  totalAmount: totalAmount,
+  subtotal: subtotal,
+  taxAmount: taxAmount,
+  status: status,
+  createdById: createdById,
+)
+.orderDate(orderDate)
+.expectedDeliveryDate(expectedDeliveryDate)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreatePurchaseOrderData, CreatePurchaseOrderVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createPurchaseOrder(
+  businessId: businessId,
+  supplierId: supplierId,
+  orderNumber: orderNumber,
+  totalAmount: totalAmount,
+  subtotal: subtotal,
+  taxAmount: taxAmount,
+  status: status,
+  createdById: createdById,
+);
+CreatePurchaseOrderData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String businessId = ...;
+String supplierId = ...;
+String orderNumber = ...;
+double totalAmount = ...;
+double subtotal = ...;
+double taxAmount = ...;
+PurchaseOrderStatus status = ...;
+String createdById = ...;
+
+final ref = BizPharmaConnector.instance.createPurchaseOrder(
+  businessId: businessId,
+  supplierId: supplierId,
+  orderNumber: orderNumber,
+  totalAmount: totalAmount,
+  subtotal: subtotal,
+  taxAmount: taxAmount,
+  status: status,
+  createdById: createdById,
 ).ref();
 ref.execute();
 ```
@@ -1350,137 +1266,6 @@ ref.execute();
 ```
 
 
-### CreateGoodsReceipt
-#### Required Arguments
-```dart
-String purchaseOrderId = ...;
-String businessId = ...;
-String receiptNumber = ...;
-GoodsReceiptStatus status = ...;
-String inspectedById = ...;
-BizPharmaConnector.instance.createGoodsReceipt(
-  purchaseOrderId: purchaseOrderId,
-  businessId: businessId,
-  receiptNumber: receiptNumber,
-  status: status,
-  inspectedById: inspectedById,
-).execute();
-```
-
-#### Optional Arguments
-We return a builder for each query. For CreateGoodsReceipt, we created `CreateGoodsReceiptBuilder`. For queries and mutations with optional parameters, we return a builder class.
-The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
-```dart
-class CreateGoodsReceiptVariablesBuilder {
-  ...
-   CreateGoodsReceiptVariablesBuilder receiptDate(Timestamp? t) {
-   _receiptDate.value = t;
-   return this;
-  }
-
-  ...
-}
-BizPharmaConnector.instance.createGoodsReceipt(
-  purchaseOrderId: purchaseOrderId,
-  businessId: businessId,
-  receiptNumber: receiptNumber,
-  status: status,
-  inspectedById: inspectedById,
-)
-.receiptDate(receiptDate)
-.execute();
-```
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateGoodsReceiptData, CreateGoodsReceiptVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createGoodsReceipt(
-  purchaseOrderId: purchaseOrderId,
-  businessId: businessId,
-  receiptNumber: receiptNumber,
-  status: status,
-  inspectedById: inspectedById,
-);
-CreateGoodsReceiptData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String purchaseOrderId = ...;
-String businessId = ...;
-String receiptNumber = ...;
-GoodsReceiptStatus status = ...;
-String inspectedById = ...;
-
-final ref = BizPharmaConnector.instance.createGoodsReceipt(
-  purchaseOrderId: purchaseOrderId,
-  businessId: businessId,
-  receiptNumber: receiptNumber,
-  status: status,
-  inspectedById: inspectedById,
-).ref();
-ref.execute();
-```
-
-
-### CreateManufacturer
-#### Required Arguments
-```dart
-String name = ...;
-String country = ...;
-BizPharmaConnector.instance.createManufacturer(
-  name: name,
-  country: country,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateManufacturerData, CreateManufacturerVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createManufacturer(
-  name: name,
-  country: country,
-);
-CreateManufacturerData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String name = ...;
-String country = ...;
-
-final ref = BizPharmaConnector.instance.createManufacturer(
-  name: name,
-  country: country,
-).ref();
-ref.execute();
-```
-
-
 ### UpdateLocation
 #### Required Arguments
 ```dart
@@ -1576,17 +1361,37 @@ ref.execute();
 ```
 
 
-### DeleteAllUsers
+### CreateProductPricing
 #### Required Arguments
 ```dart
-// No required arguments
-BizPharmaConnector.instance.deleteAllUsers().execute();
+String productId = ...;
+String businessId = ...;
+double wholesaleCost = ...;
+double retailPrice = ...;
+double walkInPrice = ...;
+double grossMarginPercent = ...;
+double markupPercent = ...;
+double taxRate = ...;
+DateTime effectiveDate = ...;
+String updatedById = ...;
+BizPharmaConnector.instance.createProductPricing(
+  productId: productId,
+  businessId: businessId,
+  wholesaleCost: wholesaleCost,
+  retailPrice: retailPrice,
+  walkInPrice: walkInPrice,
+  grossMarginPercent: grossMarginPercent,
+  markupPercent: markupPercent,
+  taxRate: taxRate,
+  effectiveDate: effectiveDate,
+  updatedById: updatedById,
+).execute();
 ```
 
 
 
 #### Return Type
-`execute()` returns a `OperationResult<DeleteAllUsersData, void>`
+`execute()` returns a `OperationResult<CreateProductPricingData, CreateProductPricingVariables>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -1596,8 +1401,19 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.deleteAllUsers();
-DeleteAllUsersData data = result.data;
+final result = await BizPharmaConnector.instance.createProductPricing(
+  productId: productId,
+  businessId: businessId,
+  wholesaleCost: wholesaleCost,
+  retailPrice: retailPrice,
+  walkInPrice: walkInPrice,
+  grossMarginPercent: grossMarginPercent,
+  markupPercent: markupPercent,
+  taxRate: taxRate,
+  effectiveDate: effectiveDate,
+  updatedById: updatedById,
+);
+CreateProductPricingData data = result.data;
 final ref = result.ref;
 ```
 
@@ -1605,7 +1421,29 @@ final ref = result.ref;
 Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
 An example of how to use the `Ref` object is shown below:
 ```dart
-final ref = BizPharmaConnector.instance.deleteAllUsers().ref();
+String productId = ...;
+String businessId = ...;
+double wholesaleCost = ...;
+double retailPrice = ...;
+double walkInPrice = ...;
+double grossMarginPercent = ...;
+double markupPercent = ...;
+double taxRate = ...;
+DateTime effectiveDate = ...;
+String updatedById = ...;
+
+final ref = BizPharmaConnector.instance.createProductPricing(
+  productId: productId,
+  businessId: businessId,
+  wholesaleCost: wholesaleCost,
+  retailPrice: retailPrice,
+  walkInPrice: walkInPrice,
+  grossMarginPercent: grossMarginPercent,
+  markupPercent: markupPercent,
+  taxRate: taxRate,
+  effectiveDate: effectiveDate,
+  updatedById: updatedById,
+).ref();
 ref.execute();
 ```
 
@@ -1644,309 +1482,49 @@ ref.execute();
 ```
 
 
-### DeleteLocation
+### CreateGoodsReceipt
 #### Required Arguments
 ```dart
-String id = ...;
-BizPharmaConnector.instance.deleteLocation(
-  id: id,
-).execute();
-```
-
-
-
-#### Return Type
-`execute()` returns a `OperationResult<DeleteLocationData, DeleteLocationVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.deleteLocation(
-  id: id,
-);
-DeleteLocationData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String id = ...;
-
-final ref = BizPharmaConnector.instance.deleteLocation(
-  id: id,
-).ref();
-ref.execute();
-```
-
-
-### CreateBusinessAndAdmin
-#### Required Arguments
-```dart
+String purchaseOrderId = ...;
 String businessId = ...;
-String businessName = ...;
-String userEmail = ...;
-String userFirstName = ...;
-String userLastName = ...;
-String userMobile = ...;
-String authUid = ...;
-DateTime today = ...;
-String defaultLocationId = ...;
-BizPharmaConnector.instance.createBusinessAndAdmin(
+String receiptNumber = ...;
+GoodsReceiptStatus status = ...;
+String inspectedById = ...;
+BizPharmaConnector.instance.createGoodsReceipt(
+  purchaseOrderId: purchaseOrderId,
   businessId: businessId,
-  businessName: businessName,
-  userEmail: userEmail,
-  userFirstName: userFirstName,
-  userLastName: userLastName,
-  userMobile: userMobile,
-  authUid: authUid,
-  today: today,
-  defaultLocationId: defaultLocationId,
-).execute();
-```
-
-#### Optional Arguments
-We return a builder for each query. For CreateBusinessAndAdmin, we created `CreateBusinessAndAdminBuilder`. For queries and mutations with optional parameters, we return a builder class.
-The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
-```dart
-class CreateBusinessAndAdminVariablesBuilder {
-  ...
-   CreateBusinessAndAdminVariablesBuilder userProfilePhoto(String? t) {
-   _userProfilePhoto.value = t;
-   return this;
-  }
-
-  ...
-}
-BizPharmaConnector.instance.createBusinessAndAdmin(
-  businessId: businessId,
-  businessName: businessName,
-  userEmail: userEmail,
-  userFirstName: userFirstName,
-  userLastName: userLastName,
-  userMobile: userMobile,
-  authUid: authUid,
-  today: today,
-  defaultLocationId: defaultLocationId,
-)
-.userProfilePhoto(userProfilePhoto)
-.execute();
-```
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateBusinessAndAdminData, CreateBusinessAndAdminVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createBusinessAndAdmin(
-  businessId: businessId,
-  businessName: businessName,
-  userEmail: userEmail,
-  userFirstName: userFirstName,
-  userLastName: userLastName,
-  userMobile: userMobile,
-  authUid: authUid,
-  today: today,
-  defaultLocationId: defaultLocationId,
-);
-CreateBusinessAndAdminData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String businessId = ...;
-String businessName = ...;
-String userEmail = ...;
-String userFirstName = ...;
-String userLastName = ...;
-String userMobile = ...;
-String authUid = ...;
-DateTime today = ...;
-String defaultLocationId = ...;
-
-final ref = BizPharmaConnector.instance.createBusinessAndAdmin(
-  businessId: businessId,
-  businessName: businessName,
-  userEmail: userEmail,
-  userFirstName: userFirstName,
-  userLastName: userLastName,
-  userMobile: userMobile,
-  authUid: authUid,
-  today: today,
-  defaultLocationId: defaultLocationId,
-).ref();
-ref.execute();
-```
-
-
-### CreateUser
-#### Required Arguments
-```dart
-String id = ...;
-String businessId = ...;
-String email = ...;
-String firstName = ...;
-String lastName = ...;
-String mobile = ...;
-UserRole role = ...;
-BizPharmaConnector.instance.createUser(
-  id: id,
-  businessId: businessId,
-  email: email,
-  firstName: firstName,
-  lastName: lastName,
-  mobile: mobile,
-  role: role,
-).execute();
-```
-
-#### Optional Arguments
-We return a builder for each query. For CreateUser, we created `CreateUserBuilder`. For queries and mutations with optional parameters, we return a builder class.
-The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
-```dart
-class CreateUserVariablesBuilder {
-  ...
-   CreateUserVariablesBuilder permissions(List<String>? t) {
-   _permissions.value = t;
-   return this;
-  }
-
-  ...
-}
-BizPharmaConnector.instance.createUser(
-  id: id,
-  businessId: businessId,
-  email: email,
-  firstName: firstName,
-  lastName: lastName,
-  mobile: mobile,
-  role: role,
-)
-.permissions(permissions)
-.execute();
-```
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateUserData, CreateUserVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createUser(
-  id: id,
-  businessId: businessId,
-  email: email,
-  firstName: firstName,
-  lastName: lastName,
-  mobile: mobile,
-  role: role,
-);
-CreateUserData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String id = ...;
-String businessId = ...;
-String email = ...;
-String firstName = ...;
-String lastName = ...;
-String mobile = ...;
-UserRole role = ...;
-
-final ref = BizPharmaConnector.instance.createUser(
-  id: id,
-  businessId: businessId,
-  email: email,
-  firstName: firstName,
-  lastName: lastName,
-  mobile: mobile,
-  role: role,
-).ref();
-ref.execute();
-```
-
-
-### CreatePurchaseOrder
-#### Required Arguments
-```dart
-String businessId = ...;
-String supplierId = ...;
-String orderNumber = ...;
-double totalAmount = ...;
-double subtotal = ...;
-double taxAmount = ...;
-PurchaseOrderStatus status = ...;
-String createdById = ...;
-BizPharmaConnector.instance.createPurchaseOrder(
-  businessId: businessId,
-  supplierId: supplierId,
-  orderNumber: orderNumber,
-  totalAmount: totalAmount,
-  subtotal: subtotal,
-  taxAmount: taxAmount,
+  receiptNumber: receiptNumber,
   status: status,
-  createdById: createdById,
+  inspectedById: inspectedById,
 ).execute();
 ```
 
 #### Optional Arguments
-We return a builder for each query. For CreatePurchaseOrder, we created `CreatePurchaseOrderBuilder`. For queries and mutations with optional parameters, we return a builder class.
+We return a builder for each query. For CreateGoodsReceipt, we created `CreateGoodsReceiptBuilder`. For queries and mutations with optional parameters, we return a builder class.
 The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
 ```dart
-class CreatePurchaseOrderVariablesBuilder {
+class CreateGoodsReceiptVariablesBuilder {
   ...
-   CreatePurchaseOrderVariablesBuilder orderDate(Timestamp? t) {
-   _orderDate.value = t;
-   return this;
-  }
-  CreatePurchaseOrderVariablesBuilder expectedDeliveryDate(DateTime? t) {
-   _expectedDeliveryDate.value = t;
+   CreateGoodsReceiptVariablesBuilder receiptDate(Timestamp? t) {
+   _receiptDate.value = t;
    return this;
   }
 
   ...
 }
-BizPharmaConnector.instance.createPurchaseOrder(
+BizPharmaConnector.instance.createGoodsReceipt(
+  purchaseOrderId: purchaseOrderId,
   businessId: businessId,
-  supplierId: supplierId,
-  orderNumber: orderNumber,
-  totalAmount: totalAmount,
-  subtotal: subtotal,
-  taxAmount: taxAmount,
+  receiptNumber: receiptNumber,
   status: status,
-  createdById: createdById,
+  inspectedById: inspectedById,
 )
-.orderDate(orderDate)
-.expectedDeliveryDate(expectedDeliveryDate)
+.receiptDate(receiptDate)
 .execute();
 ```
 
 #### Return Type
-`execute()` returns a `OperationResult<CreatePurchaseOrderData, CreatePurchaseOrderVariables>`
+`execute()` returns a `OperationResult<CreateGoodsReceiptData, CreateGoodsReceiptVariables>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -1956,17 +1534,14 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.createPurchaseOrder(
+final result = await BizPharmaConnector.instance.createGoodsReceipt(
+  purchaseOrderId: purchaseOrderId,
   businessId: businessId,
-  supplierId: supplierId,
-  orderNumber: orderNumber,
-  totalAmount: totalAmount,
-  subtotal: subtotal,
-  taxAmount: taxAmount,
+  receiptNumber: receiptNumber,
   status: status,
-  createdById: createdById,
+  inspectedById: inspectedById,
 );
-CreatePurchaseOrderData data = result.data;
+CreateGoodsReceiptData data = result.data;
 final ref = result.ref;
 ```
 
@@ -1974,82 +1549,72 @@ final ref = result.ref;
 Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
 An example of how to use the `Ref` object is shown below:
 ```dart
+String purchaseOrderId = ...;
 String businessId = ...;
-String supplierId = ...;
-String orderNumber = ...;
-double totalAmount = ...;
-double subtotal = ...;
-double taxAmount = ...;
-PurchaseOrderStatus status = ...;
-String createdById = ...;
+String receiptNumber = ...;
+GoodsReceiptStatus status = ...;
+String inspectedById = ...;
 
-final ref = BizPharmaConnector.instance.createPurchaseOrder(
+final ref = BizPharmaConnector.instance.createGoodsReceipt(
+  purchaseOrderId: purchaseOrderId,
   businessId: businessId,
-  supplierId: supplierId,
-  orderNumber: orderNumber,
-  totalAmount: totalAmount,
-  subtotal: subtotal,
-  taxAmount: taxAmount,
+  receiptNumber: receiptNumber,
   status: status,
-  createdById: createdById,
+  inspectedById: inspectedById,
 ).ref();
 ref.execute();
 ```
 
 
-### CreateSupplier
+### CreateInventoryLevel
 #### Required Arguments
 ```dart
+String productId = ...;
+String locationId = ...;
 String businessId = ...;
-String name = ...;
-SupplierType type = ...;
-String paymentTerms = ...;
-SupplierTier tier = ...;
-BizPharmaConnector.instance.createSupplier(
+int quantityOnHand = ...;
+int quantityAvailable = ...;
+double averageCost = ...;
+double totalValue = ...;
+BizPharmaConnector.instance.createInventoryLevel(
+  productId: productId,
+  locationId: locationId,
   businessId: businessId,
-  name: name,
-  type: type,
-  paymentTerms: paymentTerms,
-  tier: tier,
+  quantityOnHand: quantityOnHand,
+  quantityAvailable: quantityAvailable,
+  averageCost: averageCost,
+  totalValue: totalValue,
 ).execute();
 ```
 
 #### Optional Arguments
-We return a builder for each query. For CreateSupplier, we created `CreateSupplierBuilder`. For queries and mutations with optional parameters, we return a builder class.
+We return a builder for each query. For CreateInventoryLevel, we created `CreateInventoryLevelBuilder`. For queries and mutations with optional parameters, we return a builder class.
 The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
 ```dart
-class CreateSupplierVariablesBuilder {
+class CreateInventoryLevelVariablesBuilder {
   ...
-   CreateSupplierVariablesBuilder contactPerson(String? t) {
-   _contactPerson.value = t;
-   return this;
-  }
-  CreateSupplierVariablesBuilder email(String? t) {
-   _email.value = t;
-   return this;
-  }
-  CreateSupplierVariablesBuilder phone(String? t) {
-   _phone.value = t;
+   CreateInventoryLevelVariablesBuilder batchId(String? t) {
+   _batchId.value = t;
    return this;
   }
 
   ...
 }
-BizPharmaConnector.instance.createSupplier(
+BizPharmaConnector.instance.createInventoryLevel(
+  productId: productId,
+  locationId: locationId,
   businessId: businessId,
-  name: name,
-  type: type,
-  paymentTerms: paymentTerms,
-  tier: tier,
+  quantityOnHand: quantityOnHand,
+  quantityAvailable: quantityAvailable,
+  averageCost: averageCost,
+  totalValue: totalValue,
 )
-.contactPerson(contactPerson)
-.email(email)
-.phone(phone)
+.batchId(batchId)
 .execute();
 ```
 
 #### Return Type
-`execute()` returns a `OperationResult<CreateSupplierData, CreateSupplierVariables>`
+`execute()` returns a `OperationResult<CreateInventoryLevelData, CreateInventoryLevelVariables>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -2059,14 +1624,16 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.createSupplier(
+final result = await BizPharmaConnector.instance.createInventoryLevel(
+  productId: productId,
+  locationId: locationId,
   businessId: businessId,
-  name: name,
-  type: type,
-  paymentTerms: paymentTerms,
-  tier: tier,
+  quantityOnHand: quantityOnHand,
+  quantityAvailable: quantityAvailable,
+  averageCost: averageCost,
+  totalValue: totalValue,
 );
-CreateSupplierData data = result.data;
+CreateInventoryLevelData data = result.data;
 final ref = result.ref;
 ```
 
@@ -2074,115 +1641,22 @@ final ref = result.ref;
 Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
 An example of how to use the `Ref` object is shown below:
 ```dart
+String productId = ...;
+String locationId = ...;
 String businessId = ...;
-String name = ...;
-SupplierType type = ...;
-String paymentTerms = ...;
-SupplierTier tier = ...;
+int quantityOnHand = ...;
+int quantityAvailable = ...;
+double averageCost = ...;
+double totalValue = ...;
 
-final ref = BizPharmaConnector.instance.createSupplier(
+final ref = BizPharmaConnector.instance.createInventoryLevel(
+  productId: productId,
+  locationId: locationId,
   businessId: businessId,
-  name: name,
-  type: type,
-  paymentTerms: paymentTerms,
-  tier: tier,
-).ref();
-ref.execute();
-```
-
-
-### CreateBusiness
-#### Required Arguments
-```dart
-String name = ...;
-BusinessTier tier = ...;
-DateTime subscriptionStartDate = ...;
-BizPharmaConnector.instance.createBusiness(
-  name: name,
-  tier: tier,
-  subscriptionStartDate: subscriptionStartDate,
-).execute();
-```
-
-#### Optional Arguments
-We return a builder for each query. For CreateBusiness, we created `CreateBusinessBuilder`. For queries and mutations with optional parameters, we return a builder class.
-The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
-```dart
-class CreateBusinessVariablesBuilder {
-  ...
-   CreateBusinessVariablesBuilder subscriptionEndDate(DateTime? t) {
-   _subscriptionEndDate.value = t;
-   return this;
-  }
-  CreateBusinessVariablesBuilder maxUsers(int? t) {
-   _maxUsers.value = t;
-   return this;
-  }
-  CreateBusinessVariablesBuilder maxLocations(int? t) {
-   _maxLocations.value = t;
-   return this;
-  }
-  CreateBusinessVariablesBuilder logo(String? t) {
-   _logo.value = t;
-   return this;
-  }
-  CreateBusinessVariablesBuilder banner(String? t) {
-   _banner.value = t;
-   return this;
-  }
-  CreateBusinessVariablesBuilder phone(String? t) {
-   _phone.value = t;
-   return this;
-  }
-
-  ...
-}
-BizPharmaConnector.instance.createBusiness(
-  name: name,
-  tier: tier,
-  subscriptionStartDate: subscriptionStartDate,
-)
-.subscriptionEndDate(subscriptionEndDate)
-.maxUsers(maxUsers)
-.maxLocations(maxLocations)
-.logo(logo)
-.banner(banner)
-.phone(phone)
-.execute();
-```
-
-#### Return Type
-`execute()` returns a `OperationResult<CreateBusinessData, CreateBusinessVariables>`
-```dart
-/// Result of an Operation Request (query/mutation).
-class OperationResult<Data, Variables> {
-  OperationResult(this.dataConnect, this.data, this.ref);
-  Data data;
-  OperationRef<Data, Variables> ref;
-  FirebaseDataConnect dataConnect;
-}
-
-final result = await BizPharmaConnector.instance.createBusiness(
-  name: name,
-  tier: tier,
-  subscriptionStartDate: subscriptionStartDate,
-);
-CreateBusinessData data = result.data;
-final ref = result.ref;
-```
-
-#### Getting the Ref
-Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
-An example of how to use the `Ref` object is shown below:
-```dart
-String name = ...;
-BusinessTier tier = ...;
-DateTime subscriptionStartDate = ...;
-
-final ref = BizPharmaConnector.instance.createBusiness(
-  name: name,
-  tier: tier,
-  subscriptionStartDate: subscriptionStartDate,
+  quantityOnHand: quantityOnHand,
+  quantityAvailable: quantityAvailable,
+  averageCost: averageCost,
+  totalValue: totalValue,
 ).ref();
 ref.execute();
 ```
@@ -2305,6 +1779,439 @@ ref.execute();
 ```
 
 
+### DeleteLocation
+#### Required Arguments
+```dart
+String id = ...;
+BizPharmaConnector.instance.deleteLocation(
+  id: id,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `OperationResult<DeleteLocationData, DeleteLocationVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.deleteLocation(
+  id: id,
+);
+DeleteLocationData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String id = ...;
+
+final ref = BizPharmaConnector.instance.deleteLocation(
+  id: id,
+).ref();
+ref.execute();
+```
+
+
+### CreateSupplier
+#### Required Arguments
+```dart
+String businessId = ...;
+String name = ...;
+SupplierType type = ...;
+String paymentTerms = ...;
+SupplierTier tier = ...;
+BizPharmaConnector.instance.createSupplier(
+  businessId: businessId,
+  name: name,
+  type: type,
+  paymentTerms: paymentTerms,
+  tier: tier,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateSupplier, we created `CreateSupplierBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateSupplierVariablesBuilder {
+  ...
+   CreateSupplierVariablesBuilder contactPerson(String? t) {
+   _contactPerson.value = t;
+   return this;
+  }
+  CreateSupplierVariablesBuilder email(String? t) {
+   _email.value = t;
+   return this;
+  }
+  CreateSupplierVariablesBuilder phone(String? t) {
+   _phone.value = t;
+   return this;
+  }
+
+  ...
+}
+BizPharmaConnector.instance.createSupplier(
+  businessId: businessId,
+  name: name,
+  type: type,
+  paymentTerms: paymentTerms,
+  tier: tier,
+)
+.contactPerson(contactPerson)
+.email(email)
+.phone(phone)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateSupplierData, CreateSupplierVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createSupplier(
+  businessId: businessId,
+  name: name,
+  type: type,
+  paymentTerms: paymentTerms,
+  tier: tier,
+);
+CreateSupplierData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String businessId = ...;
+String name = ...;
+SupplierType type = ...;
+String paymentTerms = ...;
+SupplierTier tier = ...;
+
+final ref = BizPharmaConnector.instance.createSupplier(
+  businessId: businessId,
+  name: name,
+  type: type,
+  paymentTerms: paymentTerms,
+  tier: tier,
+).ref();
+ref.execute();
+```
+
+
+### CreateBusinessAndAdmin
+#### Required Arguments
+```dart
+String businessId = ...;
+String businessName = ...;
+String userEmail = ...;
+String userFirstName = ...;
+String userLastName = ...;
+String userMobile = ...;
+String authUid = ...;
+DateTime today = ...;
+String defaultLocationId = ...;
+BizPharmaConnector.instance.createBusinessAndAdmin(
+  businessId: businessId,
+  businessName: businessName,
+  userEmail: userEmail,
+  userFirstName: userFirstName,
+  userLastName: userLastName,
+  userMobile: userMobile,
+  authUid: authUid,
+  today: today,
+  defaultLocationId: defaultLocationId,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateBusinessAndAdmin, we created `CreateBusinessAndAdminBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateBusinessAndAdminVariablesBuilder {
+  ...
+   CreateBusinessAndAdminVariablesBuilder userProfilePhoto(String? t) {
+   _userProfilePhoto.value = t;
+   return this;
+  }
+
+  ...
+}
+BizPharmaConnector.instance.createBusinessAndAdmin(
+  businessId: businessId,
+  businessName: businessName,
+  userEmail: userEmail,
+  userFirstName: userFirstName,
+  userLastName: userLastName,
+  userMobile: userMobile,
+  authUid: authUid,
+  today: today,
+  defaultLocationId: defaultLocationId,
+)
+.userProfilePhoto(userProfilePhoto)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateBusinessAndAdminData, CreateBusinessAndAdminVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createBusinessAndAdmin(
+  businessId: businessId,
+  businessName: businessName,
+  userEmail: userEmail,
+  userFirstName: userFirstName,
+  userLastName: userLastName,
+  userMobile: userMobile,
+  authUid: authUid,
+  today: today,
+  defaultLocationId: defaultLocationId,
+);
+CreateBusinessAndAdminData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String businessId = ...;
+String businessName = ...;
+String userEmail = ...;
+String userFirstName = ...;
+String userLastName = ...;
+String userMobile = ...;
+String authUid = ...;
+DateTime today = ...;
+String defaultLocationId = ...;
+
+final ref = BizPharmaConnector.instance.createBusinessAndAdmin(
+  businessId: businessId,
+  businessName: businessName,
+  userEmail: userEmail,
+  userFirstName: userFirstName,
+  userLastName: userLastName,
+  userMobile: userMobile,
+  authUid: authUid,
+  today: today,
+  defaultLocationId: defaultLocationId,
+).ref();
+ref.execute();
+```
+
+
+### CreateManufacturer
+#### Required Arguments
+```dart
+String name = ...;
+String country = ...;
+BizPharmaConnector.instance.createManufacturer(
+  name: name,
+  country: country,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateManufacturerData, CreateManufacturerVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createManufacturer(
+  name: name,
+  country: country,
+);
+CreateManufacturerData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String name = ...;
+String country = ...;
+
+final ref = BizPharmaConnector.instance.createManufacturer(
+  name: name,
+  country: country,
+).ref();
+ref.execute();
+```
+
+
+### CreateCategory
+#### Required Arguments
+```dart
+String businessId = ...;
+String name = ...;
+BizPharmaConnector.instance.createCategory(
+  businessId: businessId,
+  name: name,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateCategory, we created `CreateCategoryBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateCategoryVariablesBuilder {
+  ...
+   CreateCategoryVariablesBuilder description(String? t) {
+   _description.value = t;
+   return this;
+  }
+  CreateCategoryVariablesBuilder parentId(String? t) {
+   _parentId.value = t;
+   return this;
+  }
+  CreateCategoryVariablesBuilder metadata(String? t) {
+   _metadata.value = t;
+   return this;
+  }
+
+  ...
+}
+BizPharmaConnector.instance.createCategory(
+  businessId: businessId,
+  name: name,
+)
+.description(description)
+.parentId(parentId)
+.metadata(metadata)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateCategoryData, CreateCategoryVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createCategory(
+  businessId: businessId,
+  name: name,
+);
+CreateCategoryData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String businessId = ...;
+String name = ...;
+
+final ref = BizPharmaConnector.instance.createCategory(
+  businessId: businessId,
+  name: name,
+).ref();
+ref.execute();
+```
+
+
+### CreateTherapeuticClass
+#### Required Arguments
+```dart
+String code = ...;
+String name = ...;
+BizPharmaConnector.instance.createTherapeuticClass(
+  code: code,
+  name: name,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateTherapeuticClass, we created `CreateTherapeuticClassBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateTherapeuticClassVariablesBuilder {
+  ...
+   CreateTherapeuticClassVariablesBuilder description(String? t) {
+   _description.value = t;
+   return this;
+  }
+
+  ...
+}
+BizPharmaConnector.instance.createTherapeuticClass(
+  code: code,
+  name: name,
+)
+.description(description)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateTherapeuticClassData, CreateTherapeuticClassVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createTherapeuticClass(
+  code: code,
+  name: name,
+);
+CreateTherapeuticClassData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String code = ...;
+String name = ...;
+
+final ref = BizPharmaConnector.instance.createTherapeuticClass(
+  code: code,
+  name: name,
+).ref();
+ref.execute();
+```
+
+
 ### CreateAddress
 #### Required Arguments
 ```dart
@@ -2394,61 +2301,55 @@ ref.execute();
 ```
 
 
-### CreateLocation
+### CreateUser
 #### Required Arguments
 ```dart
+String id = ...;
 String businessId = ...;
-String name = ...;
-String code = ...;
-LocationType type = ...;
-BizPharmaConnector.instance.createLocation(
+String email = ...;
+String firstName = ...;
+String lastName = ...;
+String mobile = ...;
+UserRole role = ...;
+BizPharmaConnector.instance.createUser(
+  id: id,
   businessId: businessId,
-  name: name,
-  code: code,
-  type: type,
+  email: email,
+  firstName: firstName,
+  lastName: lastName,
+  mobile: mobile,
+  role: role,
 ).execute();
 ```
 
 #### Optional Arguments
-We return a builder for each query. For CreateLocation, we created `CreateLocationBuilder`. For queries and mutations with optional parameters, we return a builder class.
+We return a builder for each query. For CreateUser, we created `CreateUserBuilder`. For queries and mutations with optional parameters, we return a builder class.
 The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
 ```dart
-class CreateLocationVariablesBuilder {
+class CreateUserVariablesBuilder {
   ...
-   CreateLocationVariablesBuilder phone(String? t) {
-   _phone.value = t;
-   return this;
-  }
-  CreateLocationVariablesBuilder email(String? t) {
-   _email.value = t;
-   return this;
-  }
-  CreateLocationVariablesBuilder operatingHours(String? t) {
-   _operatingHours.value = t;
-   return this;
-  }
-  CreateLocationVariablesBuilder licenseNumber(String? t) {
-   _licenseNumber.value = t;
+   CreateUserVariablesBuilder permissions(List<String>? t) {
+   _permissions.value = t;
    return this;
   }
 
   ...
 }
-BizPharmaConnector.instance.createLocation(
+BizPharmaConnector.instance.createUser(
+  id: id,
   businessId: businessId,
-  name: name,
-  code: code,
-  type: type,
+  email: email,
+  firstName: firstName,
+  lastName: lastName,
+  mobile: mobile,
+  role: role,
 )
-.phone(phone)
-.email(email)
-.operatingHours(operatingHours)
-.licenseNumber(licenseNumber)
+.permissions(permissions)
 .execute();
 ```
 
 #### Return Type
-`execute()` returns a `OperationResult<CreateLocationData, CreateLocationVariables>`
+`execute()` returns a `OperationResult<CreateUserData, CreateUserVariables>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -2458,13 +2359,16 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.createLocation(
+final result = await BizPharmaConnector.instance.createUser(
+  id: id,
   businessId: businessId,
-  name: name,
-  code: code,
-  type: type,
+  email: email,
+  firstName: firstName,
+  lastName: lastName,
+  mobile: mobile,
+  role: role,
 );
-CreateLocationData data = result.data;
+CreateUserData data = result.data;
 final ref = result.ref;
 ```
 
@@ -2472,55 +2376,38 @@ final ref = result.ref;
 Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
 An example of how to use the `Ref` object is shown below:
 ```dart
+String id = ...;
 String businessId = ...;
-String name = ...;
-String code = ...;
-LocationType type = ...;
+String email = ...;
+String firstName = ...;
+String lastName = ...;
+String mobile = ...;
+UserRole role = ...;
 
-final ref = BizPharmaConnector.instance.createLocation(
+final ref = BizPharmaConnector.instance.createUser(
+  id: id,
   businessId: businessId,
-  name: name,
-  code: code,
-  type: type,
+  email: email,
+  firstName: firstName,
+  lastName: lastName,
+  mobile: mobile,
+  role: role,
 ).ref();
 ref.execute();
 ```
 
 
-### CreateTherapeuticClass
+### DeleteAllBusinesses
 #### Required Arguments
 ```dart
-String code = ...;
-String name = ...;
-BizPharmaConnector.instance.createTherapeuticClass(
-  code: code,
-  name: name,
-).execute();
+// No required arguments
+BizPharmaConnector.instance.deleteAllBusinesses().execute();
 ```
 
-#### Optional Arguments
-We return a builder for each query. For CreateTherapeuticClass, we created `CreateTherapeuticClassBuilder`. For queries and mutations with optional parameters, we return a builder class.
-The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
-```dart
-class CreateTherapeuticClassVariablesBuilder {
-  ...
-   CreateTherapeuticClassVariablesBuilder description(String? t) {
-   _description.value = t;
-   return this;
-  }
 
-  ...
-}
-BizPharmaConnector.instance.createTherapeuticClass(
-  code: code,
-  name: name,
-)
-.description(description)
-.execute();
-```
 
 #### Return Type
-`execute()` returns a `OperationResult<CreateTherapeuticClassData, CreateTherapeuticClassVariables>`
+`execute()` returns a `OperationResult<DeleteAllBusinessesData, void>`
 ```dart
 /// Result of an Operation Request (query/mutation).
 class OperationResult<Data, Variables> {
@@ -2530,11 +2417,8 @@ class OperationResult<Data, Variables> {
   FirebaseDataConnect dataConnect;
 }
 
-final result = await BizPharmaConnector.instance.createTherapeuticClass(
-  code: code,
-  name: name,
-);
-CreateTherapeuticClassData data = result.data;
+final result = await BizPharmaConnector.instance.deleteAllBusinesses();
+DeleteAllBusinessesData data = result.data;
 final ref = result.ref;
 ```
 
@@ -2542,12 +2426,128 @@ final ref = result.ref;
 Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
 An example of how to use the `Ref` object is shown below:
 ```dart
-String code = ...;
-String name = ...;
+final ref = BizPharmaConnector.instance.deleteAllBusinesses().ref();
+ref.execute();
+```
 
-final ref = BizPharmaConnector.instance.createTherapeuticClass(
-  code: code,
-  name: name,
+
+### DeleteAllUsers
+#### Required Arguments
+```dart
+// No required arguments
+BizPharmaConnector.instance.deleteAllUsers().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `OperationResult<DeleteAllUsersData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.deleteAllUsers();
+DeleteAllUsersData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = BizPharmaConnector.instance.deleteAllUsers().ref();
+ref.execute();
+```
+
+
+### CreateCustomer
+#### Required Arguments
+```dart
+String businessId = ...;
+String firstName = ...;
+String lastName = ...;
+String createdById = ...;
+BizPharmaConnector.instance.createCustomer(
+  businessId: businessId,
+  firstName: firstName,
+  lastName: lastName,
+  createdById: createdById,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateCustomer, we created `CreateCustomerBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateCustomerVariablesBuilder {
+  ...
+   CreateCustomerVariablesBuilder email(String? t) {
+   _email.value = t;
+   return this;
+  }
+  CreateCustomerVariablesBuilder phone(String? t) {
+   _phone.value = t;
+   return this;
+  }
+  CreateCustomerVariablesBuilder dateOfBirth(DateTime? t) {
+   _dateOfBirth.value = t;
+   return this;
+  }
+
+  ...
+}
+BizPharmaConnector.instance.createCustomer(
+  businessId: businessId,
+  firstName: firstName,
+  lastName: lastName,
+  createdById: createdById,
+)
+.email(email)
+.phone(phone)
+.dateOfBirth(dateOfBirth)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateCustomerData, CreateCustomerVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await BizPharmaConnector.instance.createCustomer(
+  businessId: businessId,
+  firstName: firstName,
+  lastName: lastName,
+  createdById: createdById,
+);
+CreateCustomerData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String businessId = ...;
+String firstName = ...;
+String lastName = ...;
+String createdById = ...;
+
+final ref = BizPharmaConnector.instance.createCustomer(
+  businessId: businessId,
+  firstName: firstName,
+  lastName: lastName,
+  createdById: createdById,
 ).ref();
 ref.execute();
 ```

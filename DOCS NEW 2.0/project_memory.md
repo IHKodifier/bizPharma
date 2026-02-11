@@ -170,8 +170,14 @@ firebase deploy --only hosting --project bizpharma-staging
 - **App Check:** Currently DISABLED for diagnosis
 - **Connectivity Overlay:** ENABLED
 
-### Production (`bizpharma-4e73a`)
+### Development (`bizpharma-4e73a`)
 - Project Number: 381385750800
 - Region: asia-south1
-- **App Check:** Must be ENABLED before deployment
-- **Connectivity Overlay:** Must be DISABLED before deployment
+- Used for local development and hotfix branches
+- **App Check:** Debug mode enabled
+
+### Production (`bizpharma-prod`)
+- Region: asia-south1
+- Used for main branch deployments
+- **App Check:** Must be ENABLED (production reCAPTCHA)
+- **Connectivity Overlay:** Must be DISABLED

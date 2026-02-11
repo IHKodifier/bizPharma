@@ -1,0 +1,129 @@
+{
+  "backendType": "SECOND_GEN",
+  "connectionName": "bizpharma-prod:asia-south1:bizpharma-instance",
+  "createTime": "2025-12-26T18:12:27.268Z",
+  "databaseInstalledVersion": "POSTGRES_17_7",
+  "databaseVersion": "POSTGRES_17",
+  "etag": "fa6108258c069b8ab5152ada85a954a17becf940bb5c72a6af93fe7e4984ea54",
+  "gceZone": "asia-south1-b",
+  "geminiConfig": {
+    "activeQueryEnabled": false,
+    "entitled": false,
+    "googleVacuumMgmtEnabled": false,
+    "indexAdvisorEnabled": false,
+    "oomSessionCancelEnabled": true
+  },
+  "includeReplicasForMajorVersionUpgrade": false,
+  "instanceType": "CLOUD_SQL_INSTANCE",
+  "ipAddresses": [
+    {
+      "ipAddress": "34.14.197.188",
+      "type": "PRIMARY"
+    },
+    {
+      "ipAddress": "34.47.154.251",
+      "type": "OUTGOING"
+    }
+  ],
+  "kind": "sql#instance",
+  "maintenanceVersion": "POSTGRES_17_7.R20260108.01_01",
+  "name": "bizpharma-instance",
+  "project": "bizpharma-prod",
+  "region": "asia-south1",
+  "satisfiesPzi": true,
+  "selfLink": "https://sqladmin.googleapis.com/sql/v1beta4/projects/bizpharma-prod/instances/bizpharma-instance",
+  "serverCaCert": {
+    "cert": "-----BEGIN CERTIFICATE-----\nMIIDfzCCAmegAwIBAgIBADANBgkqhkiG9w0BAQsFADB3MS0wKwYDVQQuEyQ1M2Y3\nNzc0NC0xOWQ1LTQ2ZGItODJjYi1lODNiMTExNGI0N2YxIzAhBgNVBAMTGkdvb2ds\nZSBDbG91ZCBTUUwgU2VydmVyIENBMRQwEgYDVQQKEwtHb29nbGUsIEluYzELMAkG\nA1UEBhMCVVMwHhcNMjUxMjI2MTgxMzMwWhcNMzUxMjI0MTgxNDMwWjB3MS0wKwYD\nVQQuEyQ1M2Y3Nzc0NC0xOWQ1LTQ2ZGItODJjYi1lODNiMTExNGI0N2YxIzAhBgNV\nBAMTGkdvb2dsZSBDbG91ZCBTUUwgU2VydmVyIENBMRQwEgYDVQQKEwtHb29nbGUs\nIEluYzELMAkGA1UEBhMCVVMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQCd6mTS+ZWAbSmyhUs6rvpJZN7Re9eOFGUWbwUe/kFwWjr37b5sggaKykiA9QJg\nWFbH5h3l1xc9hd9lwBDWwOKwiQGkA9pCYTbILQUjOMAleHvNzx2DQSCKBWNf9K9y\nZuPCSrEWnzGLhI7wL4MZ0s8tNuxHNCs3TNs6Zfmi88YuxngkWCsglVH/0Mff2ztA\nJNm2Gqa5v0yiOpC9xCF+1YZTnK/cngEKGM6w63Bzql03QVVt2bayyHy3zXXDZYVH\nMAcMRH2dQS2juQtY6HvlNOkhZUm/eYT4MEYqkxWgYfKxk/3SnHrYQMQoOLMTQC9i\nZ8zqbOZl/uHxGrpzZ1VjLAKjAgMBAAGjFjAUMBIGA1UdEwEB/wQIMAYBAf8CAQAw\nDQYJKoZIhvcNAQELBQADggEBABqLqiK+5AZT1GIe4hQntPu2v5kli+sq1vYJpuSF\nDf2KUjkUwfKtyv/i8pqkNLIijd43WfrwOh8t+kmz2ySY2n11s64C77l/zziov1qw\nA91twRDTtZTTC2nyRJSPqcvXMxeG8DkorJ9VVUI+k1dUvYBYKgYHAxc4704X2k24\nzge1f+aB9q+FQjzgD+WbO5H7GoZKHvd1QZO4Y/KZAeP+yNtnoRxOKZVvOpT1etb3\n4x78MOirot2BEpd9KYTRpaAEzfx1MM02VYj/rZDv8aUGTmWGqshyERXzomdlLCkb\nVLUMPgSE50td/+hjo04PmH41Cv07nNMsnpqD4mhFKlOlWbs=\n-----END CERTIFICATE-----",
+    "certSerialNumber": "0",
+    "commonName": "C=US,O=Google\\, Inc,CN=Google Cloud SQL Server CA,dnQualifier=53f77744-19d5-46db-82cb-e83b1114b47f",
+    "createTime": "2025-12-26T18:13:30.571Z",
+    "expirationTime": "2035-12-24T18:14:30.571Z",
+    "instance": "bizpharma-instance",
+    "kind": "sql#sslCert",
+    "sha1Fingerprint": "40051b1a6535f23fea7a834ee703269efa6fad6a"
+  },
+  "serviceAccountEmailAddress": "p359227923382-bldnr9@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+  "settings": {
+    "activationPolicy": "ALWAYS",
+    "availabilityType": "ZONAL",
+    "backupConfiguration": {
+      "backupRetentionSettings": {
+        "retainedBackups": 30,
+        "retentionUnit": "COUNT"
+      },
+      "backupTier": "STANDARD",
+      "enabled": true,
+      "kind": "sql#backupConfiguration",
+      "pointInTimeRecoveryEnabled": true,
+      "replicationLogArchivingEnabled": true,
+      "startTime": "03:00",
+      "transactionLogRetentionDays": 7,
+      "transactionalLogStorageState": "CLOUD_STORAGE"
+    },
+    "connectorEnforcement": "NOT_REQUIRED",
+    "dataDiskSizeGb": "10",
+    "dataDiskType": "PD_SSD",
+    "databaseFlags": [
+      {
+        "name": "cloudsql.iam_authentication",
+        "value": "on"
+      }
+    ],
+    "deletionProtectionEnabled": true,
+    "edition": "ENTERPRISE",
+    "enableGoogleMlIntegration": false,
+    "finalBackupConfig": {
+      "enabled": false
+    },
+    "insightsConfig": {
+      "queryInsightsEnabled": true,
+      "queryPlansPerMinute": 5,
+      "queryStringLength": 1024
+    },
+    "ipConfiguration": {
+      "authorizedNetworks": [
+        {
+          "kind": "sql#aclEntry",
+          "name": "",
+          "value": "124.109.41.125"
+        }
+      ],
+      "enablePrivatePathForGoogleCloudServices": false,
+      "ipv4Enabled": true,
+      "requireSsl": true,
+      "serverCaMode": "GOOGLE_MANAGED_INTERNAL_CA",
+      "serverCertificateRotationMode": "SERVER_CERTIFICATE_ROTATION_MODE_UNSPECIFIED",
+      "sslMode": "TRUSTED_CLIENT_CERTIFICATE_REQUIRED"
+    },
+    "kind": "sql#settings",
+    "locationPreference": {
+      "kind": "sql#locationPreference",
+      "zone": "asia-south1-b"
+    },
+    "maintenanceWindow": {
+      "day": 0,
+      "hour": 0,
+      "kind": "sql#maintenanceWindow"
+    },
+    "pricingPlan": "PER_USE",
+    "replicationLagMaxSeconds": 31536000,
+    "replicationType": "SYNCHRONOUS",
+    "retainBackupsOnDelete": false,
+    "settingsVersion": "75",
+    "storageAutoResize": true,
+    "storageAutoResizeLimit": "0",
+    "tier": "db-f1-micro",
+    "userLabels": {
+      "firebase-data-connect": "ft"
+    }
+  },
+  "sqlNetworkArchitecture": "NEW_NETWORK_ARCHITECTURE",
+  "state": "RUNNABLE",
+  "upgradableDatabaseVersions": [
+    {
+      "displayName": "PostgreSQL 18",
+      "majorVersion": "POSTGRES_18",
+      "name": "POSTGRES_18"
+    }
+  ]
+}

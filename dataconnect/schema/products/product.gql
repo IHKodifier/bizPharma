@@ -14,7 +14,7 @@ type Product @table {
   # Identity & Classification
   genericName: String! @col(dataType: "varchar(255)")
   brandName: String @col(dataType: "varchar(255)")
-  manufacturer: Manufacturer!
+  manufacturer: Manufacturer
   nationalDrugCode: String @col(dataType: "varchar(50)")
   barcode: String @col(dataType: "varchar(100)")
   upc: String @col(dataType: "varchar(50)")
@@ -38,7 +38,7 @@ type Product @table {
   fdaApprovalStatus: FdaApprovalStatus @col(dataType: "fda_approval_status")
 
   # Clinical Information
-  therapeuticClass: TherapeuticClass!
+  therapeuticClass: TherapeuticClass
   therapeuticSubclass: TherapeuticSubclass
   contraindications: [String!] @col(dataType: "jsonb")
   blackBoxWarnings: [String!] @col(dataType: "jsonb")
@@ -78,7 +78,7 @@ type Product @table {
   pricingId: UUID
 
   # Supplier Information
-  primarySupplier: Supplier!
+  primarySupplier: Supplier
   alternativeSuppliers: String @col(dataType: "jsonb")
   leadTimeDays: Int!
   minimumOrderQuantity: Int
@@ -101,8 +101,12 @@ type Product @table {
   isActive: Boolean! @default(value: true)
   isDiscontinued: Boolean! @default(value: false)
   discontinuedDate: Date
-  category: ProductCategory! @col(dataType: "product_category")
-  subcategory: ProductSubcategory @col(dataType: "product_subcategory")
+  
+  # Dynamic Category Link
+  category: Category
+  categoryId: UUID
+  
+
 
   # Audit
   createdAt: Timestamp! @default(expr: "request.time")

@@ -1,4 +1,4 @@
-query VerifyProduct @auth(level: PUBLIC) {
+query VerifyProduct @auth(level: USER) {
   products(where: { genericName: { eq: "Paracetamol" } }) {
     id
     genericName
@@ -10,7 +10,9 @@ query VerifyProduct @auth(level: PUBLIC) {
     business {
       name
     }
-    category
+    category {
+      name
+    }
     isActive
   }
 }

@@ -2,7 +2,7 @@
 # LIST ALL USERS
 # ============================================================================
 
-query ListAllUsers @auth(level: PUBLIC) {
+query ListAllUsers @auth(level: USER) {
   users {
     id
     businessId

@@ -1,5 +1,7 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'dart:developer';
+// import 'dart:js' as js; // Add JS interop
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import '../dataconnect_generated/biz_pharma.dart';
@@ -79,20 +81,51 @@ class AuthService {
 
   // Check if user exists in Data Connect and return the user object
   Future<GetUserByAuthIdUser?> getUser(String uid) async {
+    // --- DIAGNOSTIC START ---
+    String diagnosticInfo = '';
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        final tokenResult = await user.getIdTokenResult(true);
+        final projectId = _auth.app.options.projectId;
+        final iss = tokenResult.claims?['iss'];
+        final aud = tokenResult.claims?['aud'];
+
+        diagnosticInfo =
+            '''
+          DIAGNOSTICS:
+          App Project ID: $projectId
+          Token Issuer (iss): $iss
+          Token Audience (aud): $aud
+          User UID: ${user.uid}
+          ''';
+        print(diagnosticInfo);
+      } else {
+        diagnosticInfo = 'DIAGNOSTICS: User is null (not signed in)';
+      }
+    } catch (e) {
+      diagnosticInfo = 'DIAGNOSTICS FAILED: $e';
+    }
+    // --- DIAGNOSTIC END ---
+
     try {
       final result = await BizPharmaConnector.instance
           .getUserByAuthId(id: uid)
           .execute();
+
+      if (result.data.user == null) {
+        print('User query returned null (New User Flow)');
+        return null;
+      }
       return result.data.user;
     } catch (e) {
-      log('User not found in Data Connect (new user): $e');
-      // Return null for new users instead of throwing error
-      // This allows the auth wrapper to route them to onboarding
-      return null;
+      // THROW THE DIAGNOSTICS TO THE UI
+      throw Exception('AUTH ERROR: $e\n\n$diagnosticInfo');
     }
+    return null;
   }
 
-  // Create Business and Admin User atomically
+  // Create Business and Admin User atomically (includes default Main Store location)
   Future<void> createBusinessAndUser({
     required String businessName,
     required String email,
@@ -104,6 +137,7 @@ class AuthService {
     try {
       const uuid = Uuid();
       final businessId = uuid.v4();
+      final defaultLocationId = uuid.v4();
 
       await BizPharmaConnector.instance
           .createBusinessAndAdmin(
@@ -115,9 +149,10 @@ class AuthService {
             userMobile: phone,
             authUid: uid,
             today: DateTime.now(),
+            defaultLocationId: defaultLocationId,
           )
           .execute();
-      log('Business and User created successfully');
+      log('Business, User, and default Location created successfully');
     } catch (e) {
       log('Error creating business and user: $e');
       rethrow;

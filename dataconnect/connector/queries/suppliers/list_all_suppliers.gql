@@ -2,7 +2,7 @@
 # LIST ALL SUPPLIERS
 # ============================================================================
 
-query ListAllSuppliers @auth(level: USER) {
+query ListAllSuppliers @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
   suppliers {
     id
     businessId

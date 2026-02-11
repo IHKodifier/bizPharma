@@ -99,8 +99,31 @@ class AuthWrapper extends ConsumerWidget {
                 ),
               ),
             ),
-            error: (error, stack) =>
-                Scaffold(body: Center(child: Text('Error: $error'))),
+            error: (error, stack) => Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Error: $error',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    OutlinedButton.icon(
+                      onPressed: () async {
+                        await ref.read(authServiceProvider).signOut();
+                      },
+                      icon: const Icon(Icons.logout),
+                      label: const Text('Sign Out & Retry'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         }
         return const LandingPage();

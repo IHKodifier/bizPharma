@@ -94,6 +94,7 @@ app.add_middleware(
     # Allow specific origins for Staging/Prod/Dev
     allow_origins=[
         "https://bizpharma-staging.web.app",
+        "https://bizpharma-staging.firebaseapp.com",
         "https://bizpharma-prod.web.app",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
@@ -104,6 +105,10 @@ app.add_middleware(
         "https://bizpharma.app",
         "https://www.bizpharma.app",
     ],
+    # Allow any localhost port for development (Flutter run uses random ports)
+    # TODO: [SECURITY WARNING] Remove or restrict this regex before Production/Staging deployment!
+    # This allows ANY localhost port to connect, which is only safe for local debugging.
+    allow_origin_regex=r"^http://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,7 +116,7 @@ app.add_middleware(
 
 # Middleware
 app.add_middleware(RequestResponseLoggingMiddleware)
-
+# just a trivial comment
 
 @app.get("/")
 async def root():
@@ -119,7 +124,7 @@ async def root():
     return {
         "app": settings.APP_NAME,
         "version": settings.APP_VERSION,
-        "status": "running",
+        "status": "running", 
         "docs": "/docs",
         "firebase_initialized": firebase_config.is_initialized(),
     }

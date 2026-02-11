@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import '../config/api_config.dart';
 
 class ApiClient {
   final Dio _dio;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseAppCheck _appCheck = FirebaseAppCheck.instance;
+  // final FirebaseAppCheck _appCheck = FirebaseAppCheck.instance;
 
   ApiClient()
     : _dio = Dio(
@@ -30,19 +29,19 @@ class ApiClient {
           }
 
           // Get and add AppCheck token
-          if (!kDebugMode) {
-            try {
-              final appCheckToken = await _appCheck.getToken();
-              if (appCheckToken != null) {
-                options.headers['X-Firebase-AppCheck'] = appCheckToken;
-              }
-            } catch (e) {
-              print('ApiClient: AppCheck token failed (Expected in Dev): $e');
-            }
-          } else {
-            // In debug mode, we can add a mock header or skip it
-            options.headers['X-Firebase-AppCheck-Debug'] = 'true';
-          }
+          // if (!kDebugMode) {
+          //   try {
+          //     final appCheckToken = await _appCheck.getToken();
+          //     if (appCheckToken != null) {
+          //       options.headers['X-Firebase-AppCheck'] = appCheckToken;
+          //     }
+          //   } catch (e) {
+          //     print('ApiClient: AppCheck token failed (Expected in Dev): $e');
+          //   }
+          // } else {
+          //   // In debug mode, we can add a mock header or skip it
+          //   options.headers['X-Firebase-AppCheck-Debug'] = 'true';
+          // }
 
           return handler.next(options);
         },

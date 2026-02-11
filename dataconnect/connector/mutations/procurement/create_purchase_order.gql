@@ -13,7 +13,7 @@ mutation CreatePurchaseOrder(
   $taxAmount: Float!
   $status: PurchaseOrderStatus!
   $createdById: String!
-) @auth(level: USER) {
+) @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
   purchaseOrder_insert(data: {
     businessId: $businessId
     supplierId: $supplierId

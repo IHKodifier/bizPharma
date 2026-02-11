@@ -10,13 +10,14 @@ class CreateBusinessAndAdminVariablesBuilder {
   Optional<String> _userProfilePhoto = Optional.optional(nativeFromJson, nativeToJson);
   String authUid;
   DateTime today;
+  String defaultLocationId;
 
   final FirebaseDataConnect _dataConnect;  CreateBusinessAndAdminVariablesBuilder userProfilePhoto(String? t) {
    _userProfilePhoto.value = t;
    return this;
   }
 
-  CreateBusinessAndAdminVariablesBuilder(this._dataConnect, {required  this.businessId,required  this.businessName,required  this.userEmail,required  this.userFirstName,required  this.userLastName,required  this.userMobile,required  this.authUid,required  this.today,});
+  CreateBusinessAndAdminVariablesBuilder(this._dataConnect, {required  this.businessId,required  this.businessName,required  this.userEmail,required  this.userFirstName,required  this.userLastName,required  this.userMobile,required  this.authUid,required  this.today,required  this.defaultLocationId,});
   Deserializer<CreateBusinessAndAdminData> dataDeserializer = (dynamic json)  => CreateBusinessAndAdminData.fromJson(jsonDecode(json));
   Serializer<CreateBusinessAndAdminVariables> varsSerializer = (CreateBusinessAndAdminVariables vars) => jsonEncode(vars.toJson());
   Future<OperationResult<CreateBusinessAndAdminData, CreateBusinessAndAdminVariables>> execute() {
@@ -24,7 +25,7 @@ class CreateBusinessAndAdminVariablesBuilder {
   }
 
   MutationRef<CreateBusinessAndAdminData, CreateBusinessAndAdminVariables> ref() {
-    CreateBusinessAndAdminVariables vars= CreateBusinessAndAdminVariables(businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userMobile: userMobile,userProfilePhoto: _userProfilePhoto,authUid: authUid,today: today,);
+    CreateBusinessAndAdminVariables vars= CreateBusinessAndAdminVariables(businessId: businessId,businessName: businessName,userEmail: userEmail,userFirstName: userFirstName,userLastName: userLastName,userMobile: userMobile,userProfilePhoto: _userProfilePhoto,authUid: authUid,today: today,defaultLocationId: defaultLocationId,);
     return _dataConnect.mutation("CreateBusinessAndAdmin", dataDeserializer, varsSerializer, vars);
   }
 }
@@ -98,13 +99,49 @@ class CreateBusinessAndAdminUserInsert {
 }
 
 @immutable
+class CreateBusinessAndAdminLocationInsert {
+  final String id;
+  CreateBusinessAndAdminLocationInsert.fromJson(dynamic json):
+  
+  id = nativeFromJson<String>(json['id']);
+  @override
+  bool operator ==(Object other) {
+    if(identical(this, other)) {
+      return true;
+    }
+    if(other.runtimeType != runtimeType) {
+      return false;
+    }
+
+    final CreateBusinessAndAdminLocationInsert otherTyped = other as CreateBusinessAndAdminLocationInsert;
+    return id == otherTyped.id;
+    
+  }
+  @override
+  int get hashCode => id.hashCode;
+  
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+    json['id'] = nativeToJson<String>(id);
+    return json;
+  }
+
+  CreateBusinessAndAdminLocationInsert({
+    required this.id,
+  });
+}
+
+@immutable
 class CreateBusinessAndAdminData {
   final CreateBusinessAndAdminBusinessInsert business_insert;
   final CreateBusinessAndAdminUserInsert user_insert;
+  final CreateBusinessAndAdminLocationInsert location_insert;
   CreateBusinessAndAdminData.fromJson(dynamic json):
   
   business_insert = CreateBusinessAndAdminBusinessInsert.fromJson(json['business_insert']),
-  user_insert = CreateBusinessAndAdminUserInsert.fromJson(json['user_insert']);
+  user_insert = CreateBusinessAndAdminUserInsert.fromJson(json['user_insert']),
+  location_insert = CreateBusinessAndAdminLocationInsert.fromJson(json['location_insert']);
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -116,23 +153,26 @@ class CreateBusinessAndAdminData {
 
     final CreateBusinessAndAdminData otherTyped = other as CreateBusinessAndAdminData;
     return business_insert == otherTyped.business_insert && 
-    user_insert == otherTyped.user_insert;
+    user_insert == otherTyped.user_insert && 
+    location_insert == otherTyped.location_insert;
     
   }
   @override
-  int get hashCode => Object.hashAll([business_insert.hashCode, user_insert.hashCode]);
+  int get hashCode => Object.hashAll([business_insert.hashCode, user_insert.hashCode, location_insert.hashCode]);
   
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
     json['business_insert'] = business_insert.toJson();
     json['user_insert'] = user_insert.toJson();
+    json['location_insert'] = location_insert.toJson();
     return json;
   }
 
   CreateBusinessAndAdminData({
     required this.business_insert,
     required this.user_insert,
+    required this.location_insert,
   });
 }
 
@@ -147,6 +187,7 @@ class CreateBusinessAndAdminVariables {
   late final Optional<String>userProfilePhoto;
   final String authUid;
   final DateTime today;
+  final String defaultLocationId;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
   CreateBusinessAndAdminVariables.fromJson(Map<String, dynamic> json):
   
@@ -157,7 +198,8 @@ class CreateBusinessAndAdminVariables {
   userLastName = nativeFromJson<String>(json['userLastName']),
   userMobile = nativeFromJson<String>(json['userMobile']),
   authUid = nativeFromJson<String>(json['authUid']),
-  today = nativeFromJson<DateTime>(json['today']) {
+  today = nativeFromJson<DateTime>(json['today']),
+  defaultLocationId = nativeFromJson<String>(json['defaultLocationId']) {
   
   
   
@@ -168,6 +210,7 @@ class CreateBusinessAndAdminVariables {
   
     userProfilePhoto = Optional.optional(nativeFromJson, nativeToJson);
     userProfilePhoto.value = json['userProfilePhoto'] == null ? null : nativeFromJson<String>(json['userProfilePhoto']);
+  
   
   
   
@@ -190,11 +233,12 @@ class CreateBusinessAndAdminVariables {
     userMobile == otherTyped.userMobile && 
     userProfilePhoto == otherTyped.userProfilePhoto && 
     authUid == otherTyped.authUid && 
-    today == otherTyped.today;
+    today == otherTyped.today && 
+    defaultLocationId == otherTyped.defaultLocationId;
     
   }
   @override
-  int get hashCode => Object.hashAll([businessId.hashCode, businessName.hashCode, userEmail.hashCode, userFirstName.hashCode, userLastName.hashCode, userMobile.hashCode, userProfilePhoto.hashCode, authUid.hashCode, today.hashCode]);
+  int get hashCode => Object.hashAll([businessId.hashCode, businessName.hashCode, userEmail.hashCode, userFirstName.hashCode, userLastName.hashCode, userMobile.hashCode, userProfilePhoto.hashCode, authUid.hashCode, today.hashCode, defaultLocationId.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -210,6 +254,7 @@ class CreateBusinessAndAdminVariables {
     }
     json['authUid'] = nativeToJson<String>(authUid);
     json['today'] = nativeToJson<DateTime>(today);
+    json['defaultLocationId'] = nativeToJson<String>(defaultLocationId);
     return json;
   }
 
@@ -223,6 +268,7 @@ class CreateBusinessAndAdminVariables {
     required this.userProfilePhoto,
     required this.authUid,
     required this.today,
+    required this.defaultLocationId,
   });
 }
 

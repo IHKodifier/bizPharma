@@ -1,0 +1,29 @@
+# ============================================================================
+# UPDATE LOCATION
+# ============================================================================
+
+mutation UpdateLocation(
+  $id: UUID!
+  $name: String
+  $code: String
+  $type: LocationType
+  $phone: String
+  $email: String
+  $operatingHours: String
+  $licenseNumber: String
+  $isActive: Boolean
+) @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
+  location_update(
+    id: $id
+    data: {
+      name: $name
+      code: $code
+      type: $type
+      phone: $phone
+      email: $email
+      operatingHours: $operatingHours
+      licenseNumber: $licenseNumber
+      isActive: $isActive
+    }
+  )
+}

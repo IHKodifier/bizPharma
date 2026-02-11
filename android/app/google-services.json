@@ -29,6 +29,49 @@
             {
               "client_id": "381385750800-i3dnf6r6bvl5age1g3hfh8h4at3ma4h9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "381385750800-71497iq32ihdgbvodq12eb8fbj557t8b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.bizpharma"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381385750800:android:396d6f7636b29e70e44d95",
+        "android_client_info": {
+          "package_name": "com.example.biz_pharma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381385750800-i3dnf6r6bvl5age1g3hfh8h4at3ma4h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1EIbEbBVBs5PqqgRkuZ185a78NfzWng0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381385750800-i3dnf6r6bvl5age1g3hfh8h4at3ma4h9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "381385750800-71497iq32ihdgbvodq12eb8fbj557t8b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.bizpharma"
+              }
             }
           ]
         }

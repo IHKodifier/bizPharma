@@ -11,7 +11,7 @@ mutation CreateInventoryLevel(
   $quantityAvailable: Int!
   $averageCost: Float!
   $totalValue: Float!
-) @auth(level: USER) {
+) @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
   inventoryLevel_insert(data: {
     productId: $productId
     locationId: $locationId

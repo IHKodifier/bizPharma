@@ -1,0 +1,15 @@
+# Test query to verify public access to Data Connect
+query Uptime @auth(level: PUBLIC) {
+  # We just query a list of businesses limited to 1, effectively doing a "ping"
+  # This relies on listAllBusinesses existing, or we can just fetch something trivial.
+  # Better approach: Just return a static check if possible, or query a known public entity.
+  # Since we don't have a "System" table, we'll query businesses with a limit.
+  # However, listAllBusinesses might be restrictive.
+  # Let's try to just query the current time or a simple count if possible, 
+  # but standard Data Connect requires querying a table.
+  # Let's count Users (or similar) with limit 0 or 1.
+  
+  users(limit: 1) {
+    id
+  }
+}

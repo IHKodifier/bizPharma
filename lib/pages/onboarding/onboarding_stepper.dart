@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
-import '../../services/api_client.dart';
 import '../../app_home_page.dart';
+import '../../widgets/auth_wrapper.dart';
+import '../../dataconnect_generated/biz_pharma.dart';
+import 'package:uuid/uuid.dart';
 
 class OnboardingStepper extends ConsumerStatefulWidget {
   const OnboardingStepper({super.key});
@@ -84,28 +86,29 @@ class _OnboardingStepperState extends ConsumerState<OnboardingStepper> {
 
       if (user == null) throw Exception('No authenticated user found');
 
-      final idToken = await user.getIdToken();
-
-      // Call Backend API to initialize business
-      // This sets custom claims (business_id) and creates records
-      final apiClient = ApiClient();
-      await apiClient.post(
-        '/api/v1/setup/initialize',
-        data: {
-          'id_token': idToken,
-          'business_name': _businessNameController.text.trim(),
-          'first_name': _firstNameController.text.trim(),
-          'last_name': _lastNameController.text.trim(),
-          'phone': _phoneController.text.trim().isEmpty
-              ? ''
-              : _phoneController.text.trim(),
-          'email': _emailController.text.trim(),
-          'profile_photo': user.photoURL,
-        },
-      );
+      // Call Data Connect to create business and admin user
+      await BizPharmaConnector.instance
+          .createBusinessAndAdmin(
+            businessId: const Uuid().v4(),
+            businessName: _businessNameController.text.trim(),
+            today: DateTime.now(),
+            authUid: user.uid,
+            userFirstName: _firstNameController.text.trim(),
+            userLastName: _lastNameController.text.trim(),
+            userEmail: _emailController.text.trim(),
+            userMobile: _phoneController.text.trim().isEmpty
+                ? ''
+                : _phoneController.text.trim(),
+            defaultLocationId: const Uuid().v4(),
+          )
+          .execute();
 
       // Force token refresh to get new custom claims (business_id)
       await user.getIdToken(true);
+
+      // Invalidate the user provider to force AuthWrapper to re-fetch
+      // user data from Data Connect (which now includes the businessId)
+      ref.invalidate(currentUserProvider);
 
       if (mounted) {
         // Navigate to Dashboard

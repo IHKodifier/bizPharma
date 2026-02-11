@@ -84,7 +84,37 @@ class Settings(BaseSettings):
     ENABLE_AI_FEATURES: bool = True
     
     class Config:
-        env_file = ".env"
+        # Load .env file based on ENV environment variable
+        # Priority: .env.{ENV} > .env > defaults
+        @staticmethod
+        def env_file_resolver():
+            import os
+            # Default to DEV if not specified
+            env = os.getenv('ENV', 'DEV').upper()
+            
+            # Map ENV to filename
+            env_map = {
+                'DEV': '.env.local',
+                'STAGING': '.env.staging',
+                'PROD': '.env.production'
+            }
+            
+            target_file = env_map.get(env, '.env.local')
+            
+            # Check if file exists, otherwise fallback
+            if os.path.exists(target_file):
+                print(f"🔧 Loading config from: {target_file} (ENV={env})")
+                return target_file
+            
+            # Fallback to .env if specific file missing
+            if os.path.exists('.env'):
+                print(f"⚠️ {target_file} not found. Falling back to .env")
+                return '.env'
+                
+            print(f"⚠️ No config file found for ENV={env}. Using defaults.")
+            return None
+        
+        env_file = env_file_resolver()
         case_sensitive = True
         extra = "ignore"
 

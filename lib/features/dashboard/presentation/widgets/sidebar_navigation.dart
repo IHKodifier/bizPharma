@@ -130,7 +130,22 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
                 ),
                 _buildNavItem(context, Icons.message, 'Messaging', badge: '3'),
                 _buildNavItem(context, Icons.bar_chart, 'Reports & Analytics'),
-                _buildNavItem(context, Icons.settings, 'Settings'),
+                _buildExpandableModule(
+                  context,
+                  Icons.settings,
+                  'Settings',
+                  'settings',
+                  [
+                    _ModuleItem(
+                      'Locations',
+                      Icons.location_on,
+                      route: 'locations',
+                    ),
+                    _ModuleItem('Business Profile', Icons.business),
+                    _ModuleItem('Users & Roles', Icons.people),
+                    _ModuleItem('Preferences', Icons.tune),
+                  ],
+                ),
               ],
             ),
           ),
@@ -270,7 +285,12 @@ class _SidebarNavigationState extends ConsumerState<SidebarNavigation> {
           margin: const EdgeInsets.symmetric(vertical: 4),
           child: IconButton(
             icon: Icon(icon, color: colorScheme.onSurfaceVariant, size: 22),
-            onPressed: () {},
+            onPressed: () {
+              widget.onToggleCollapse();
+              setState(() {
+                _expandedModule = moduleId;
+              });
+            },
             padding: const EdgeInsets.all(12),
           ),
         ),

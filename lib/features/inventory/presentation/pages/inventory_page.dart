@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart';
 import '../../../../providers/inventory_provider.dart';
+import 'add_product_page.dart';
 
 class InventoryPage extends ConsumerStatefulWidget {
   const InventoryPage({super.key});
@@ -21,13 +22,29 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Inventory Management',
-            style: GoogleFonts.inter(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.onSurface,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Inventory Management',
+                style: GoogleFonts.inter(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AddProductPage(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('Add Product'),
+              ),
+            ],
           ),
           const SizedBox(height: 24),
 

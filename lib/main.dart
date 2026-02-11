@@ -22,11 +22,19 @@ void main() async {
     // ------------------------------------
   }
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (kIsWeb) {
+    print('🔍 DEBUG: Uri.base.host = ${Uri.base.host}');
+  }
+
+  // Determine options
+  final options = DefaultFirebaseOptions.currentPlatform;
+  print('🔍 DEBUG: Selected Firebase Options Project ID: ${options.projectId}');
+
+  await Firebase.initializeApp(options: options);
 
   if (kDebugMode) {
     // Connect to local emulators
-    await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
+    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
     BizPharmaConnector.instance.dataConnect.useDataConnectEmulator(
       '127.0.0.1',
       9399,
@@ -42,6 +50,7 @@ void main() async {
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,
   );
+  print('✅ App Check activated');
 
   runApp(const ProviderScope(child: MyApp()));
 }

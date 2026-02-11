@@ -27,7 +27,7 @@ class _LandingNavbarState extends ConsumerState<LandingNavbar> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 1200;
     final isTablet = screenWidth >= 768 && screenWidth < 1200;
-    final isMobile = screenWidth < 768;
+    final isMobile = screenWidth < 1024;
 
     // Header Height
     final double height = isDesktop ? 64 : 56;

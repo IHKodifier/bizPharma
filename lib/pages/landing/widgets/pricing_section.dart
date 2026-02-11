@@ -92,25 +92,17 @@ class PricingSection extends StatelessWidget {
           const SizedBox(height: 56),
 
           // Pricing Cards
-          isMobile
-              ? Column(
-                  children: cards.map((card) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: _PricingCard(data: card),
-                    );
-                  }).toList(),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: cards.map((card) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: _PricingCard(data: card),
-                    );
-                  }).toList(),
-                ),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 24,
+            runSpacing: 24,
+            children: cards.map((card) {
+              return ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 340),
+                child: _PricingCard(data: card),
+              );
+            }).toList(),
+          ),
         ],
       ),
     );

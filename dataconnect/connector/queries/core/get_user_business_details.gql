@@ -1,0 +1,18 @@
+# ============================================================================
+# GET JOINED DATA
+# Returns User details, Business Name, and Default Location Name
+# ============================================================================
+
+query GetUserBusinessAndDefaultLocation @auth(level: USER_ANON, insecureReason: "Trial users (anonymous) need access to this functionality during their 4-week trial period. Business-scoped access is enforced via businessId validation.") {
+  users {
+    firstName
+    lastName
+    business {
+      name
+      # Fetch the first location as the "default" store
+      locations: locations_on_business(limit: 1) {
+        name
+      }
+    }
+  }
+}

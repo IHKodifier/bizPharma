@@ -1,4 +1,4 @@
-query listAllProducts @auth(level: PUBLIC) {
+query listAllProducts @auth(level: USER) {
   products {
     id
     genericName

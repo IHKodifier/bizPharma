@@ -21,14 +21,14 @@ class ListAllProductsProducts {
   final String id;
   final String genericName;
   final String internalSKU;
-  final ListAllProductsProductsManufacturer manufacturer;
+  final ListAllProductsProductsManufacturer? manufacturer;
   final ListAllProductsProductsBusiness business;
   ListAllProductsProducts.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
   genericName = nativeFromJson<String>(json['genericName']),
   internalSKU = nativeFromJson<String>(json['internalSKU']),
-  manufacturer = ListAllProductsProductsManufacturer.fromJson(json['manufacturer']),
+  manufacturer = json['manufacturer'] == null ? null : ListAllProductsProductsManufacturer.fromJson(json['manufacturer']),
   business = ListAllProductsProductsBusiness.fromJson(json['business']);
   @override
   bool operator ==(Object other) {
@@ -56,7 +56,9 @@ class ListAllProductsProducts {
     json['id'] = nativeToJson<String>(id);
     json['genericName'] = nativeToJson<String>(genericName);
     json['internalSKU'] = nativeToJson<String>(internalSKU);
-    json['manufacturer'] = manufacturer.toJson();
+    if (manufacturer != null) {
+      json['manufacturer'] = manufacturer!.toJson();
+    }
     json['business'] = business.toJson();
     return json;
   }
@@ -65,7 +67,7 @@ class ListAllProductsProducts {
     required this.id,
     required this.genericName,
     required this.internalSKU,
-    required this.manufacturer,
+    this.manufacturer,
     required this.business,
   });
 }

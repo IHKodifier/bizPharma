@@ -33,8 +33,7 @@ class ListProductsByBusinessProducts {
   final EnumValue<RouteOfAdministration> routeOfAdministration;
   final EnumValue<DrugSchedule> drugSchedule;
   final bool requiresPrescription;
-  final EnumValue<ProductCategory> category;
-  final EnumValue<ProductSubcategory>? subcategory;
+  final ListProductsByBusinessProductsCategory? category;
   final bool isActive;
   final bool isDiscontinued;
   final Timestamp createdAt;
@@ -54,8 +53,7 @@ class ListProductsByBusinessProducts {
   routeOfAdministration = routeOfAdministrationDeserializer(json['routeOfAdministration']),
   drugSchedule = drugScheduleDeserializer(json['drugSchedule']),
   requiresPrescription = nativeFromJson<bool>(json['requiresPrescription']),
-  category = productCategoryDeserializer(json['category']),
-  subcategory = json['subcategory'] == null ? null : productSubcategoryDeserializer(json['subcategory']),
+  category = json['category'] == null ? null : ListProductsByBusinessProductsCategory.fromJson(json['category']),
   isActive = nativeFromJson<bool>(json['isActive']),
   isDiscontinued = nativeFromJson<bool>(json['isDiscontinued']),
   createdAt = Timestamp.fromJson(json['createdAt']);
@@ -84,14 +82,13 @@ class ListProductsByBusinessProducts {
     drugSchedule == otherTyped.drugSchedule && 
     requiresPrescription == otherTyped.requiresPrescription && 
     category == otherTyped.category && 
-    subcategory == otherTyped.subcategory && 
     isActive == otherTyped.isActive && 
     isDiscontinued == otherTyped.isDiscontinued && 
     createdAt == otherTyped.createdAt;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, genericName.hashCode, brandName.hashCode, nationalDrugCode.hashCode, barcode.hashCode, upc.hashCode, internalSKU.hashCode, dosageForm.hashCode, strength.hashCode, unit.hashCode, routeOfAdministration.hashCode, drugSchedule.hashCode, requiresPrescription.hashCode, category.hashCode, subcategory.hashCode, isActive.hashCode, isDiscontinued.hashCode, createdAt.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, businessId.hashCode, genericName.hashCode, brandName.hashCode, nationalDrugCode.hashCode, barcode.hashCode, upc.hashCode, internalSKU.hashCode, dosageForm.hashCode, strength.hashCode, unit.hashCode, routeOfAdministration.hashCode, drugSchedule.hashCode, requiresPrescription.hashCode, category.hashCode, isActive.hashCode, isDiscontinued.hashCode, createdAt.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -124,13 +121,8 @@ class ListProductsByBusinessProducts {
     drugScheduleSerializer(drugSchedule)
     ;
     json['requiresPrescription'] = nativeToJson<bool>(requiresPrescription);
-    json['category'] = 
-    productCategorySerializer(category)
-    ;
-    if (subcategory != null) {
-      json['subcategory'] = 
-    productSubcategorySerializer(subcategory!)
-    ;
+    if (category != null) {
+      json['category'] = category!.toJson();
     }
     json['isActive'] = nativeToJson<bool>(isActive);
     json['isDiscontinued'] = nativeToJson<bool>(isDiscontinued);
@@ -153,11 +145,49 @@ class ListProductsByBusinessProducts {
     required this.routeOfAdministration,
     required this.drugSchedule,
     required this.requiresPrescription,
-    required this.category,
-    this.subcategory,
+    this.category,
     required this.isActive,
     required this.isDiscontinued,
     required this.createdAt,
+  });
+}
+
+@immutable
+class ListProductsByBusinessProductsCategory {
+  final String id;
+  final String name;
+  ListProductsByBusinessProductsCategory.fromJson(dynamic json):
+  
+  id = nativeFromJson<String>(json['id']),
+  name = nativeFromJson<String>(json['name']);
+  @override
+  bool operator ==(Object other) {
+    if(identical(this, other)) {
+      return true;
+    }
+    if(other.runtimeType != runtimeType) {
+      return false;
+    }
+
+    final ListProductsByBusinessProductsCategory otherTyped = other as ListProductsByBusinessProductsCategory;
+    return id == otherTyped.id && 
+    name == otherTyped.name;
+    
+  }
+  @override
+  int get hashCode => Object.hashAll([id.hashCode, name.hashCode]);
+  
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+    json['id'] = nativeToJson<String>(id);
+    json['name'] = nativeToJson<String>(name);
+    return json;
+  }
+
+  ListProductsByBusinessProductsCategory({
+    required this.id,
+    required this.name,
   });
 }
 

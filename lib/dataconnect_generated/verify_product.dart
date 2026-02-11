@@ -22,9 +22,9 @@ class VerifyProductProducts {
   final String genericName;
   final String? brandName;
   final String internalSKU;
-  final VerifyProductProductsManufacturer manufacturer;
+  final VerifyProductProductsManufacturer? manufacturer;
   final VerifyProductProductsBusiness business;
-  final EnumValue<ProductCategory> category;
+  final VerifyProductProductsCategory? category;
   final bool isActive;
   VerifyProductProducts.fromJson(dynamic json):
   
@@ -32,9 +32,9 @@ class VerifyProductProducts {
   genericName = nativeFromJson<String>(json['genericName']),
   brandName = json['brandName'] == null ? null : nativeFromJson<String>(json['brandName']),
   internalSKU = nativeFromJson<String>(json['internalSKU']),
-  manufacturer = VerifyProductProductsManufacturer.fromJson(json['manufacturer']),
+  manufacturer = json['manufacturer'] == null ? null : VerifyProductProductsManufacturer.fromJson(json['manufacturer']),
   business = VerifyProductProductsBusiness.fromJson(json['business']),
-  category = productCategoryDeserializer(json['category']),
+  category = json['category'] == null ? null : VerifyProductProductsCategory.fromJson(json['category']),
   isActive = nativeFromJson<bool>(json['isActive']);
   @override
   bool operator ==(Object other) {
@@ -68,11 +68,13 @@ class VerifyProductProducts {
       json['brandName'] = nativeToJson<String?>(brandName);
     }
     json['internalSKU'] = nativeToJson<String>(internalSKU);
-    json['manufacturer'] = manufacturer.toJson();
+    if (manufacturer != null) {
+      json['manufacturer'] = manufacturer!.toJson();
+    }
     json['business'] = business.toJson();
-    json['category'] = 
-    productCategorySerializer(category)
-    ;
+    if (category != null) {
+      json['category'] = category!.toJson();
+    }
     json['isActive'] = nativeToJson<bool>(isActive);
     return json;
   }
@@ -82,9 +84,9 @@ class VerifyProductProducts {
     required this.genericName,
     this.brandName,
     required this.internalSKU,
-    required this.manufacturer,
+    this.manufacturer,
     required this.business,
-    required this.category,
+    this.category,
     required this.isActive,
   });
 }
@@ -153,6 +155,40 @@ class VerifyProductProductsBusiness {
   }
 
   VerifyProductProductsBusiness({
+    required this.name,
+  });
+}
+
+@immutable
+class VerifyProductProductsCategory {
+  final String name;
+  VerifyProductProductsCategory.fromJson(dynamic json):
+  
+  name = nativeFromJson<String>(json['name']);
+  @override
+  bool operator ==(Object other) {
+    if(identical(this, other)) {
+      return true;
+    }
+    if(other.runtimeType != runtimeType) {
+      return false;
+    }
+
+    final VerifyProductProductsCategory otherTyped = other as VerifyProductProductsCategory;
+    return name == otherTyped.name;
+    
+  }
+  @override
+  int get hashCode => name.hashCode;
+  
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+    json['name'] = nativeToJson<String>(name);
+    return json;
+  }
+
+  VerifyProductProductsCategory({
     required this.name,
   });
 }

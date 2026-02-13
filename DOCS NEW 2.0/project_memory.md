@@ -140,6 +140,102 @@ firebase deploy --only hosting --project bizpharma-staging
 
 ---
 
+### Environment Detection for Emulator Connection (2026-02-11)
+
+**Issue:** Production app was trying to connect to localhost emulators, causing App Check failures.
+
+**Root Cause:** Using `kDebugMode` to detect local development environment. `kDebugMode` is `true` even in Flutter web debug builds deployed to production domains.
+
+**Solution:** Use domain-based detection instead of build mode flags.
+
+**Implementation:**
+```dart
+// lib/main.dart
+bool isLocalDev = false;
+if (kIsWeb) {
+  final host = Uri.base.host;
+  isLocalDev = (host == 'localhost' || host.startsWith('127.0.0.1'));
+}
+
+if (isLocalDev) {
+  // Only connect to emulators on localhost
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  BizPharmaConnector.instance.dataConnect.useDataConnectEmulator('127.0.0.1', 9399);
+}
+```
+
+**Key Insight:** Always use domain-based detection (same pattern as `firebase_options.dart`) for environment-specific logic. Never rely on `kDebugMode` or `kReleaseMode` for web deployments.
+
+**Files Affected:**
+- `lib/main.dart` - Emulator connection logic
+- `lib/firebase_options.dart` - Already using domain-based detection (proven pattern)
+
+**Commit:** d4d4278
+
+---
+
+### Production Cloud SQL Hardening (2026-02-11)
+
+**Success:** Hardened production Cloud SQL instance with industry-standard security measures.
+
+**Implemented Security Features:**
+1. ✅ Automated backups (daily)
+2. ✅ Point-in-time recovery (7-day retention)
+3. ✅ Storage auto-resize
+4. ✅ Deletion protection
+5. ✅ SSL/TLS enforcement
+6. ✅ IAM authentication for database access
+
+**Database Access:**
+- IAM user: `enigmatek.inc@gmail.com`
+- Permissions: `cloudsql.instances.connect`, `cloudsql.instances.get`
+- PostgreSQL roles: `cloudsqlsuperuser`, granted necessary permissions via SQL
+
+**Schema Deployment:**
+- Successfully deployed Data Connect schema to production
+- Resolved enum type conflicts (`product_category`, `product_subcategory`)
+- Manual cleanup required via Cloud SQL Studio
+
+**Pending:**
+- Private IP (VPC) configuration - requires manual VPC setup
+
+**Scripts Created:**
+- `scripts/harden_production.bat` - Windows automation
+- `scripts/harden_production.sh` - Unix/Linux automation
+- `prod_sql_config_updated.json` - Configuration snapshot
+
+---
+
+### App Check Configuration Issues (2026-02-13)
+
+**Issue:** 403 errors when exchanging reCAPTCHA Enterprise tokens in production.
+
+**Root Cause:** The reCAPTCHA Enterprise site key (`6LdmAzgsAAAAALi4XGcnxBgs_TJmDOJfnURMsLJH`) is not registered in Firebase App Check for the `bizpharma-prod` project.
+
+**Impact:**
+- ⚠️ App Check validation fails
+- ✅ **Onboarding still works** (Data Connect uses `@auth(level: USER_ANON)`)
+- ⚠️ Reduced security posture
+
+**Solution Required:**
+1. Verify the site key exists in Google Cloud Console → reCAPTCHA Enterprise
+2. Register the site key in Firebase Console → App Check → Web App
+3. Add `bizpharma.app` to allowed domains
+4. OR create a new site key and update `lib/config/app_check_config.dart`
+
+**Key Insight:** App Check is optional for Data Connect operations, but it's a security best practice. Without it, APIs are more vulnerable to abuse.
+
+**Configuration:**
+- Dev Site Key: `6Le6Xi4sAAAAAHANwno2xugEDeaG5zLPtMcpcMtz`
+- Staging Site Key: `6LcqZjUsAAAAAKtTitPrBwz9hJS1DlXqVRa6Yiao`
+- Production Site Key: `6LdmAzgsAAAAALi4XGcnxBgs_TJmDOJfnURMsLJH` (needs registration)
+
+**Files Affected:**
+- `lib/config/app_check_config.dart` - Site key configuration
+- `lib/main.dart` - App Check activation
+
+---
+
 ## Architecture Decisions
 
 ### Anonymous User Trial Flow
@@ -177,7 +273,11 @@ firebase deploy --only hosting --project bizpharma-staging
 - **App Check:** Debug mode enabled
 
 ### Production (`bizpharma-prod`)
+- Project Number: 359227923382
 - Region: asia-south1
 - Used for main branch deployments
-- **App Check:** Must be ENABLED (production reCAPTCHA)
-- **Connectivity Overlay:** Must be DISABLED
+- **Cloud SQL:** bizpharma-instance (PostgreSQL 17.7)
+- **Database:** bizpharma-db
+- **App Check:** ENABLED (reCAPTCHA Enterprise - needs registration)
+- **Connectivity Overlay:** DISABLED
+- **Security:** Backups, PITR, SSL/TLS, deletion protection enabled
